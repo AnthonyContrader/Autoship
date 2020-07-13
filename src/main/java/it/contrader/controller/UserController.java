@@ -31,10 +31,10 @@ public class UserController implements Controller {
 	
 	/**
 	 * Metodo dell'interfaccia Controller. Estrae dalla request la mode
-	 * (che riceve dalle view specifiche e può essere la richesta di una 
+	 * (che riceve dalle view specifiche e puï¿½ essere la richesta di una 
 	 * scelta da parte dell'utente "GETCHOICE") e la scelta dell'utente.
 	 * 
-	 * Se la modalità corrisponde ad una CRUD il controller chiama i service,
+	 * Se la modalitï¿½ corrisponde ad una CRUD il controller chiama i service,
 	 * altrimenti rimanda alla View della CRUD per richiedere i parametri
 	 */
 	@Override
@@ -49,7 +49,7 @@ public class UserController implements Controller {
 		int id;
 		String username;
 		String password;
-		String usertype;
+		int usertype;
 
 		switch (mode) {
 		
@@ -65,7 +65,7 @@ public class UserController implements Controller {
 		case "INSERT":
 			username = request.get("username").toString();
 			password = request.get("password").toString();
-			usertype = request.get("usertype").toString();
+			usertype = (int) request.get("usertype");
 			
 			//costruisce l'oggetto user da inserire
 			UserDTO usertoinsert = new UserDTO(username, password, usertype);
@@ -92,7 +92,7 @@ public class UserController implements Controller {
 			id = Integer.parseInt(request.get("id").toString());
 			username = request.get("username").toString();
 			password = request.get("password").toString();
-			usertype = request.get("usertype").toString();
+			usertype = (int) request.get("usertype");
 			UserDTO usertoupdate = new UserDTO(username, password, usertype);
 			usertoupdate.setId(id);
 			userService.update(usertoupdate);

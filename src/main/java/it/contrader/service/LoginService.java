@@ -15,7 +15,7 @@ public class LoginService {
 	/**
 	 * Chiama il metodo del DAO e ottiene una stringa (lo usertype)
 	 */
-	public String login (String username, String password) {
+	public int login (String username, String password) {
 		return this.loginDAO.login(username, password);
 	}
 }

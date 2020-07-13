@@ -17,20 +17,20 @@ public class UserDTO {
 	
 	private String password;
 	
-	private String usertype;
+	private int usertype;
 
 	
 	public UserDTO() {
 		
 	}
 
-	public UserDTO (String username, String password, String usertype) {
+	public UserDTO (String username, String password, int usertype) {
 		this.username = username;
 		this.password = password;
 		this.usertype = usertype;
 	}
 
-	public UserDTO (int id, String username, String password, String usertype) {
+	public UserDTO (int id, String username, String password, int usertype) {
 		this.id = id;
 		this.username = username;
 		this.password = password;
@@ -44,11 +44,11 @@ public class UserDTO {
 		this.id = id;
 	}
 
-	public String getUsertype() {
+	public int getUsertype() {
 		return this.usertype;
 	}
 
-	public void setUsertype(String usertype) {
+	public void setUsertype(int usertype) {
 		this.usertype = usertype;
 	}
 

@@ -4,8 +4,7 @@ public class Oggetto {
 private int id;
 private String nome;
 private int dimensione;
-public Oggetto(int id, String nome, int dimensione){
-	id = this.id;
+public Oggetto(String nome, int dimensione){
 	nome = this.nome;
 	dimensione = this.dimensione;
 }
