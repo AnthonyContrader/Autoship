@@ -2,9 +2,10 @@ package it.contrader.controller;
 
 import java.util.List;
 
-import it.contrader.dto.UserDTO;
+import it.contrader.dto.MagazzinoDTO;
 import it.contrader.main.MainDispatcher;
-import it.contrader.service.UserService;
+import it.contrader.model.Oggetto;
+import it.contrader.service.MagazzinoService;
 
 /**
  * 
@@ -12,19 +13,19 @@ import it.contrader.service.UserService;
  *
  *Si osservi che nel Controller compaiono solo oggetti del DTO e non del Model!
  */
-public class AdminController implements Controller {
+public class MagazzinoController implements Controller {
 
 	/**
 	 * definisce il pacchetto di vista user.
 	 */
-	private static String sub_package = "user.";
+	private static String sub_package = "magazino.";
 	
-	private UserService userService;
+	private MagazzinoService magazzinoService;
 	/**
 	 * Costruisce un oggetto di tipo UserService per poterne usare i metodi
 	 */
-	public AdminController() {
-		this.userService = new UserService();
+	public MagazzinoController() {
+		this.magazzinoService = new MagazzinoService();
 	}
 	
 	
@@ -47,36 +48,36 @@ public class AdminController implements Controller {
 
 		//Definisce i campi della classe (serviranno sempre, tanto vale definirli una sola volta)
 		int id;
-		String username;
-		String password;
-		int usertype;
+		Oggetto oggetto;
+		int capienza;
+		int posizione;
 
 		switch (mode) {
 		
 		// Arriva qui dalla UserReadView. Invoca il Service con il parametro id e invia alla UserReadView uno user da mostrare 
-		case "READ":
+		/*case "READ":
 			id = Integer.parseInt(request.get("id").toString());
 			UserDTO userDTO = userService.read(id);
 			request.put("user", userDTO);
 			MainDispatcher.getInstance().callView(sub_package + "UserRead", request);
 			break;
-		
+		*/
 		// Arriva qui dalla UserInsertView. Estrae i parametri da inserire e chiama il service per inserire uno user con questi parametri
 		case "INSERT":
-			username = request.get("username").toString();
-			password = request.get("password").toString();
-			usertype = (int) request.get("usertype");
+			oggetto = (Oggetto) request.get("id_oggetto");
+			capienza = (int) request.get("capienza");
+			posizione = (int) request.get("usertype");
 			
 			//costruisce l'oggetto user da inserire
-			UserDTO usertoinsert = new UserDTO(username, password, usertype);
+			MagazzinoDTO magazzinotoinsert = new MagazzinoDTO(oggetto, capienza, posizione);
 			//invoca il service
-			userService.insert(usertoinsert);
+			magazzinoService.insert(magazzinotoinsert);
 			request = new Request();
 			request.put("mode", "mode");
 			//Rimanda alla view con la risposta
-			MainDispatcher.getInstance().callView(sub_package + "UserInsert", request);
+			MainDispatcher.getInstance().callView(sub_package + "MagazzinoInsert", request);
 			break;
-		
+		/*
 		// Arriva qui dalla UserDeleteView. Estrae l'id dell'utente da cancellare e lo passa al Service
 		case "DELETE":
 			id = Integer.parseInt(request.get("id").toString());
@@ -100,13 +101,13 @@ public class AdminController implements Controller {
 			request.put("mode", "mode");
 			MainDispatcher.getInstance().callView(sub_package + "UserUpdate", request);
 			break;
-			
+			*/
 		//Arriva qui dalla UserView Invoca il Service e invia alla UserView il risultato da mostrare 
-		case "USERLIST":
-			List<UserDTO> usersDTO = userService.getAll();
+		case "MAGAZZINORLIST":
+			List<MagazzinoDTO> magazzinoDTO = magazzinoService.getAll();
 			//Impacchetta la request con la lista degli user
-			request.put("users", usersDTO);
-			MainDispatcher.getInstance().callView("User", request);
+			request.put("magazzino", magazzinoDTO);
+			MainDispatcher.getInstance().callView("Magazzino", request);
 			break;
 			
 		//Esegue uno switch sulla base del comando inserito dall'utente e reindirizza tramite il Dispatcher alla View specifica per ogni operazione
@@ -116,22 +117,22 @@ public class AdminController implements Controller {
 					//toUpperCase() mette in maiuscolo la scelta
 			switch (choice.toUpperCase()) {
 			
-			case "L":
+			/*case "L":
 				MainDispatcher.getInstance().callView(sub_package + "UserRead", null);
 				break;
-				
+			*/	
 			case "I":
-				MainDispatcher.getInstance().callView(sub_package + "UserInsert", null);
+				MainDispatcher.getInstance().callView(sub_package + "MagazzinoInsert", null);
 				break;
-				
+			/*	
 			case "M":
 				MainDispatcher.getInstance().callView(sub_package + "UserUpdate", null);
 				break;
-				
+			
 			case "C":
 				MainDispatcher.getInstance().callView(sub_package + "UserDelete", null);
 				break;
-				
+				*/
 			case "E":
 				MainDispatcher.getInstance().callView("Login", null);
 				break;

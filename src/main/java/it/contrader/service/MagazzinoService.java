@@ -1,27 +1,29 @@
 package it.contrader.service;
 import java.util.List;
 
+import it.contrader.converter.MagazzinoConverter;
 import it.contrader.dao.MagazzinoDAO;
+import it.contrader.dto.MagazzinoDTO;
 
 
 public class MagazzinoService {
 	private MagazzinoDAO magazzinoDAO;
-	private magazzinoConverter magazzinoConverter;
+	private MagazzinoConverter magazzinoConverter;
 	
 	//Istanzio DAO  e Converter specifici.
-	public magazzinoService(){
-		this.magazzinoDAO = new magazzinoDAO();
-		this.magazzinoConverter = new magazzinoConverter();
+	public MagazzinoService(){
+		this.magazzinoDAO = new MagazzinoDAO();
+		this.magazzinoConverter = new MagazzinoConverter();
 	}
 	
 
-	public List<magazzinoDTO> getAll() {
+	public List<MagazzinoDTO> getAll() {
 		// Ottiene una lista di entit� e le restituisce convertendole in DTO
 		return magazzinoConverter.toDTOList(magazzinoDAO.getAll());
 	}
 
 
-	public magazzinoDTO read(int id) {
+	public MagazzinoDTO read(int id) {
 		// Ottiene un'entit� e la restituisce convertendola in DTO
 		return magazzinoConverter.toDTO(magazzinoDAO.read(id));
 	}

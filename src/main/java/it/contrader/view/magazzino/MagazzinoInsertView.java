@@ -4,7 +4,7 @@ import it.contrader.controller.Request;
 import it.contrader.main.MainDispatcher;
 import it.contrader.view.AbstractView;
 
-public class MagazzinoDeleteView extends AbstractView{
+public class MagazzinoInsertView extends AbstractView{
 	
 	private Request request;
 
@@ -13,13 +13,13 @@ public class MagazzinoDeleteView extends AbstractView{
 	
 	private final String mode = "INSERT";
 	
-	public MagazzinoDeleteView() {}
+	public MagazzinoInsertView() {}
 	
 	@Override
 	public void showResults(Request request) {
 		if (request!=null) {
 			System.out.println("Inserimento andato a buon fine.\n");
-			MainDispatcher.getInstance().callView("User", null);
+			MainDispatcher.getInstance().callView("Magazzino", null);
 		}
 	}
 	

@@ -31,19 +31,16 @@ public class MagazzinoView extends AbstractView{
 	 {
 	    	 System.out.println("-------------MAGAZZINO------------\n");
 	         System.out.println(" Seleziona l'opzione del magazzino:");
-	         System.out.println("[C]rea");
+	         System.out.println("[I]nserisci");
 	         choice = this.getInput();
 	 }
 	 
 	 public void submit() {    
 	    	//crea una nuova Request (vedi classe Request)
-	    	request = new Request();
-	    	switch (choice) {
-	    	case "c":
-	    		MainDispatcher.getInstance().callAction("Magazzino", "doControl", request);
-	    		default:
-	    			showOptions();
-	    	}
+		 	request = new Request();
+			request.put("choice", choice);
+			request.put("mode", "GETCHOICE");
+	    	MainDispatcher.getInstance().callAction("Magazzino", "doControl", this.request);
 	    }
 
 }

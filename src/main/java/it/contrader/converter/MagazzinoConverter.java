@@ -21,8 +21,8 @@ public class MagazzinoConverter {
 	 * Notare l'uso del metodo get() per ottenere il valore dell'attributo-
 	 */
 	public Magazzino toEntity(MagazzinoDTO magazzinoDTO) {
-		MagazzinoDTO magazzinoDTO = new MagazzinoDTO(magazzinoDTO.getId_oggetto(), magazzinoDTO.getCapienza(), magazzinoDTO.getPosizione());
-		return magazzinoDTO;
+		Magazzino magazzino = new Magazzino(magazzinoDTO.getId_oggetto(), magazzinoDTO.getCapienza(), magazzinoDTO.getPosizione());
+		return magazzino;
 	}
 	
 	/**
@@ -30,7 +30,7 @@ public class MagazzinoConverter {
 	 */
 	public List<MagazzinoDTO> toDTOList(List<Magazzino> magazzinoList) {
 		//Crea una lista vuota.
-		List<MagazzinoDTO> magazzinoDTOList = new ArrayList<magazzinoDTO>();
+		List<MagazzinoDTO> magazzinoDTOList = new ArrayList<MagazzinoDTO>();
 		
 		//Cicla tutti gli elementi della lista e li converte uno a uno
 		for(Magazzino magazzino : magazzinoList) {
