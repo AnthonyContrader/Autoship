@@ -66,7 +66,7 @@ public class MagazzinoController implements Controller {
 		case "INSERT":
 			oggetto = (Oggetto) request.get("id_oggetto");
 			capienza = (int) request.get("capienza");
-			posizione = (int) request.get("posizione");
+			posizione = (int) request.get("usertype");
 			
 			//costruisce l'oggetto user da inserire
 			MagazzinoDTO magazzinotoinsert = new MagazzinoDTO(oggetto, capienza, posizione);
