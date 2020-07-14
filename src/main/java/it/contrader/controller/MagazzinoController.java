@@ -18,7 +18,7 @@ public class MagazzinoController implements Controller {
 	/**
 	 * definisce il pacchetto di vista user.
 	 */
-	private static String sub_package = "magazino.";
+	private static String sub_package = "magazzino.";
 	
 	private MagazzinoService magazzinoService;
 	/**
@@ -55,13 +55,13 @@ public class MagazzinoController implements Controller {
 		switch (mode) {
 		
 		// Arriva qui dalla UserReadView. Invoca il Service con il parametro id e invia alla UserReadView uno user da mostrare 
-		/*case "READ":
+		case "READ":
 			id = Integer.parseInt(request.get("id").toString());
-			UserDTO userDTO = userService.read(id);
+			MagazzinoDTO userDTO = magazzinoService.read(id);
 			request.put("user", userDTO);
-			MainDispatcher.getInstance().callView(sub_package + "UserRead", request);
+			MainDispatcher.getInstance().callView(sub_package + "MagazzinoRead", request);
 			break;
-		*/
+		
 		// Arriva qui dalla UserInsertView. Estrae i parametri da inserire e chiama il service per inserire uno user con questi parametri
 		case "INSERT":
 			oggetto = (Oggetto) request.get("id_oggetto");
@@ -77,33 +77,33 @@ public class MagazzinoController implements Controller {
 			//Rimanda alla view con la risposta
 			MainDispatcher.getInstance().callView(sub_package + "MagazzinoInsert", request);
 			break;
-		/*
+		
 		// Arriva qui dalla UserDeleteView. Estrae l'id dell'utente da cancellare e lo passa al Service
 		case "DELETE":
 			id = Integer.parseInt(request.get("id").toString());
 			//Qui chiama il service
-			userService.delete(id);
+			magazzinoService.delete(id);
 			request = new Request();
 			request.put("mode", "mode");
-			MainDispatcher.getInstance().callView(sub_package + "UserDelete", request);
+			MainDispatcher.getInstance().callView(sub_package + "MagazzinoDelete", request);
 			break;
 		
 		// Arriva qui dalla UserUpdateView
 		case "UPDATE":
 			id = Integer.parseInt(request.get("id").toString());
-			username = request.get("username").toString();
-			password = request.get("password").toString();
-			usertype = (int) request.get("usertype");
-			UserDTO usertoupdate = new UserDTO(username, password, usertype);
-			usertoupdate.setId(id);
-			userService.update(usertoupdate);
+			oggetto = (Oggetto) request.get("id_oggetto");
+			capienza = (int) request.get("capienza");
+			posizione = (int) request.get("usertype");
+			MagazzinoDTO magazzinotoupdate = new MagazzinoDTO(oggetto, capienza, posizione);
+			magazzinotoupdate.setId(id);
+			magazzinoService.update(magazzinotoupdate);
 			request = new Request();
 			request.put("mode", "mode");
 			MainDispatcher.getInstance().callView(sub_package + "UserUpdate", request);
 			break;
-			*/
+			
 		//Arriva qui dalla UserView Invoca il Service e invia alla UserView il risultato da mostrare 
-		case "MAGAZZINORLIST":
+		case "MAGAZZINOLIST":
 			List<MagazzinoDTO> magazzinoDTO = magazzinoService.getAll();
 			//Impacchetta la request con la lista degli user
 			request.put("magazzino", magazzinoDTO);

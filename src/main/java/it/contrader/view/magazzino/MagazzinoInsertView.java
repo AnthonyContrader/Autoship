@@ -2,6 +2,7 @@ package it.contrader.view.magazzino;
 
 import it.contrader.controller.Request;
 import it.contrader.main.MainDispatcher;
+import it.contrader.model.Oggetto;
 import it.contrader.view.AbstractView;
 
 public class MagazzinoInsertView extends AbstractView{
