@@ -4,6 +4,7 @@ import java.util.List;
 
 import it.contrader.converter.OggettoConverter;
 import it.contrader.dao.OggettoDAO;
+import it.contrader.dto.OggettoDTO;
 
 public class OggettoService {
 	private OggettoDAO oggettoDAO;

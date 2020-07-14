@@ -46,4 +46,4 @@ public class OggettoView extends AbstractView{
 
 	}
 
-}
+
