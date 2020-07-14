@@ -66,7 +66,7 @@ public class MagazzinoController implements Controller {
 		case "INSERT":
 			oggetto = (Oggetto) request.get("id_oggetto");
 			capienza = (int) request.get("capienza");
-			posizione = (int) request.get("usertype");
+			posizione = (int) request.get("posizione");
 			
 			//costruisce l'oggetto user da inserire
 			MagazzinoDTO magazzinotoinsert = new MagazzinoDTO(oggetto, capienza, posizione);
@@ -93,7 +93,7 @@ public class MagazzinoController implements Controller {
 			id = Integer.parseInt(request.get("id").toString());
 			oggetto = (Oggetto) request.get("id_oggetto");
 			capienza = (int) request.get("capienza");
-			posizione = (int) request.get("usertype");
+			posizione = (int) request.get("posizione");
 			MagazzinoDTO magazzinotoupdate = new MagazzinoDTO(oggetto, capienza, posizione);
 			magazzinotoupdate.setId(id);
 			magazzinoService.update(magazzinotoupdate);
