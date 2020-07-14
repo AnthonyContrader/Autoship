@@ -3,7 +3,7 @@ package it.contrader.view;
 import java.util.List;
 
 import it.contrader.controller.Request;
-import it.contrader.dto.UserDTO;
+import it.contrader.dto.MagazzinoDTO;
 import it.contrader.main.MainDispatcher;
 
 public class MagazzinoView extends AbstractView{
@@ -16,12 +16,12 @@ public class MagazzinoView extends AbstractView{
 	public void showResults(Request request) {
 		if (request != null) {
 			System.out.println("\n------------------- Gestione magazzino ----------------\n");
-			System.out.println("ID\tID Oggetto\tCapienza\tPosizione");
+			System.out.println("ID\tID Nome\tCapienza\tPosizione");
 			System.out.println("----------------------------------------------------\n");
 			
 			@SuppressWarnings("unchecked")
-			List<UserDTO> magazzino = (List<UserDTO>) request.get("magazzino");
-			for (UserDTO m: magazzino)
+			List<MagazzinoDTO> magazzino = (List<MagazzinoDTO>) request.get("magazzino");
+			for (MagazzinoDTO m: magazzino)
 				System.out.println(m);
 			System.out.println();
 		}
