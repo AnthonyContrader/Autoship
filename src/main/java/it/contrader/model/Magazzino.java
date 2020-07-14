@@ -5,8 +5,7 @@ private int id;
 private Oggetto id_oggetto;
 private int capienza;
 private int posizione;
-public Magazzino( int id, Oggetto id_oggetto, int capienza, int posizione) {
-	id= this.id;
+public Magazzino(Oggetto id_oggetto, int capienza, int posizione) {
 	id_oggetto= this.id_oggetto;
 	capienza= this.capienza;
 	posizione= this.posizione;
