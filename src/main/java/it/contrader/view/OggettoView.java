@@ -3,6 +3,7 @@ package it.contrader.view;
 import java.util.List;
 
 import it.contrader.controller.Request;
+import it.contrader.dto.OggettoDTO;
 import it.contrader.dto.UserDTO;
 import it.contrader.main.MainDispatcher;
 
@@ -20,8 +21,8 @@ public class OggettoView extends AbstractView{
 				System.out.println("----------------------------------------------------\n");
 				
 				@SuppressWarnings("unchecked")
-				List<OggettoDTO> magazzino = (List<OggettoDTODTO>) request.get("magazzino");
-				for (OggettoDTODTO m: magazzino)
+				List<OggettoDTO> magazzino = (List<OggettoDTO>) request.get("magazzino");
+				for (OggettoDTO m: magazzino)
 					System.out.println(m);
 				System.out.println();
 			}
@@ -45,4 +46,4 @@ public class OggettoView extends AbstractView{
 
 	}
 
-}
+

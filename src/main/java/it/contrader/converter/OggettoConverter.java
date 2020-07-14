@@ -3,6 +3,7 @@ package it.contrader.converter;
 import java.util.ArrayList;
 import java.util.List;
 
+import it.contrader.dto.OggettoDTO;
 import it.contrader.model.Oggetto;
 
 
@@ -11,7 +12,7 @@ public class OggettoConverter {
 	 * Crea un oggetto di tipo UserDTO e lo riempie con i campi del parametro user di tipo User.
 	 * Notare l'uso del metodo get() per ottenere il valore dell'attributo-
 	 */
-	public oggettoDTO toDTO(Oggetto oggetto) {
+	public OggettoDTO toDTO(Oggetto oggetto) {
 		OggettoDTO oggettoDTO = new OggettoDTO(oggetto.getNome(), oggetto.getDimensione());
 		return oggettoDTO;
 	}
@@ -21,14 +22,14 @@ public class OggettoConverter {
 	 * Notare l'uso del metodo get() per ottenere il valore dell'attributo-
 	 */
 	public Oggetto toEntity(OggettoDTO oggettoDTO) {
-		Oggetto oggetto = new Oggetto(oggetto.getNome(), oggetto.getDimensione());
+		Oggetto oggetto = new Oggetto(oggettoDTO.getNome(), oggettoDTO.getDimensione());
 		return oggetto;
 	}
 	
 	/**
 	 * Metodo per convertire le liste di User.
 	 */
-	public List<OggettoDTO> toDTOList(List<OggettoDTO> oggettoList) {
+	public List<OggettoDTO> toDTOList(List<Oggetto> oggettoList) {
 		//Crea una lista vuota.
 		List<OggettoDTO> oggettoDTOList = new ArrayList<OggettoDTO>();
 		
