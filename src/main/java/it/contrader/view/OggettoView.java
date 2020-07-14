@@ -20,9 +20,9 @@ public class OggettoView extends AbstractView{
 				System.out.println("----------------------------------------------------\n");
 				
 				@SuppressWarnings("unchecked")
-				List<OggettoDTO> magazzino = (List<OggettoDTO>) request.get("magazzino");
-				for (OggettoDTO m: magazzino)
-					System.out.println(m);
+				List<OggettoDTO> oggetto = (List<OggettoDTO>) request.get("oggetto");
+				for (OggettoDTO o: oggetto)
+					System.out.println(o);
 				System.out.println();
 			}
 		}

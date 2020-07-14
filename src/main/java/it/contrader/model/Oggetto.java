@@ -5,8 +5,8 @@ private int id;
 private String nome;
 private int dimensione;
 public Oggetto(String nome, int dimensione){
-	nome = this.nome;
-	dimensione = this.dimensione;
+	this.nome = nome;
+	this.dimensione = dimensione; 
 }
 public int getId() {
 	return id;

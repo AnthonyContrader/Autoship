@@ -9,9 +9,9 @@ public class MagazzinoDTO {
 	private int capienza;
 	private int posizione;
 	public MagazzinoDTO(Oggetto id_oggetto, int capienza, int posizione) {
-		id_oggetto= this.id_oggetto;
-		capienza= this.capienza;
-		posizione= this.posizione;
+		this.id_oggetto = id_oggetto;
+		this.capienza = capienza;
+		this.posizione= posizione;
 	}
 	public int getId() {
 		return id;

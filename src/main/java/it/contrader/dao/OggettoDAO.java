@@ -8,7 +8,7 @@ import it.contrader.main.ConnectionSingleton;
 import it.contrader.model.Oggetto;
 public class OggettoDAO {
 	private final String QUERY_ALL = "SELECT * FROM Oggetto";
-	private final String QUERY_CREATE = "INSERT INTO Oggetto (nome, dimensione) VALUES (?,?,?)";
+	private final String QUERY_CREATE = "INSERT INTO Oggetto (nome, dimensione) VALUES (?,?)";
 	private final String QUERY_READ = "SELECT * FROM Oggetto WHERE id=?";
 	private final String QUERY_UPDATE = "UPDATE Oggetto SET nome=?, dimensione=? WHERE id=?";
 	private final String QUERY_DELETE = "DELETE FROM Oggetto WHERE id=?";
@@ -42,6 +42,7 @@ public class OggettoDAO {
 			preparedStatement.execute();
 			return true;
 		} catch (SQLException e) {
+			System.out.println("Exeption: " + e);
 			return false;
 		}
 
