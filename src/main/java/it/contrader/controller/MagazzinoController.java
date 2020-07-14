@@ -57,8 +57,8 @@ public class MagazzinoController implements Controller {
 		// Arriva qui dalla UserReadView. Invoca il Service con il parametro id e invia alla UserReadView uno user da mostrare 
 		case "READ":
 			id = Integer.parseInt(request.get("id").toString());
-			MagazzinoDTO userDTO = magazzinoService.read(id);
-			request.put("user", userDTO);
+			MagazzinoDTO magazzinoDTO = magazzinoService.read(id);
+			request.put("magazzino", magazzinoDTO);
 			MainDispatcher.getInstance().callView(sub_package + "MagazzinoRead", request);
 			break;
 		
@@ -104,9 +104,9 @@ public class MagazzinoController implements Controller {
 			
 		//Arriva qui dalla UserView Invoca il Service e invia alla UserView il risultato da mostrare 
 		case "MAGAZZINOLIST":
-			List<MagazzinoDTO> magazzinoDTO = magazzinoService.getAll();
+			List<MagazzinoDTO> magazziniDTO = magazzinoService.getAll();
 			//Impacchetta la request con la lista degli user
-			request.put("magazzino", magazzinoDTO);
+			request.put("magazzino", magazziniDTO);
 			MainDispatcher.getInstance().callView("Magazzino", request);
 			break;
 			

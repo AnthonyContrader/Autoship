@@ -2,11 +2,8 @@ package it.contrader.controller;
 
 import java.util.List;
 
-import it.contrader.dto.MagazzinoDTO;
 import it.contrader.dto.OggettoDTO;
 import it.contrader.main.MainDispatcher;
-import it.contrader.model.Oggetto;
-import it.contrader.service.MagazzinoService;
 import it.contrader.service.OggettoService;
 
 public class OggettoController implements Controller  {
@@ -86,9 +83,9 @@ private static String sub_package = "oggetto.";
 					
 				//Arriva qui dalla UserView Invoca il Service e invia alla UserView il risultato da mostrare 
 				case "OGGETTOLIST":
-					List<OggettoDTO> oggettoDTO = oggettoService.getAll();
+					List<OggettoDTO> oggettiDTO = oggettoService.getAll();
 					//Impacchetta la request con la lista degli user
-					request.put("oggetto", oggettoDTO);
+					request.put("oggetto", oggettiDTO);
 					MainDispatcher.getInstance().callView("Oggetto", request);
 					break;
 					
