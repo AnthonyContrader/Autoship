@@ -93,12 +93,12 @@ public class MagazzinoController implements Controller {
 			oggetto = (int) request.get("id_oggetto");
 			capienza = (int) request.get("capienza");
 			posizione = (int) request.get("posizione");
-			MagazzinoDTO magazzinotoupdate = new MagazzinoDTO(oggetto, capienza, posizione);
+			MagazzinoDTO magazzinotoupdate = new MagazzinoDTO(id,oggetto, capienza, posizione);
 			magazzinotoupdate.setId(id);
 			magazzinoService.update(magazzinotoupdate);
 			request = new Request();
 			request.put("mode", "mode");
-			MainDispatcher.getInstance().callView(sub_package + "UserUpdate", request);
+			MainDispatcher.getInstance().callView(sub_package + "MagazzinoUpdate", request);
 			break;
 			
 		//Arriva qui dalla UserView Invoca il Service e invia alla UserView il risultato da mostrare 
