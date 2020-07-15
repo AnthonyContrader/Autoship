@@ -5,7 +5,7 @@ import it.contrader.controller.Request;
 import it.contrader.main.MainDispatcher;
 
 public class HomeUserView extends AbstractView{
-
+    private Request request;
 	String choice;
 
 	@Override
@@ -15,26 +15,34 @@ public class HomeUserView extends AbstractView{
 	}
 
 	@Override
+
 	public void showOptions() {
-		System.out.println("-------------MENU------------\n");
-		System.out.println("NESSUNA OPZIONE DISPONIBILE!");
-		System.out.println("\n Esatto, puoi solo uscire...");
-		choice = this.getInput();
+        System.out.println("-------------MENU------------\n");
+        System.out.println(" Seleziona cosa vuoi gestire:");
+        System.out.println(" [O]ggetto [E]sci");
+        //Il metodo che salva l'input nella stringa choice.
+        //getInput() è definito in AbstractView.
+        choice = this.getInput();
+    }
 
-	}
+	 public void submit() {    
+	    	//crea una nuova Request (vedi classe Request)
+	    	request = new Request();
+	        switch (choice) {
+	       
+	        case "o":
+	        	this.request.put("mode", "OGGETTOLIST");
+	        	MainDispatcher.getInstance().callAction("Oggetto", "doControl", request);
+	        	break;
+	 
+	        case "e":
+	        	MainDispatcher.getInstance().callAction("Login", "doControl", null);
+	        	break;
 
-	@Override
-	public void submit() {
-
-		switch (choice) {
-
-		case "e":
-			MainDispatcher.getInstance().callAction("Login", "doControl", null);
-			break;
-
-		default:
-			MainDispatcher.getInstance().callAction("Login", "doControl", null);
-		}
-	}
-
+	        default:        	
+	            request.put("choice", choice);
+	        	MainDispatcher.getInstance().callAction("Login", "doControl", request);
+	        }
+	    }
+	
 }
