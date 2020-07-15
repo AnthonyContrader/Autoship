@@ -13,7 +13,7 @@ public class MagazzinoDAO {
 	private final String QUERY_READ = "SELECT * FROM Magazzino WHERE id=?";
 	private final String QUERY_UPDATE = "UPDATE Magazzino SET id_oggetto=?, capienza=?, posizione=? WHERE id=?";
 	private final String QUERY_DELETE = "DELETE FROM Magazzino WHERE id=?";
-	private final String QUERY_OGGETTO = "SELECT * FROM Magazzino WHERE id=?";
+	private final String QUERY_OGGETTO = "SELECT id_oggetto FROM Magazzino WHERE id=?";
 
 	public MagazzinoDAO() {
 
@@ -45,7 +45,12 @@ public class MagazzinoDAO {
 		Connection connection = ConnectionSingleton.getInstance();
 		try {	
 			PreparedStatement preparedStatement = connection.prepareStatement(QUERY_CREATE);
-			preparedStatement.setInt(1, magazzinoToInsert.getId_oggetto());
+			if(magazzinoToInsert.getId_oggetto() == 0) {
+				preparedStatement.setObject(1, null);
+			}
+			else {
+				preparedStatement.setInt(1, magazzinoToInsert.getId_oggetto());
+			}
 			preparedStatement.setInt(2, magazzinoToInsert.getCapienza());
 			preparedStatement.setInt(3, magazzinoToInsert.getPosizione());
 			preparedStatement.execute();

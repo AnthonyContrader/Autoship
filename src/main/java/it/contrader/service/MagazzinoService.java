@@ -45,5 +45,9 @@ public class MagazzinoService {
 		// Questo mtodo chiama direttamente il DAO
 		return magazzinoDAO.delete(id);
 	}
+	
+	public int checkOggetto(int id) {
+		return magazzinoDAO.checkOggetto(id);
+	}
 
 }

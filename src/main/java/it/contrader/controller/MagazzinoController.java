@@ -63,7 +63,12 @@ public class MagazzinoController implements Controller {
 		
 		// Arriva qui dalla UserInsertView. Estrae i parametri da inserire e chiama il service per inserire uno user con questi parametri
 		case "INSERT":
-			oggetto = (int) request.get("id_oggetto");
+			if(request.get("id_oggetto") != null) {
+				oggetto = (int) request.get("id_oggetto");
+			}
+			else {
+				oggetto = 0;
+			}
 			capienza = (int) request.get("capienza");
 			posizione = (int) request.get("posizione");
 			
@@ -80,10 +85,13 @@ public class MagazzinoController implements Controller {
 		// Arriva qui dalla UserDeleteView. Estrae l'id dell'utente da cancellare e lo passa al Service
 		case "DELETE":
 			id = Integer.parseInt(request.get("id").toString());
-			//Qui chiama il service
-			magazzinoService.delete(id);
-			request = new Request();
-			request.put("mode", "mode");
+			oggetto = magazzinoService.checkOggetto(id);
+			if(oggetto < 0) {
+				//Qui chiama il service
+				magazzinoService.delete(id);
+				request = new Request();
+				request.put("mode", "mode");
+			}
 			MainDispatcher.getInstance().callView(sub_package + "MagazzinoDelete", request);
 			break;
 		
