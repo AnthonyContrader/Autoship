@@ -23,7 +23,7 @@ public int getCodice() {
 	return codice;
 }
 
-public int SetCodice (int codice) {
+public void setCodice (int codice) {
 	this.codice=codice; 
 }
 
