@@ -6,7 +6,6 @@ import java.util.List;
 
 import it.contrader.main.ConnectionSingleton;
 import it.contrader.model.Magazzino;
-import it.contrader.model.Oggetto;
 
 public class MagazzinoDAO {
 	private final String QUERY_ALL = "SELECT * FROM Magazzino";
@@ -28,7 +27,7 @@ public class MagazzinoDAO {
 			Magazzino Magazzino;
 			while (resultSet.next()) {
 				int id = resultSet.getInt("id");
-				Oggetto oggetto = (Oggetto) resultSet.getObject("id_oggetto");
+				int oggetto = resultSet.getInt("id_oggetto");
 				int capienza = resultSet.getInt("capienza");
 				int posizione = resultSet.getInt("posizione");
 				Magazzino = new Magazzino(oggetto, capienza, posizione);
@@ -45,7 +44,7 @@ public class MagazzinoDAO {
 		Connection connection = ConnectionSingleton.getInstance();
 		try {	
 			PreparedStatement preparedStatement = connection.prepareStatement(QUERY_CREATE);
-			preparedStatement.setObject(1, magazzinoToInsert.getId_oggetto());
+			preparedStatement.setInt(1, magazzinoToInsert.getId_oggetto());
 			preparedStatement.setInt(2, magazzinoToInsert.getCapienza());
 			preparedStatement.setInt(3, magazzinoToInsert.getPosizione());
 			preparedStatement.execute();
@@ -65,10 +64,9 @@ public class MagazzinoDAO {
 			preparedStatement.setInt(1, magazzinoId);
 			ResultSet resultSet = preparedStatement.executeQuery();
 			resultSet.next();
-			int capienza,posizione;
-			Oggetto oggetto;
+			int oggetto, capienza,posizione;
 
-			oggetto = (Oggetto) resultSet.getObject("id_oggetto");
+			oggetto = resultSet.getInt("id_oggetto");
 			capienza = resultSet.getInt("capienza");
 			posizione = resultSet.getInt("posizione");
 			Magazzino magazzino = new Magazzino(oggetto, capienza, posizione);
@@ -92,7 +90,7 @@ public class MagazzinoDAO {
 		if (!magazzinoRead.equals(magazzinoToUpdate)) {
 			try {
 				// Fill the magazzinoToUpdate object
-				if (magazzinoToUpdate.getId_oggetto() == null)  {
+				if (magazzinoToUpdate.getId_oggetto() == -1)  {
 					magazzinoToUpdate.setId_oggetto(magazzinoRead.getId_oggetto());
 				}
 

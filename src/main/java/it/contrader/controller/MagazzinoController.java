@@ -4,7 +4,6 @@ import java.util.List;
 
 import it.contrader.dto.MagazzinoDTO;
 import it.contrader.main.MainDispatcher;
-import it.contrader.model.Oggetto;
 import it.contrader.service.MagazzinoService;
 
 /**
@@ -48,7 +47,7 @@ public class MagazzinoController implements Controller {
 
 		//Definisce i campi della classe (serviranno sempre, tanto vale definirli una sola volta)
 		int id;
-		Oggetto oggetto;
+		int oggetto;
 		int capienza;
 		int posizione;
 
@@ -64,7 +63,7 @@ public class MagazzinoController implements Controller {
 		
 		// Arriva qui dalla UserInsertView. Estrae i parametri da inserire e chiama il service per inserire uno user con questi parametri
 		case "INSERT":
-			oggetto = (Oggetto) request.get("id_oggetto");
+			oggetto = (int) request.get("id_oggetto");
 			capienza = (int) request.get("capienza");
 			posizione = (int) request.get("posizione");
 			
@@ -91,7 +90,7 @@ public class MagazzinoController implements Controller {
 		// Arriva qui dalla UserUpdateView
 		case "UPDATE":
 			id = Integer.parseInt(request.get("id").toString());
-			oggetto = (Oggetto) request.get("id_oggetto");
+			oggetto = (int) request.get("id_oggetto");
 			capienza = (int) request.get("capienza");
 			posizione = (int) request.get("posizione");
 			MagazzinoDTO magazzinotoupdate = new MagazzinoDTO(oggetto, capienza, posizione);
@@ -117,22 +116,22 @@ public class MagazzinoController implements Controller {
 					//toUpperCase() mette in maiuscolo la scelta
 			switch (choice.toUpperCase()) {
 			
-			/*case "L":
-				MainDispatcher.getInstance().callView(sub_package + "UserRead", null);
+			case "L":
+				MainDispatcher.getInstance().callView(sub_package + "MagazzinoRead", null);
 				break;
-			*/	
+			
 			case "I":
 				MainDispatcher.getInstance().callView(sub_package + "MagazzinoInsert", null);
 				break;
-			/*	
+				
 			case "M":
-				MainDispatcher.getInstance().callView(sub_package + "UserUpdate", null);
+				MainDispatcher.getInstance().callView(sub_package + "MagazzinoUpdate", null);
 				break;
 			
 			case "C":
-				MainDispatcher.getInstance().callView(sub_package + "UserDelete", null);
+				MainDispatcher.getInstance().callView(sub_package + "MagazzinoDelete", null);
 				break;
-				*/
+				
 			case "E":
 				MainDispatcher.getInstance().callView("Login", null);
 				break;

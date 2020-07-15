@@ -2,7 +2,6 @@ package it.contrader.view.oggetto;
 
 import it.contrader.controller.Request;
 import it.contrader.dto.OggettoDTO;
-import it.contrader.dto.UserDTO;
 import it.contrader.main.MainDispatcher;
 import it.contrader.view.AbstractView;
 
