@@ -31,7 +31,7 @@ public class MagazzinoView extends AbstractView{
 	 {
 	    	 System.out.println("-------------MAGAZZINO------------\n");
 	         System.out.println(" Seleziona l'opzione del magazzino:");
-	         System.out.println("[I]nserisci");
+	         System.out.println("[L]eggi [I]nserisci [M]odifica [C]ancella [B]ack [E]sci");
 	         choice = this.getInput();
 	 }
 	 

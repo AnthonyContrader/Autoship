@@ -13,6 +13,7 @@ public class MagazzinoDAO {
 	private final String QUERY_READ = "SELECT * FROM Magazzino WHERE id=?";
 	private final String QUERY_UPDATE = "UPDATE Magazzino SET id_oggetto=?, capienza=?, posizione=? WHERE id=?";
 	private final String QUERY_DELETE = "DELETE FROM Magazzino WHERE id=?";
+	private final String QUERY_OGGETTO = "SELECT * FROM Magazzino WHERE id=?";
 
 	public MagazzinoDAO() {
 
@@ -104,7 +105,7 @@ public class MagazzinoDAO {
 
 				// Update the magazzino
 				PreparedStatement preparedStatement = (PreparedStatement) connection.prepareStatement(QUERY_UPDATE);
-				preparedStatement.setObject(1, magazzinoToUpdate.getId_oggetto());
+				preparedStatement.setInt(1, magazzinoToUpdate.getId_oggetto());
 				preparedStatement.setInt(2, magazzinoToUpdate.getCapienza());
 				preparedStatement.setInt(3, magazzinoToUpdate.getPosizione());
 				preparedStatement.setInt(4, magazzinoToUpdate.getId());
@@ -135,5 +136,26 @@ public class MagazzinoDAO {
 		} catch (SQLException e) {
 		}
 		return false;
+	}
+	
+	public int checkOggetto(int id) {
+		Connection connection = ConnectionSingleton.getInstance();
+		try {
+			int oggetto;
+			
+			PreparedStatement preparedStatement = connection.prepareStatement(QUERY_OGGETTO);
+			preparedStatement.setInt(1, id);
+			ResultSet resultSet = preparedStatement.executeQuery();
+			resultSet.next();
+			oggetto = resultSet.getInt("id_oggetto");
+			if(oggetto > 0) {
+				return oggetto;
+			}
+			else {
+				return -1;
+			}
+		} catch (SQLException e) {
+		}
+		return -1;	
 	}
 }
