@@ -14,6 +14,7 @@ public class OggettoDAO {
 	private final String QUERY_DELETE = "DELETE FROM Oggetto WHERE id=?";
 	private final String QUERY_ID = "SELECT id FROM Oggetto WHERE id=?";
 	private final String QUERY_DIMENSIONE = "SELECT dimensione FROM Oggetto WHERE id=?";
+	private final String QUERY_ALLINCELL = "SELECT * FROM Oggetto JOIN Magazzino ON Magazzino.id_oggetto = Oggetto.id";
 	
 	public OggettoDAO() {}
 	public List<Oggetto> getAll() {
@@ -167,5 +168,26 @@ public class OggettoDAO {
 			System.out.println("Errore: " + e);
 		}
 		return -1;
+	}
+	
+	public List<Oggetto> getAllInCell() {
+		List<Oggetto> OggettosList = new ArrayList<>();
+		Connection connection = ConnectionSingleton.getInstance();
+		try {
+			Statement statement = connection.createStatement();
+			ResultSet resultSet = statement.executeQuery(QUERY_ALLINCELL);
+			Oggetto Oggetto;
+			while (resultSet.next()) {
+				int id = resultSet.getInt("id");
+				String nome = resultSet.getString("nome");
+				int dimensione = resultSet.getInt("dimensione");
+				Oggetto = new Oggetto(nome,dimensione);
+				Oggetto.setId(id);
+				OggettosList.add(Oggetto);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return OggettosList;
 	}
 }
