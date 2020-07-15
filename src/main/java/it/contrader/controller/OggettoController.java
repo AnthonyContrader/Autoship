@@ -4,6 +4,7 @@ import java.util.List;
 
 import it.contrader.dto.OggettoDTO;
 import it.contrader.main.MainDispatcher;
+import it.contrader.service.MagazzinoService;
 import it.contrader.service.OggettoService;
 
 public class OggettoController implements Controller  {
@@ -12,11 +13,13 @@ public class OggettoController implements Controller  {
 private static String sub_package = "oggetto.";
 	
 	private OggettoService oggettoService;
+	private MagazzinoService magazzinoService;
 	/**
 	 * Costruisce un oggetto di tipo UserService per poterne usare i metodi
 	 */
 	public OggettoController() {
 		this.oggettoService = new OggettoService();
+		this.magazzinoService = new MagazzinoService();
 	}
 	
 	public void doControl(Request request) {
@@ -63,6 +66,7 @@ private static String sub_package = "oggetto.";
 					id = Integer.parseInt(request.get("id").toString());
 					//Qui chiama il service
 					oggettoService.delete(id);
+					magazzinoService.removeOggetto(id);
 					request = new Request();
 					request.put("mode", "mode");
 					MainDispatcher.getInstance().callView(sub_package + "OggettoDelete", request);

@@ -12,6 +12,9 @@ public class OggettoDAO {
 	private final String QUERY_READ = "SELECT * FROM Oggetto WHERE id=?";
 	private final String QUERY_UPDATE = "UPDATE Oggetto SET nome=?, dimensione=? WHERE id=?";
 	private final String QUERY_DELETE = "DELETE FROM Oggetto WHERE id=?";
+	private final String QUERY_ID = "SELECT id FROM Oggetto WHERE id=?";
+	private final String QUERY_DIMENSIONE = "SELECT dimensione FROM Oggetto WHERE id=?";
+	
 	public OggettoDAO() {}
 	public List<Oggetto> getAll() {
 		List<Oggetto> OggettosList = new ArrayList<>();
@@ -110,6 +113,7 @@ public class OggettoDAO {
 		return false;
 
 	}
+	
 	public boolean delete(int id) {
 		Connection connection = ConnectionSingleton.getInstance();
 		try {
@@ -120,7 +124,46 @@ public class OggettoDAO {
 				return true;
 
 		} catch (SQLException e) {
+			System.out.println("Messaggio : " + e);
 		}
 		return false;
+	}
+	
+	public int id(int id) {
+		Connection connection = ConnectionSingleton.getInstance();
+		try {
+			PreparedStatement preparedStatement = connection.prepareStatement(QUERY_ID);
+			ResultSet resultSet = preparedStatement.executeQuery();
+			resultSet.next();
+			int n = resultSet.getInt("id");
+			if (n != 0) {
+				return n;
+			}
+			else {
+				return -1;
+			}
+
+		} catch (SQLException e) {
+		}
+		return -1;
+	}
+	
+	public int dimensione(int id) {
+		Connection connection = ConnectionSingleton.getInstance();
+		try {
+			PreparedStatement preparedStatement = connection.prepareStatement(QUERY_DIMENSIONE);
+			ResultSet resultSet = preparedStatement.executeQuery();
+			resultSet.next();
+			int n = resultSet.getInt("dimensione");
+			if (n != 0) {
+				return n;
+			}
+			else {
+				return -1;
+			}
+
+		} catch (SQLException e) {
+		}
+		return -1;
 	}
 }

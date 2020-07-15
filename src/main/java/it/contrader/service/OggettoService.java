@@ -45,4 +45,12 @@ public class OggettoService {
 		// Questo mtodo chiama direttamente il DAO
 		return oggettoDAO.delete(id);
 	}
+	
+	public int id(int id) {
+		return oggettoDAO.id(id);
+	}
+	
+	public int dimensione(int id) {
+		return oggettoDAO.dimensione(id);
+	}
 }
