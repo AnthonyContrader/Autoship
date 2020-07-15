@@ -65,7 +65,7 @@ private static String sub_package = "oggetto.";
 					oggettoService.delete(id);
 					request = new Request();
 					request.put("mode", "mode");
-					MainDispatcher.getInstance().callView(sub_package + "OggettoDelete", request);
+					MainDispatcher.getInstance().callView(sub_package + "OggettoDelete", request);//parto da qui 
 					break;
 				
 				// Arriva qui dalla UserUpdateView

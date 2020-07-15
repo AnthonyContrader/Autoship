@@ -10,7 +10,7 @@ public class OggettoDeleteView extends AbstractView {
 	private int id;
 	private final String mode = "DELETE";
 
-	public OggettoDeleteView() {
+	public OggettoDeleteView() {//mi porta qui 
 	}
 
 	/**
