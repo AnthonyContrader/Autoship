@@ -78,7 +78,7 @@ private static String sub_package = "oggetto.";
 					oggettoService.update(oggettotoupdate);
 					request = new Request();
 					request.put("mode", "mode");
-					MainDispatcher.getInstance().callView(sub_package + "UserUpdate", request);
+					MainDispatcher.getInstance().callView(sub_package + "OggettoUpdate", request);
 					break;
 					
 				//Arriva qui dalla UserView Invoca il Service e invia alla UserView il risultato da mostrare 
