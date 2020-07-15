@@ -16,7 +16,7 @@ public class OggettoReadView extends AbstractView {
 	}
 
 	/**
-	 * Se la request non è nulla (ovvero se si arriva dalla mode READ del controller) mostra
+	 * Se la request non ï¿½ nulla (ovvero se si arriva dalla mode READ del controller) mostra
 	 * l'esito dell'operazione
 	 */
 	@Override
