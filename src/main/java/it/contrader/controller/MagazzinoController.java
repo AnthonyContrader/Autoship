@@ -93,7 +93,7 @@ public class MagazzinoController implements Controller {
 			oggetto = (int) request.get("id_oggetto");
 			capienza = (int) request.get("capienza");
 			posizione = (int) request.get("posizione");
-			MagazzinoDTO magazzinotoupdate = new MagazzinoDTO(oggetto, capienza, posizione);
+			MagazzinoDTO magazzinotoupdate = new MagazzinoDTO(id,oggetto, capienza, posizione);
 			magazzinotoupdate.setId(id);
 			magazzinoService.update(magazzinotoupdate);
 			request = new Request();
