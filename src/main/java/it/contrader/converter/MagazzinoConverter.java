@@ -21,7 +21,7 @@ public class MagazzinoConverter {
 	 * Notare l'uso del metodo get() per ottenere il valore dell'attributo-
 	 */
 	public Magazzino toEntity(MagazzinoDTO magazzinoDTO) {
-		Magazzino magazzino = new Magazzino(magazzinoDTO.getId_oggetto(), magazzinoDTO.getCapienza(), magazzinoDTO.getPosizione());
+		Magazzino magazzino = new Magazzino(magazzinoDTO.getId(), magazzinoDTO.getId_oggetto(), magazzinoDTO.getCapienza(), magazzinoDTO.getPosizione());
 		return magazzino;
 	}
 	

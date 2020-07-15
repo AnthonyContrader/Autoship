@@ -22,7 +22,7 @@ public class OggettoConverter {
 	 * Notare l'uso del metodo get() per ottenere il valore dell'attributo-
 	 */
 	public Oggetto toEntity(OggettoDTO oggettoDTO) {
-		Oggetto oggetto = new Oggetto(oggettoDTO.getNome(), oggettoDTO.getDimensione());
+		Oggetto oggetto = new Oggetto(oggettoDTO.getId(), oggettoDTO.getNome(), oggettoDTO.getDimensione());
 		return oggetto;
 	}
 	

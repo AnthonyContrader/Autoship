@@ -85,7 +85,7 @@ private static String sub_package = "oggetto.";
 				case "OGGETTOLIST":
 					List<OggettoDTO> oggettiDTO = oggettoService.getAll();
 					//Impacchetta la request con la lista degli user
-					request.put("oggetto", oggettiDTO);
+					request.put("oggetti", oggettiDTO);
 					MainDispatcher.getInstance().callView("Oggetto", request);
 					break;
 					

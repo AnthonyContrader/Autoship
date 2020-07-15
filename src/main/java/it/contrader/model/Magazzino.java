@@ -10,6 +10,14 @@ public Magazzino(Oggetto id_oggetto, int capienza, int posizione) {
 	this.capienza= capienza;
 	this.posizione= posizione;
 }
+
+public Magazzino(int id, Oggetto id_oggetto, int capienza, int posizione) {
+	this.id = id;
+	this.id_oggetto= id_oggetto;
+	this.capienza= capienza;
+	this.posizione= posizione;
+}
+
 public int getId() {
 	return id;
 }

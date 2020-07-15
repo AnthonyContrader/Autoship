@@ -8,6 +8,7 @@ public class OggettoDTO {
 		this.nome = nome;
 		this.dimensione = dimensione;
 	}
+		
 	public int getId() {
 		return id;
 	}
@@ -25,5 +26,10 @@ public class OggettoDTO {
 	}
 	public void setDimensione(int dimensione) {
 		this.dimensione = dimensione;
+	}
+	
+	@Override
+	public String toString() {
+		return  id + "\t"  + nome +"\t\t" + dimensione;
 	}
 }

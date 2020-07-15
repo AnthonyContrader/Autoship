@@ -8,6 +8,13 @@ public Oggetto(String nome, int dimensione){
 	this.nome = nome;
 	this.dimensione = dimensione; 
 }
+
+public Oggetto(int id, String nome, int dimensione){
+	this.id = id;
+	this.nome = nome;
+	this.dimensione = dimensione; 
+}
+
 public int getId() {
 	return id;
 }

@@ -102,6 +102,7 @@ public class OggettoDAO {
 					return false;
 
 			} catch (SQLException e) {
+				System.out.println("Errore: " + e);
 				return false;
 			}
 		}
