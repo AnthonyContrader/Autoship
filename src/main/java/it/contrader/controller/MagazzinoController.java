@@ -110,7 +110,7 @@ public class MagazzinoController implements Controller {
 			posizione = (int) request.get("posizione");
 			int dimensioneOggetto = oggettoService.dimensione(oggetto);
 			if(capienza < dimensioneOggetto) {
-				oggetto = -1;
+				oggetto = 0;
 			}
 			
 			MagazzinoDTO magazzinotoupdate = new MagazzinoDTO(id,oggetto, capienza, posizione);

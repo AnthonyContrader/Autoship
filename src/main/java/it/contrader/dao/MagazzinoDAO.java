@@ -111,7 +111,17 @@ public class MagazzinoDAO {
 
 				// Update the magazzino
 				PreparedStatement preparedStatement = (PreparedStatement) connection.prepareStatement(QUERY_UPDATE);
-				preparedStatement.setInt(1, magazzinoToUpdate.getId_oggetto());
+				if(magazzinoToUpdate.getId_oggetto() == 0) {
+					if(magazzinoRead.getId_oggetto() > 0) {
+						preparedStatement.setInt(1, magazzinoRead.getId_oggetto());
+					}
+					else {
+						preparedStatement.setObject(1, null);
+					}
+				}
+				else {
+					preparedStatement.setInt(1, magazzinoToUpdate.getId_oggetto());
+				}
 				preparedStatement.setInt(2, magazzinoToUpdate.getCapienza());
 				preparedStatement.setInt(3, magazzinoToUpdate.getPosizione());
 				preparedStatement.setInt(4, magazzinoToUpdate.getId());

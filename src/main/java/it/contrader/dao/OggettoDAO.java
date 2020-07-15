@@ -152,6 +152,7 @@ public class OggettoDAO {
 		Connection connection = ConnectionSingleton.getInstance();
 		try {
 			PreparedStatement preparedStatement = connection.prepareStatement(QUERY_DIMENSIONE);
+			preparedStatement.setInt(1, id);
 			ResultSet resultSet = preparedStatement.executeQuery();
 			resultSet.next();
 			int n = resultSet.getInt("dimensione");
@@ -163,6 +164,7 @@ public class OggettoDAO {
 			}
 
 		} catch (SQLException e) {
+			System.out.println("Errore: " + e);
 		}
 		return -1;
 	}
