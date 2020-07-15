@@ -18,8 +18,8 @@ public class HomeUserView extends AbstractView{
 
 	public void showOptions() {
         System.out.println("-------------MENU------------\n");
-        System.out.println(" Seleziona cosa vuoi gestire:");
-        System.out.println(" [O]ggetto [E]sci");
+        System.out.println("Seleziona cosa vuoi gestire:");
+        System.out.println("[V]isualizza [O]rdina [E]sci");
         //Il metodo che salva l'input nella stringa choice.
         //getInput() è definito in AbstractView.
         choice = this.getInput();
@@ -30,8 +30,13 @@ public class HomeUserView extends AbstractView{
 	    	request = new Request();
 	        switch (choice) {
 	       
-	        case "o":
+	        case "v":
 	        	this.request.put("mode", "OGGETTOLIST");
+	        	MainDispatcher.getInstance().callAction("OggettoUser", "doControl", request);
+	        	break;
+	        	
+	        case "o":
+	        	this.request.put("mode", "ORDINATE");
 	        	MainDispatcher.getInstance().callAction("OggettoUser", "doControl", request);
 	        	break;
 	 
