@@ -63,7 +63,25 @@ public class UserController implements Controller{
 				case "L":
 					MainDispatcher.getInstance().callView(sub_package + "UserRead", null);
 					break;
+				case "I":
+					MainDispatcher.getInstance().callView(sub_package + "UserInsert", null);
+					break;
 					
+				case "M":
+					MainDispatcher.getInstance().callView(sub_package + "UserUpdate", null);
+					break;
+				
+				case "C":
+					MainDispatcher.getInstance().callView(sub_package + "UserDelete", null);
+					break;
+	
+				case "E":
+					MainDispatcher.getInstance().callView("Login", null);
+					break;
+
+				case "B":
+					MainDispatcher.getInstance().callView("HomeAdmin", null);
+					break;
 				
 					
 				default:
