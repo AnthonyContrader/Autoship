@@ -30,7 +30,7 @@ public class OggettoView extends AbstractView{
 		 public void showOptions()
 		 {
 		    	 System.out.println("-------------OGGETTO------------\n");
-		         System.out.println(" Seleziona l'opzione del magazzino:");
+		         System.out.println(" Seleziona l'opzione degli oggetti:");
 		         System.out.println("[L]eggi [I]nserisci [M]odifica [C]ancella [B]ack [E]sci");
 		         choice = this.getInput();
 		 }

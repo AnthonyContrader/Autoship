@@ -5,6 +5,7 @@ import java.util.List;
 import it.contrader.dto.MagazzinoDTO;
 import it.contrader.main.MainDispatcher;
 import it.contrader.service.MagazzinoService;
+import it.contrader.service.OggettoService;
 
 /**
  * 
@@ -20,11 +21,13 @@ public class MagazzinoController implements Controller {
 	private static String sub_package = "magazzino.";
 	
 	private MagazzinoService magazzinoService;
+	private OggettoService oggettoService;
 	/**
 	 * Costruisce un oggetto di tipo UserService per poterne usare i metodi
 	 */
 	public MagazzinoController() {
 		this.magazzinoService = new MagazzinoService();
+		this.oggettoService = new OggettoService();
 	}
 	
 	
@@ -72,6 +75,10 @@ public class MagazzinoController implements Controller {
 			capienza = (int) request.get("capienza");
 			posizione = (int) request.get("posizione");
 			
+			if(capienza < oggettoService.dimensione(oggetto)) {
+				oggetto = 0;
+			}
+			
 			//costruisce l'oggetto user da inserire
 			MagazzinoDTO magazzinotoinsert = new MagazzinoDTO(oggetto, capienza, posizione);
 			//invoca il service
@@ -101,6 +108,11 @@ public class MagazzinoController implements Controller {
 			oggetto = (int) request.get("id_oggetto");
 			capienza = (int) request.get("capienza");
 			posizione = (int) request.get("posizione");
+			int dimensioneOggetto = oggettoService.dimensione(oggetto);
+			if(capienza < dimensioneOggetto) {
+				oggetto = 0;
+			}
+			
 			MagazzinoDTO magazzinotoupdate = new MagazzinoDTO(id,oggetto, capienza, posizione);
 			magazzinotoupdate.setId(id);
 			magazzinoService.update(magazzinotoupdate);

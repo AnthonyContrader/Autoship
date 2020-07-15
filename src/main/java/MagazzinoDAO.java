@@ -14,6 +14,7 @@ public class MagazzinoDAO {
 	private final String QUERY_UPDATE = "UPDATE Magazzino SET id_oggetto=?, capienza=?, posizione=? WHERE id=?";
 	private final String QUERY_DELETE = "DELETE FROM Magazzino WHERE id=?";
 	private final String QUERY_OGGETTO = "SELECT id_oggetto FROM Magazzino WHERE id=?";
+	private final String QUERY_REMOVEOGGETTO = "UPDATE Magazzino SET id_oggetto=NULL WHERE id_oggetto=?";
 
 	public MagazzinoDAO() {
 
@@ -110,7 +111,17 @@ public class MagazzinoDAO {
 
 				// Update the magazzino
 				PreparedStatement preparedStatement = (PreparedStatement) connection.prepareStatement(QUERY_UPDATE);
-				preparedStatement.setInt(1, magazzinoToUpdate.getId_oggetto());
+				if(magazzinoToUpdate.getId_oggetto() == 0) {
+					if(magazzinoRead.getId_oggetto() > 0) {
+						preparedStatement.setInt(1, magazzinoRead.getId_oggetto());
+					}
+					else {
+						preparedStatement.setObject(1, null);
+					}
+				}
+				else {
+					preparedStatement.setInt(1, magazzinoToUpdate.getId_oggetto());
+				}
 				preparedStatement.setInt(2, magazzinoToUpdate.getCapienza());
 				preparedStatement.setInt(3, magazzinoToUpdate.getPosizione());
 				preparedStatement.setInt(4, magazzinoToUpdate.getId());
@@ -162,5 +173,21 @@ public class MagazzinoDAO {
 		} catch (SQLException e) {
 		}
 		return -1;	
+	}
+	
+	public boolean removeOggetto(int oggetto) {
+		Connection connection = ConnectionSingleton.getInstance();
+		try {
+					
+			PreparedStatement preparedStatement = (PreparedStatement) connection.prepareStatement(QUERY_REMOVEOGGETTO);
+			preparedStatement.setInt(1, oggetto);
+			int a = preparedStatement.executeUpdate();
+			if (a > 0)
+				return true;
+			else
+				return false;
+		} catch (SQLException e) {
+		}
+		return false;	
 	}
 }
