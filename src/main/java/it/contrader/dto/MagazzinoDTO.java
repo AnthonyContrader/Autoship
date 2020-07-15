@@ -13,6 +13,14 @@ public class MagazzinoDTO {
 		this.capienza = capienza;
 		this.posizione= posizione;
 	}
+	
+	public MagazzinoDTO(int id, Oggetto id_oggetto, int capienza, int posizione) {
+		this.id = id;
+		this.id_oggetto = id_oggetto;
+		this.capienza = capienza;
+		this.posizione= posizione;
+	}
+	
 	public int getId() {
 		return id;
 	}
@@ -38,5 +46,10 @@ public class MagazzinoDTO {
 		this.posizione = posizione;
 	}
 
+	@Override
+	public String toString() {
+		return  id + "\t"  + id_oggetto +"\t\t" + capienza + "\t\t" + posizione;
+	}
+	
 
 }

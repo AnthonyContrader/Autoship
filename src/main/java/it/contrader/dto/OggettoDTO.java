@@ -8,6 +8,12 @@ public class OggettoDTO {
 		this.nome = nome;
 		this.dimensione = dimensione;
 	}
+	
+	public OggettoDTO(int id, String nome, int dimensione){
+		this.id = id;
+		this.nome = nome;
+		this.dimensione = dimensione;
+	}
 		
 	public int getId() {
 		return id;
