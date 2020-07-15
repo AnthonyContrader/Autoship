@@ -10,7 +10,7 @@ public class HomeUserView extends AbstractView{
 
 	@Override
 	public void showResults(Request request) {
-		System.out.println("\n-----Purtroppo in questo sample l'utente non puà fare nulla, ci scusiamo per il disagio.-----");
+		System.out.println("");
 
 	}
 
@@ -32,7 +32,7 @@ public class HomeUserView extends AbstractView{
 	       
 	        case "o":
 	        	this.request.put("mode", "OGGETTOLIST");
-	        	MainDispatcher.getInstance().callAction("Oggetto", "doControl", request);
+	        	MainDispatcher.getInstance().callAction("OggettoUser", "doControl", request);
 	        	break;
 	 
 	        case "e":
