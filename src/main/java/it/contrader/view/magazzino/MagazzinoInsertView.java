@@ -9,6 +9,7 @@ public class MagazzinoInsertView extends AbstractView{
 	
 	private Request request;
 
+	private int id_oggetto;
 	private int capienza;
 	private int posizione;
 	
@@ -25,6 +26,8 @@ public class MagazzinoInsertView extends AbstractView{
 	}
 	
 	public void showOptions() {
+		System.out.println("Inserisci l'ID dell'oggetto altrimenti inserisci 0:");
+		id_oggetto = Integer.parseInt(getInput());
 		System.out.println("Inserisci la capienza della cella:");
 		capienza = Integer.parseInt(getInput());
 		System.out.println("Inserisci la posizione della cella:");
@@ -34,7 +37,12 @@ public class MagazzinoInsertView extends AbstractView{
 	@Override
 	public void submit() {
 		request = new Request();
-		request.put("id_oggetto", null);
+		if(id_oggetto == 0) {
+			request.put("id_oggetto", null);
+		}
+		else {
+			request.put("id_oggetto", id_oggetto);
+		}
 		request.put("capienza", capienza);
 		request.put("posizione", posizione);
 		request.put("mode", mode);

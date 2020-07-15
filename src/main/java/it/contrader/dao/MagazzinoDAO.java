@@ -51,6 +51,7 @@ public class MagazzinoDAO {
 			preparedStatement.execute();
 			return true;
 		} catch (SQLException e) {
+			System.out.println("Errore: " + e);
 			return false;
 		}
 

@@ -1,6 +1,8 @@
 package it.contrader.view.oggetto;
 
 import it.contrader.controller.Request;
+import it.contrader.dto.OggettoDTO;
+import it.contrader.dto.UserDTO;
 import it.contrader.main.MainDispatcher;
 import it.contrader.view.AbstractView;
 
@@ -19,8 +21,9 @@ public class OggettoReadView extends AbstractView {
 	 */
 	@Override
 	public void showResults(Request request) {
-		if (request!=null) {
-			System.out.println("Lettura andata a buon fine.\n");
+		if (request != null) {
+			OggettoDTO oggetto = (OggettoDTO) request.get("oggetto");
+			System.out.println(oggetto);
 			MainDispatcher.getInstance().callView("Oggetto", null);
 		}
 	}
@@ -30,7 +33,7 @@ public class OggettoReadView extends AbstractView {
 	 */
 	@Override
 	public void showOptions() {
-			System.out.println(" Inserisci id dell'oggetto:");
+			System.out.println("Inserisci id dell'oggetto:");
 			id = Integer.parseInt(getInput());
 
 	}
