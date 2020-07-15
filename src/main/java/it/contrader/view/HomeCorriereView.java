@@ -29,7 +29,7 @@ public class HomeCorriereView extends AbstractView{
        
         case "o":
         	this.request.put("mode", "OGGETTOLIST");
-        	MainDispatcher.getInstance().callAction("OggettoCorriereDelete", "doControl", request);
+        	MainDispatcher.getInstance().callAction("OggettoCorriere", "doControl", request);
         	break;
  
         case "e":
