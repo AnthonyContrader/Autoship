@@ -98,7 +98,7 @@ public class MagazzinoController implements Controller {
 			magazzinoService.update(magazzinotoupdate);
 			request = new Request();
 			request.put("mode", "mode");
-			MainDispatcher.getInstance().callView(sub_package + "UserUpdate", request);
+			MainDispatcher.getInstance().callView(sub_package + "MagazzinoUpdate", request);
 			break;
 			
 		//Arriva qui dalla UserView Invoca il Service e invia alla UserView il risultato da mostrare 
