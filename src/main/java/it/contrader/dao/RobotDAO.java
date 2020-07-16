@@ -9,7 +9,7 @@ import it.contrader.model.Oggetto;
 
 public class RobotDAO {
 	
-	private final String QUERY_CREATECODE = "UPDATE Magazzino SET coidce=? FROM Magazzino JOIN Magazzino ON Magazzino.id_oggetto = Oggetto.id WHERE Oggetto.id=?";
+	private final String QUERY_CREATECODE = "UPDATE Magazzino SET coidce=? FROM Magazzino JOIN Oggetto ON Magazzino.id_oggetto = Oggetto.id WHERE Oggetto.id=?";
 	private final String QUERY_REMOVECODE = "UPDATE Magazzino SET coidce=NULL WHERE codice=?";
 	private final String QUERY_REMOVEOBJECT = "DELETE FROM Oggetto JOIN Magazzino ON Magazzino.id_oggetto = Oggetto.id WHERE Magazzino.codice=?";
 

@@ -39,6 +39,6 @@ public class OggettoUserUpdateView extends AbstractView{
 		request = new Request();
 		request.put("id", id);
 		request.put("mode", mode);
-		MainDispatcher.getInstance().callAction("Oggetto", "doControl", request);
+		MainDispatcher.getInstance().callAction("OggettoUser", "doControl", request);
 	}
 }
