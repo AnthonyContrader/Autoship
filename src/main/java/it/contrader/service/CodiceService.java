@@ -3,12 +3,14 @@ package it.contrader.service;
 import java.util.List;
 
 import it.contrader.converter.CodiceConverter;
+import it.contrader.converter.OggettoConverter;
 import it.contrader.dao.CodiceDAO;
+import it.contrader.dao.OggettoDAO;
 import it.contrader.dto.CodiceDTO;
 
 public class CodiceService {
-	private OggettoDAO oggettoDAO;
-	private OggettoConverter oggettoConverter;
+	private CodiceDAO CodiceDAO;
+	private CodiceConverter CodiceConverter;
 	
 	//Istanzio DAO  e Converter specifici.
 	public CodiceService(){
