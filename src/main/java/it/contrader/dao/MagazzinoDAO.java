@@ -15,7 +15,7 @@ public class MagazzinoDAO {
 	private final String QUERY_DELETE = "DELETE FROM Magazzino WHERE id=?";
 	private final String QUERY_OGGETTO = "SELECT id_oggetto FROM Magazzino WHERE id=?";
 	private final String QUERY_REMOVEOGGETTO = "UPDATE Magazzino SET id_oggetto=NULL WHERE id_oggetto=?";
-	private final String QUERY_CODICE = "SELECT * FROM Magazzino WHERE codice IN NOT NULL";
+	private final String QUERY_CODICE = "SELECT id FROM Magazzino WHERE codice IS NOT NULL";
 	
 	public MagazzinoDAO() {
 
@@ -191,4 +191,26 @@ public class MagazzinoDAO {
 		}
 		return false;	
 	}
+	
+	public int checkCodice() {
+		Connection connection = ConnectionSingleton.getInstance();
+		try {
+			int id;
+			
+			PreparedStatement preparedStatement = connection.prepareStatement(QUERY_CODICE);
+			ResultSet resultSet = preparedStatement.executeQuery();
+			resultSet.next();
+			id = resultSet.getInt("id");
+			if(id > 0) {
+				return id;
+			}
+			else {
+				return -1;
+			}
+		} catch (SQLException e) {
+			System.out.println("Messaggio: " + e);
+		}
+		return -1;	
+	}
+	
 }

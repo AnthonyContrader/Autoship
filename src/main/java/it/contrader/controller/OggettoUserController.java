@@ -6,6 +6,7 @@ import java.util.Random;
 
 import it.contrader.dto.OggettoDTO;
 import it.contrader.main.MainDispatcher;
+import it.contrader.service.MagazzinoService;
 import it.contrader.service.OggettoService;
 import it.contrader.service.RobotService;
 
@@ -14,10 +15,12 @@ public class OggettoUserController implements Controller  {
 private static String sub_package = "oggetto.";
 	
 	private OggettoService oggettoService;
+	private MagazzinoService magazzinoService;
 	private RobotService robotService;
 	
 	public OggettoUserController() {
 		this.oggettoService = new OggettoService();
+		this.magazzinoService = new MagazzinoService();
 		this.robotService = new RobotService();
 	}
 	
@@ -38,9 +41,12 @@ private static String sub_package = "oggetto.";
 			break;
 		
 		case "UPDATE":
-			id = Integer.parseInt(request.get("id").toString());			
-			int codice = (int) (Math.random() * (5000 - 1000));
-			robotService.createCode(codice, id);
+			id = Integer.parseInt(request.get("id").toString());
+			int checkCodice = magazzinoService.checkCodice();
+			if(checkCodice == -1) {
+				int codice = (int) (Math.random() * (5000 - 1000));
+				robotService.createCode(codice, id);
+			}
 			request = new Request();
 			request.put("mode", "mode");
 			MainDispatcher.getInstance().callView(sub_package + "OggettoUserUpdate", request);

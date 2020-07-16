@@ -53,5 +53,9 @@ public class MagazzinoService {
 	public boolean removeOggetto(int oggetto) {
 		return magazzinoDAO.removeOggetto(oggetto);
 	}
+	
+	public int checkCodice() {
+		return magazzinoDAO.checkCodice();
+	}
 
 }

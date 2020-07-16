@@ -6,6 +6,8 @@ import it.contrader.view.AbstractView;
 
 public class OggettoUserUpdateView extends AbstractView{
 	
+	private static String sub_package = "oggetto.";
+	
 	private Request request;
 	private int id;
 	private String nome;
@@ -19,7 +21,7 @@ public class OggettoUserUpdateView extends AbstractView{
 	public void showResults(Request request) {
 		if (request!=null) {
 			System.out.println("Ordinazione andata a buon fine.\n");
-			MainDispatcher.getInstance().callView("Oggetto", null);
+			MainDispatcher.getInstance().callView(sub_package + "OggettoUser", null);
 		}
 	}
 	

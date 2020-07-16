@@ -14,7 +14,7 @@ public class OggettoDAO {
 	private final String QUERY_DELETE = "DELETE FROM Oggetto WHERE id=?";
 	private final String QUERY_ID = "SELECT id FROM Oggetto WHERE id=?";
 	private final String QUERY_DIMENSIONE = "SELECT dimensione FROM Oggetto WHERE id=?";
-	private final String QUERY_ALLINCELL = "SELECT * FROM Oggetto JOIN Magazzino ON Magazzino.id_oggetto = Oggetto.id";
+	private final String QUERY_ALLINCELL = "SELECT * FROM Oggetto JOIN Magazzino ON Magazzino.id_oggetto = Oggetto.id WHERE Magazzino.codice IS NULL";
 	
 	public OggettoDAO() {}
 	public List<Oggetto> getAll() {
