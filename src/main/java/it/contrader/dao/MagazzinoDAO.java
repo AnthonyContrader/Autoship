@@ -15,7 +15,8 @@ public class MagazzinoDAO {
 	private final String QUERY_DELETE = "DELETE FROM Magazzino WHERE id=?";
 	private final String QUERY_OGGETTO = "SELECT id_oggetto FROM Magazzino WHERE id=?";
 	private final String QUERY_REMOVEOGGETTO = "UPDATE Magazzino SET id_oggetto=NULL WHERE id_oggetto=?";
-
+	private final String QUERY_CODICE = "SELECT * FROM Magazzino WHERE codice IN NOT NULL";
+	
 	public MagazzinoDAO() {
 
 	}
