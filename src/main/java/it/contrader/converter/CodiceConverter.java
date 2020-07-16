@@ -13,7 +13,11 @@ public class CodiceConverter {
 	 * Notare l'uso del metodo get() per ottenere il valore dell'attributo-
 	 */
 	public CodiceDTO toDTO(Codice codice) {
+<<<<<<< HEAD
 		CodiceDTO codiceDTO = new CodiceDTO (codice.getCodice());
+=======
+		CodiceDTO codiceDTO = new CodiceDTO (codice.getId(), codice.getCodice(), 0);
+>>>>>>> 0ace919cf34d1162062a0b0f11dc68a864900b94
 		return codiceDTO;
 	}
 
@@ -22,8 +26,13 @@ public class CodiceConverter {
 	 * Notare l'uso del metodo get() per ottenere il valore dell'attributo-
 	 */
 	public Codice toEntity(CodiceDTO codiceDTO) {
+<<<<<<< HEAD
 		Codice codice = new Codice(codiceDTO.getId(), codiceDTO.getCodice());
 		return codice ;
+=======
+		Codice codiceDTO1 = new Codice(codiceDTO1.getId(), codiceDTO1.getCodice());
+		return codiceDTO1 ;
+>>>>>>> 0ace919cf34d1162062a0b0f11dc68a864900b94
 	}
 	
 	/**
@@ -31,7 +40,11 @@ public class CodiceConverter {
 	 */
 	public List<CodiceDTO> toDTOList(List<Codice> codiceList) {
 		//Crea una lista vuota.
+<<<<<<< HEAD
 		List<CodiceDTO> codiceDTOList = new ArrayList<CodiceDTO>();
+=======
+		List<CodiceDTO> codiceDTOList = newArrayList<codiceDTO>();
+>>>>>>> 0ace919cf34d1162062a0b0f11dc68a864900b94
 		
 		//Cicla tutti gli elementi della lista e li converte uno a uno
 		for(Codice codice : codiceList) {
