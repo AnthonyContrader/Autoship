@@ -39,7 +39,7 @@ private static String sub_package = "oggetto.";
 		
 		case "UPDATE":
 			id = Integer.parseInt(request.get("id").toString());			
-			int codice = (int) (Math.random() * (10 - 1));
+			int codice = (int) (Math.random() * (5 - 1));
 			robotService.createCode(codice, id);
 			request = new Request();
 			request.put("mode", "mode");
