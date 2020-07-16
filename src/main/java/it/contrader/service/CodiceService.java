@@ -7,6 +7,7 @@ import it.contrader.converter.OggettoConverter;
 import it.contrader.dao.CodiceDAO;
 import it.contrader.dao.OggettoDAO;
 import it.contrader.dto.CodiceDTO;
+import it.contrader.model.Codice;
 
 public class CodiceService {
 	private CodiceDAO CodiceDAO;
@@ -27,7 +28,7 @@ public class CodiceService {
 
 	public CodiceDTO read(int id) {
 		// Ottiene un'entit� e la restituisce convertendola in DTO
-		return CodiceConverter.toDTO(Codice.read(id));
+		return CodiceConverter.toDTO(CodiceDAO.read(id));
 	}
 
 
@@ -52,12 +53,5 @@ public class CodiceService {
 		return CodiceDAO.id(id);
 	}
 	
-	public int dimensione(int id) {
-		return CodiceDAO.dimensione(id);
-	}
 	
-	public List<CodiceDTO> getAllInCell() {
-		// Ottiene una lista di entit� e le restituisce convertendole in DTO
-		return CodiceConverter.toDTOList(CodiceDAO.getAllInCell());
-	}
 }

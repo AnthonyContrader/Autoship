@@ -5,6 +5,7 @@ import java.util.List;
 import it.contrader.dto.CodiceDTO;
 import it.contrader.dto.OggettoDTO;
 import it.contrader.main.MainDispatcher;
+import it.contrader.service.CodiceService;
 
 public class CodiceController implements Controller  {
 
@@ -16,7 +17,7 @@ private static String sub_package = "oggetto.";
 	 * Costruisce un oggetto di tipo UserService per poterne usare i metodi
 	 */
 	public CodiceController() {
-		this.codiceService = new codiceService();
+		this.codiceService = new CodiceService();
 	}
 	
 	public void doControl(Request request) {

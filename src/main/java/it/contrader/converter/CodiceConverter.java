@@ -13,7 +13,7 @@ public class CodiceConverter {
 	 * Notare l'uso del metodo get() per ottenere il valore dell'attributo-
 	 */
 	public CodiceDTO toDTO(Codice codice) {
-		CodiceoDTO codiceDTO = new CodiceDTO(codice.getNome(), codice.getDimensione());
+		CodiceDTO codiceDTO = new CodiceDTO (codice.getCodice());
 		return codiceDTO;
 	}
 
@@ -21,25 +21,25 @@ public class CodiceConverter {
 	 * Crea un oggetto di tipo User e lo riempie con i campi del parametro user di tipo UserDTO.
 	 * Notare l'uso del metodo get() per ottenere il valore dell'attributo-
 	 */
-	public Oggetto toEntity(OggettoDTO oggettoDTO) {
-		Oggetto oggetto = new Oggetto(oggettoDTO.getId(), oggettoDTO.getNome(), oggettoDTO.getDimensione());
-		return oggetto;
+	public Codice toEntity(CodiceDTO codiceDTO) {
+		Codice codice = new Codice(codiceDTO.getId(), codiceDTO.getCodice());
+		return codice ;
 	}
 	
 	/**
 	 * Metodo per convertire le liste di User.
 	 */
-	public List<OggettoDTO> toDTOList(List<Oggetto> oggettoList) {
+	public List<CodiceDTO> toDTOList(List<Codice> codiceList) {
 		//Crea una lista vuota.
-		List<OggettoDTO> oggettoDTOList = new ArrayList<OggettoDTO>();
+		List<CodiceDTO> codiceDTOList = new ArrayList<CodiceDTO>();
 		
 		//Cicla tutti gli elementi della lista e li converte uno a uno
-		for(Oggetto oggetto : oggettoList) {
+		for(Codice codice : codiceList) {
 			//Utilizza il metodo toDTO per convertire ogni singolo elemento della lista
 			//e lo aggiunge adda lista di DTO
-			oggettoDTOList.add(toDTO(oggetto));
+			codiceDTOList.add(toDTO(codice));
 		}
-		return oggettoDTOList;
+		return codiceDTOList;
 	}
 
 }
