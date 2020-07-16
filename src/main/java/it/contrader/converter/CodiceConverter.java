@@ -13,7 +13,7 @@ public class CodiceConverter {
 	 * Notare l'uso del metodo get() per ottenere il valore dell'attributo-
 	 */
 	public CodiceDTO toDTO(Codice codice) {
-		CodiceoDTO codiceDTO = new CodiceDTO(codice.getNome(), codice.getDimensione());
+		CodiceDTO codiceDTO = new CodiceDTO(codice.getid(), codice.getCodice());
 		return codiceDTO;
 	}
 
@@ -21,9 +21,9 @@ public class CodiceConverter {
 	 * Crea un oggetto di tipo User e lo riempie con i campi del parametro user di tipo UserDTO.
 	 * Notare l'uso del metodo get() per ottenere il valore dell'attributo-
 	 */
-	public Oggetto toEntity(OggettoDTO oggettoDTO) {
-		Oggetto oggetto = new Oggetto(oggettoDTO.getId(), oggettoDTO.getNome(), oggettoDTO.getDimensione());
-		return oggetto;
+	public Codice toEntity(CodiceDTO codiceDTO) {
+		Codice codice = new Codice(codiceDTO.getId(), codice.getCodice());
+		return codice ;
 	}
 	
 	/**
