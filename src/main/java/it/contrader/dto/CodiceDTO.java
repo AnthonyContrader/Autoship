@@ -2,37 +2,24 @@ package it.contrader.dto;
 
 public class CodiceDTO {
 private int id;
-private String nome;
-private int dimensione;
-public CodiceDTO(String nome, int dimensione){
-	this.nome = nome;
-	this.dimensione = dimensione; 
+private int codice;
+public CodiceDTO(String nome, int codice){
+	this.id= id;
+	this.codice = codice; 
 }
 
-public CodiceDTO(int id, String nome, int dimensione){
+public CodiceDTO(int id, int dimensione, int codice){
 	this.id = id;
-	this.nome = nome;
-	this.dimensione = dimensione; 
+	this.codice = codice; 
 }
 
 public int getId() {
 	return id;
 }
-public void setId(int id) {
-	this.id = id;
+public void setCodice(int id) {
+	this.codice = id;
 }
-public String getNome() {
-	return nome;
-}
-public void setNome(String nome) {
-	this.nome = nome;
-}
-public int getDimensione() {
-	return dimensione;
-}
-public void setDimensione(int dimensione) {
-	this.dimensione = dimensione;
-}
+
 
 
 }
