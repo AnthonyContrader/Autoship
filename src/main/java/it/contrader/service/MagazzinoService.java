@@ -1,4 +1,5 @@
 package it.contrader.service;
+import java.sql.SQLException;
 import java.util.List;
 
 import it.contrader.converter.MagazzinoConverter;
@@ -54,8 +55,8 @@ public class MagazzinoService {
 		return magazzinoDAO.removeOggetto(oggetto);
 	}
 	
-	public int checkCodice() {
-		return magazzinoDAO.checkCodice();
+	public int checkCodice(int id) throws SQLException {
+		return magazzinoDAO.checkCodice(id);
 	}
 
 }

@@ -26,5 +26,9 @@ public void setCodice(int codice) {
 	this.codice=codice;
 }
 
+@Override
+public String toString() {
+	return  id + "\t"  + id +"\t\t" + codice;
+}
 
 }

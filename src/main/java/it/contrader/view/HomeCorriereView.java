@@ -16,7 +16,7 @@ public class HomeCorriereView extends AbstractView{
 	public void showOptions() {
         System.out.println("-------------MENU------------\n");
         System.out.println(" Seleziona cosa vuoi gestire:");
-        System.out.println(" [O]ggetto [E]sci");
+        System.out.println(" [C]odici [E]sci");
         //Il metodo che salva l'input nella stringa choice.
         //getInput() � definito in AbstractView.
         choice = this.getInput();
@@ -27,9 +27,9 @@ public class HomeCorriereView extends AbstractView{
     	request = new Request();
         switch (choice) {
        
-        case "o":
-        	this.request.put("mode", "OGGETTOLIST");
-        	MainDispatcher.getInstance().callAction("OggettoCorriere", "doControl", request);
+        case "c":
+        	this.request.put("mode", "CODICELIST");
+        	MainDispatcher.getInstance().callAction("Codice", "doControl", request);
         	break;
  
         case "e":

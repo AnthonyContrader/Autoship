@@ -19,8 +19,8 @@ public class CodiceView extends AbstractView{
 			System.out.println("----------------------------------------------------\n");
 			
 			@SuppressWarnings("unchecked")
-			List<CodiceDTO> codice = (List<CodiceDTO>) request.get("Codice");
-			for (CodiceDTO c: codice)
+			List<CodiceDTO> codici = (List<CodiceDTO>) request.get("codici");
+			for (CodiceDTO c: codici)
 				System.out.println(c);
 			System.out.println();
 		}
@@ -30,7 +30,7 @@ public class CodiceView extends AbstractView{
 	 {
 	    	 System.out.println("-------------Codice------------\n");
 	         System.out.println(" Seleziona l'opzione degli oggetti:");
-	         System.out.println("[L]eggi [S]eleziona [C]ancella [B]ack [E]sci");
+	         System.out.println("[L]eggi [S]pedisci [E]esci [B]ack");
 	         choice = this.getInput();
 	 }
 	 

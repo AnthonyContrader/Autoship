@@ -53,5 +53,9 @@ public class CodiceService {
 		return CodiceDAO.id(id);
 	}
 	
+	public int codice(int id) {
+		return CodiceDAO.codice(id);
+	}
+	
 	
 }

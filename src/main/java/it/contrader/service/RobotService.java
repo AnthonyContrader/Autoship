@@ -15,6 +15,10 @@ public class RobotService {
 		return robotDAO.createCode(codice, oggetto);
 	}
 	
+	public boolean spedisci(int codice) {
+		return robotDAO.spedizione(codice);
+	}
+	
 	
 
 }

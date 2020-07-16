@@ -13,7 +13,7 @@ import it.contrader.model.Codice;
 
 public class CodiceDAO {
 	private final String QUERY_ALL = "SELECT * FROM Codice";
-	private final String QUERY_CREATE = "INSERT INTO Codice (id, codice) VALUES (?,?)";
+	private final String QUERY_CREATE = "INSERT INTO Codice (codice) VALUES (?)";
 	private final String QUERY_READ = "SELECT * FROM Codice WHERE id=?";
 	private final String QUERY_UPDATE = "UPDATE Codice SET codice=? WHERE id=?";
 	private final String QUERY_DELETE = "DELETE FROM Codice WHERE id=?";
@@ -42,8 +42,7 @@ public class CodiceDAO {
 		Connection connection = ConnectionSingleton.getInstance();
 		try {	
 			PreparedStatement preparedStatement = connection.prepareStatement(QUERY_CREATE);
-			preparedStatement.setInt(1, codiceToInsert.getId());
-			preparedStatement.setInt(2, codiceToInsert.getCodice());
+			preparedStatement.setInt(1, codiceToInsert.getCodice());
 			preparedStatement.execute();
 			return true;
 		} catch (SQLException e) {
@@ -134,6 +133,7 @@ public class CodiceDAO {
 		Connection connection = ConnectionSingleton.getInstance();
 		try {
 			PreparedStatement preparedStatement = connection.prepareStatement(QUERY_ID);
+			preparedStatement.setInt(1, id);
 			ResultSet resultSet = preparedStatement.executeQuery();
 			resultSet.next();
 			int n = resultSet.getInt("id");
@@ -145,6 +145,28 @@ public class CodiceDAO {
 			}
 
 		} catch (SQLException e) {
+		}
+		return -1;
+	}
+	
+	public int codice(int id) {
+		Connection connection = ConnectionSingleton.getInstance();
+		try {
+			PreparedStatement preparedStatement = connection.prepareStatement(QUERY_READ);
+			preparedStatement.setInt(1, id);
+			ResultSet resultSet = preparedStatement.executeQuery();
+			resultSet.next();
+			int n = resultSet.getInt("id");
+			int codice = resultSet.getInt("codice");
+			if (n != 0) {
+				return codice;
+			}
+			else {
+				return -1;
+			}
+
+		} catch (SQLException e) {
+			System.out.println("Errore: " + e);
 		}
 		return -1;
 	}

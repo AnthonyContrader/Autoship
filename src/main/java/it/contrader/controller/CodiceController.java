@@ -6,18 +6,21 @@ import it.contrader.dto.CodiceDTO;
 import it.contrader.dto.OggettoDTO;
 import it.contrader.main.MainDispatcher;
 import it.contrader.service.CodiceService;
+import it.contrader.service.RobotService;
 
 public class CodiceController implements Controller  {
 
 
-private static String sub_package = "oggetto.";
+private static String sub_package = "codice.";
 	
 	private CodiceService codiceService;
+	private RobotService robotService;
 	/**
 	 * Costruisce un oggetto di tipo UserService per poterne usare i metodi
 	 */
 	public CodiceController() {
 		this.codiceService = new CodiceService();
+		this.robotService = new RobotService();
 	}
 	
 	public void doControl(Request request) {
@@ -41,7 +44,15 @@ private static String sub_package = "oggetto.";
 					id = Integer.parseInt(request.get("id").toString());
 					CodiceDTO codiceDTO = codiceService.read(id);
 					request.put("codice", codiceDTO);
-					MainDispatcher.getInstance().callView(sub_package + "codiceRead", request);
+					MainDispatcher.getInstance().callView(sub_package + "CodiceRead", request);
+					break;
+					
+				case "DELETE":
+					id = Integer.parseInt(request.get("id").toString());
+					int codice = codiceService.codice(id);
+					robotService.spedisci(codice);
+					codiceService.delete(id);
+					MainDispatcher.getInstance().callView(sub_package + "CodiceDelete", request);
 					break;
 				
 
@@ -50,7 +61,7 @@ private static String sub_package = "oggetto.";
 				case "CODICELIST":
 					List<CodiceDTO> codiciDTO = codiceService.getAll();
 					//Impacchetta la request con la lista degli user
-					request.put("codicii", codiciDTO);
+					request.put("codici", codiciDTO);
 					MainDispatcher.getInstance().callView("Codice", request);
 					break;
 					
@@ -64,13 +75,17 @@ private static String sub_package = "oggetto.";
 					case "L":
 						MainDispatcher.getInstance().callView(sub_package + "CodiceRead", null);
 						break;
+						
+					case "S":
+						MainDispatcher.getInstance().callView(sub_package + "CodiceDelete", null);
+						break;
 		
 					case "E":
 						MainDispatcher.getInstance().callView("Login", null);
 						break;
 
 					case "B":
-						MainDispatcher.getInstance().callView("HomeAdmin", null);
+						MainDispatcher.getInstance().callView("Codice", null);
 						break;
 						
 					default:

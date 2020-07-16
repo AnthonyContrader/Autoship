@@ -1,4 +1,4 @@
-package view.codice;
+package it.contrader.view.codice;
 
 import it.contrader.controller.Request;
 import it.contrader.dto.CodiceDTO;
