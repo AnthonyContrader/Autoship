@@ -4,6 +4,7 @@ package it.contrader.controller;
 
 import java.util.List;
 
+import it.contrader.dto.OggettoDTO;
 import it.contrader.dto.UserDTO;
 import it.contrader.main.MainDispatcher;
 import it.contrader.service.UserService;
@@ -43,7 +44,41 @@ public class UserController implements Controller{
 				MainDispatcher.getInstance().callView(sub_package + "UserRead", request);
 				break;
 			
-			
+			case "INSERT":
+				username = request.get("username").toString();
+				password = request.get("password").toString();
+				usertype = Integer.parseInt(request.get("usertype").toString());
+				//costruisce l'oggetto user da inserire
+				UserDTO usertoinsert = new UserDTO(username, password, usertype);
+				//invoca il service
+				userService.insert(usertoinsert);
+				request = new Request();
+				request.put("mode", "mode");
+				//Rimanda alla view con la risposta
+				MainDispatcher.getInstance().callView(sub_package + "UserInsert", request);
+				break;
+				
+			case "DELETE":
+				id = Integer.parseInt(request.get("id").toString());
+				//Qui chiama il service
+				userService.delete(id);
+				request = new Request();
+				request.put("mode", "mode");
+				MainDispatcher.getInstance().callView(sub_package + "UserDelete", request);//parto da qui 
+				break;
+				
+			case "UPDATE":
+				id = Integer.parseInt(request.get("id").toString());
+				username = request.get("username").toString();
+				password = request.get("password").toString();
+				usertype = Integer.parseInt(request.get("usertype").toString());
+				UserDTO usertoupdate = new UserDTO(username, password, usertype);
+				usertoupdate.setId(id);
+				userService.update(usertoupdate);
+				request = new Request();
+				request.put("mode", "mode");
+				MainDispatcher.getInstance().callView(sub_package + "UserUpdate", request);
+				break;
 				
 			//Arriva qui dalla UserView Invoca il Service e invia alla UserView il risultato da mostrare 
 			case "USERLIST":
