@@ -28,7 +28,7 @@ public void setCodice(int codice) {
 
 @Override
 public String toString() {
-	return  id + "\t"  + id +"\t\t" + codice;
+	return  id + "\t\t" + codice;
 }
 
 }

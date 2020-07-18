@@ -12,7 +12,7 @@ public class MagazzinoConverter {
 	 * Notare l'uso del metodo get() per ottenere il valore dell'attributo-
 	 */
 	public MagazzinoDTO toDTO(Magazzino magazzino) {
-		MagazzinoDTO magazzinoDTO = new MagazzinoDTO(magazzino.getId_oggetto(), magazzino.getCapienza(), magazzino.getPosizione());
+		MagazzinoDTO magazzinoDTO = new MagazzinoDTO(magazzino.getId(), magazzino.getId_oggetto(), magazzino.getCapienza(), magazzino.getPosizione());
 		return magazzinoDTO;
 	}
 

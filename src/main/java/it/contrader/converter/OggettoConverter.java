@@ -13,7 +13,7 @@ public class OggettoConverter {
 	 * Notare l'uso del metodo get() per ottenere il valore dell'attributo-
 	 */
 	public OggettoDTO toDTO(Oggetto oggetto) {
-		OggettoDTO oggettoDTO = new OggettoDTO(oggetto.getNome(), oggetto.getDimensione());
+		OggettoDTO oggettoDTO = new OggettoDTO(oggetto.getId(), oggetto.getNome(), oggetto.getDimensione());
 		return oggettoDTO;
 	}
 

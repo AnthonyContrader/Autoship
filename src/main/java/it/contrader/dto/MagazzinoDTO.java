@@ -46,7 +46,7 @@ public class MagazzinoDTO {
 
 	@Override
 	public String toString() {
-		return  id + "\t"  + id_oggetto +"\t\t" + capienza + "\t\t" + posizione;
+		return  id + "\t\t"  + id_oggetto +"\t\t" + capienza + "\t\t" + posizione;
 	}
 	
 
