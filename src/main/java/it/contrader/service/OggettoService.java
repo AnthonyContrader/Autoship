@@ -5,9 +5,7 @@ import java.util.List;
 import it.contrader.converter.OggettoConverter;
 import it.contrader.dao.OggettoDAO;
 import it.contrader.dto.OggettoDTO;
-import it.contrader.dto.UserDTO;
 import it.contrader.model.Oggetto;
-import it.contrader.model.User;
 
 public class OggettoService extends AbstractService<Oggetto,OggettoDTO>{
 	private OggettoDAO oggettoDAO;
@@ -60,5 +58,10 @@ public class OggettoService extends AbstractService<Oggetto,OggettoDTO>{
 	public List<OggettoDTO> getAllInCell() {
 		// Ottiene una lista di entit� e le restituisce convertendole in DTO
 		return oggettoConverter.toDTOList(oggettoDAO.getAllInCell());
+	}
+	
+	public List<OggettoDTO> getNotInCell() {
+		// Ottiene una lista di entit� e le restituisce convertendole in DTO
+		return oggettoConverter.toDTOList(oggettoDAO.getNotInCell());
 	}
 }

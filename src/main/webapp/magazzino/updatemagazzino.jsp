@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1" import="it.contrader.dto.MagazzinoDTO"%>
+    pageEncoding="ISO-8859-1" import="java.util.List" 
+    import="it.contrader.dto.MagazzinoDTO" import="it.contrader.dto.OggettoDTO"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -19,6 +20,29 @@
 <div class="main">
 
 <%MagazzinoDTO m = (MagazzinoDTO) request.getAttribute("dto");%>
+<%List<OggettoDTO> oggetti = (List<OggettoDTO>) request.getAttribute("oggetti");%>
+
+<br>
+
+	<table>
+		<tr>
+			<th>Id</th>
+			<th>Nome</th>
+			<th>Dimensione</th>
+		</tr>
+		<%
+		if(oggetti!=null){
+			for (OggettoDTO o : oggetti) {
+		%>
+		<tr>
+			<td><%=o.getId()%></td>
+			<td><%=o.getNome()%></td>
+			<td><%=o.getDimensione()%></td>
+		</tr>
+		<%
+			}}
+		%>
+	</table>
 
 
 <form id="floatright" action="MagazzinoServlet?mode=update&id=<%=m.getId()%>" method="post">
