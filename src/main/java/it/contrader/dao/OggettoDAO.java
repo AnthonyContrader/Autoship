@@ -9,16 +9,19 @@ import java.util.ArrayList;
 import java.util.List;
 
 import it.contrader.model.Oggetto;
-import it.contrader.model.User;
 import it.contrader.utils.ConnectionSingleton;
 
 public class OggettoDAO implements DAO<Oggetto> {
 
 	private final String QUERY_ALL = "SELECT * FROM Oggetto";
-	private final String QUERY_CREATE = "INSERT INTO Oggetto (nome, dimensione, cancellato) VALUES (?,?,0)";
+	private final String QUERY_CREATE = "INSERT INTO Oggetto (nome, dimensione) VALUES (?,?)";
 	private final String QUERY_READ = "SELECT * FROM Oggetto WHERE id=?";
 	private final String QUERY_UPDATE = "UPDATE Oggetto SET nome=?, dimensione=? WHERE id=?";
-	private final String QUERY_DELETE = "UPDATE Oggetto SET calcellato = 1 WHERE id=?";
+	private final String QUERY_DELETE = " FROM Oggetto WHERE id=?";
+	private final String QUERY_ID = "SELECT id FROM Oggetto WHERE id=?";
+	private final String QUERY_DIMENSIONE = "SELECT dimensione FROM Oggetto WHERE id=?";
+	private final String QUERY_ALLINCELLORDERED = "SELECT * FROM Oggetto JOIN Magazzino ON Magazzino.id_oggetto = Oggetto.id WHERE Magazzino.codice IS NULL";
+	private final String QUERY_ALLINCELL = "SELECT * FROM Oggetto JOIN Magazzino ON Magazzino.id_oggetto = Oggetto.id";
 
 	public OggettoDAO() {
 
@@ -133,6 +136,101 @@ public class OggettoDAO implements DAO<Oggetto> {
 		} catch (SQLException e) {
 		}
 		return false;
+	}
+	
+	public int id(int id) {
+		Connection connection = ConnectionSingleton.getInstance();
+		try {
+			PreparedStatement preparedStatement = connection.prepareStatement(QUERY_ID);
+			ResultSet resultSet = preparedStatement.executeQuery();
+			resultSet.next();
+			int n = resultSet.getInt("id");
+			if (n != 0) {
+				return n;
+			}
+			else {
+				return -1;
+			}
+
+		} catch (SQLException e) {
+		}
+		return -1;
+	}
+	
+	public int dimensione(int id) {
+		Connection connection = ConnectionSingleton.getInstance();
+		try {
+			PreparedStatement preparedStatement = connection.prepareStatement(QUERY_DIMENSIONE);
+			preparedStatement.setInt(1, id);
+			ResultSet resultSet = preparedStatement.executeQuery();
+			resultSet.next();
+			int n = resultSet.getInt("dimensione");
+			if (n != 0) {
+				return n;
+			}
+			else {
+				return -1;
+			}
+
+		} catch (SQLException e) {
+			System.out.println("Errore: " + e);
+		}
+		return -1;
+	}
+	
+	public List<Oggetto> getAllInCellOrdered() {
+		List<Oggetto> OggettosList = new ArrayList<>();
+		Connection connection = ConnectionSingleton.getInstance();
+		try {
+			Statement statement = connection.createStatement();
+			ResultSet resultSet = statement.executeQuery(QUERY_ALLINCELLORDERED);
+			Oggetto Oggetto;
+			while (resultSet.next()) {
+				int id = resultSet.getInt("id");
+				String nome = resultSet.getString("nome");
+				int dimensione = resultSet.getInt("dimensione");
+				Oggetto = new Oggetto(nome,dimensione);
+				Oggetto.setId(id);
+				OggettosList.add(Oggetto);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return OggettosList;
+	}
+	
+	public List<Oggetto> getAllInCell(){
+		List<Oggetto> OggettosList = new ArrayList<>();
+		Connection connection = ConnectionSingleton.getInstance();
+		try {
+			Statement statement = connection.createStatement();
+			ResultSet resultSet = statement.executeQuery(QUERY_ALLINCELL);
+			Oggetto Oggetto;
+			while (resultSet.next()) {
+				int id = resultSet.getInt("id");
+				String nome = resultSet.getString("nome");
+				int dimensione = resultSet.getInt("dimensione");
+				Oggetto = new Oggetto(nome,dimensione);
+				Oggetto.setId(id);
+				OggettosList.add(Oggetto);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return OggettosList;
+	}
+		
+	public List<Oggetto> getNotInCell(){
+		
+		List<Oggetto> oggettoList = getAll();
+		List<Oggetto> removeListList = getAllInCell();
+		
+		for(Oggetto o: oggettoList) {
+			if(removeListList.contains(o)) {
+				oggettoList.remove(o);
+			}
+		}
+		return oggettoList;
 	}
 
 
