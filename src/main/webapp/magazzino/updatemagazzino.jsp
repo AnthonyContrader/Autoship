@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1" import="it.contrader.dto.UserDTO"%>
+    pageEncoding="ISO-8859-1" import="it.contrader.dto.MagazzinoDTO"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -11,22 +11,23 @@
 <%@ include file="../css/header.jsp" %>
 <div class="navbar">
   <a href="homeadmin.jsp">Home</a>
-  <a class="active" href="UserServlet?mode=userlist">Users</a>
+  <a href="UserServlet?mode=userlist">Users</a>
+  <a class="active" href="MagazzinoServlet?mode=magazzinolist">Magazzino</a>
   <a href="LogoutServlet" id="logout">Logout</a>
 </div>
 <br>
 <div class="main">
 
-<%MagazzinoDTO m = (UserDTO) request.getAttribute("dto");%>
+<%MagazzinoDTO m = (MagazzinoDTO) request.getAttribute("dto");%>
 
 
-<form id="floatright" action="MagazzinoServlet?mode=insert" method="post">
+<form id="floatright" action="MagazzinoServlet?mode=update&id=<%=m.getId()%>" method="post">
   <div class="row">
     <div class="col-25">
       <label for="idoggetto">Oggetto</label>
     </div>
     <div class="col-75">
-      <input type="text" id="idoggetto" name="capienza" placeholder="inserisci capienza">
+      <input type="number" id="id_oggetto" name="id_oggetto" placeholder="inserisci id oggetto">
     </div>
   </div>
   <div class="row">
@@ -34,7 +35,7 @@
       <label for="capienza">Capienza</label>
     </div>
     <div class="col-75">
-      <input type="text" id="capienza" name="capienza" placeholder="inserisci capienza">
+      <input type="number" id="capienza" name="capienza" placeholder="inserisci capienza">
     </div>
   </div>
       <button type="submit" >Edit</button>

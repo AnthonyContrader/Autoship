@@ -9,13 +9,13 @@ import it.contrader.utils.ConnectionSingleton;
 import it.contrader.model.Magazzino;
 
 public class MagazzinoDAO {
-	private final String QUERY_ALL = "SELECT * FROM Magazzino";
+	private final String QUERY_ALL = "SELECT * FROM Magazzino WHERE cancellato=0";
 	private final String QUERY_CREATE = "INSERT INTO Magazzino (id_oggetto, capienza,cancellato) VALUES (?,?,0)";
 	private final String QUERY_READ = "SELECT * FROM Magazzino WHERE id=?";
 	private final String QUERY_UPDATE = "UPDATE Magazzino SET id_oggetto=?, capienza=? WHERE id=?";
+	private final String QUERY_DELETE = "UPDATE Magazzino SET cancellato=1 WHERE id=?";
 	private final String QUERY_OGGETTO = "SELECT id_oggetto FROM Magazzino WHERE id=?";
-	private final String QUERY_REMOVEOGGETTO = "UPDATE Magazzino SET cancellato =1 WHERE id_oggetto=?";
-	
+	private final String QUERY_REMOVEOGGETTO = "UPDATE Magazzino SET id_oggetto=NULL WHERE id_oggetto=?";	
 	
 	public MagazzinoDAO() {
 
@@ -136,7 +136,19 @@ public class MagazzinoDAO {
 
 	}
 	
-	
+	public boolean delete(int id) {
+		Connection connection = ConnectionSingleton.getInstance();
+		try {
+			PreparedStatement preparedStatement = connection.prepareStatement(QUERY_DELETE);
+			preparedStatement.setInt(1, id);
+			int n = preparedStatement.executeUpdate();
+			if (n != 0)
+				return true;
+
+		} catch (SQLException e) {
+		}
+		return false;
+	}
 	
 	public int checkOggetto(int id) {
 		Connection connection = ConnectionSingleton.getInstance();
@@ -157,6 +169,22 @@ public class MagazzinoDAO {
 		} catch (SQLException e) {
 		}
 		return -1;	
+	}
+	
+	public boolean removeOggetto(int oggetto) {
+		Connection connection = ConnectionSingleton.getInstance();
+		try {
+					
+			PreparedStatement preparedStatement = (PreparedStatement) connection.prepareStatement(QUERY_REMOVEOGGETTO);
+			preparedStatement.setInt(1, oggetto);
+			int a = preparedStatement.executeUpdate();
+			if (a > 0)
+				return true;
+			else
+				return false;
+		} catch (SQLException e) {
+		}
+		return false;	
 	}
 	
 	public boolean updateOggetto(int oggetto) {

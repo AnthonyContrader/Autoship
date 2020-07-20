@@ -32,4 +32,21 @@
     <servlet-name>UserServlet</servlet-name>
     <url-pattern>/UserServlet</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <servlet-name>MagazzinoServlet</servlet-name>
+    <servlet-class>it.contrader.servlets.MagazzinoServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>MagazzinoServlet</servlet-name>
+    <url-pattern>/MagazzinoServlet</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>OggettoServlet</servlet-name>
+    <servlet-class>it.contrader.servlets.OggettoServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>OggettoServlet</servlet-name>
+    <url-pattern>/OggettoServlet</url-pattern>
+  </servlet-mapping>
+  
 </web-app>

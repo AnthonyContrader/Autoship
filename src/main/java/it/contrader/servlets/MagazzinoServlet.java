@@ -55,7 +55,13 @@ public class MagazzinoServlet extends HttpServlet {
 			break;
 
 		case "INSERT":
-			int id_oggetto = Integer.parseInt(request.getParameter("id_oggetto").toString());
+			int id_oggetto;
+			if(!(request.getParameter("id_oggetto").toString().equals(""))) {
+				id_oggetto = Integer.parseInt(request.getParameter("id_oggetto").toString());
+			}
+			else {
+				id_oggetto = 0;
+			}
 			int capienza = Integer.parseInt(request.getParameter("capienza").toString());
 			dto = new MagazzinoDTO (id_oggetto,capienza);
 			ans = service.insert(dto);
@@ -65,9 +71,20 @@ public class MagazzinoServlet extends HttpServlet {
 			break;
 			
 		case "UPDATE":
-			id_oggetto = Integer.parseInt(request.getParameter("id_oggetto"));
-			capienza = Integer.parseInt(request.getParameter("capienza"));
 			id = Integer.parseInt(request.getParameter("id"));
+			MagazzinoDTO olddto = service.read(id);
+			if(!(request.getParameter("id_oggetto").toString().trim().equals(""))) {
+				id_oggetto = Integer.parseInt(request.getParameter("id_oggetto").toString());
+			}
+			else {
+				id_oggetto = olddto.getId_oggetto();
+			}
+			if(!(request.getParameter("capienza").toString().trim().equals(""))) {
+				capienza = Integer.parseInt(request.getParameter("capienza"));
+			}
+			else {
+				capienza = olddto.getCapienza();
+			}
 			dto = new MagazzinoDTO (id,id_oggetto,capienza);
 			ans = service.update(dto);
 			updateList(request);

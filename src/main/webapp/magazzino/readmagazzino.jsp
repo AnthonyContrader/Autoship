@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1" import="it.contrader.dto.UserDTO"%>
+    pageEncoding="ISO-8859-1" import="it.contrader.dto.MagazzinoDTO"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -11,7 +11,8 @@
 <%@ include file="../css/header.jsp" %>
 <div class="navbar">
   <a href="homeadmin.jsp">Home</a>
-  <a class="active"  href="UserServlet?mode=userlist">Users</a>
+  <a href="UserServlet?mode=userlist">Users</a>
+  <a class="active" href="MagazzinoServlet?mode=magazzinolist">Magazzino</a>
   <a href="LogoutServlet" id="logout">Logout</a>
 </div>
 <br>
@@ -27,7 +28,7 @@
 			<th>Capienza</th>
 	</tr>
 	<tr>
-		<td><%=m.getIdOggetto()%></td>
+		<td><%=m.getId_oggetto()%></td>
 		<td><%=m.getCapienza()%></td>
 	</tr>	
 </table>

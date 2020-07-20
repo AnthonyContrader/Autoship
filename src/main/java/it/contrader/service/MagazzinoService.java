@@ -6,6 +6,7 @@ import it.contrader.converter.MagazzinoConverter;
 import it.contrader.dao.MagazzinoDAO;
 import it.contrader.dto.MagazzinoDTO;
 import it.contrader.dto.UserDTO;
+import it.contrader.model.Magazzino;
 import it.contrader.model.User;
 
 
@@ -57,8 +58,5 @@ public class MagazzinoService extends AbstractService <Magazzino, MagazzinoDTO>{
 		return magazzinoDAO.removeOggetto(oggetto);
 	}
 	
-	public int checkCodice(int id) throws SQLException {
-		return magazzinoDAO.checkCodice(id);
-	}
 
 }
