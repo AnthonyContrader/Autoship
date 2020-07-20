@@ -6,6 +6,10 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import it.contrader.dto.OggettoDTO;
+import it.contrader.service.OggettoService;
+import it.contrader.service.Service;
+
 
 public class OggettoServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
@@ -14,14 +18,14 @@ public class OggettoServlet extends HttpServlet {
 	}
 	
 	public void updateList(HttpServletRequest request) {
-		Service<OggettoDTO> service = new OggettoService();
+		Service <OggettoDTO> service = new OggettoService();
 		List<OggettoDTO>listDTO = service.getAll();
 		request.setAttribute("list", listDTO);
 	}
 
 	@Override
 	public void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		Service<OggettoDTO> service = new OggettoService();
+		Service <OggettoDTO> service = new OggettoService();
 		String mode = request.getParameter("mode");
 		OggettoDTO dto;
 		int id;
@@ -51,8 +55,7 @@ public class OggettoServlet extends HttpServlet {
 		case "INSERT":
 			String nome = request.getParameter("nome").toString();
 			int dimensione = Integer.parseInt(request.getParameter("dimensione").toString());
-			int cancellato = Integer.parseInt(request.getParameter("cancellato").toString());
-			dto = new OggettoDTO (nome,dimensione,cancellato);
+			dto = new OggettoDTO (nome,dimensione);
 			ans = service.insert(dto);
 			request.setAttribute("ans", ans);
 			updateList(request);
@@ -62,9 +65,8 @@ public class OggettoServlet extends HttpServlet {
 		case "UPDATE":
 			nome = request.getParameter("nome");
 			dimensione = Integer.parseInt(request.getParameter("dimensione"));
-			cancellato = Integer.parseInt(request.getParameter("cancellato"));
 			id = Integer.parseInt(request.getParameter("id"));
-			dto = new OggettoDTO (id,nome,dimensione,cancellato);
+			dto = new OggettoDTO (id,nome,dimensione);
 			ans = service.update(dto);
 			updateList(request);
 			getServletContext().getRequestDispatcher("/oggetto/oggettomanager.jsp").forward(request, response);

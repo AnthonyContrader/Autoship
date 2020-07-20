@@ -6,6 +6,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import it.contrader.dto.MagazzinoDTO;
+import it.contrader.service.MagazzinoService;
+
 
 public class MagazzinoServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
@@ -51,8 +54,7 @@ public class MagazzinoServlet extends HttpServlet {
 		case "INSERT":
 			int id_oggetto = Integer.parseInt(request.getParameter("id_oggetto").toString());
 			int capienza = Integer.parseInt(request.getParameter("capienza").toString());
-			int cancellato = Integer.parseInt(request.getParameter("cancellato").toString());
-			dto = new MagazzinoDTO (id_oggetto,capienza,cancellato);
+			dto = new MagazzinoDTO (id_oggetto,capienza);
 			ans = service.insert(dto);
 			request.setAttribute("ans", ans);
 			updateList(request);
@@ -62,9 +64,8 @@ public class MagazzinoServlet extends HttpServlet {
 		case "UPDATE":
 			id_oggetto = Integer.parseInt(request.getParameter("id_oggetto"));
 			capienza = Integer.parseInt(request.getParameter("capienza"));
-			cancellato = Integer.parseInt(request.getParameter("cancellato"));
 			id = Integer.parseInt(request.getParameter("id"));
-			dto = new MagazzinoDTO (id,id_oggetto,capienza,cancellato);
+			dto = new MagazzinoDTO (id,id_oggetto,capienza);
 			ans = service.update(dto);
 			updateList(request);
 			getServletContext().getRequestDispatcher("/magazzino/magazzinomanager.jsp").forward(request, response);

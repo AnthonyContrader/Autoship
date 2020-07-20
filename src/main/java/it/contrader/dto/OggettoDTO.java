@@ -1,10 +1,9 @@
 package it.contrader.dto;
 
-public class Oggetto {
+public class OggettoDTO {
 private int id;
 private String nome;
 private int dimensione;
-private boolean cancellato;
 
 public OggettoDTO(String nome, int dimensione){
 	this.nome = nome;
@@ -16,6 +15,7 @@ public OggettoDTO(int id, String nome, int dimensione){
 	this.nome = nome;
 	this.dimensione = dimensione; 
 }
+
 
 public int getId() {
 	return id;

@@ -4,7 +4,6 @@ public class MagazzinoDTO {
 private int id;
 private int id_oggetto;
 private int capienza;
-private boolean cancellato;
 public MagazzinoDTO(int id_oggetto, int capienza) {
 	this.id_oggetto= id_oggetto;
 	this.capienza= capienza;
