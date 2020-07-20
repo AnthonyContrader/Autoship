@@ -10,11 +10,11 @@ import it.contrader.model.Magazzino;
 
 public class MagazzinoDAO {
 	private final String QUERY_ALL = "SELECT * FROM Magazzino";
-	private final String QUERY_CREATE = "INSERT INTO Magazzino (id_oggetto, capienza,0) VALUES (?,?,?)";
+	private final String QUERY_CREATE = "INSERT INTO Magazzino (id_oggetto, capienza,cancellato) VALUES (?,?,0)";
 	private final String QUERY_READ = "SELECT * FROM Magazzino WHERE id=?";
-	private final String QUERY_UPDATE = "UPDATE Magazzino SET id_oggetto=?, capienza=?, cancellato=0 WHERE id=?";
+	private final String QUERY_UPDATE = "UPDATE Magazzino SET id_oggetto=?, capienza=? WHERE id=?";
 	private final String QUERY_OGGETTO = "SELECT id_oggetto FROM Magazzino WHERE id=?";
-	private final String QUERY_REMOVEOGGETTO = "UPDATE Magazzino SET id_oggetto=NULL , cancellato =1 WHERE id_oggetto=?";
+	private final String QUERY_REMOVEOGGETTO = "UPDATE Magazzino SET cancellato =1 WHERE id_oggetto=?";
 	
 	
 	public MagazzinoDAO() {

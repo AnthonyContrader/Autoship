@@ -1,3 +1,5 @@
+package it.contrader.servlets;
+
 import java.io.IOException;
 import java.util.List;
 
@@ -8,6 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import it.contrader.dto.MagazzinoDTO;
 import it.contrader.service.MagazzinoService;
+import it.contrader.service.Service;
 
 
 public class MagazzinoServlet extends HttpServlet {

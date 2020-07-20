@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import it.contrader.dto.MagazzinoDTO;
+import it.contrader.dto.OggettoDTO;
 import it.contrader.model.Magazzino;
 import it.contrader.model.Oggetto;
 
@@ -21,8 +22,8 @@ public class OggettoConverter implements Converter<Oggetto, OggettoDTO> {
 	 */
 	@Override
 	public Oggetto toEntity(OggettoDTO oggettoDTO) {
-		Oggetto oggetto = new Magazzino(oggettoDTO.getId(), oggettoDTO.getNome(), oggettoDTO.getDimensione(),);
-		return magazzino;
+		Oggetto oggetto = new Oggetto(oggettoDTO.getId(), oggettoDTO.getNome(), oggettoDTO.getDimensione());
+		return oggetto;
 	}
 	
 	/**
@@ -34,7 +35,7 @@ public class OggettoConverter implements Converter<Oggetto, OggettoDTO> {
 		List<OggettoDTO> oggettoDTOList = new ArrayList<OggettoDTO>();
 		
 		//Cicla tutti gli elementi della lista e li converte uno a uno
-		for(Oggetto oggetto: OggettoList) {
+		for(Oggetto oggetto: oggettoList) {
 			//Utilizza il metodo toDTO per convertire ogni singolo elemento della lista
 			//e lo aggiunge adda lista di DTO
 			oggettoDTOList.add(toDTO(oggetto));
