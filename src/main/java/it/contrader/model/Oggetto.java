@@ -4,8 +4,6 @@ public class Oggetto {
 private int id;
 private String nome;
 private int dimensione;
-private boolean cancellato;
-
 public Oggetto(String nome, int dimensione){
 	this.nome = nome;
 	this.dimensione = dimensione; 
