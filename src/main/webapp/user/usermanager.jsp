@@ -78,6 +78,7 @@
  			<select id="type" name="usertype">
   				<option value="ADMIN">ADMIN</option>
   				<option value="USER">USER</option>
+  				<option value="CORRIERE">CORRIERE</option>
  
 			</select>
     	</div>
