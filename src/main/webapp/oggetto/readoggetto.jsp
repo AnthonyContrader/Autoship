@@ -1,4 +1,4 @@
-< %@ page language="java" contentType="text/html; charset=ISO-8859-1"
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1" import="it.contrader.dto.OggettoDTO"%>
 <!DOCTYPE html>
 <html>
@@ -26,7 +26,7 @@
 			<th>Dimensione</th>
 	</tr>
 	<tr>
-		<td><%=m.getId_oggetto()%></td>
+		<td><%=m.getId()%></td>
 		<td><%=m.getDimensione()%></td>
 	</tr>	
 </table>
