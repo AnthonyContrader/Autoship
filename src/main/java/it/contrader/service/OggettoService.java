@@ -5,8 +5,10 @@ import java.util.List;
 import it.contrader.converter.OggettoConverter;
 import it.contrader.dao.OggettoDAO;
 import it.contrader.dto.OggettoDTO;
+import it.contrader.dto.UserDTO;
+import it.contrader.model.User;
 
-public class OggettoService {
+public class OggettoService extends AbstractService<Oggetto, OggettoDTO>{
 	private OggettoDAO oggettoDAO;
 	private OggettoConverter oggettoConverter;
 	

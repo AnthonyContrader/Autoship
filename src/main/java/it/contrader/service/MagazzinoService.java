@@ -5,9 +5,11 @@ import java.util.List;
 import it.contrader.converter.MagazzinoConverter;
 import it.contrader.dao.MagazzinoDAO;
 import it.contrader.dto.MagazzinoDTO;
+import it.contrader.dto.UserDTO;
+import it.contrader.model.User;
 
 
-public class MagazzinoService {
+public class MagazzinoService extends AbstractService <Magazzino, MagazzinoDTO>{
 	private MagazzinoDAO magazzinoDAO;
 	private MagazzinoConverter magazzinoConverter;
 	
