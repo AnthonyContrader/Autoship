@@ -38,8 +38,9 @@
 		<tr>
 			<td><%=m.getNome_oggetto()%></td>
 			<td><%=m.getCapienza()%></td>
+			<%if(m.getOtp()!=null){%>
 			<td><a href=MagazzinoServlet?mode=read&update=true&id=<%=m.getId()%>>Edit</a>
-			</td>
+			</td><%}%>
 			<%
 				if(!(m.getNome_oggetto().equalsIgnoreCase("Vuoto"))) {
 			%>
