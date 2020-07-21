@@ -195,4 +195,17 @@ public class MagazzinoDAO {
 		}
 		return false;	
 	}
+	
+	public int checkCodice(int id) throws SQLException{
+		
+		Magazzino magazzinoRead = read(id);
+		if(magazzinoRead.getOtp() != null) {
+			return id;
+		}
+		else
+		{
+			return -1;
+		}	
+	}
+	
 }

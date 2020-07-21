@@ -4,6 +4,7 @@ public class Magazzino {
 private int id;
 private int id_oggetto;
 private int capienza;
+private String otp;
 private boolean cancellato;
 public Magazzino(int id_oggetto, int capienza) {
 	this.id_oggetto= id_oggetto;
@@ -37,6 +38,14 @@ public int getCapienza() {
 }
 public void setCapienza(int capienza) {
 	this.capienza = capienza;
+}
+
+public String getOtp () {
+	return otp;
+}
+
+public void setOtp(String otp) {
+	this.otp = otp;
 }
 
 }

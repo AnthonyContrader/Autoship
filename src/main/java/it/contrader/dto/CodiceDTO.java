@@ -2,10 +2,15 @@ package it.contrader.dto;
 
 public class CodiceDTO {
 	private int id;
-	private int otp;
+	private String otp;
 	
-	public CodiceDTO(int id,int otp) {
+	public CodiceDTO(int id, String otp) {
 		this.id=id;
+		this.otp= otp;
+		
+	}
+	
+	public CodiceDTO(String otp) {
 		this.otp= otp;
 		
 	}
@@ -18,12 +23,12 @@ public class CodiceDTO {
 		this.id=id;
 	}
 
-	public int getOtp () {
+	public String getOtp () {
 		return otp;
 	}
 
-	public void setOtp(int otp) {
-		this.otp=otp;
+	public void setOtp(String otp) {
+		this.otp = otp;
 	}
 
 

@@ -1,15 +1,19 @@
 package it.contrader.servlets;
 
 import java.io.IOException;
+import java.nio.charset.Charset;
 import java.util.List;
+import java.util.Random;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import it.contrader.dto.CodiceDTO;
 import it.contrader.dto.MagazzinoDTO;
 import it.contrader.dto.OggettoDTO;
+import it.contrader.service.CodiceService;
 import it.contrader.service.MagazzinoService;
 import it.contrader.service.OggettoService;
 import it.contrader.service.Service;
@@ -30,6 +34,8 @@ public class AcquistoServlet extends HttpServlet {
 
  public void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		Service<OggettoDTO> service = new OggettoService();
+		Service <MagazzinoDTO> magazzinoService = new MagazzinoService();
+		Service <CodiceDTO> codiceService = new CodiceService();
 		String mode = request.getParameter("mode");
 		int id;
 		boolean ans;		
@@ -40,13 +46,24 @@ public class AcquistoServlet extends HttpServlet {
 			getServletContext().getRequestDispatcher("/acquisto/acquistomanager.jsp").forward(request, response);
 			break;
 		
-		/*case "UPDATE":
+		case "UPDATE":
 			id = Integer.parseInt(request.getParameter("id"));
+			int checkCodice;
+			try {
+				checkCodice = ((MagazzinoService) magazzinoService).checkCodice(id);
+				if(checkCodice == -1) {
+					 byte[] array = new byte[5]; // length is bounded by 7
+					 new Random().nextBytes(array);
+					 String codice = new String(array, Charset.forName("UTF-8"));
+					 CodiceDTO codicetoinsert = new CodiceDTO(codice);
+					 codiceService.insert(codicetoinsert);
+				}
+			}
 			ans = 
 			request.setAttribute("ans", ans);
 			updateList(request);
 			getServletContext().getRequestDispatcher("/acquisto/acquistomanager.jsp").forward(request, response);
-			break;*/
+			break;
 		
 			
 			

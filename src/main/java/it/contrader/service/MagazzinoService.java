@@ -58,5 +58,9 @@ public class MagazzinoService extends AbstractService <Magazzino, MagazzinoDTO>{
 		return magazzinoDAO.removeOggetto(oggetto);
 	}
 	
+	public int checkCodice(int id) throws SQLException{
+		return magazzinoDAO.checkCodice(id);
+	}
+	
 
 }
