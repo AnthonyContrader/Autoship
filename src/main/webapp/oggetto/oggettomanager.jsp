@@ -74,7 +74,7 @@
       <label for="dimensione">Dimensione</label>
     </div>
     <div class="col-75">
-      <input type="number" id="dimensione" name="dimensione" placeholder="inserisci dimensione">
+      <input type="number" id="dimensione" name="dimensione" placeholder="inserisci dimensione" required>
     </div>
   </div>
       <button type="submit" >Insert</button>

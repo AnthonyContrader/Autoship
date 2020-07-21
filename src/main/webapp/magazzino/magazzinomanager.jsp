@@ -85,7 +85,7 @@
       <label for="capienza">Capienza</label>
     </div>
     <div class="col-75">
-      <input type="number" id="capienza" name="capienza" placeholder="inserisci capienza">
+      <input type="number" id="capienza" name="capienza" placeholder="inserisci capienza" required>
     </div>
   </div>
       <button type="submit" >Insert</button>
