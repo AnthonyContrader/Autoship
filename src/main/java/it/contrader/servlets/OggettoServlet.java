@@ -24,6 +24,14 @@ public class OggettoServlet extends HttpServlet {
 	public void updateList(HttpServletRequest request) {
 		Service <OggettoDTO> service = new OggettoService();
 		List<OggettoDTO>listDTO = service.getAll();
+		Service <MagazzinoDTO> magazzinoService = new MagazzinoService();
+		int oggetto;
+		for(OggettoDTO ogg : listDTO) {
+			oggetto = ((MagazzinoService) magazzinoService).checkOggetto(ogg.getId());
+		if(oggetto > 0) {
+			ogg.setCella(true);
+		}
+		}
 		request.setAttribute("list", listDTO);
 	}
 

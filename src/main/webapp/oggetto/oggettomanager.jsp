@@ -38,10 +38,12 @@
 		<tr>
 			<td><%=o.getNome()%></td>
 			<td><%=o.getDimensione()%></td>
+			<% if(o.getCella() == false) { %>
 			<td><a href=OggettoServlet?mode=read&update=true&id=<%=o.getId()%>>Edit</a>
 			</td>
 			<td><a href=OggettoServlet?mode=delete&id=<%=o.getId()%>>Delete</a>
 			</td>
+			<% } %>
 
 		</tr>
 		<%
