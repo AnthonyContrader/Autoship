@@ -30,7 +30,7 @@ public class AcquistoServlet extends HttpServlet {
 	
 	public void updateList(HttpServletRequest request) {
 		Service <OggettoDTO> service = new OggettoService();
-		List<OggettoDTO>listDTO = ((OggettoService) service).getAllInCell();
+		List<OggettoDTO>listDTO = ((OggettoService) service).getAllInCellOrdered();
 		request.setAttribute("list", listDTO);
 	}
 
@@ -40,6 +40,7 @@ public class AcquistoServlet extends HttpServlet {
 		Service <CodiceDTO> codiceService = new CodiceService();
 		RobotService robotService = new RobotService();
 		String mode = request.getParameter("mode");
+		OggettoDTO dto;
 		int id;
 		boolean ans;		
 		
@@ -48,7 +49,7 @@ public class AcquistoServlet extends HttpServlet {
 			updateList(request);
 			getServletContext().getRequestDispatcher("/acquisto/acquistomanager.jsp").forward(request, response);
 			break;
-		
+			
 		case "UPDATE":
 			id = Integer.parseInt(request.getParameter("id"));
 			int checkCodice;

@@ -12,11 +12,11 @@ import it.contrader.model.Codice;
 import it.contrader.utils.ConnectionSingleton;
 
 public  class CodiceDAO implements DAO<Codice> {
-private final String QUERY_ALL = " SELECT * FROM Codice ";
-private final String QUERY_CREATE = "INSERT INTO Codice (id,otp) VALUES (?,?)";
+private final String QUERY_ALL = " SELECT * FROM Codice WHERE cancellato=0";
+private final String QUERY_CREATE = "INSERT INTO Codice (id,otp,cancellato) VALUES (?,?,0)";
 private final String QUERY_READ = "SELECT * FROM Codice WHERE id=?";
-private final String QUERY_UPDATE = "UPDATE user SET id=?, otp=?";
-private final String QUERY_DELETE = "DELETE FROM Codice WHERE id=?";
+private final String QUERY_UPDATE = "UPDATE Codice SET id=?, otp=?";
+private final String QUERY_DELETE = "UPDATE Codice SET cancellato=1 WHERE id=?";
 private final String QUERY_ID = "SELECT id FROM Codice WHERE id=?";
 
 public CodiceDAO() {

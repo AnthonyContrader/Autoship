@@ -26,6 +26,7 @@ UNIQUE (id, id_oggetto)
 CREATE TABLE Codice(
 id integer primary key auto_increment,
 otp varchar(5),
+cancellato tinyint(1),
 UNIQUE (otp)
 );
 

@@ -21,7 +21,7 @@ public class OggettoDAO implements DAO<Oggetto> {
 	private final String QUERY_ID = "SELECT id FROM Oggetto WHERE id=?";
 	private final String QUERY_NOME = "SELECT nome FROM Oggetto WHERE id=?";
 	private final String QUERY_DIMENSIONE = "SELECT dimensione FROM Oggetto WHERE id=?";
-	private final String QUERY_ALLINCELLORDERED = "SELECT * FROM Oggetto JOIN Magazzino ON Magazzino.id_oggetto = Oggetto.id WHERE Magazzino.codice IS NULL";
+	private final String QUERY_ALLINCELLORDERED = "SELECT * FROM Oggetto JOIN Magazzino ON Magazzino.id_oggetto = Oggetto.id WHERE Magazzino.otp IS NULL";
 	private final String QUERY_ALLINCELL = "SELECT * FROM Oggetto JOIN Magazzino ON Magazzino.id_oggetto = Oggetto.id WHERE Oggetto.cancellato=0 AND Magazzino.cancellato=0";
 
 	public OggettoDAO() {
@@ -246,6 +246,28 @@ public class OggettoDAO implements DAO<Oggetto> {
 		
 		List<Oggetto> oggettoList = getAll();
 		List<Oggetto> removeList = getAllInCell();
+		List<Oggetto> notInCellList = new ArrayList<>();
+		
+		boolean flag = false;
+		
+		for(Oggetto o: oggettoList) {
+			flag = false;
+			for(Oggetto r : removeList) {
+				if(r.getId() == o.getId()) {
+					flag = true;
+				}
+			}
+			if(flag == false) {
+				notInCellList.add(o);
+			}
+		}
+		return notInCellList;
+	}
+	
+	public List<Oggetto> getNotOrdered(){
+		
+		List<Oggetto> oggettoList = getAllInCell();
+		List<Oggetto> removeList = getAllInCellOrdered();
 		List<Oggetto> notInCellList = new ArrayList<>();
 		
 		boolean flag = false;

@@ -68,9 +68,20 @@ public class OggettoServlet extends HttpServlet {
 			break;
 			
 		case "UPDATE":
-			nome = request.getParameter("nome");
-			dimensione = Integer.parseInt(request.getParameter("dimensione"));
 			id = Integer.parseInt(request.getParameter("id"));
+			OggettoDTO olddto = service.read(id);
+			if (!(request.getParameter("nome").toString().trim().equals(""))) {
+				nome = request.getParameter("nome");
+			}
+			else {
+				nome = olddto.getNome();
+			}
+			if (!(request.getParameter("dimensione").toString().trim().equals(""))) {
+				dimensione = Integer.parseInt(request.getParameter("dimensione"));
+			}
+			else {
+				dimensione = olddto.getDimensione();
+			}
 			dto = new OggettoDTO (id,nome,dimensione);
 			ans = service.update(dto);
 			updateList(request);

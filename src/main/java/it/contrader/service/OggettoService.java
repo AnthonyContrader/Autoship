@@ -64,8 +64,18 @@ public class OggettoService extends AbstractService<Oggetto,OggettoDTO>{
 		return oggettoConverter.toDTOList(oggettoDAO.getAllInCell());
 	}
 	
+	public List<OggettoDTO> getAllInCellOrdered() {
+		// Ottiene una lista di entit� e le restituisce convertendole in DTO
+		return oggettoConverter.toDTOList(oggettoDAO.getAllInCellOrdered());
+	}
+	
 	public List<OggettoDTO> getNotInCell() {
 		// Ottiene una lista di entit� e le restituisce convertendole in DTO
 		return oggettoConverter.toDTOList(oggettoDAO.getNotInCell());
+	}
+	
+	public List<OggettoDTO> getNotOrdered() {
+		// Ottiene una lista di entit� e le restituisce convertendole in DTO
+		return oggettoConverter.toDTOList(oggettoDAO.getNotOrdered());
 	}
 }

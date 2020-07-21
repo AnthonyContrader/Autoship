@@ -199,7 +199,7 @@ public class MagazzinoDAO {
 	public int checkCodice(int id) throws SQLException{
 		
 		Magazzino magazzinoRead = read(id);
-		if(magazzinoRead.getOtp() != null) {
+		if(magazzinoRead != null && magazzinoRead.getOtp() != null) {
 			return id;
 		}
 		else

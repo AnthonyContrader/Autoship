@@ -56,5 +56,13 @@
     <servlet-name>AcquistoServlet</servlet-name>
     <url-pattern>/AcquistoServlet</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <servlet-name>SpedizioneServlet</servlet-name>
+    <servlet-class>it.contrader.servlets.SpedizioneServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>SpedizioneServlet</servlet-name>
+    <url-pattern>/SpedizioneServlet</url-pattern>
+  </servlet-mapping>
   
 </web-app>
