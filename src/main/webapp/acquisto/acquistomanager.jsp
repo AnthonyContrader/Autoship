@@ -35,7 +35,7 @@
 		<tr>
 			<td><%=o.getNome()%></td>
 			<td><%=o.getDimensione()%></td>
-			<td><a href=AcquistaServlet?mode=update=true&id=<%=o.getId()%>>Ordina</a>
+			<td><a href=AcquistaServlet?mode=read&update=true&id=<%=o.getId()%>>Ordina</a>
 			</td>
 			<%
 				}

@@ -48,5 +48,13 @@
     <servlet-name>OggettoServlet</servlet-name>
     <url-pattern>/OggettoServlet</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <servlet-name>AcquistoServlet</servlet-name>
+    <servlet-class>it.contrader.servlets.AcquistoServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>AcquistoServlet</servlet-name>
+    <url-pattern>/AcquistoServlet</url-pattern>
+  </servlet-mapping>
   
 </web-app>
