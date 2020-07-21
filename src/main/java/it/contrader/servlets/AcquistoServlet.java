@@ -22,45 +22,31 @@ public class AcquistoServlet extends HttpServlet {
 	}
 	
 	
-	public void updateList(HttpServletRequest request) {//aggiorno la lista 
-		Service<MagazzinoDTO> service = new MagazzinoService();
-		List<MagazzinoDTO> listDTO = service.getAll();
-		Service<OggettoDTO> serviceOggetto = new OggettoService();
-		String nomeOggetto = "";
-		for(MagazzinoDTO m: listDTO) {
-			nomeOggetto = ((OggettoService) serviceOggetto).nome(m.getId_oggetto());
-			if(nomeOggetto != null) {
-				m.setNome_oggetto(nomeOggetto);
-			}
-			else {
-				m.setNome_oggetto("Vuoto");
-			}
-		}
+	public void updateList(HttpServletRequest request) {
+		Service <OggettoDTO> service = new OggettoService();
+		List<OggettoDTO>listDTO = ((OggettoService) service).getAllInCell();
 		request.setAttribute("list", listDTO);
 	}
 
- public void getOggetti(HttpServletRequest request) {
-	Service<OggettoDTO> service = new OggettoService();
-	List<OggettoDTO> oggettiDTO = service.getAll();
-	request.setAttribute("oggetti", oggettiDTO);
-  }
- 
  public void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		Service<MagazzinoDTO> service = new MagazzinoService();
+		Service<OggettoDTO> service = new OggettoService();
 		String mode = request.getParameter("mode");
-		MagazzinoDTO dto;
 		int id;
-		boolean ans;
-		
+		boolean ans;		
 		
 		switch (mode.toUpperCase()) {
-		case "UPDATE":
+		case "OGGETTOLIST":
+			updateList(request);
+			getServletContext().getRequestDispatcher("/acquisto/acquistomanager.jsp").forward(request, response);
+			break;
+		
+		/*case "UPDATE":
 			id = Integer.parseInt(request.getParameter("id"));
-			ans = ((MagazzinoService) service).removeOggetto(id);
+			ans = 
 			request.setAttribute("ans", ans);
 			updateList(request);
-			getServletContext().getRequestDispatcher("/magazzino/readoggetto.jsp").forward(request, response);
-			break;
+			getServletContext().getRequestDispatcher("/acquisto/acquistomanager.jsp").forward(request, response);
+			break;*/
 		
 			
 			

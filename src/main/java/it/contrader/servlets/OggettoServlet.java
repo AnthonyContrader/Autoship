@@ -8,7 +8,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import it.contrader.dto.MagazzinoDTO;
 import it.contrader.dto.OggettoDTO;
+import it.contrader.service.MagazzinoService;
 import it.contrader.service.OggettoService;
 import it.contrader.service.Service;
 
@@ -28,6 +30,7 @@ public class OggettoServlet extends HttpServlet {
 	@Override
 	public void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		Service <OggettoDTO> service = new OggettoService();
+		Service <MagazzinoDTO> magazzinoService = new MagazzinoService();
 		String mode = request.getParameter("mode");
 		OggettoDTO dto;
 		int id;
@@ -76,6 +79,10 @@ public class OggettoServlet extends HttpServlet {
 
 		case "DELETE":
 			id = Integer.parseInt(request.getParameter("id"));
+			int oggetto = ((MagazzinoService) magazzinoService).checkOggetto(id);
+			if(oggetto > 0) {
+				((MagazzinoService) magazzinoService).removeOggetto(oggetto);
+			}
 			ans = service.delete(id);
 			request.setAttribute("ans", ans);
 			updateList(request);

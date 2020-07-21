@@ -39,13 +39,14 @@ public class MagazzinoServlet extends HttpServlet {
 
 	public void getOggetti(HttpServletRequest request) {
 		Service<OggettoDTO> service = new OggettoService();
-		List<OggettoDTO> oggettiDTO = service.getAll();
+		List<OggettoDTO> oggettiDTO = ((OggettoService) service).getNotInCell();
 		request.setAttribute("oggetti", oggettiDTO);
 	}
 
 	@Override
 	public void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		Service<MagazzinoDTO> service = new MagazzinoService();
+		Service<OggettoDTO> serviceOggetto = new OggettoService();
 		String mode = request.getParameter("mode");
 		MagazzinoDTO dto;
 		int id;
@@ -59,6 +60,7 @@ public class MagazzinoServlet extends HttpServlet {
 			break;
 
 		case "READ":
+			getOggetti(request);
 			id = Integer.parseInt(request.getParameter("id"));
 			dto = service.read(id);
 			request.setAttribute("dto", dto);
@@ -81,6 +83,12 @@ public class MagazzinoServlet extends HttpServlet {
 				id_oggetto = 0;
 			}
 			int capienza = Integer.parseInt(request.getParameter("capienza").toString());
+			if(id_oggetto != 0) {
+				int dimensione = ((OggettoService) serviceOggetto).dimensione(id_oggetto);
+				if(capienza < dimensione) {
+					id_oggetto = 0;
+				}
+			}
 			dto = new MagazzinoDTO(id_oggetto, capienza);
 			ans = service.insert(dto);
 			request.setAttribute("ans", ans);
@@ -89,7 +97,6 @@ public class MagazzinoServlet extends HttpServlet {
 			break;
 
 		case "UPDATE":
-			getOggetti(request);
 			id = Integer.parseInt(request.getParameter("id"));
 			MagazzinoDTO olddto = service.read(id);
 			if (!(request.getParameter("id_oggetto").toString().trim().equals(""))) {
@@ -108,6 +115,12 @@ public class MagazzinoServlet extends HttpServlet {
 			}
 			else {
 				capienza = olddto.getCapienza();
+			}			
+			if(id_oggetto != 0) {
+				int dimensione = ((OggettoService) serviceOggetto).dimensione(id_oggetto);
+				if(capienza < dimensione) {
+					id_oggetto = 0;
+				}
 			}
 			dto = new MagazzinoDTO(id, id_oggetto, capienza);
 			ans = service.update(dto);
