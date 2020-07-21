@@ -2,6 +2,7 @@ package it.contrader.servlets;
 
 import java.io.IOException;
 import java.nio.charset.Charset;
+import java.sql.SQLException;
 import java.util.List;
 import java.util.Random;
 
@@ -16,6 +17,7 @@ import it.contrader.dto.OggettoDTO;
 import it.contrader.service.CodiceService;
 import it.contrader.service.MagazzinoService;
 import it.contrader.service.OggettoService;
+import it.contrader.service.RobotService;
 import it.contrader.service.Service;
 
 public class AcquistoServlet extends HttpServlet {
@@ -36,6 +38,7 @@ public class AcquistoServlet extends HttpServlet {
 		Service<OggettoDTO> service = new OggettoService();
 		Service <MagazzinoDTO> magazzinoService = new MagazzinoService();
 		Service <CodiceDTO> codiceService = new CodiceService();
+		RobotService robotService = new RobotService();
 		String mode = request.getParameter("mode");
 		int id;
 		boolean ans;		
@@ -57,12 +60,17 @@ public class AcquistoServlet extends HttpServlet {
 					 String codice = new String(array, Charset.forName("UTF-8"));
 					 CodiceDTO codicetoinsert = new CodiceDTO(codice);
 					 codiceService.insert(codicetoinsert);
+					 robotService.createCode(codice, id);
+					 ans = codiceService.update(codicetoinsert);
+					 request.setAttribute("ans", ans);
+					 updateList(request);
+					 getServletContext().getRequestDispatcher("/acquisto/acquistomanager.jsp").forward(request, response);
 				}
 			}
-			ans = 
-			request.setAttribute("ans", ans);
-			updateList(request);
-			getServletContext().getRequestDispatcher("/acquisto/acquistomanager.jsp").forward(request, response);
+			catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 			break;
 		
 			
