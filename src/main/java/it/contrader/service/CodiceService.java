@@ -51,21 +51,9 @@ public class CodiceService extends AbstractService<Codice,CodiceDTO>{
 		return codiceDAO.id(id);
 	}
 	
-	public String nome(int id) {
-		return codiceDAO.nome(id);
+	public String codice(int id) {
+		return codiceDAO.codice(id);
 	}
+
 	
-	public int dimensione(int id) {
-		return codiceDAO.dimensione(id);
-	}
-	
-	public List<CodiceDTO> getAllInCell() {
-		// Ottiene una lista di entit� e le restituisce convertendole in DTO
-		return codiceConverter.toDTOList(codiceDAO.getAllInCell());
-	}
-	
-	public List<CodiceDTO> getNotInCell() {
-		// Ottiene una lista di entit� e le restituisce convertendole in DTO
-		return codiceConverter.toDTOList(codiceDAO.getNotInCell());
-	}
 }

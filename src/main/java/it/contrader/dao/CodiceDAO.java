@@ -17,6 +17,7 @@ private final String QUERY_CREATE = "INSERT INTO Codice (id,otp) VALUES (?,?)";
 private final String QUERY_READ = "SELECT * FROM Codice WHERE id=?";
 private final String QUERY_UPDATE = "UPDATE user SET id=?, otp=?";
 private final String QUERY_DELETE = "DELETE FROM Codice WHERE id=?";
+private final String QUERY_ID = "SELECT id FROM Codice WHERE id=?";
 
 public CodiceDAO() {
 	
@@ -117,6 +118,48 @@ public CodiceDAO() {
 				} catch (SQLException e) {
 				}
 				return false;
+			}
+			
+			public int id(int id) {
+				Connection connection = ConnectionSingleton.getInstance();
+				try {
+					PreparedStatement preparedStatement = connection.prepareStatement(QUERY_ID);
+					preparedStatement.setInt(1, id);
+					ResultSet resultSet = preparedStatement.executeQuery();
+					resultSet.next();
+					int n = resultSet.getInt("id");
+					if (n != 0) {
+						return n;
+					}
+					else {
+						return -1;
+					}
+
+				} catch (SQLException e) {
+				}
+				return -1;
+			}
+			
+			public String codice(int id) {
+				Connection connection = ConnectionSingleton.getInstance();
+				try {
+					PreparedStatement preparedStatement = connection.prepareStatement(QUERY_READ);
+					preparedStatement.setInt(1, id);
+					ResultSet resultSet = preparedStatement.executeQuery();
+					resultSet.next();
+					int n = resultSet.getInt("id");
+					String codice = resultSet.getString("otp");
+					if (n != 0) {
+						return codice;
+					}
+					else {
+						return null;
+					}
+
+				} catch (SQLException e) {
+					System.out.println("Errore: " + e);
+				}
+				return null;
 			}
 		
 		
