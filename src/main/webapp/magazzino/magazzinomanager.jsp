@@ -35,7 +35,7 @@
 			for (MagazzinoDTO m : list) {
 		%>
 		<tr>
-			<td><%=m.getId_oggetto()%></td>
+			<td><%=m.getNome_oggetto()%></td>
 			<td><%=m.getCapienza()%></td>
 			<td><a href=MagazzinoServlet?mode=read&update=true&id=<%=m.getId()%>>Edit</a>
 			</td>

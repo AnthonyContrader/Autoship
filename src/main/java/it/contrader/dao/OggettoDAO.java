@@ -13,12 +13,13 @@ import it.contrader.utils.ConnectionSingleton;
 
 public class OggettoDAO implements DAO<Oggetto> {
 
-	private final String QUERY_ALL = "SELECT * FROM Oggetto";
-	private final String QUERY_CREATE = "INSERT INTO Oggetto (nome, dimensione) VALUES (?,?)";
+	private final String QUERY_ALL = "SELECT * FROM Oggetto WHERE cancellato=0";
+	private final String QUERY_CREATE = "INSERT INTO Oggetto (nome, dimensione,cancellato) VALUES (?,?,0)";
 	private final String QUERY_READ = "SELECT * FROM Oggetto WHERE id=?";
 	private final String QUERY_UPDATE = "UPDATE Oggetto SET nome=?, dimensione=? WHERE id=?";
-	private final String QUERY_DELETE = " FROM Oggetto WHERE id=?";
+	private final String QUERY_DELETE = "UPDATE Oggetto SET cancellato=1 WHERE id=?";
 	private final String QUERY_ID = "SELECT id FROM Oggetto WHERE id=?";
+	private final String QUERY_NOME = "SELECT nome FROM Oggetto WHERE id=?";
 	private final String QUERY_DIMENSIONE = "SELECT dimensione FROM Oggetto WHERE id=?";
 	private final String QUERY_ALLINCELLORDERED = "SELECT * FROM Oggetto JOIN Magazzino ON Magazzino.id_oggetto = Oggetto.id WHERE Magazzino.codice IS NULL";
 	private final String QUERY_ALLINCELL = "SELECT * FROM Oggetto JOIN Magazzino ON Magazzino.id_oggetto = Oggetto.id";
@@ -142,6 +143,7 @@ public class OggettoDAO implements DAO<Oggetto> {
 		Connection connection = ConnectionSingleton.getInstance();
 		try {
 			PreparedStatement preparedStatement = connection.prepareStatement(QUERY_ID);
+			preparedStatement.setInt(1, id);
 			ResultSet resultSet = preparedStatement.executeQuery();
 			resultSet.next();
 			int n = resultSet.getInt("id");
@@ -155,6 +157,26 @@ public class OggettoDAO implements DAO<Oggetto> {
 		} catch (SQLException e) {
 		}
 		return -1;
+	}
+	
+	public String nome(int id) {
+		Connection connection = ConnectionSingleton.getInstance();
+		try {
+			PreparedStatement preparedStatement = connection.prepareStatement(QUERY_NOME);
+			preparedStatement.setInt(1, id);
+			ResultSet resultSet = preparedStatement.executeQuery();
+			resultSet.next();
+			String n = resultSet.getString("nome");
+			if (n != null) {
+				return n;
+			}
+			else {
+				return null;
+			}
+
+		} catch (SQLException e) {
+		}
+		return null;
 	}
 	
 	public int dimensione(int id) {

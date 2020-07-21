@@ -23,20 +23,12 @@
 
 
 <form id="floatright" action="OggettoServlet?mode=update&id=<%=m.getId()%>" method="post">
-  <div class="row">
-    <div class="col-25">
-      <label for="id">Id</label>
-    </div>
-    <div class="col-75">
-      <input type="number" id="id" name="id" placeholder="inserisci id oggetto">
-    </div>
-  </div>
-  <div class="row">
+   <div class="row">
     <div class="col-25">
       <label for="nome">Nome</label>
     </div>
     <div class="col-75">
-      <input type="number" id="nome" name="nome" placeholder="inserisci nome oggetto">
+      <input type="text" id="nome" name="nome" placeholder="inserisci nome oggetto">
     </div>
   </div>
        <div class="row">

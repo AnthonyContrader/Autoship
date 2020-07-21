@@ -51,6 +51,10 @@ public class OggettoService extends AbstractService<Oggetto,OggettoDTO>{
 		return oggettoDAO.id(id);
 	}
 	
+	public String nome(int id) {
+		return oggettoDAO.nome(id);
+	}
+	
 	public int dimensione(int id) {
 		return oggettoDAO.dimensione(id);
 	}

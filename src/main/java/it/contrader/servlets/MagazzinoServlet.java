@@ -23,6 +23,17 @@ public class MagazzinoServlet extends HttpServlet {
 	public void updateList(HttpServletRequest request) {
 		Service<MagazzinoDTO> service = new MagazzinoService();
 		List<MagazzinoDTO> listDTO = service.getAll();
+		Service<OggettoDTO> serviceOggetto = new OggettoService();
+		String nomeOggetto = "";
+		for(MagazzinoDTO m: listDTO) {
+			nomeOggetto = ((OggettoService) serviceOggetto).nome(m.getId_oggetto());
+			if(nomeOggetto != null) {
+				m.setNome_oggetto(nomeOggetto);
+			}
+			else {
+				m.setNome_oggetto("Vuoto");
+			}
+		}
 		request.setAttribute("list", listDTO);
 	}
 

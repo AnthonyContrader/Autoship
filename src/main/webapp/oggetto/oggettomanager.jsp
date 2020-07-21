@@ -56,7 +56,7 @@
       <label for="nome">Oggetto</label>
     </div>
     <div class="col-75">
-      <input type="text" id="nome" name="nome" placeholder="inserisci id oggetto">
+      <input type="text" id="nome" name="nome" placeholder="inserisci nome oggetto">
     </div>
   </div>
   <div class="row">
