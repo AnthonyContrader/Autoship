@@ -2,12 +2,16 @@ package it.contrader.model;
 
 public class Codice {
 	private int id;
-	private int otp;
+	private String otp;
 	
-	public Codice(int id,int otp) {
+	public Codice(int id,String otp2) {
 		this.id=id;
-		this.otp= otp;
+		this.otp= otp2;
 		
+	}
+
+	public Codice( String otp2) {
+		this.otp= otp2;
 	}
 
 	public int getId () {
@@ -18,11 +22,11 @@ public class Codice {
 		this.id=id;
 	}
 
-	public int getOtp () {
+	public String getOtp () {
 		return otp;
 	}
 
-	public void setOtp(int otp) {
+	public void setOtp(String otp) {
 		this.otp=otp;
 	}
 
