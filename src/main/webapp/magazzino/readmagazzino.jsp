@@ -23,7 +23,7 @@
 
 <table>
 	<tr> 
-		<th>Numero</th>
+		
 			<th>Oggetto</th>
 			<th>Capienza</th>
 	</tr>
