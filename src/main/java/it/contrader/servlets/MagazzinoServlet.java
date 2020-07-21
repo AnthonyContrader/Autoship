@@ -122,6 +122,10 @@ public class MagazzinoServlet extends HttpServlet {
 					id_oggetto = 0;
 				}
 			}
+			int checkOggetto = ((MagazzinoService) service).checkOggetto(id_oggetto);
+			if(checkOggetto > 0) {
+				id_oggetto = olddto.getId_oggetto();
+			}
 			dto = new MagazzinoDTO(id, id_oggetto, capienza);
 			ans = service.update(dto);
 			updateList(request);
