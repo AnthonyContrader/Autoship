@@ -93,13 +93,20 @@ public class MagazzinoServlet extends HttpServlet {
 			id = Integer.parseInt(request.getParameter("id"));
 			MagazzinoDTO olddto = service.read(id);
 			if (!(request.getParameter("id_oggetto").toString().trim().equals(""))) {
-				id_oggetto = Integer.parseInt(request.getParameter("id_oggetto").toString());
-			} else {
+				if(request.getParameter("id_oggetto").toString().trim().equals("0")) {
+					id_oggetto = 0;
+				}
+				else {
+					id_oggetto = Integer.parseInt(request.getParameter("id_oggetto").toString());
+				}
+			}
+			else {
 				id_oggetto = olddto.getId_oggetto();
 			}
 			if (!(request.getParameter("capienza").toString().trim().equals(""))) {
 				capienza = Integer.parseInt(request.getParameter("capienza"));
-			} else {
+			}
+			else {
 				capienza = olddto.getCapienza();
 			}
 			dto = new MagazzinoDTO(id, id_oggetto, capienza);

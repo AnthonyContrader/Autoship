@@ -15,6 +15,7 @@
   <a  href="homeadmin.jsp">Home</a>
   <a href="UserServlet?mode=userlist">Users</a>
   <a class="active" href="MagazzinoServlet?mode=magazzinolist">Magazzino</a>
+  <a href="OggettoServlet?mode=oggettolist">Oggetto</a>
   <a href="LogoutServlet" id="logout">Logout</a>
 </div>
 <div class="main">
@@ -39,7 +40,18 @@
 			<td><%=m.getCapienza()%></td>
 			<td><a href=MagazzinoServlet?mode=read&update=true&id=<%=m.getId()%>>Edit</a>
 			</td>
-			<td><a href=MagazzinoServlet?mode=delete&id=<%=m.getId()%>>Delete</a>
+			<%
+				if(!(m.getNome_oggetto().equalsIgnoreCase("Vuoto"))) {
+			%>
+				<td>
+			<%
+				}
+				else{
+			%>
+				<td><a href=MagazzinoServlet?mode=delete&id=<%=m.getId()%>>Delete</a>
+			<%
+				}
+			%>
 			</td>
 
 		</tr>
