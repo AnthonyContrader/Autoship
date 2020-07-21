@@ -32,7 +32,8 @@ public class MagazzinoDAO {
 				int id = resultSet.getInt("id");
 				int oggetto = resultSet.getInt("id_oggetto");
 				int capienza = resultSet.getInt("capienza");
-				Magazzino = new Magazzino(oggetto, capienza);
+				String otp = resultSet.getString("otp");
+				Magazzino = new Magazzino(oggetto, capienza, otp);
 				Magazzino.setId(id);
 				MagazzinosList.add(Magazzino);
 			}
@@ -71,10 +72,12 @@ public class MagazzinoDAO {
 			ResultSet resultSet = preparedStatement.executeQuery();
 			resultSet.next();
 			int oggetto, capienza;
+			String otp;
 
 			oggetto = resultSet.getInt("id_oggetto");
 			capienza = resultSet.getInt("capienza");
-			Magazzino magazzino = new Magazzino(oggetto, capienza);
+			otp = resultSet.getString("otp");
+			Magazzino magazzino = new Magazzino(oggetto, capienza, otp);
 			magazzino.setId(resultSet.getInt("id"));
 
 			return magazzino;

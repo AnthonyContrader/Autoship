@@ -4,22 +4,23 @@ public class MagazzinoDTO {
 private int id;
 private int id_oggetto;
 private int capienza;
+private String otp;
 private String nome_oggetto;
 
-public MagazzinoDTO(int id_oggetto, int capienza) {
+public MagazzinoDTO(int id_oggetto, int capienza, String otp) {
 	this.id_oggetto= id_oggetto;
 	this.capienza= capienza;
+	this.otp = otp;
 	
 }
 
-public MagazzinoDTO(int id, int id_oggetto, int capienza) {
+public MagazzinoDTO(int id, int id_oggetto, int capienza, String otp) {
 	this.id = id;
 	this.id_oggetto= id_oggetto;
 	this.capienza= capienza;
+	this.otp = otp;
 	
 }
-
-
 
 public int getId() {
 	return id;
@@ -38,6 +39,14 @@ public int getCapienza() {
 }
 public void setCapienza(int capienza) {
 	this.capienza = capienza;
+}
+
+public String getOtp() {
+	return this.otp;
+}
+
+public void setOtp(String otp) {
+	this.otp = otp;
 }
 
 public String getNome_oggetto() {

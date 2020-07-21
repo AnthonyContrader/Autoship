@@ -6,17 +6,18 @@ private int id_oggetto;
 private int capienza;
 private String otp;
 private boolean cancellato;
-public Magazzino(int id_oggetto, int capienza) {
+
+public Magazzino(int id_oggetto, int capienza, String otp) {
 	this.id_oggetto= id_oggetto;
 	this.capienza= capienza;
-	
+	this.otp = otp;	
 }
 
-public Magazzino(int id, int id_oggetto, int capienza) {
+public Magazzino(int id, int id_oggetto, int capienza, String otp) {
 	this.id = id;
 	this.id_oggetto= id_oggetto;
 	this.capienza= capienza;
-	
+	this.otp = otp;	
 }
 
 

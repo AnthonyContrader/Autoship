@@ -10,7 +10,7 @@ public class MagazzinoConverter implements Converter<Magazzino, MagazzinoDTO> {
 	
 	@Override
 	public MagazzinoDTO toDTO(Magazzino magazzino) {
-		MagazzinoDTO magazzinoDTO = new MagazzinoDTO(magazzino.getId(), magazzino.getId_oggetto(), magazzino.getCapienza());
+		MagazzinoDTO magazzinoDTO = new MagazzinoDTO(magazzino.getId(), magazzino.getId_oggetto(), magazzino.getCapienza(), magazzino.getOtp());
 		return magazzinoDTO;
 	}
 
@@ -20,7 +20,7 @@ public class MagazzinoConverter implements Converter<Magazzino, MagazzinoDTO> {
 	 */
 	@Override
 	public Magazzino toEntity(MagazzinoDTO magazzinoDTO) {
-		Magazzino magazzino = new Magazzino(magazzinoDTO.getId(), magazzinoDTO.getId_oggetto(), magazzinoDTO.getCapienza());
+		Magazzino magazzino = new Magazzino(magazzinoDTO.getId(), magazzinoDTO.getId_oggetto(), magazzinoDTO.getCapienza(), magazzinoDTO.getOtp());
 		return magazzino;
 	}
 	

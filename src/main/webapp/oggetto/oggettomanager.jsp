@@ -43,8 +43,15 @@
 			</td>
 			<td><a href=OggettoServlet?mode=delete&id=<%=o.getId()%>>Delete</a>
 			</td>
-			<% } %>
-
+			<% 
+				}
+				else{
+			%>
+			<td></td>
+			<td></td>
+			<% 
+				}
+			%>
 		</tr>
 		<%
 			}
