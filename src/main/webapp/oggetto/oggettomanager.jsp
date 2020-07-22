@@ -38,18 +38,24 @@
 		<tr>
 			<td><%=o.getNome()%></td>
 			<td><%=o.getDimensione()%></td>
-			<% if(o.getCella() == false) { %>
+			<% if(o.getCella() == false && o.getCancellato() == 0) { %>
 			<td><a href=OggettoServlet?mode=read&update=true&id=<%=o.getId()%>>Edit</a>
 			</td>
 			<td><a href=OggettoServlet?mode=delete&id=<%=o.getId()%>>Delete</a>
 			</td>
 			<% 
 				}
+				else if(o.getCancellato() == 1){
+			%>
+			<td><a href=OggettoServlet?mode=reinsert&id=<%=o.getId()%>>Out of Order</a></td>
+			<td></td>
+			<% 
+				}
 				else{
 			%>
 			<td></td>
 			<td></td>
-			<% 
+			<%					
 				}
 			%>
 		</tr>

@@ -12,7 +12,7 @@ public class OggettoConverter implements Converter<Oggetto, OggettoDTO> {
 	
 	@Override
 	public OggettoDTO toDTO(Oggetto oggetto) {
-		OggettoDTO oggettoDTO = new OggettoDTO(oggetto.getId(), oggetto.getNome(), oggetto.getDimensione());
+		OggettoDTO oggettoDTO = new OggettoDTO(oggetto.getId(), oggetto.getNome(), oggetto.getDimensione(), oggetto.getCancellato());
 		return oggettoDTO;
 	}
 
@@ -22,7 +22,7 @@ public class OggettoConverter implements Converter<Oggetto, OggettoDTO> {
 	 */
 	@Override
 	public Oggetto toEntity(OggettoDTO oggettoDTO) {
-		Oggetto oggetto = new Oggetto(oggettoDTO.getId(), oggettoDTO.getNome(), oggettoDTO.getDimensione());
+		Oggetto oggetto = new Oggetto(oggettoDTO.getId(), oggettoDTO.getNome(), oggettoDTO.getDimensione(), oggettoDTO.getCancellato());
 		return oggetto;
 	}
 	

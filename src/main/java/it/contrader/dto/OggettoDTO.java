@@ -7,17 +7,18 @@ private int dimensione;
 private int cancellato;
 private boolean cella;
 
-public OggettoDTO(String nome, int dimensione){
+public OggettoDTO(String nome, int dimensione, int cancellato){
 	this.nome = nome;
-	this.dimensione = dimensione; 
+	this.dimensione = dimensione;
+	this.cancellato = cancellato;
 	this.cella=false;
 }
 
-public OggettoDTO(int id, String nome, int dimensione){
+public OggettoDTO(int id, String nome, int dimensione, int cancellato){
 	this.id = id;
 	this.nome = nome;
 	this.dimensione = dimensione; 
-	this.cella=false;
+	this.cancellato = cancellato;
 }
 
 

@@ -109,7 +109,7 @@ public class MagazzinoServlet extends HttpServlet {
 			ans = service.insert(dto);
 			request.setAttribute("ans", ans);
 			updateList(request);
-			getOggetti(request);
+			getOggettiNotInCell(request);
 			getServletContext().getRequestDispatcher("/magazzino/magazzinomanager.jsp").forward(request, response);
 			break;
 
@@ -156,6 +156,7 @@ public class MagazzinoServlet extends HttpServlet {
 			dto = new MagazzinoDTO(id, id_oggetto, capienza, null);
 			ans = service.update(dto);
 			updateList(request);
+			getOggettiNotInCell(request);
 			getServletContext().getRequestDispatcher("/magazzino/magazzinomanager.jsp").forward(request, response);
 			break;
 

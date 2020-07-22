@@ -52,6 +52,11 @@ public class OggettoService extends AbstractService<Oggetto,OggettoDTO>{
 		return oggettoDAO.delete(id);
 	}
 	
+	public boolean reinsert(int id) {
+		// Questo mtodo chiama direttamente il DAO
+		return oggettoDAO.reinsert(id);
+	}
+	
 	public int id(int id) {
 		return oggettoDAO.id(id);
 	}

@@ -68,7 +68,7 @@ public class OggettoServlet extends HttpServlet {
 		case "INSERT":
 			String nome = request.getParameter("nome").toString();
 			int dimensione = Integer.parseInt(request.getParameter("dimensione").toString());
-			dto = new OggettoDTO (nome,dimensione);
+			dto = new OggettoDTO (nome,dimensione, 0);
 			ans = service.insert(dto);
 			request.setAttribute("ans", ans);
 			updateList(request);
@@ -90,7 +90,7 @@ public class OggettoServlet extends HttpServlet {
 			else {
 				dimensione = olddto.getDimensione();
 			}
-			dto = new OggettoDTO (id,nome,dimensione);
+			dto = new OggettoDTO (id,nome,dimensione, 0);
 			ans = service.update(dto);
 			updateList(request);
 			getServletContext().getRequestDispatcher("/oggetto/oggettomanager.jsp").forward(request, response);
@@ -103,6 +103,14 @@ public class OggettoServlet extends HttpServlet {
 				((MagazzinoService) magazzinoService).removeOggetto(oggetto);
 			}
 			ans = service.delete(id);
+			request.setAttribute("ans", ans);
+			updateList(request);
+			getServletContext().getRequestDispatcher("/oggetto/oggettomanager.jsp").forward(request, response);
+			break;
+			
+		case "REINSERT":
+			id = Integer.parseInt(request.getParameter("id"));
+			ans = ((OggettoService) service).reinsert(id);
 			request.setAttribute("ans", ans);
 			updateList(request);
 			getServletContext().getRequestDispatcher("/oggetto/oggettomanager.jsp").forward(request, response);

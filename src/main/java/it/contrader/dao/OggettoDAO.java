@@ -19,6 +19,7 @@ public class OggettoDAO implements DAO<Oggetto> {
 	private final String QUERY_READ = "SELECT * FROM Oggetto WHERE id=?";
 	private final String QUERY_UPDATE = "UPDATE Oggetto SET nome=?, dimensione=? WHERE id=?";
 	private final String QUERY_DELETE = "UPDATE Oggetto SET cancellato=1 WHERE id=?";
+	private final String QUERY_REINSERT = "UPDATE Oggetto SET cancellato=0 WHERE id=?";
 	private final String QUERY_ID = "SELECT id FROM Oggetto WHERE id=? AND cancellato=0";
 	private final String QUERY_NOME = "SELECT nome FROM Oggetto WHERE id=?";
 	private final String QUERY_DIMENSIONE = "SELECT dimensione FROM Oggetto WHERE id=?";
@@ -40,7 +41,8 @@ public class OggettoDAO implements DAO<Oggetto> {
 				int id = resultSet.getInt("id");
 				String nome = resultSet.getString("nome");
 				int dimensione = resultSet.getInt("dimensione");
-				oggetto = new Oggetto(nome, dimensione);
+				int cancellato = resultSet.getInt("cancellato");
+				oggetto = new Oggetto(nome, dimensione, cancellato);
 				oggetto.setId(id);
 				usersList.add(oggetto);
 			}
@@ -61,7 +63,8 @@ public class OggettoDAO implements DAO<Oggetto> {
 				int id = resultSet.getInt("id");
 				String nome = resultSet.getString("nome");
 				int dimensione = resultSet.getInt("dimensione");
-				oggetto = new Oggetto(nome, dimensione);
+				int cancellato = resultSet.getInt("cancellato");
+				oggetto = new Oggetto(nome, dimensione, cancellato);
 				oggetto.setId(id);
 				usersList.add(oggetto);
 			}
@@ -95,11 +98,12 @@ public class OggettoDAO implements DAO<Oggetto> {
 			ResultSet resultSet = preparedStatement.executeQuery();
 			resultSet.next();
 			String nome;
-			int dimensione;
+			int dimensione, cancellato;
 
 			nome = resultSet.getString("nome");
 			dimensione = resultSet.getInt("dimensione");
-			Oggetto oggetto = new Oggetto(nome, dimensione);
+			cancellato = resultSet.getInt("cancellato");
+			Oggetto oggetto = new Oggetto(nome, dimensione, cancellato);
 			oggetto.setId(resultSet.getInt("id"));
 
 			return oggetto;
@@ -151,6 +155,20 @@ public class OggettoDAO implements DAO<Oggetto> {
 		Connection connection = ConnectionSingleton.getInstance();
 		try {
 			PreparedStatement preparedStatement = connection.prepareStatement(QUERY_DELETE);
+			preparedStatement.setInt(1, id);
+			int n = preparedStatement.executeUpdate();
+			if (n != 0)
+				return true;
+
+		} catch (SQLException e) {
+		}
+		return false;
+	}
+	
+	public boolean reinsert(int id) {
+		Connection connection = ConnectionSingleton.getInstance();
+		try {
+			PreparedStatement preparedStatement = connection.prepareStatement(QUERY_REINSERT);
 			preparedStatement.setInt(1, id);
 			int n = preparedStatement.executeUpdate();
 			if (n != 0)
@@ -233,7 +251,8 @@ public class OggettoDAO implements DAO<Oggetto> {
 				int id = resultSet.getInt("id");
 				String nome = resultSet.getString("nome");
 				int dimensione = resultSet.getInt("dimensione");
-				Oggetto = new Oggetto(nome,dimensione);
+				int cancellato = resultSet.getInt("cancellato");
+				Oggetto = new Oggetto(nome,dimensione, cancellato);
 				Oggetto.setId(id);
 				OggettosList.add(Oggetto);
 			}
@@ -254,7 +273,8 @@ public class OggettoDAO implements DAO<Oggetto> {
 				int id = resultSet.getInt("id");
 				String nome = resultSet.getString("nome");
 				int dimensione = resultSet.getInt("dimensione");
-				Oggetto = new Oggetto(nome,dimensione);
+				int cancellato = resultSet.getInt("cancellato");
+				Oggetto = new Oggetto(nome,dimensione, cancellato);
 				Oggetto.setId(id);
 				OggettosList.add(Oggetto);
 			}
@@ -266,7 +286,7 @@ public class OggettoDAO implements DAO<Oggetto> {
 		
 	public List<Oggetto> getNotInCell(){
 		
-		List<Oggetto> oggettoList = getAll();
+		List<Oggetto> oggettoList = getAllIn();
 		List<Oggetto> removeList = getAllInCell();
 		List<Oggetto> notInCellList = new ArrayList<>();
 		

@@ -6,21 +6,17 @@ private String nome;
 private int dimensione;
 private int cancellato;
 
-public Oggetto(String nome, int dimensione){
-	this.nome = nome;
-	this.dimensione = dimensione; 
-}
-
 public Oggetto(String nome, int dimensione, int cancellato){
 	this.nome = nome;
 	this.dimensione = dimensione;
 	this.cancellato = cancellato;
 }
 
-public Oggetto(int id, String nome, int dimensione){
+public Oggetto(int id, String nome, int dimensione, int cancellato){
 	this.id = id;
 	this.nome = nome;
 	this.dimensione = dimensione; 
+	this.cancellato = cancellato;
 }
 
 public int getId() {
