@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1" import="java.util.List"
-	import="it.contrader.dto.MagazzinoDTO"%>
+	import="it.contrader.dto.MagazzinoDTO"
+	import="it.contrader.dto.OggettoDTO"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -21,6 +22,7 @@
 <div class="main">
 	<%
 		List<MagazzinoDTO> list = (List<MagazzinoDTO>) request.getAttribute("list");
+		List<OggettoDTO> listo = (List<OggettoDTO>) request.getAttribute("list");
 	%>
 
 <br>
@@ -77,8 +79,12 @@
       <label for="id_oggetto">Oggetto</label>
     </div>
     <div class="col-75">
-      <input type="number" id="id_oggetto" name="id_oggetto" placeholder="inserisci id oggetto">
-    </div>
+    <select id="type" name="usertype">
+    <% for(OggettoDTO o : listo) {%>
+  				<option value="<%o.getId();%>" id="id_oggetto" name="id_oggetto"><%o.getNome();%></option>
+ <%} %>
+			</select>
+     </div>
   </div>
   <div class="row">
     <div class="col-25">
