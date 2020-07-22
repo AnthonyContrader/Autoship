@@ -17,7 +17,8 @@ private final String QUERY_CREATE = "INSERT INTO Codice (id,otp,cancellato) VALU
 private final String QUERY_READ = "SELECT * FROM Codice WHERE id=?";
 private final String QUERY_UPDATE = "UPDATE Codice SET id=?, otp=?";
 private final String QUERY_DELETE = "UPDATE Codice SET cancellato=1 WHERE id=?";
-private final String QUERY_ID = "SELECT id FROM Codice WHERE id=?";
+private final String QUERY_ID = "SELECT id FROM Codice WHERE id=? AND cancellato=0";
+private final String QUERY_CODICE = "SELECT otp FROM Codice WHERE otp=? AND cancellato=0";
 
 public CodiceDAO() {
 	
@@ -161,6 +162,27 @@ public CodiceDAO() {
 				}
 				return null;
 			}
+			
+			public int getCodice(String otp) {
+				Connection connection = ConnectionSingleton.getInstance();
+				try {
+					PreparedStatement preparedStatement = connection.prepareStatement(QUERY_ID);
+					preparedStatement.setString(1, otp);
+					ResultSet resultSet = preparedStatement.executeQuery();
+					resultSet.next();
+					String n = resultSet.getString("otp");
+					if (n != null) {
+						return 1;
+					}
+					else {
+						return -1;
+					}
+
+				} catch (SQLException e) {
+				}
+				return -1;
+			}
+			
 		
 		
 		

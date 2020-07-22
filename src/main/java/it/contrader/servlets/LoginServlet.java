@@ -1,13 +1,22 @@
 package it.contrader.servlets;
 
 import java.io.IOException;
+import java.nio.charset.Charset;
+import java.util.Random;
+
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+
+import it.contrader.dto.CodiceDTO;
+import it.contrader.dto.MagazzinoDTO;
 import it.contrader.dto.UserDTO;
+import it.contrader.service.CodiceService;
 import it.contrader.service.LoginService;
+import it.contrader.service.MagazzinoService;
+import it.contrader.service.Service;
 
 
 /*
@@ -25,6 +34,7 @@ public class LoginServlet extends HttpServlet {
 	 */
 	public void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		final HttpSession session = request.getSession();
+		Service <CodiceDTO> codiceService = new CodiceService();
 		session.setAttribute("utente", null);
 
 		LoginService service = new LoginService();
@@ -49,6 +59,13 @@ public class LoginServlet extends HttpServlet {
 				break;
 				
 			case "USER":
+				byte[] array = new byte[5]; // length is bounded by 7
+				new Random().nextBytes(array);
+				String codice = Integer.toString((int)(Math.random() * (5000 - 1000)));
+				while(((CodiceService) codiceService).getCodice(codice) == 1) {
+					codice = Integer.toString((int)(Math.random() * (5000 - 1000)));
+				}
+				request.setAttribute("otp", codice);
 				getServletContext().getRequestDispatcher("/homeuser.jsp").forward(request, response);
 				break;
 				

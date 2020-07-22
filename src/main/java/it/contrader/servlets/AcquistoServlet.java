@@ -40,6 +40,7 @@ public class AcquistoServlet extends HttpServlet {
 		Service <CodiceDTO> codiceService = new CodiceService();
 		RobotService robotService = new RobotService();
 		String mode = request.getParameter("mode");
+		String codice = request.getParameter("otp");
 		OggettoDTO dto;
 		int id;
 		boolean ans;		
@@ -47,6 +48,7 @@ public class AcquistoServlet extends HttpServlet {
 		switch (mode.toUpperCase()) {
 		case "OGGETTOLIST":
 			updateList(request);
+			request.setAttribute("otp", codice);
 			getServletContext().getRequestDispatcher("/acquisto/acquistomanager.jsp").forward(request, response);
 			break;
 			
@@ -56,15 +58,15 @@ public class AcquistoServlet extends HttpServlet {
 			try {
 				checkCodice = ((MagazzinoService) magazzinoService).checkCodice(id);
 				if(checkCodice == -1) {
-					 byte[] array = new byte[5]; // length is bounded by 7
-					 new Random().nextBytes(array);
-					 String codice = new String(array, Charset.forName("UTF-8"));
 					 CodiceDTO codicetoinsert = new CodiceDTO(codice);
-					 codiceService.insert(codicetoinsert);
+					if(((CodiceService) codiceService).getCodice(codice) == -1) {
+						 codiceService.insert(codicetoinsert);
+					}
 					 robotService.createCode(codice, id);
 					 ans = codiceService.update(codicetoinsert);
 					 request.setAttribute("ans", ans);
 					 updateList(request);
+					 request.setAttribute("otp", codice);
 					 getServletContext().getRequestDispatcher("/acquisto/acquistomanager.jsp").forward(request, response);
 				}
 			}

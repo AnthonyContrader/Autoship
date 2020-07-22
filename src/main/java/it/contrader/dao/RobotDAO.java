@@ -4,8 +4,10 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
-
+import it.contrader.model.Oggetto;
 import it.contrader.utils.ConnectionSingleton;
 
 public class RobotDAO {
@@ -13,7 +15,7 @@ public class RobotDAO {
 	private final String QUERY_CREATECODE = "UPDATE Magazzino SET otp=? WHERE id_oggetto=?";
 	private final String QUERY_REMOVECODE = "UPDATE Magazzino SET id_oggetto=NULL, otp=NULL WHERE otp=?";
 	private final String QUERY_GETOBJECT = "SELECT Oggetto.* FROM Oggetto JOIN Magazzino ON Magazzino.id_oggetto = Oggetto.id WHERE Magazzino.otp=?";
-	private final String QUERY_DELETEOBJECT = "UPDATE Oggetto SET cancellato=1 WHERE id=?";
+	private final String QUERY_DELETEOBJECT = "UPDATE Oggetto JOIN Magazzino ON Magazzino.id_oggetto = Oggetto.id SET Oggetto.cancellato=1 WHERE Magazzino.otp=?";
      
 	public boolean createCode(String codice, int oggetto) {
 		Connection connection = ConnectionSingleton.getInstance();
@@ -50,33 +52,12 @@ public class RobotDAO {
 		}
 	}
 	
-	private int getObject(String codice) {
-		Connection connection = ConnectionSingleton.getInstance();
-		try {
-			PreparedStatement preparedStatement = connection.prepareStatement(QUERY_GETOBJECT);
-			preparedStatement.setString(1, codice);
-			ResultSet resultSet = preparedStatement.executeQuery();
-			resultSet.next();
-			int id = resultSet.getInt("id");
-			if (id != 0) {
-				return id;
-			}
-			else {
-				return -1;
-			}
-
-		} catch (SQLException e) {
-			System.out.println("Errore: " + e);
-		}
-		return -1;
-	}
 	
 	private boolean removeObject(String codice) {
 		Connection connection = ConnectionSingleton.getInstance();
 		try {
-			int id = getObject(codice);
 			PreparedStatement preparedStatement = connection.prepareStatement(QUERY_DELETEOBJECT);
-			preparedStatement.setInt(1, id);
+			preparedStatement.setString(1, codice);
 			int n = preparedStatement.executeUpdate();
 			if (n != 0)
 				return true;
@@ -87,16 +68,11 @@ public class RobotDAO {
 		return false;
 	}
 	
-	public boolean spedizione(String codice) {
+	public void spedizione(String codice) {
 		
-		if(removeObject(codice) && removeCode(codice) == true) {
-			return true;
-		}
-		else {
-			return false;
-		}
-		
+		removeObject(codice);
+		removeCode(codice);
 	}
-	
-	
+		
 }
+

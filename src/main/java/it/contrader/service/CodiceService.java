@@ -54,6 +54,10 @@ public class CodiceService extends AbstractService<Codice,CodiceDTO>{
 	public String codice(int id) {
 		return codiceDAO.codice(id);
 	}
+	
+	public int getCodice(String otp) {
+		return codiceDAO.getCodice(otp);
+	}
 
 	
 }

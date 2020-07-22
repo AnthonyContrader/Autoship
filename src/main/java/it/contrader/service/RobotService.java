@@ -16,8 +16,8 @@ public class RobotService{
 		return robotDAO.createCode(codice, oggetto);
 	}
 	
-	public boolean spedisci(String codice) {
-		return robotDAO.spedizione(codice);
+	public void spedisci(String codice) {
+		robotDAO.spedizione(codice);
 	}
 	
 }

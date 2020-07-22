@@ -13,7 +13,7 @@
 
 <div class="navbar">
   <a  href="homeuser.jsp">Home</a>
-  <a class="active" href="AcquistoServlet?mode=oggettolist">Oggetto</a>
+  <a class="active" href="AcquistoServlet?mode=oggettolist&otp=${otp}">Oggetto</a>
   <a href="LogoutServlet" id="logout">Logout</a>
 </div>
 <div class="main">
@@ -35,7 +35,7 @@
 		<tr>
 			<td><%=o.getNome()%></td>
 			<td><%=o.getDimensione()%></td>
-			<td><a href=AcquistoServlet?mode=update&id=<%=o.getId()%>>Ordina</a>
+			<td><a href="AcquistoServlet?mode=update&otp=${otp}&id=<%=o.getId()%>">Ordina</a>
 			</td>
 			<%
 				}
