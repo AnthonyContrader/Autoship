@@ -18,7 +18,7 @@ public class OggettoDAO implements DAO<Oggetto> {
 	private final String QUERY_READ = "SELECT * FROM Oggetto WHERE id=?";
 	private final String QUERY_UPDATE = "UPDATE Oggetto SET nome=?, dimensione=? WHERE id=?";
 	private final String QUERY_DELETE = "UPDATE Oggetto SET cancellato=1 WHERE id=?";
-	private final String QUERY_ID = "SELECT id FROM Oggetto WHERE id=?";
+	private final String QUERY_ID = "SELECT id FROM Oggetto WHERE id=? AND cancellato=0";
 	private final String QUERY_NOME = "SELECT nome FROM Oggetto WHERE id=?";
 	private final String QUERY_DIMENSIONE = "SELECT dimensione FROM Oggetto WHERE id=?";
 	private final String QUERY_ALLINCELLORDERED = "SELECT * FROM Oggetto JOIN Magazzino ON Magazzino.id_oggetto = Oggetto.id WHERE Magazzino.otp IS NULL";

@@ -82,10 +82,19 @@ public class MagazzinoServlet extends HttpServlet {
 			} else {
 				id_oggetto = 0;
 			}
+			if(id_oggetto != 0 && ((OggettoService) serviceOggetto).id(id_oggetto) == -1) {
+				id_oggetto = 0;
+			}
 			int capienza = Integer.parseInt(request.getParameter("capienza").toString());
 			if(id_oggetto != 0) {
 				int dimensione = ((OggettoService) serviceOggetto).dimensione(id_oggetto);
 				if(capienza < dimensione) {
+					id_oggetto = 0;
+				}
+			}
+			if(id_oggetto > 0) {
+				int checkOggetto = ((MagazzinoService) service).checkOggetto(id_oggetto);
+				if(checkOggetto > 0) {
 					id_oggetto = 0;
 				}
 			}
@@ -110,6 +119,9 @@ public class MagazzinoServlet extends HttpServlet {
 			else {
 				id_oggetto = olddto.getId_oggetto();
 			}
+			if(id_oggetto != 0 && ((OggettoService) serviceOggetto).id(id_oggetto) == -1) {
+				id_oggetto = olddto.getId_oggetto();
+			}
 			if (!(request.getParameter("capienza").toString().trim().equals(""))) {
 				capienza = Integer.parseInt(request.getParameter("capienza"));
 			}
@@ -119,7 +131,7 @@ public class MagazzinoServlet extends HttpServlet {
 			if(id_oggetto != 0) {
 				int dimensione = ((OggettoService) serviceOggetto).dimensione(id_oggetto);
 				if(capienza < dimensione) {
-					id_oggetto = 0;
+					id_oggetto = olddto.getId_oggetto();
 				}
 			}
 			int checkOggetto = ((MagazzinoService) service).checkOggetto(id_oggetto);
