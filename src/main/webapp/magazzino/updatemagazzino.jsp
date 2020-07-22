@@ -51,9 +51,15 @@
     <div class="col-25">
       <label for="idoggetto">Oggetto</label>
     </div>
-    <div class="col-75">
-      <input type="number" id="id_oggetto" name="id_oggetto" placeholder="inserisci id oggetto">
-    </div>
+    <select id="id_oggetto" name="id_oggetto">
+	    	<% 
+	    		for(OggettoDTO o : oggetti) {
+	    	%>
+	  			<option value=<%=o.getId()%>><%=o.getNome()%></option>
+		 	<%
+		 		} 
+		 	%> 
+		</select>
   </div>
   <div class="row">
     <div class="col-25">
