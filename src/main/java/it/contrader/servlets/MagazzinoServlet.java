@@ -37,9 +37,15 @@ public class MagazzinoServlet extends HttpServlet {
 		request.setAttribute("list", listDTO);
 	}
 
-	public void getOggetti(HttpServletRequest request) {
+	public void getOggettiNotInCell(HttpServletRequest request) {
 		Service<OggettoDTO> service = new OggettoService();
 		List<OggettoDTO> oggettiDTO = ((OggettoService) service).getNotInCell();
+		request.setAttribute("oggetti", oggettiDTO);
+	}
+	
+	public void getOggetti(HttpServletRequest request) {
+		Service<OggettoDTO> service = new OggettoService();
+		List<OggettoDTO> oggettiDTO = ((OggettoService) service).getAllIn();
 		request.setAttribute("oggetti", oggettiDTO);
 	}
 
@@ -56,11 +62,12 @@ public class MagazzinoServlet extends HttpServlet {
 
 		case "MAGAZZINOLIST":
 			updateList(request);
+			getOggetti(request);
 			getServletContext().getRequestDispatcher("/magazzino/magazzinomanager.jsp").forward(request, response);
 			break;
 
 		case "READ":
-			getOggetti(request);
+			getOggettiNotInCell(request);
 			id = Integer.parseInt(request.getParameter("id"));
 			dto = service.read(id);
 			request.setAttribute("dto", dto);
@@ -102,6 +109,7 @@ public class MagazzinoServlet extends HttpServlet {
 			ans = service.insert(dto);
 			request.setAttribute("ans", ans);
 			updateList(request);
+			getOggetti(request);
 			getServletContext().getRequestDispatcher("/magazzino/magazzinomanager.jsp").forward(request, response);
 			break;
 

@@ -4,6 +4,7 @@ public class OggettoDTO {
 private int id;
 private String nome;
 private int dimensione;
+private int cancellato;
 private boolean cella;
 
 public OggettoDTO(String nome, int dimensione){
@@ -45,6 +46,13 @@ public int getDimensione() {
 }
 public void setDimensione(int dimensione) {
 	this.dimensione = dimensione;
+}
+
+public int getCancellato() {
+	return cancellato;
+}
+public void setCancellato(int cancellato) {
+	this.cancellato = cancellato;
 }
 
 

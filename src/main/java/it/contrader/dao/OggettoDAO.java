@@ -13,7 +13,8 @@ import it.contrader.utils.ConnectionSingleton;
 
 public class OggettoDAO implements DAO<Oggetto> {
 
-	private final String QUERY_ALL = "SELECT * FROM Oggetto WHERE cancellato=0";
+	private final String QUERY_ALL = "SELECT * FROM Oggetto";
+	private final String QUERY_ALLIN = "SELECT * FROM Oggetto WHERE cancellato=0";
 	private final String QUERY_CREATE = "INSERT INTO Oggetto (nome, dimensione,cancellato) VALUES (?,?,0)";
 	private final String QUERY_READ = "SELECT * FROM Oggetto WHERE id=?";
 	private final String QUERY_UPDATE = "UPDATE Oggetto SET nome=?, dimensione=? WHERE id=?";
@@ -34,6 +35,27 @@ public class OggettoDAO implements DAO<Oggetto> {
 		try {
 			Statement statement = connection.createStatement();
 			ResultSet resultSet = statement.executeQuery(QUERY_ALL);
+			Oggetto oggetto;
+			while (resultSet.next()) {
+				int id = resultSet.getInt("id");
+				String nome = resultSet.getString("nome");
+				int dimensione = resultSet.getInt("dimensione");
+				oggetto = new Oggetto(nome, dimensione);
+				oggetto.setId(id);
+				usersList.add(oggetto);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return usersList;
+	}
+	
+	public List<Oggetto> getAllIn() {
+		List<Oggetto> usersList = new ArrayList<>();
+		Connection connection = ConnectionSingleton.getInstance();
+		try {
+			Statement statement = connection.createStatement();
+			ResultSet resultSet = statement.executeQuery(QUERY_ALLIN);
 			Oggetto oggetto;
 			while (resultSet.next()) {
 				int id = resultSet.getInt("id");

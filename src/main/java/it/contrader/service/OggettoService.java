@@ -22,6 +22,11 @@ public class OggettoService extends AbstractService<Oggetto,OggettoDTO>{
 		// Ottiene una lista di entit� e le restituisce convertendole in DTO
 		return oggettoConverter.toDTOList(oggettoDAO.getAll());
 	}
+	
+	public List<OggettoDTO> getAllIn() {
+		// Ottiene una lista di entit� e le restituisce convertendole in DTO
+		return oggettoConverter.toDTOList(oggettoDAO.getAllIn());
+	}
 
 
 	public OggettoDTO read(int id) {

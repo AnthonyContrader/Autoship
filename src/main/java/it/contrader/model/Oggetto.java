@@ -4,9 +4,17 @@ public class Oggetto {
 private int id;
 private String nome;
 private int dimensione;
+private int cancellato;
+
 public Oggetto(String nome, int dimensione){
 	this.nome = nome;
 	this.dimensione = dimensione; 
+}
+
+public Oggetto(String nome, int dimensione, int cancellato){
+	this.nome = nome;
+	this.dimensione = dimensione;
+	this.cancellato = cancellato;
 }
 
 public Oggetto(int id, String nome, int dimensione){
@@ -32,6 +40,13 @@ public int getDimensione() {
 }
 public void setDimensione(int dimensione) {
 	this.dimensione = dimensione;
+}
+
+public int getCancellato() {
+	return cancellato;
+}
+public void setCancellato(int cancellato) {
+	this.cancellato = cancellato;
 }
 
 

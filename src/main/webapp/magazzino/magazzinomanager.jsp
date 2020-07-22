@@ -22,7 +22,7 @@
 <div class="main">
 	<%
 		List<MagazzinoDTO> list = (List<MagazzinoDTO>) request.getAttribute("list");
-		List<OggettoDTO> listo = (List<OggettoDTO>) request.getAttribute("list");
+		List<OggettoDTO> listo = (List<OggettoDTO>) request.getAttribute("oggetti");
 	%>
 
 <br>
@@ -79,11 +79,15 @@
       <label for="id_oggetto">Oggetto</label>
     </div>
     <div class="col-75">
-    <select id="type" name="usertype">
-    <% for(OggettoDTO o : listo) {%>
-  				<option value="<%o.getId();%>" id="id_oggetto" name="id_oggetto"><%o.getNome();%></option>
- <%} %>
-			</select>
+	   <select id="id_oggetto" name="id_oggetto">
+	    	<% 
+	    		for(OggettoDTO o : listo) {
+	    	%>
+	  			<option value=<%=o.getId()%>><%=o.getNome()%></option>
+		 	<%
+		 		} 
+		 	%> 
+		</select>
      </div>
   </div>
   <div class="row">
