@@ -18,7 +18,6 @@ private final String QUERY_READ = "SELECT * FROM Codice WHERE id=?";
 private final String QUERY_UPDATE = "UPDATE Codice SET id=?, otp=?";
 private final String QUERY_DELETE = "UPDATE Codice SET cancellato=1 WHERE id=?";
 private final String QUERY_ID = "SELECT id FROM Codice WHERE id=? AND cancellato=0";
-private final String QUERY_CODICE = "SELECT otp FROM Codice WHERE otp=? AND cancellato=0";
 
 public CodiceDAO() {
 	

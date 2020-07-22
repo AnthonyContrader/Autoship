@@ -134,6 +134,13 @@ public class MagazzinoServlet extends HttpServlet {
 					id_oggetto = olddto.getId_oggetto();
 				}
 			}
+			
+			if((id_oggetto == 0 && olddto.getId_oggetto() != 0) || (id_oggetto == olddto.getId_oggetto())) {
+				int dimensione = ((OggettoService) serviceOggetto).dimensione(olddto.getId_oggetto());
+				if(capienza < dimensione) {
+					capienza = olddto.getCapienza();
+				}
+			}
 			int checkOggetto = ((MagazzinoService) service).checkOggetto(id_oggetto);
 			if(checkOggetto > 0) {
 				id_oggetto = olddto.getId_oggetto();
