@@ -87,6 +87,7 @@
 		 	<%
 		 		} 
 		 	%> 
+		 	<option value="">Vuoto</option>
 		</select>
      </div>
   </div>

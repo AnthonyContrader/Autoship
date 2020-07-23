@@ -52,6 +52,7 @@
       <label for="idoggetto">Oggetto</label>
     </div>
     <select id="id_oggetto" name="id_oggetto">
+    		<option value="">Nessuna Modifica</option>
 	    	<% 
 	    		for(OggettoDTO o : oggetti) {
 	    	%>
@@ -59,6 +60,7 @@
 		 	<%
 		 		} 
 		 	%> 
+		 	<option value="0">Vuoto</option>
 		</select>
   </div>
   <div class="row">
