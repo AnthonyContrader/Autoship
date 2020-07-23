@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta charset="ISO-8859-1">
-<title>Home user</title>
+<title>Home User</title>
 <link href="css/vittoriostyle.css" rel="stylesheet">
 </head>
 <body>
