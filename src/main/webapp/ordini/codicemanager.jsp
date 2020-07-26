@@ -22,7 +22,7 @@
 
 <br>
 
-	<table>
+	<table class="tableRead">
 		<tr>
 			<th>Codice</th>
 			<th></th>

@@ -25,7 +25,7 @@
 
 <br>
 
-	<table>
+	<table class=tableInsert>
 		<tr>
 			<th>Username</th>
 			<th>Password</th>

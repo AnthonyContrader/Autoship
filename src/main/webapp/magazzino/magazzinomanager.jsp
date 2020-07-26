@@ -27,7 +27,7 @@
 
 <br>
 
-	<table>
+	<table class="tableInsert">
 		<tr>
 			<th>Oggetto</th>
 			<th>Capienza</th>

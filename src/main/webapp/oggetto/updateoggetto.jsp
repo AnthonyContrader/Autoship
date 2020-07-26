@@ -23,7 +23,7 @@
 <%OggettoDTO m = (OggettoDTO) request.getAttribute("dto");%>
 
 
-<form id="floatright" action="OggettoServlet?mode=update&id=<%=m.getId()%>" method="post">
+<form id="center" action="OggettoServlet?mode=update&id=<%=m.getId()%>" method="post">
    <div class="row">
     <div class="col-25">
       <label for="nome">Nome</label>

@@ -25,28 +25,7 @@
 
 <br>
 
-	<table>
-		<tr>
-			<th>Id</th>
-			<th>Nome</th>
-			<th>Dimensione</th>
-		</tr>
-		<%
-		if(oggetti!=null){
-			for (OggettoDTO o : oggetti) {
-		%>
-		<tr>
-			<td><%=o.getId()%></td>
-			<td><%=o.getNome()%></td>
-			<td><%=o.getDimensione()%></td>
-		</tr>
-		<%
-			}}
-		%>
-	</table>
-
-
-<form id="floatright" action="MagazzinoServlet?mode=update&id=<%=m.getId()%>" method="post">
+<form id="center" action="MagazzinoServlet?mode=update&id=<%=m.getId()%>" method="post">
   <div class="row">
     <div class="col-25">
       <label for="idoggetto">Oggetto</label>

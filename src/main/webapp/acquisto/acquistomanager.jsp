@@ -23,7 +23,7 @@
 
 <br>
 
-	<table>
+	<table class="tableRead">
 		<tr>
 			<th>Oggetto</th>
 			<th>Dimensione</th>
