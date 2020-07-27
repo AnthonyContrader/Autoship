@@ -40,18 +40,24 @@
 			type="text" id="pass" name="password" value=<%=u.getPassword()%>> 
     </div>
   </div>
-  <div class="row">
-    <div class="col-25">
-      <label for="type">Usertype</label>
-    </div>
-   		 <div class="col-75">
- 			<select id="type" name="usertype">
-  				<option value="ADMIN" <%if(u.getUsertype().equals("ADMIN")) {%>selected<%}%>>ADMIN</option>
-  				<option value="USER" <%if(u.getUsertype().equals("USER")) {%>selected<%}%>>USER</option>
-  				<option value="CORRIERE" <%if(u.getUsertype().equals("CORRIERE")) {%>selected<%}%>>CORRIERE</option>
-			</select>
-    	</div>
-  </div>
+  	<%
+		if (!(u.getUsertype().equalsIgnoreCase("ADMIN"))) {
+	%>
+		<div class="row">
+		    <div class="col-25">
+		      <label for="type">Usertype</label>
+		    </div>
+			<div class="col-75">
+	 			<select id="type" name="usertype">
+	  				<option value="ADMIN" <%if(u.getUsertype().equals("ADMIN")) {%>selected<%}%>>ADMIN</option>
+	  				<option value="USER" <%if(u.getUsertype().equals("USER")) {%>selected<%}%>>USER</option>
+	  				<option value="CORRIERE" <%if(u.getUsertype().equals("CORRIERE")) {%>selected<%}%>>CORRIERE</option>
+				</select>
+	    	</div>
+	    </div>
+	    <%
+			}
+		%>
       <button type="submit" >Edit</button>
 </form>
 
