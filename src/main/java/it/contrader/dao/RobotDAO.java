@@ -52,6 +52,27 @@ public class RobotDAO {
 		}
 	}
 	
+	private int getObject(int codice) {
+		Connection connection = ConnectionSingleton.getInstance();
+		try {
+			PreparedStatement preparedStatement = connection.prepareStatement(QUERY_GETOBJECT);
+			preparedStatement.setInt(1, codice);
+			ResultSet resultSet = preparedStatement.executeQuery();
+			resultSet.next();
+			int id = resultSet.getInt("id");
+			if (id != 0) {
+				return id;
+			}
+			else {
+				return -1;
+			}
+
+		} catch (SQLException e) {
+			System.out.println("Errore: " + e);
+		}
+		return -1;
+	}
+	
 	
 	private boolean removeObject(String codice) {
 		Connection connection = ConnectionSingleton.getInstance();
