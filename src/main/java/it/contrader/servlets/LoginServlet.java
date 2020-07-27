@@ -65,7 +65,7 @@ public class LoginServlet extends HttpServlet {
 				while(((CodiceService) codiceService).getCodice(codice) == 1) {
 					codice = Integer.toString((int)(Math.random() * (5000 - 1000)));
 				}
-				request.setAttribute("otp", codice);
+				session.setAttribute("otp", codice);
 				getServletContext().getRequestDispatcher("/homeuser.jsp").forward(request, response);
 				break;
 				

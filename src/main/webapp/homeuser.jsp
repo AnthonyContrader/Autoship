@@ -14,7 +14,7 @@
 
 <div class="navbar">
 <div class="navbar">
-  <a class="active" href="homeuser.jsp">Home</a>
+  <a class="active" href="homeuser.jsp?otp=${otp}">Home</a>
   <a href="AcquistoServlet?mode=oggettolist&otp=${otp}">Acquista</a>
   <a href="LogoutServlet" id="logout">Logout</a>
 </div>
