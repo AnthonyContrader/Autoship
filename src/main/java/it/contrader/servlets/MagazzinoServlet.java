@@ -64,6 +64,13 @@ public class MagazzinoServlet extends HttpServlet {
 			getOggettiNotInCell(request);
 			id = Integer.parseInt(request.getParameter("id"));
 			dto = service.read(id);
+			String nomeOggetto = ((OggettoService) serviceOggetto).nome(dto.getId_oggetto());
+			if(nomeOggetto != null) {
+				dto.setNome_oggetto(nomeOggetto);
+			}
+			else {
+				dto.setNome_oggetto("Vuoto");
+			}
 			request.setAttribute("dto", dto);
 
 			if (request.getParameter("update") == null) {

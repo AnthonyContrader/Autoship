@@ -20,16 +20,16 @@
 <br>
 <div class="main">
 
-<%OggettoDTO m = (OggettoDTO) request.getAttribute("dto");%>
+<%OggettoDTO o = (OggettoDTO) request.getAttribute("dto");%>
 
 
-<form id="center" action="OggettoServlet?mode=update&id=<%=m.getId()%>" method="post">
+<form id="center" action="OggettoServlet?mode=update&id=<%=o.getId()%>" method="post">
    <div class="row">
     <div class="col-25">
       <label for="nome">Nome</label>
     </div>
     <div class="col-75">
-      <input type="text" id="nome" name="nome" placeholder="inserisci nome oggetto">
+      <input type="text" id="nome" name="nome" value="<%=o.getNome()%>">
     </div>
   </div>
        <div class="row">
@@ -37,7 +37,7 @@
       <label for="nome">Dimensione</label>
     </div>
     <div class="col-75">
-      <input type="number" id="dimensione" name="dimensione" placeholder="inserisci dimensione oggetto">
+      <input type="number" id="dimensione" name="dimensione" value="<%=o.getDimensione()%>">
     </div>
   </div>
       <button type="submit" >Edit</button>
