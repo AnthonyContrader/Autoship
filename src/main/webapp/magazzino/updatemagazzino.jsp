@@ -31,23 +31,24 @@
       <label for="id_oggetto">Oggetto</label>
     </div>
     <div class="col-75">
-    <select id="id_oggetto" name="id_oggetto">
-    	<%
-			if (!(m.getNome_oggetto().equalsIgnoreCase("Vuoto"))) {
-		%>
-			<option value=<%=m.getId_oggetto()%>><%=m.getNome_oggetto()%></option>
-		<%
-			}
-		%>
-	    <% 
-	   		for(OggettoDTO o : oggetti) {
-	   	%>
-	 		<option value=<%=o.getId()%>><%=o.getNome()%></option>
-	 	<%
-	 		} 
-	    %> 
-		<option value="0">Vuoto</option>
-		</select>
+	    <select id="id_oggetto" name="id_oggetto">
+	    	<%
+				if (!(m.getNome_oggetto().equalsIgnoreCase("Vuoto"))) {
+			%>
+				<option value=<%=m.getId_oggetto()%>><%=m.getNome_oggetto()%></option>
+			<%
+				}
+			%>
+		    <% 
+		   		for(OggettoDTO o : oggetti) {
+		   	%>
+		 		<option value=<%=o.getId()%>><%=o.getNome()%></option>
+		 	<%
+		 		} 
+		    %> 
+			<option value="0">Vuoto</option>
+			</select>
+		</div>
   </div>
   <div class="row">
     <div class="col-25">
