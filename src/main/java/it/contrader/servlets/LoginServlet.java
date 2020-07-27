@@ -42,41 +42,46 @@ public class LoginServlet extends HttpServlet {
 		if (request != null) {
 			String username = request.getParameter("username").toString();
 			String password = request.getParameter("password").toString();
+			if(!(username.trim().equals("")) && !(password.trim().equals(""))) {
 			//come nei vecchi controller, invoca il service
-			UserDTO dto = service.login(username, password);
-			if (dto != null)
-				//se il login ha funzionato, salva l'utente nella sessione
-				session.setAttribute("user", dto);
-			else
-				//altrimenti torna alla pagina di login
-				getServletContext().getRequestDispatcher("/index.jsp").forward(request, response);
-			
+				UserDTO dto = service.login(username, password);
+				if (dto != null)
+					
+						//se il login ha funzionato, salva l'utente nella sessione
+						session.setAttribute("user", dto);
+					else
+					//altrimenti torna alla pagina di login
+						getServletContext().getRequestDispatcher("/index.jsp").forward(request, response);			
 			//esegue una switch cae in base allo usertype per il reindirizzamento
-			switch (dto.getUsertype().toUpperCase()) {
-			case "ADMIN":
-				//questo metodo reindirizza alla JSP tramite URL con una request e una response
-				getServletContext().getRequestDispatcher("/homeadmin.jsp").forward(request, response);
-				break;
-				
-			case "USER":
-				byte[] array = new byte[5]; // length is bounded by 7
-				new Random().nextBytes(array);
-				String codice = Integer.toString((int)(Math.random() * (5000 - 1000)));
-				while(((CodiceService) codiceService).getCodice(codice) == 1) {
-					codice = Integer.toString((int)(Math.random() * (5000 - 1000)));
+				switch (dto.getUsertype().toUpperCase()) {
+				case "ADMIN":
+					//questo metodo reindirizza alla JSP tramite URL con una request e una response
+					getServletContext().getRequestDispatcher("/homeadmin.jsp").forward(request, response);
+					break;
+					
+				case "USER":
+					byte[] array = new byte[5]; // length is bounded by 7
+					new Random().nextBytes(array);
+					String codice = Integer.toString((int)(Math.random() * (5000 - 1000)));
+					while(((CodiceService) codiceService).getCodice(codice) == 1) {
+						codice = Integer.toString((int)(Math.random() * (5000 - 1000)));
+					}
+					session.setAttribute("otp", codice);
+					getServletContext().getRequestDispatcher("/homeuser.jsp").forward(request, response);
+					break;
+					
+				case "CORRIERE":
+					getServletContext().getRequestDispatcher("/homecorriere.jsp").forward(request, response);
+					break;
+					
+				default:
+					//di default rimanda al login
+					getServletContext().getRequestDispatcher("/index.jsp").forward(request, response);
+					break;
 				}
-				session.setAttribute("otp", codice);
-				getServletContext().getRequestDispatcher("/homeuser.jsp").forward(request, response);
-				break;
-				
-			case "CORRIERE":
-				getServletContext().getRequestDispatcher("/homecorriere.jsp").forward(request, response);
-				break;
-				
-			default:
-				//di default rimanda al login
+			}
+			else {
 				getServletContext().getRequestDispatcher("/index.jsp").forward(request, response);
-				break;
 			}
 		}
 	}
