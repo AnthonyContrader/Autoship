@@ -50,6 +50,11 @@ public class MagazzinoService extends AbstractService <Magazzino, MagazzinoDTO>{
 		return magazzinoDAO.delete(id);
 	}
 	
+	public boolean reinsert(int id) {
+		// Questo mtodo chiama direttamente il DAO
+		return magazzinoDAO.reinsert(id);
+	}
+	
 	public int checkOggetto(int id) {
 		return magazzinoDAO.checkOggetto(id);
 	}

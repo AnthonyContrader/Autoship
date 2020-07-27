@@ -9,11 +9,12 @@ import it.contrader.utils.ConnectionSingleton;
 import it.contrader.model.Magazzino;
 
 public class MagazzinoDAO {
-	private final String QUERY_ALL = "SELECT * FROM Magazzino WHERE cancellato=0";
+	private final String QUERY_ALL = "SELECT * FROM Magazzino";
 	private final String QUERY_CREATE = "INSERT INTO Magazzino (id_oggetto, capienza,cancellato) VALUES (?,?,0)";
 	private final String QUERY_READ = "SELECT * FROM Magazzino WHERE id=?";
 	private final String QUERY_UPDATE = "UPDATE Magazzino SET id_oggetto=?, capienza=? WHERE id=?";
 	private final String QUERY_DELETE = "UPDATE Magazzino SET cancellato=1 WHERE id=?";
+	private final String QUERY_REINSERT = "UPDATE Magazzino SET cancellato=0 WHERE id=?";
 	private final String QUERY_OGGETTO = "SELECT id_oggetto FROM Magazzino WHERE id_oggetto=?";
 	private final String QUERY_REMOVEOGGETTO = "UPDATE Magazzino SET id_oggetto=NULL WHERE id_oggetto=?";	
 	
@@ -33,7 +34,8 @@ public class MagazzinoDAO {
 				int oggetto = resultSet.getInt("id_oggetto");
 				int capienza = resultSet.getInt("capienza");
 				String otp = resultSet.getString("otp");
-				Magazzino = new Magazzino(oggetto, capienza, otp);
+				int cancellato = resultSet.getInt("cancellato");
+				Magazzino = new Magazzino(oggetto, capienza, otp, cancellato);
 				Magazzino.setId(id);
 				MagazzinosList.add(Magazzino);
 			}
@@ -77,7 +79,8 @@ public class MagazzinoDAO {
 			oggetto = resultSet.getInt("id_oggetto");
 			capienza = resultSet.getInt("capienza");
 			otp = resultSet.getString("otp");
-			Magazzino magazzino = new Magazzino(oggetto, capienza, otp);
+			int cancellato = resultSet.getInt("cancellato");
+			Magazzino magazzino = new Magazzino(oggetto, capienza, otp, cancellato);
 			magazzino.setId(resultSet.getInt("id"));
 
 			return magazzino;
@@ -136,6 +139,20 @@ public class MagazzinoDAO {
 		Connection connection = ConnectionSingleton.getInstance();
 		try {
 			PreparedStatement preparedStatement = connection.prepareStatement(QUERY_DELETE);
+			preparedStatement.setInt(1, id);
+			int n = preparedStatement.executeUpdate();
+			if (n != 0)
+				return true;
+
+		} catch (SQLException e) {
+		}
+		return false;
+	}
+	
+	public boolean reinsert(int id) {
+		Connection connection = ConnectionSingleton.getInstance();
+		try {
+			PreparedStatement preparedStatement = connection.prepareStatement(QUERY_REINSERT);
 			preparedStatement.setInt(1, id);
 			int n = preparedStatement.executeUpdate();
 			if (n != 0)

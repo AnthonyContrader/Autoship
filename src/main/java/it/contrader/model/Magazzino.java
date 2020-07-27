@@ -5,19 +5,21 @@ private int id;
 private int id_oggetto;
 private int capienza;
 private String otp;
-private boolean cancellato;
+private int cancellato;
 
-public Magazzino(int id_oggetto, int capienza, String otp) {
+public Magazzino(int id_oggetto, int capienza, String otp, int cancellato) {
 	this.id_oggetto= id_oggetto;
 	this.capienza= capienza;
 	this.otp = otp;	
+	this.cancellato = cancellato;
 }
 
-public Magazzino(int id, int id_oggetto, int capienza, String otp) {
+public Magazzino(int id, int id_oggetto, int capienza, String otp,int cancellato) {
 	this.id = id;
 	this.id_oggetto= id_oggetto;
 	this.capienza= capienza;
-	this.otp = otp;	
+	this.otp = otp;
+	this.cancellato = cancellato;
 }
 
 
@@ -47,6 +49,13 @@ public String getOtp () {
 
 public void setOtp(String otp) {
 	this.otp = otp;
+}
+
+public int getCancellato() {
+	return cancellato;
+}
+public void setCancellato(int cancellato) {
+	this.cancellato = cancellato;
 }
 
 }

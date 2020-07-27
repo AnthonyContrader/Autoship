@@ -106,7 +106,7 @@ public class MagazzinoServlet extends HttpServlet {
 					id_oggetto = 0;
 				}
 			}
-			dto = new MagazzinoDTO(id_oggetto, capienza, null);
+			dto = new MagazzinoDTO(id_oggetto, capienza, null, 0);
 			ans = service.insert(dto);
 			request.setAttribute("ans", ans);
 			updateList(request);
@@ -154,7 +154,7 @@ public class MagazzinoServlet extends HttpServlet {
 			if(checkOggetto > 0) {
 				id_oggetto = olddto.getId_oggetto();
 			}
-			dto = new MagazzinoDTO(id, id_oggetto, capienza, null);
+			dto = new MagazzinoDTO(id, id_oggetto, capienza, null, 0);
 			ans = service.update(dto);
 			updateList(request);
 			getOggettiNotInCell(request);
@@ -164,6 +164,15 @@ public class MagazzinoServlet extends HttpServlet {
 		case "DELETE":
 			id = Integer.parseInt(request.getParameter("id"));
 			ans = service.delete(id);
+			request.setAttribute("ans", ans);
+			updateList(request);
+			getOggettiNotInCell(request);
+			getServletContext().getRequestDispatcher("/magazzino/magazzinomanager.jsp").forward(request, response);
+			break;
+			
+		case "REINSERT":
+			id = Integer.parseInt(request.getParameter("id"));
+			ans = ((MagazzinoService) service).reinsert(id);
 			request.setAttribute("ans", ans);
 			updateList(request);
 			getOggettiNotInCell(request);

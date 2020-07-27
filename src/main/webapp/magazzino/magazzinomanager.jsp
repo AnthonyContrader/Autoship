@@ -41,30 +41,36 @@
 			<td><%=m.getNome_oggetto()%></td>
 			<td><%=m.getCapienza()%></td>
 			<%
-				if(m.getOtp()==null){
+				if(m.getCancellato() == 0){
+					if(m.getOtp()==null){
 			%>
 			<td><a href=MagazzinoServlet?mode=read&update=true&id=<%=m.getId()%>>Edit</a>
 			</td>
 			<%
-			}
-				else{
+					}
+					else{
 			%>
 			<td></td>
 			<%
-				}
-				if(!(m.getNome_oggetto().equalsIgnoreCase("Vuoto"))) {
+					}
+					if(!(m.getNome_oggetto().equalsIgnoreCase("Vuoto"))) {
 			%>
 				<td>
 			<%
+					}
+					else{
+			%>
+				<td><a href=MagazzinoServlet?mode=delete&id=<%=m.getId()%>>Delete</a></td>
+			<%
+					}
 				}
 				else{
 			%>
-				<td><a href=MagazzinoServlet?mode=delete&id=<%=m.getId()%>>Delete</a>
+				<td><a href=MagazzinoServlet?mode=reinsert&id=<%=m.getId()%>>Disabled</a></td>
+				<td></td>
 			<%
 				}
 			%>
-			</td>
-
 		</tr>
 		<%
 			}

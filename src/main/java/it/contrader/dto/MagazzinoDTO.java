@@ -5,20 +5,22 @@ private int id;
 private int id_oggetto;
 private int capienza;
 private String otp;
+private int cancellato;
 private String nome_oggetto;
 
-public MagazzinoDTO(int id_oggetto, int capienza, String otp) {
+public MagazzinoDTO(int id_oggetto, int capienza, String otp, int cancellato) {
 	this.id_oggetto= id_oggetto;
 	this.capienza= capienza;
 	this.otp = otp;
-	
+	this.cancellato = cancellato;
 }
 
-public MagazzinoDTO(int id, int id_oggetto, int capienza, String otp) {
+public MagazzinoDTO(int id, int id_oggetto, int capienza, String otp, int cancellato) {
 	this.id = id;
 	this.id_oggetto= id_oggetto;
 	this.capienza= capienza;
 	this.otp = otp;
+	this.cancellato = cancellato;
 	
 }
 
@@ -47,6 +49,13 @@ public String getOtp() {
 
 public void setOtp(String otp) {
 	this.otp = otp;
+}
+
+public int getCancellato() {
+	return cancellato;
+}
+public void setCancellato(int cancellato) {
+	this.cancellato = cancellato;
 }
 
 public String getNome_oggetto() {
