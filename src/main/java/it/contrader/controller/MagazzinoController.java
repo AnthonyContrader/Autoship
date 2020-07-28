@@ -73,7 +73,14 @@ public class MagazzinoController {
 	@PostMapping("/update")
 	public String update(HttpServletRequest request, @RequestParam("id") Long id, @RequestParam("id_oggetto") Long id_oggetto,
 			@RequestParam("capienza") int capienza) {
-
+		OggettoDTO oggetto;
+		if(id_oggetto != 0) {
+			oggetto = oggettoService.read(id_oggetto);
+			int dimensione = oggetto.getDimensione();
+			if(capienza < dimensione) {
+				id_oggetto = (long) 0;
+			}
+		}
 		MagazzinoDTO dto = new MagazzinoDTO();
 		dto.setId(id);
 		dto.setCapienza(capienza);
@@ -81,7 +88,7 @@ public class MagazzinoController {
 			dto.setOggetto(null);
 		}
 		else {
-			OggettoDTO oggetto = oggettoService.read(id_oggetto);
+			oggetto = oggettoService.read(id_oggetto);
 			dto.setOggetto(oggettoConverter.toEntity(oggetto));
 		}
 		dto.setCancellato(false);
@@ -93,13 +100,21 @@ public class MagazzinoController {
 	
 	@PostMapping("/insert")
 	public String insert(HttpServletRequest request, @RequestParam("capienza") int capienza, @RequestParam("id_oggetto") Long id_oggetto) {		
+		OggettoDTO oggetto;
+		if(id_oggetto != 0) {
+			oggetto = oggettoService.read(id_oggetto);
+			int dimensione = oggetto.getDimensione();
+			if(capienza < dimensione) {
+				id_oggetto = (long) 0;
+			}
+		}
 		MagazzinoDTO dto = new MagazzinoDTO();
 		dto.setCapienza(capienza);		
 		if(id_oggetto == 0) {
 			dto.setOggetto(null);
 		}
 		else {
-			OggettoDTO oggetto = oggettoService.read(id_oggetto);
+			oggetto = oggettoService.read(id_oggetto);
 			dto.setOggetto(oggettoConverter.toEntity(oggetto));
 		}
 		dto.setCancellato(false);
