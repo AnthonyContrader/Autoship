@@ -1,11 +1,15 @@
 package it.contrader.model;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
+
+import org.hibernate.annotations.Cascade;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -27,7 +31,9 @@ public class Magazzino {
 	
 	private int capienza;
 	
-	private String otp;
+	@ManyToOne
+	@JoinColumn(name = "id_codice", referencedColumnName = "id")
+	private Codice codice;
 	
 	private boolean cancellato;
 }

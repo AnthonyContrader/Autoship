@@ -10,7 +10,7 @@ public class MagazzinoConverter extends AbstractConverter<Magazzino, MagazzinoDT
 	public Magazzino toEntity(MagazzinoDTO magazzinoDTO) {
 		Magazzino magazzino = null;
 		if (magazzinoDTO != null) {
-			magazzino = new Magazzino(magazzinoDTO.getId(), magazzinoDTO.getOggetto(), magazzinoDTO.getCapienza(), magazzinoDTO.getOtp(),magazzinoDTO.isCancellato());
+			magazzino = new Magazzino(magazzinoDTO.getId(), magazzinoDTO.getOggetto(), magazzinoDTO.getCapienza(), magazzinoDTO.getCodice(),magazzinoDTO.isCancellato());
 		}
 		return magazzino ;
 	}
@@ -19,7 +19,7 @@ public class MagazzinoConverter extends AbstractConverter<Magazzino, MagazzinoDT
 	public MagazzinoDTO toDTO(Magazzino magazzino ) {
 		MagazzinoDTO magazzinoDTO = null;
 		if (magazzino != null) {
-			magazzinoDTO = new MagazzinoDTO(magazzino.getId(), magazzino.getOggetto(), magazzino.getCapienza(), magazzino.getOtp(), magazzino.isCancellato());
+			magazzinoDTO = new MagazzinoDTO(magazzino.getId(), magazzino.getOggetto(), magazzino.getCapienza(), magazzino.getCodice(), magazzino.isCancellato());
 
 		}
 		return magazzinoDTO;

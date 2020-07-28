@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import it.contrader.converter.MagazzinoConverter;
 import it.contrader.dao.MagazzinoRepository;
 import it.contrader.dto.MagazzinoDTO;
+import it.contrader.model.Codice;
 import it.contrader.model.Magazzino;
 import it.contrader.model.Oggetto;
 
@@ -24,12 +25,12 @@ public class MagazzinoService extends AbstractService<Magazzino, MagazzinoDTO>{
 		return converter.toDTO(repository.findByOggetto(oggetto));
 	}
 	
-	public MagazzinoDTO findByOtp(String otp) {
-		return converter.toDTO(repository.findByOtp(otp));
+	public MagazzinoDTO findByCodice(Codice codice) {
+		return converter.toDTO(repository.findByCodice(codice));
 	}
 	
-	public List<MagazzinoDTO> findMagazzinosByOtp(String otp){
-		return converter.toDTOList(repository.findMagazzinosByOtp(otp));
+	public List<MagazzinoDTO> findMagazzinosByCodice(Codice codice){
+		return converter.toDTOList(repository.findMagazzinosByCodice(codice));
 	}
 
 }

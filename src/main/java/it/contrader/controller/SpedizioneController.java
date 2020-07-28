@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import it.contrader.converter.CodiceConverter;
 import it.contrader.converter.OggettoConverter;
 import it.contrader.dto.CodiceDTO;
 import it.contrader.dto.MagazzinoDTO;
@@ -34,6 +35,9 @@ public class SpedizioneController {
 	@Autowired
 	private OggettoConverter oggettoConverter;
 	
+	@Autowired
+	private CodiceConverter codiceConverter;
+	
 	@GetMapping("/getall")
 	public String getAll(HttpServletRequest request) {
 		setAll(request);
@@ -44,11 +48,11 @@ public class SpedizioneController {
 	public String delete(HttpServletRequest request, @RequestParam("id") Long id) {
 		CodiceDTO codice = service.read(id);
 		String otpCodice = codice.getOtp();
-		List<MagazzinoDTO> magazzinoList = magazzinoService.findMagazzinosByOtp(otpCodice);
+		List<MagazzinoDTO> magazzinoList = magazzinoService.findMagazzinosByCodice(codiceConverter.toEntity(codice));
 		for(MagazzinoDTO m : magazzinoList){
 			OggettoDTO oggetto = oggettoConverter.toDTO(m.getOggetto());
 			m.setOggetto(null);
-			m.setOtp(null);
+			m.setCodice(null);
 			magazzinoService.update(m);
 			oggetto.setCancellato(true);
 			oggettoService.update(oggetto);

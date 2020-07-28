@@ -55,7 +55,7 @@
 			<td><%=m.getCapienza()%></td>
 			<%
 				if(m.isCancellato() == false){
-					if(m.getOtp()==null){
+					if(m.getCodice()==null){
 			%>
 			<td><a href=/magazzino/preupdate?id=<%=m.getId()%>>Edit</a>
 			</td>

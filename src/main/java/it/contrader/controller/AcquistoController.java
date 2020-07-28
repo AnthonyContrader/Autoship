@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import it.contrader.converter.CodiceConverter;
 import it.contrader.converter.OggettoConverter;
 import it.contrader.dto.CodiceDTO;
 import it.contrader.dto.MagazzinoDTO;
@@ -37,6 +38,9 @@ public class AcquistoController {
 	@Autowired
 	private CodiceService codiceService;
 	
+	@Autowired
+	private CodiceConverter codiceConverter;
+	
 	@GetMapping("/getall")
 	public String getAll(HttpServletRequest request) {
 		setAll(request);
@@ -48,14 +52,14 @@ public class AcquistoController {
 		String otp = (String) request.getSession().getAttribute("otp");
 		OggettoDTO oggetto = service.read(id);
 		MagazzinoDTO magazzino = magazzinoService.findByOggetto(converter.toEntity(oggetto));
-		magazzino.setOtp(otp);
-		magazzinoService.update(magazzino);
 		CodiceDTO codice = codiceService.findByOtp(otp);
 		if(codice == null) {
 			codice = new CodiceDTO();
 			codice.setOtp(otp);
+			codice = codiceService.insert(codice);
 		}
-		codiceService.insert(codice);
+		magazzino.setCodice(codiceConverter.toEntity(codice));
+		magazzinoService.update(magazzino);
 		setAll(request);
 		return "acquisto";
 	}	
@@ -68,7 +72,7 @@ public class AcquistoController {
 			for(OggettoDTO oggetto : dummyList) {
 				Oggetto oggettoEntity = converter.toEntity(oggetto);
 				magazzino = magazzinoService.findByOggetto(oggettoEntity);
-				if(magazzino == null || magazzino.getOtp() != null) {
+				if(magazzino == null || magazzino.getCodice() != null) {
 					list.remove(oggetto);
 				}
 			}
