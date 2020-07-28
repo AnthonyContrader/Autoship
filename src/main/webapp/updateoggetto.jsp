@@ -9,6 +9,7 @@
 <meta name="description" content="Oggetto Edit page">
 <meta name="author" content="Vittorio Valent">
 <link href="/css/vittoriostyle.css" rel="stylesheet">
+<title>Edit Oggetto</title>
 </head>
 <body>
 <%@ include file="../css/header.jsp" %>

@@ -6,16 +6,18 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<meta name="description" content="Spedizione Management">
+<meta name="description" content="Acquisto Management">
 <meta name="author" content="Vittorio Valent">
 <link href="/css/vittoriostyle.css" rel="stylesheet">
+<title>Acquisto Manager</title>
 </head>
 <body>
 	<%@ include file="../css/header.jsp" %>
 	
 	<div class="navbar">
 	  <a href="/homecorriere.jsp">Home</a>
-	  <a class="active"  href="/acquisto/getall">Oggetto</a>
+	  <a class="active" href="/acquisto/getall">Oggetto</a>
+	  <a href="/carrello/getall">Ordine</a>
 	  <a href="/user/logout" id="logout">Logout</a>
 	</div>
 	

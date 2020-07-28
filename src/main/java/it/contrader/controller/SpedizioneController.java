@@ -47,7 +47,6 @@ public class SpedizioneController {
 	@GetMapping("/delete")
 	public String delete(HttpServletRequest request, @RequestParam("id") Long id) {
 		CodiceDTO codice = service.read(id);
-		String otpCodice = codice.getOtp();
 		List<MagazzinoDTO> magazzinoList = magazzinoService.findMagazzinosByCodice(codiceConverter.toEntity(codice));
 		for(MagazzinoDTO m : magazzinoList){
 			OggettoDTO oggetto = oggettoConverter.toDTO(m.getOggetto());

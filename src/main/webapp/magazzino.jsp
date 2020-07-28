@@ -10,6 +10,7 @@
 <meta name="description" content="Magazzino Management">
 <meta name="author" content="Vittorio Valent">
 <link href="/css/vittoriostyle.css" rel="stylesheet">
+<title>Magazzino Manager</title>
 </head>
 <body>
 <%@ include file="../css/header.jsp" %>

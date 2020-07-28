@@ -9,6 +9,7 @@
 <meta name="description" content="Oggetto Management">
 <meta name="author" content="Vittorio Valent">
 <link href="/css/vittoriostyle.css" rel="stylesheet">
+<title>Oggetto Manager</title>
 </head>
 <body>
 <%@ include file="../css/header.jsp" %>
