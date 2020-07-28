@@ -54,10 +54,10 @@
 			%>
 			<td><%=m.getCapienza()%></td>
 			<%
-				if(m.getCancellato() == 0){
+				if(m.isCancellato() == false){
 					if(m.getOtp()==null){
 			%>
-			<td><a href=MagazzinoServlet?mode=read&update=true&id=<%=m.getId()%>>Edit</a>
+			<td><a href=/magazzino/preupdate?id=<%=m.getId()%>>Edit</a>
 			</td>
 			<%
 					}
@@ -66,20 +66,20 @@
 			<td></td>
 			<%
 					}
-					if(!(m.getNome_oggetto().equalsIgnoreCase("Vuoto"))) {
+					if(m.getOggetto() != null) {
 			%>
-				<td>
+				<td></td>
 			<%
 					}
 					else{
 			%>
-				<td><a href=MagazzinoServlet?mode=delete&id=<%=m.getId()%>>Delete</a></td>
+				<td><a href=/magazzino/delete?id=<%=m.getId()%>>Delete</a></td>
 			<%
 					}
 				}
 				else{
 			%>
-				<td><a href=MagazzinoServlet?mode=reinsert&id=<%=m.getId()%>>Disabled</a></td>
+				<td><a href=/magazzino/reinsert?id=<%=m.getId()%>>Disabled</a></td>
 				<td></td>
 			<%
 				}

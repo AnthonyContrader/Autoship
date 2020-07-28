@@ -94,9 +94,10 @@ public class OggettoController {
 	}
 	
 	private void setAll(HttpServletRequest request) {
+		MagazzinoDTO magazzino;
 		List<OggettoDTO> list = service.getAll();
 		for(OggettoDTO oggetto : list) {
-			MagazzinoDTO magazzino = magazzinoService.findByOggetto(converter.toEntity(oggetto));
+			magazzino = magazzinoService.findByOggetto(converter.toEntity(oggetto));
 			if(magazzino != null) {
 				oggetto.setCella(true);
 			}

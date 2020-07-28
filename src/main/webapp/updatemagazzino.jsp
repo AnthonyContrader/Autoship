@@ -27,7 +27,7 @@
 
 <br>
 
-<form id="center" action="MagazzinoServlet?mode=update&id=<%=m.getId()%>" method="post">
+<form id="center" action="/oggetto/update?id=<%=m.getId()%>" method="post">
   <div class="row">
     <div class="col-25">
       <label for="id_oggetto">Oggetto</label>
@@ -35,16 +35,16 @@
     <div class="col-75">
 	    <select id="id_oggetto" name="id_oggetto">
 	    	<%
-				if (!(m.getNome_oggetto().equalsIgnoreCase("Vuoto"))) {
+				if (!(m.getOggetto() != null)) {
 			%>
-				<option value=<%=m.getId_oggetto()%>><%=m.getNome_oggetto()%></option>
+				<option value="<%=m.getOggetto().getId()%>"><%=m.getOggetto().getNome()%></option>
 			<%
 				}
 			%>
 		    <% 
 		   		for(OggettoDTO o : oggetti) {
 		   	%>
-		 		<option value=<%=o.getId()%>><%=o.getNome()%></option>
+		 		<option value="<%=o.getId()%>"><%=o.getNome()%></option>
 		 	<%
 		 		} 
 		    %> 
@@ -57,7 +57,7 @@
       <label for="capienza">Capienza</label>
     </div>
     <div class="col-75">
-      <input type="number" id="capienza" name="capienza" value=<%=m.getCapienza()%>>
+      <input type="number" id="capienza" name="capienza" value="<%=m.getCapienza()%>" required>
     </div>
   </div>
       <button type="submit" >Edit</button>
