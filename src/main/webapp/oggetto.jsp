@@ -40,17 +40,17 @@
 		<tr>
 			<td><a href="/oggetto/read?id=<%=o.getId()%>"><%=o.getNome()%></a></td>
 			<td><%=o.getDimensione()%></td>
-			<% if(o.isCancellato() == false) { %>
-			<td><a href="/oggetto/preupdate?id=<%=o.getId()%>">Edit</a>
-			</td>
-			<td><a href="/oggetto/delete?id=<%=o.getId()%>">Delete</a>
-			</td>
+			<% if(o.isCella() == false && o.isCancellato() == false) { %>
+				<td><a href="/oggetto/preupdate?id=<%=o.getId()%>">Edit</a>
+				</td>
+				<td><a href="/oggetto/delete?id=<%=o.getId()%>">Delete</a>
+				</td>
 			<% 
 				}
 				else if(o.isCancellato() == true){
 			%>
-			<td><a href="/oggetto/reinsert?id=<%=o.getId()%>">Out of Order</a></td>
-			<td></td>
+				<td><a href="/oggetto/reinsert?id=<%=o.getId()%>">Out of Stock</a></td>
+				<td></td>
 			<% 
 				}
 				else{
@@ -74,7 +74,7 @@
       <label for="nome">Oggetto</label>
     </div>
     <div class="col-75">
-      <input type="text" id="nome" name="nome" placeholder="inserisci nome oggetto">
+      <input type="text" id="nome" name="nome" placeholder="inserisci nome oggetto" required>
     </div>
   </div>
   <div class="row">

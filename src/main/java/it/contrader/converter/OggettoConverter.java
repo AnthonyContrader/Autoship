@@ -20,7 +20,7 @@ public class OggettoConverter extends AbstractConverter<Oggetto, OggettoDTO>{
 	public OggettoDTO toDTO(Oggetto oggetto) {
 		OggettoDTO oggettoDTO = null;
 		if (oggetto != null) {
-			oggettoDTO = new OggettoDTO(oggetto.getId(), oggetto.getNome(), oggetto.getDimensione(), oggetto.isCancellato());
+			oggettoDTO = new OggettoDTO(oggetto.getId(), oggetto.getNome(), oggetto.getDimensione(), oggetto.isCancellato(), false);
 
 		}
 		return oggettoDTO;

@@ -16,4 +16,6 @@ public class OggettoDTO {
 	private int dimensione;
 	
 	private boolean cancellato;
+	
+	private boolean cella;
 }

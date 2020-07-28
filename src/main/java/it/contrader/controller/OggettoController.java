@@ -1,5 +1,7 @@
 package it.contrader.controller;
 
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,6 +31,7 @@ public class OggettoController {
 	public String delete(HttpServletRequest request, @RequestParam("id") Long id) {
 		OggettoDTO dto = service.read(id);
 		dto.setCancellato(true);
+		service.update(dto);
 		setAll(request);
 		return "oggetto";
 	}
@@ -37,6 +40,7 @@ public class OggettoController {
 	public String reinsert(HttpServletRequest request, @RequestParam("id") Long id) {
 		OggettoDTO dto = service.read(id);
 		dto.setCancellato(false);
+		service.update(dto);
 		setAll(request);
 		return "oggetto";
 	}
@@ -45,10 +49,6 @@ public class OggettoController {
 	public String preUpdate(HttpServletRequest request, @RequestParam("id") Long id) {
 		request.setAttribute("dto", service.read(id));
 		return "updateoggetto";
-	}
-	
-	private void setAll(HttpServletRequest request) {
-		request.setAttribute("list", service.getAll());
 	}
 	
 	@PostMapping("/update")
@@ -76,6 +76,20 @@ public class OggettoController {
 		service.insert(dto);
 		setAll(request);
 		return "oggetto";
+	}
+	
+	@GetMapping("/read")
+	public String read(HttpServletRequest request, @RequestParam("id") Long id) {
+		request.setAttribute("dto", service.read(id));
+		return "readoggetto";
+	}
+	
+	private void setAll(HttpServletRequest request) {
+		List<OggettoDTO> list = service.getAll();
+		for(OggettoDTO oggetto : list) {
+			oggetto.setCella(false);
+		}
+		request.setAttribute("list", service.getAll());
 	}
 
 }

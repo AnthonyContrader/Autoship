@@ -31,7 +31,7 @@
       <label for="nome">Nome</label>
     </div>
     <div class="col-75">
-      <input type="text" id="nome" name="nome" value="<%=o.getNome()%>">
+      <input type="text" id="nome" name="nome" value="<%=o.getNome()%>" required>
     </div>
   </div>
        <div class="row">
@@ -39,7 +39,7 @@
       <label for="nome">Dimensione</label>
     </div>
     <div class="col-75">
-      <input type="number" id="dimensione" name="dimensione" value="<%=o.getDimensione()%>">
+      <input type="number" id="dimensione" name="dimensione" value="<%=o.getDimensione()%>" required>
     </div>
     <input type="hidden" name="id" value =<%=o.getId() %>>
   </div>
