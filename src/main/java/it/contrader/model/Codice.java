@@ -20,4 +20,6 @@ public class Codice {
 	private Long id;
 
 	private String otp;
+	
+	private boolean cancellato;
 }

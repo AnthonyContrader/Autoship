@@ -13,4 +13,6 @@ public class CodiceDTO {
 	private Long id;
 
 	private String otp;
+	
+	private boolean cancellato;
 }

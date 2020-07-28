@@ -12,7 +12,7 @@ public class CodiceConverter extends AbstractConverter<Codice, CodiceDTO>{
 	public Codice toEntity(CodiceDTO codiceDTO) {
 		Codice codice = null;
 		if (codiceDTO != null) {
-			codice = new Codice(codiceDTO.getId(), codiceDTO.getOtp());
+			codice = new Codice(codiceDTO.getId(), codiceDTO.getOtp(), codiceDTO.isCancellato());
 		}
 		return codice;
 	}
@@ -21,7 +21,7 @@ public class CodiceConverter extends AbstractConverter<Codice, CodiceDTO>{
 	public CodiceDTO toDTO(Codice codice) {
 		CodiceDTO codiceDTO = null;
 		if (codice != null) {
-			codiceDTO = new CodiceDTO(codice.getId(), codice.getOtp());
+			codiceDTO = new CodiceDTO(codice.getId(), codice.getOtp(), codice.isCancellato());
 
 		}
 		return codiceDTO;

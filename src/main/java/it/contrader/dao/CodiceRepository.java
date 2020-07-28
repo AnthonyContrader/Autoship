@@ -1,6 +1,6 @@
 package it.contrader.dao;
 
-import java.util.Optional;
+import java.util.List;
 
 import javax.transaction.Transactional;
 
@@ -14,4 +14,6 @@ import it.contrader.model.Codice;
 public interface CodiceRepository extends CrudRepository<Codice, Long>{
 	
 	Codice findByOtp(String otp);
+	
+	List<Codice> findByCancellatoFalse();
 }

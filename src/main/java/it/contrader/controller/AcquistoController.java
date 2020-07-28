@@ -54,6 +54,7 @@ public class AcquistoController {
 		if(codice == null) {
 			codice = new CodiceDTO();
 			codice.setOtp(otp);
+			codice.setCancellato(false);
 			codice = codiceService.insert(codice);
 		}
 		magazzino.setCodice(codiceConverter.toEntity(codice));

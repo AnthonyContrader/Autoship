@@ -26,6 +26,10 @@ public class Carrello {
 	@JoinColumn(name = "id_oggetto", referencedColumnName = "id")
 	private Oggetto oggetto;
 	
+	@ManyToOne
+	@JoinColumn(name = "id_codice", referencedColumnName = "id")
+	private Codice codice;
+	
 	@Enumerated(EnumType.STRING)
 	private CarrelloStato stato;
 }

@@ -56,13 +56,14 @@ public class SpedizioneController {
 			oggetto.setCancellato(true);
 			oggettoService.update(oggetto);
 		}
-		service.delete(id);
+		codice.setCancellato(true);
+		service.update(codice);
 		setAll(request);
 		return "spedizione";
 	}
 	
 	private void setAll(HttpServletRequest request) {
-		request.setAttribute("list", service.getAll());
+		request.setAttribute("list", service.findByCancellatoFalse());
 	}
 
 }
