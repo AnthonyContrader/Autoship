@@ -1,11 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1" import="it.contrader.dto.UserDTO"%>
+    pageEncoding="ISO-8859-1" import="it.contrader.dto.UserDTO" import="it.contrader.model.User.Usertype"%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="utf-8">
-<meta name="viewport"
-	content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <meta name="description" content="User Edit page">
 <meta name="author" content="Vittorio Valent">
 <link href="/css/vittoriostyle.css" rel="stylesheet">
@@ -14,18 +13,20 @@
 </head>
 <body>
 <%@ include file="./css/header.jsp" %>
-<div class="navbar">
-  <a href="/homeadmin.jsp">Home</a>
-  <a class="active" href="/user/getall">Users</a>
-  <a href="/user/logout" id="logout">Logout</a>
-</div>
+	<div class="navbar">
+		<a href="/homeadmin.jsp">Home</a>
+		<a class="active"  href=/user/getall>Users</a>
+		<a href=/magazzino/getall>Magazzino</a>
+		<a href=/oggetto/getall>Oggetto</a>
+		<a href="/user/logout" id="logout">Logout</a>
+	</div>
 <br>
 <div class="main">
 
 <%UserDTO u = (UserDTO) request.getSession().getAttribute("dto");%>
 
 
-<form id="floatleft" action="/user/update" method="post">
+<form id="center" action="/user/update" method="post">
   <div class="row">
     <div class="col-25">
       <label for="user">Username</label>
@@ -43,6 +44,9 @@
 			type="text" id="pass" name="password" value=<%=u.getPassword()%>> 
     </div>
   </div>
+  <%
+		if (u.getUsertype() != Usertype.ADMIN) {
+	%>
   <div class="row">
     <div class="col-25">
       <label for="type">Usertype</label>
@@ -55,6 +59,9 @@
     	</div>
     	<input type="hidden" name="id" value =<%=u.getId() %>>
   </div>
+ 	<%
+		}
+	%>
       <button type="submit" >Edit</button>
 </form>
 

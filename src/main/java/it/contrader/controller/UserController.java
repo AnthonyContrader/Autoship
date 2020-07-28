@@ -1,5 +1,7 @@
 package it.contrader.controller;
 
+import java.util.Random;
+
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,17 +27,32 @@ public class UserController {
 			@RequestParam(value = "password", required = true) String password) {
 
 		UserDTO userDTO = service.findByUsernameAndPassword(username, password);
-		request.getSession().setAttribute("user", userDTO);
-
-		switch (userDTO.getUsertype()) {
-
-		case ADMIN:
-			return "homeadmin";
-
-		case USER:
+		if(userDTO != null) {
+			request.getSession().setAttribute("user", userDTO);
+		
+			switch (userDTO.getUsertype()) {
+			
+			case ADMIN:
+				return "homeadmin";
+		
+			case USER:
+				byte[] array = new byte[5]; // length is bounded by 7
+				new Random().nextBytes(array);
+				String codice = Integer.toString((int)(Math.random() * (5000 - 1000)));					
+				/*while(((CodiceService) codiceService).getCodice(codice) == 1) {
+					codice = Integer.toString((int)(Math.random() * (5000 - 1000)));
+				}*/
+				request.getSession().setAttribute("otp", codice);
+				return "homeuser";
+					
+			case CORRIERE:
+				return "homecorriere";
+		
+			default:
 			return "index";
-
-		default:
+			}
+		}
+		else {
 			return "index";
 		}
 	}

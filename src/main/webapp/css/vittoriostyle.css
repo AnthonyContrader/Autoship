@@ -122,9 +122,16 @@ a:visited {
 table {
 	border-collapse: collapse;
 	width: 50%;
-	float:left;
 	border-radius:4px;
     -moz-border-radius:4px;
+}
+
+.tableRead {
+	margin: auto auto;
+}
+
+.tableInsert {
+	float:left;
 }
 
 
@@ -281,6 +288,9 @@ button:hover {
 #floatright {
 	float:bottom;
 }
+#center {
+	margin: auto auto;
+}
 
 /*Navigation bar*/
 div.navbar {
@@ -323,5 +333,4 @@ div.navbar a.active {
 	opacity: .9;
 	z-index: -1; opacity : .9;
 	width: 8%;
-}
 }
