@@ -1,6 +1,7 @@
 package it.contrader.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import it.contrader.converter.CodiceConverter;
 import it.contrader.converter.UserConverter;
@@ -11,6 +12,7 @@ import it.contrader.dto.MagazzinoDTO;
 import it.contrader.model.Codice;
 import it.contrader.model.Oggetto;
 
+@Service
 public class CodiceService extends AbstractService<Codice, CodiceDTO> {
 	
 	@Autowired

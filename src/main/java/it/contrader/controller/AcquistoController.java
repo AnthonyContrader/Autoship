@@ -1,7 +1,24 @@
 package it.contrader.controller;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Random;
+
+import javax.servlet.http.HttpServletRequest;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+
+import it.contrader.converter.OggettoConverter;
+import it.contrader.dto.CodiceDTO;
+import it.contrader.dto.MagazzinoDTO;
+import it.contrader.dto.OggettoDTO;
+import it.contrader.service.CodiceService;
+import it.contrader.service.MagazzinoService;
+import it.contrader.service.OggettoService;
 
 @Controller
 @RequestMapping("/acquisto")
@@ -11,52 +28,45 @@ public class AcquistoController {
 	private OggettoService service;
 	
 	@Autowired
-	private MagazzinoService magazzinoService;
+	private OggettoConverter converter;
 	
 	@Autowired
-	private RobotService robotService;
+	private MagazzinoService magazzinoService;
 	
 	@Autowired
 	private CodiceService codiceService;
 	
-	
-	public void updateList(HttpServletRequest request) {
-		Service <OggettoDTO> service = new OggettoService();
-		List<OggettoDTO>listDTO = ((OggettoService) service).getAllInCellOrdered();
-		request.setAttribute("list", listDTO);
+	@GetMapping("/getall")
+	public String getAll(HttpServletRequest request) {
+		setAll(request);
+		return "acquisto";
 	}
 	
-	@GetMapping("/oggettolist")
-	public String oggettolist(HttpServletRequest request, @RequestParam("id") Long id) {
-		updateList(request);
-		request.setAttribute("otp", codice);
-		return "acquistomanager";
-	}
+	@GetMapping("/udpate")
+	public String delete(HttpServletRequest request, @RequestParam("id") Long id) {
+		String otp = (String) request.getSession().getAttribute("otp");
+		OggettoDTO oggetto = service.read(id);
+		MagazzinoDTO magazzino = magazzinoService.findByOggetto(converter.toEntity(oggetto));
+		magazzino.setOtp(otp);
+		CodiceDTO codice = new CodiceDTO();
+		codice.setOtp(otp);
+		codiceService.insert(codice);
+		setAll(request);
+		return "acquisto";
+	}	
 	
-	
-	@GetMapping("/update")
-	public String oggettolist(HttpServletRequest request, @RequestParam("id") Long id) {
-		int id = Integer.parseInt(request.getParameter("id"));
-		int checkCodice;
-		try {
-			checkCodice = ((MagazzinoService) magazzinoService).checkCodice(id);
-			if(checkCodice == -1) {
-				 CodiceDTO codicetoinsert = new CodiceDTO(codice);
-				if(((CodiceService) codiceService).getCodice(codice) == -1) {
-					 codiceService.insert(codicetoinsert);
+	private void setAll(HttpServletRequest request) {
+		MagazzinoDTO magazzino;
+		List<OggettoDTO> list = service.getAll();
+		List<OggettoDTO> dummyList = service.getAll();
+		if(list != null) {
+			for(OggettoDTO oggetto : dummyList) {
+				magazzino = magazzinoService.findByOggetto(converter.toEntity(oggetto));
+				if(magazzino == null || magazzino.getOtp() == null) {
+					list.remove(oggetto);
 				}
-				 robotService.createCode(codice, id);
-				boolean ans = codiceService.update(codicetoinsert);
-				 request.setAttribute("ans", ans);
-				 updateList(request);
-				 request.setAttribute("otp", codice);
-				 return "acquistomanager";
 			}
 		}
-		catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-	
-}
+		request.setAttribute("list", list);
+	}
 }

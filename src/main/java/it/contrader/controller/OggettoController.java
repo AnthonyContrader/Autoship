@@ -105,7 +105,7 @@ public class OggettoController {
 				oggetto.setCella(false);
 			}
 		}
-		request.setAttribute("list", service.getAll());
+		request.setAttribute("list", list);
 	}
 
 }

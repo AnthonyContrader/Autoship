@@ -1,5 +1,7 @@
 package it.contrader.controller;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
 
 import javax.servlet.http.HttpServletRequest;
@@ -11,8 +13,10 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import it.contrader.dto.CodiceDTO;
 import it.contrader.dto.UserDTO;
 import it.contrader.model.User.Usertype;
+import it.contrader.service.CodiceService;
 import it.contrader.service.UserService;
 
 @Controller
@@ -21,6 +25,9 @@ public class UserController {
 
 	@Autowired
 	private UserService service;
+	
+	@Autowired
+	private CodiceService codiceService;
 
 	@PostMapping("/login")
 	public String login(HttpServletRequest request, @RequestParam(value = "username", required = true) String username,
@@ -37,11 +44,13 @@ public class UserController {
 		
 			case USER:
 				byte[] array = new byte[5]; // length is bounded by 7
+				List<String> otp = getAllCodes();
 				new Random().nextBytes(array);
-				String codice = Integer.toString((int)(Math.random() * (5000 - 1000)));					
-				/*while(((CodiceService) codiceService).getCodice(codice) == 1) {
+				String codice = Integer.toString((int)(Math.random() * (5000 - 1000)));
+				while(otp.contains(codice)) {
+					new Random().nextBytes(array);
 					codice = Integer.toString((int)(Math.random() * (5000 - 1000)));
-				}*/
+				}
 				request.getSession().setAttribute("otp", codice);
 				return "homeuser";
 					
@@ -117,5 +126,17 @@ public class UserController {
 
 	private void setAll(HttpServletRequest request) {
 		request.getSession().setAttribute("list", service.getAll());
+	}
+	
+	private List<String> getAllCodes() {
+		List<String> otp = new ArrayList<>();
+		
+		List<CodiceDTO> codici = codiceService.getAll();
+		
+		for(CodiceDTO c : codici) {
+			otp.add(c.getOtp());
+		}
+		
+		return otp;
 	}
 }

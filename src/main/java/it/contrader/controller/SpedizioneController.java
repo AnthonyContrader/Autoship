@@ -50,7 +50,7 @@ public class SpedizioneController {
 		oggettoService.update(oggetto);
 		service.delete(id);
 		setAll(request);
-		return "users";
+		return "spedizione";
 	}
 	
 	private void setAll(HttpServletRequest request) {
