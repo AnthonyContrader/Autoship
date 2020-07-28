@@ -1,5 +1,7 @@
 package it.contrader.controller;
 
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -42,12 +44,15 @@ public class SpedizioneController {
 	public String delete(HttpServletRequest request, @RequestParam("id") Long id) {
 		CodiceDTO codice = service.read(id);
 		String otpCodice = codice.getOtp();
-		MagazzinoDTO magazzino = magazzinoService.findByOtp(otpCodice);
-		OggettoDTO oggetto = oggettoConverter.toDTO(magazzino.getOggetto());
-		magazzino.setOggetto(null);
-		magazzinoService.update(magazzino);
-		oggetto.setCancellato(true);
-		oggettoService.update(oggetto);
+		List<MagazzinoDTO> magazzinoList = magazzinoService.findMagazzinosByOtp(otpCodice);
+		for(MagazzinoDTO m : magazzinoList){
+			OggettoDTO oggetto = oggettoConverter.toDTO(m.getOggetto());
+			m.setOggetto(null);
+			m.setOtp(null);
+			magazzinoService.update(m);
+			oggetto.setCancellato(true);
+			oggettoService.update(oggetto);
+		}
 		service.delete(id);
 		setAll(request);
 		return "spedizione";

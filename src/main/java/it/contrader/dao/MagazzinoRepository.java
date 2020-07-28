@@ -1,5 +1,7 @@
 package it.contrader.dao;
 
+import java.util.List;
+
 import javax.transaction.Transactional;
 
 import org.springframework.data.repository.CrudRepository;
@@ -15,5 +17,7 @@ public interface MagazzinoRepository extends CrudRepository<Magazzino, Long> {
 	Magazzino findByOggetto(Oggetto oggetto);
 	
 	Magazzino findByOtp(String otp);
+	
+	List<Magazzino> findMagazzinosByOtp(String otp);
 
 }

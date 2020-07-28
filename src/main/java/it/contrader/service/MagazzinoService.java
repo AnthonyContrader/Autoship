@@ -1,5 +1,7 @@
 package it.contrader.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -24,6 +26,10 @@ public class MagazzinoService extends AbstractService<Magazzino, MagazzinoDTO>{
 	
 	public MagazzinoDTO findByOtp(String otp) {
 		return converter.toDTO(repository.findByOtp(otp));
+	}
+	
+	public List<MagazzinoDTO> findMagazzinosByOtp(String otp){
+		return converter.toDTOList(repository.findMagazzinosByOtp(otp));
 	}
 
 }

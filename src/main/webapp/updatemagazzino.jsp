@@ -23,11 +23,11 @@
 <div class="main">
 
 <%MagazzinoDTO m = (MagazzinoDTO) request.getAttribute("dto");%>
-<%List<OggettoDTO> oggetti = (List<OggettoDTO>) request.getAttribute("oggetti");%>
+<%List<OggettoDTO> oggetti = (List<OggettoDTO>) request.getAttribute("listo");%>
 
 <br>
 
-<form id="center" action="/oggetto/update?id=<%=m.getId()%>" method="post">
+<form id="center" action="/magazzino/update?id=<%=m.getId()%>" method="post">
   <div class="row">
     <div class="col-25">
       <label for="id_oggetto">Oggetto</label>
@@ -35,7 +35,7 @@
     <div class="col-75">
 	    <select id="id_oggetto" name="id_oggetto">
 	    	<%
-				if (!(m.getOggetto() != null)) {
+				if (m.getOggetto() != null) {
 			%>
 				<option value="<%=m.getOggetto().getId()%>"><%=m.getOggetto().getNome()%></option>
 			<%

@@ -24,7 +24,7 @@
 <div class="main">
 	<%
 		List<MagazzinoDTO> list = (List<MagazzinoDTO>) request.getAttribute("list");
-		List<OggettoDTO> listo = (List<OggettoDTO>) request.getAttribute("oggetti");
+		List<OggettoDTO> listo = (List<OggettoDTO>) request.getAttribute("listo");
 	%>
 
 <br>
@@ -106,7 +106,7 @@
 		 	<%
 		 		} 
 		 	%> 
-		 	<option value="">Vuoto</option>
+		 	<option value="0">Vuoto</option>
 		</select>
      </div>
   </div>

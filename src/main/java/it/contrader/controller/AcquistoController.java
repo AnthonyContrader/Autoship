@@ -16,6 +16,7 @@ import it.contrader.converter.OggettoConverter;
 import it.contrader.dto.CodiceDTO;
 import it.contrader.dto.MagazzinoDTO;
 import it.contrader.dto.OggettoDTO;
+import it.contrader.model.Oggetto;
 import it.contrader.service.CodiceService;
 import it.contrader.service.MagazzinoService;
 import it.contrader.service.OggettoService;
@@ -42,14 +43,18 @@ public class AcquistoController {
 		return "acquisto";
 	}
 	
-	@GetMapping("/udpate")
-	public String delete(HttpServletRequest request, @RequestParam("id") Long id) {
+	@GetMapping("/update")
+	public String udpate(HttpServletRequest request, @RequestParam("id") Long id) {
 		String otp = (String) request.getSession().getAttribute("otp");
 		OggettoDTO oggetto = service.read(id);
 		MagazzinoDTO magazzino = magazzinoService.findByOggetto(converter.toEntity(oggetto));
 		magazzino.setOtp(otp);
-		CodiceDTO codice = new CodiceDTO();
-		codice.setOtp(otp);
+		magazzinoService.update(magazzino);
+		CodiceDTO codice = codiceService.findByOtp(otp);
+		if(codice == null) {
+			codice = new CodiceDTO();
+			codice.setOtp(otp);
+		}
 		codiceService.insert(codice);
 		setAll(request);
 		return "acquisto";
@@ -61,8 +66,9 @@ public class AcquistoController {
 		List<OggettoDTO> dummyList = service.getAll();
 		if(list != null) {
 			for(OggettoDTO oggetto : dummyList) {
-				magazzino = magazzinoService.findByOggetto(converter.toEntity(oggetto));
-				if(magazzino == null || magazzino.getOtp() == null) {
+				Oggetto oggettoEntity = converter.toEntity(oggetto);
+				magazzino = magazzinoService.findByOggetto(oggettoEntity);
+				if(magazzino == null || magazzino.getOtp() != null) {
 					list.remove(oggetto);
 				}
 			}

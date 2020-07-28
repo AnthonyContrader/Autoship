@@ -12,9 +12,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import it.contrader.converter.MagazzinoConverter;
+import it.contrader.converter.OggettoConverter;
 import it.contrader.dto.MagazzinoDTO;
+import it.contrader.dto.OggettoDTO;
 import it.contrader.model.Oggetto;
 import it.contrader.service.MagazzinoService;
+import it.contrader.service.OggettoService;
 
 @Controller
 @RequestMapping("/magazzino")
@@ -27,12 +30,16 @@ public class MagazzinoController {
 	private MagazzinoConverter converter;
 	
 	@Autowired
-	private MagazzinoService magazzinoService;
+	private OggettoService oggettoService;
+	
+	@Autowired
+	private OggettoConverter oggettoConverter;
 	
 	
 	@GetMapping("/getall")
 	public String getAll(HttpServletRequest request) {
 		setAll(request);
+		getObjectNotInCell(request);
 		return "magazzino";
 	}
 	
@@ -42,6 +49,7 @@ public class MagazzinoController {
 		dto.setCancellato(true);
 		service.update(dto);
 		setAll(request);
+		getObjectNotInCell(request);
 		return "magazzino";
 	}
 	
@@ -51,38 +59,52 @@ public class MagazzinoController {
 		dto.setCancellato(false);
 		service.update(dto);
 		setAll(request);
+		getObjectNotInCell(request);
 		return "magazzino";
 	}
 	
 	@GetMapping("/preupdate")
 	public String preUpdate(HttpServletRequest request, @RequestParam("id") Long id) {
 		request.setAttribute("dto", service.read(id));
+		getObjectNotInCell(request);
 		return "updatemagazzino";
 	}
 	
 	@PostMapping("/update")
-	public String update(HttpServletRequest request, @RequestParam("id") Long id, @RequestParam("oggetto") Oggetto oggetto,
+	public String update(HttpServletRequest request, @RequestParam("id") Long id, @RequestParam("id_oggetto") Long id_oggetto,
 			@RequestParam("capienza") int capienza) {
 
 		MagazzinoDTO dto = new MagazzinoDTO();
 		dto.setId(id);
 		dto.setCapienza(capienza);
-		dto.setOggetto(oggetto);
+		if(id_oggetto == 0) {
+			dto.setOggetto(null);
+		}
+		else {
+			OggettoDTO oggetto = oggettoService.read(id_oggetto);
+			dto.setOggetto(oggettoConverter.toEntity(oggetto));
+		}
 		dto.setCancellato(false);
 		service.update(dto);
+		getObjectNotInCell(request);
 		setAll(request);
 		return "magazzino";
 	}
 	
 	@PostMapping("/insert")
-	public String insert(HttpServletRequest request, @RequestParam("capienza") int capienza,
-			@RequestParam("oggetto") Oggetto oggetto) {
-
+	public String insert(HttpServletRequest request, @RequestParam("capienza") int capienza, @RequestParam("id_oggetto") Long id_oggetto) {		
 		MagazzinoDTO dto = new MagazzinoDTO();
-		dto.setCapienza(capienza);
-		dto.setOggetto(oggetto);
+		dto.setCapienza(capienza);		
+		if(id_oggetto == 0) {
+			dto.setOggetto(null);
+		}
+		else {
+			OggettoDTO oggetto = oggettoService.read(id_oggetto);
+			dto.setOggetto(oggettoConverter.toEntity(oggetto));
+		}
 		dto.setCancellato(false);
 		service.insert(dto);
+		getObjectNotInCell(request);
 		setAll(request);
 		return "magazzino";
 	}
@@ -94,6 +116,21 @@ public class MagazzinoController {
 	}
 	
 	private void setAll(HttpServletRequest request) {
-		request.getSession().setAttribute("list", service.getAll());
+		request.setAttribute("list", service.getAll());
+	}
+	
+	private void getObjectNotInCell(HttpServletRequest request) {
+		List<OggettoDTO> listo = oggettoService.getAll();
+		List<OggettoDTO> dummyList = oggettoService.getAll();
+		MagazzinoDTO magazzino;
+		
+		for(OggettoDTO oggetto : dummyList) {
+			magazzino = service.findByOggetto(oggettoConverter.toEntity(oggetto));
+			if(magazzino != null) {
+				listo.remove(oggetto);
+			}
+		}
+		
+		request.setAttribute("listo", listo);
 	}
 }

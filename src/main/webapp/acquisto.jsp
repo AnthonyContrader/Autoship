@@ -39,7 +39,7 @@
 		<tr>
 			<td><%=o.getNome()%></td>
 			<td><%=o.getDimensione()%></td>
-			<td><a href="/acquisto/update?id=<%=o.getId()%>">Ordina</a>
+			<td><a href=/acquisto/update?id=<%=o.getId()%>>Ordina</a>
 			</td>
 			<%
 				}
