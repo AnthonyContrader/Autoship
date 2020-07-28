@@ -1,10 +1,11 @@
 package it.contrader.model;
 
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -16,16 +17,17 @@ import lombok.NoArgsConstructor;
 @Entity
 
 public class Magazzino {
-	    @Id
-		@GeneratedValue(strategy = GenerationType.IDENTITY)
-		private Long id;
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Long id;
 
-		@Column(unique = true)
-		private int id;
-		private int id_oggetto;
-		private int capienza;
-		private String otp;
-		private int cancellato;
-
-	}
+	@OneToOne
+	@JoinColumn(name = "id_oggetto", referencedColumnName = "id")
+	private Oggetto oggetto;
+	
+	private int capienza;
+	
+	private String otp;
+	
+	private boolean cancellato;
 }
