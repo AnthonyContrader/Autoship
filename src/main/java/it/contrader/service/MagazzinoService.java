@@ -21,5 +21,9 @@ public class MagazzinoService extends AbstractService<Magazzino, MagazzinoDTO>{
 	public MagazzinoDTO findByOggetto(Oggetto oggetto) {
 		return converter.toDTO(repository.findByOggetto(oggetto));
 	}
+	
+	public MagazzinoDTO findByOtp(String otp) {
+		return converter.toDTO(repository.findByOtp(otp));
+	}
 
 }

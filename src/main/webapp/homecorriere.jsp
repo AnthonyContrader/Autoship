@@ -20,6 +20,7 @@
 
 <div class="navbar">
   <a class="active" href="/homecorriere.jsp">Home</a>
+  <a href="/spedizione/getall">Ordini</a>
   <a href="/user/logout" id="logout">Logout</a>
 </div>
 

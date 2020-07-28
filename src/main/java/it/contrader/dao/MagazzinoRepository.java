@@ -13,5 +13,7 @@ import it.contrader.model.Oggetto;
 public interface MagazzinoRepository extends CrudRepository<Magazzino, Long> {
 	
 	Magazzino findByOggetto(Oggetto oggetto);
+	
+	Magazzino findByOtp(String otp);
 
 }
