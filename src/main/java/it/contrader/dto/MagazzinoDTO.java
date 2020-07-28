@@ -1,5 +1,6 @@
 package it.contrader.dto;
 
+import it.contrader.model.Oggetto;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -12,7 +13,7 @@ public class MagazzinoDTO {
 	
 	private Long id;
 
-	private int id_oggetto;
+	private Oggetto oggetto;
 		
 	private int capienza;
 		

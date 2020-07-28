@@ -11,7 +11,10 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import it.contrader.converter.OggettoConverter;
+import it.contrader.dto.MagazzinoDTO;
 import it.contrader.dto.OggettoDTO;
+import it.contrader.service.MagazzinoService;
 import it.contrader.service.OggettoService;
 
 @Controller
@@ -20,6 +23,12 @@ public class OggettoController {
 	
 	@Autowired
 	private OggettoService service;
+	
+	@Autowired
+	private OggettoConverter converter;
+	
+	@Autowired
+	private MagazzinoService magazzinoService;
 	
 	@GetMapping("/getall")
 	public String getAll(HttpServletRequest request) {
@@ -87,7 +96,13 @@ public class OggettoController {
 	private void setAll(HttpServletRequest request) {
 		List<OggettoDTO> list = service.getAll();
 		for(OggettoDTO oggetto : list) {
-			oggetto.setCella(false);
+			MagazzinoDTO magazzino = magazzinoService.findByOggetto(converter.toEntity(oggetto));
+			if(magazzino != null) {
+				oggetto.setCella(true);
+			}
+			else {
+				oggetto.setCella(false);
+			}
 		}
 		request.setAttribute("list", service.getAll());
 	}
