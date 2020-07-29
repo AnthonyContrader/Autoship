@@ -47,10 +47,7 @@
 			</tr>
 			<%
 				for (UserDTO u : list) {
-					if(u.getUsertype() == Usertype.SUPERUSER && user.getUsertype() != Usertype.SUPERUSER){
-						
-					}
-					else{
+					if(!(u.getUsertype() == Usertype.SUPERUSER && user.getUsertype() != Usertype.SUPERUSER)){
 			%>
 			<tr>
 				<td><a href="/user/read?id=<%=u.getId()%>"> <%=u.getUsername()%>
