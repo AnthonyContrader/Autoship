@@ -10,11 +10,17 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import it.contrader.converter.CarrelloConverter;
 import it.contrader.converter.CodiceConverter;
 import it.contrader.converter.OggettoConverter;
+import it.contrader.dto.CarrelloDTO;
 import it.contrader.dto.CodiceDTO;
 import it.contrader.dto.MagazzinoDTO;
 import it.contrader.dto.OggettoDTO;
+import it.contrader.dto.UserDTO;
+import it.contrader.model.Carrello.CarrelloStato;
+import it.contrader.model.Codice;
+import it.contrader.service.CarrelloService;
 import it.contrader.service.CodiceService;
 import it.contrader.service.MagazzinoService;
 import it.contrader.service.OggettoService;
@@ -33,10 +39,16 @@ public class SpedizioneController {
 	private OggettoService oggettoService;
 	
 	@Autowired
+	private CarrelloService carrelloService;
+	
+	@Autowired
 	private OggettoConverter oggettoConverter;
 	
 	@Autowired
 	private CodiceConverter codiceConverter;
+	
+	@Autowired
+	private CarrelloConverter carrelloConverter;
 	
 	@GetMapping("/getall")
 	public String getAll(HttpServletRequest request) {
@@ -54,10 +66,15 @@ public class SpedizioneController {
 			m.setCodice(null);
 			magazzinoService.update(m);
 			oggetto.setCancellato(true);
-			oggettoService.update(oggetto);
+			oggetto = oggettoService.update(oggetto);
 		}
 		codice.setCancellato(true);
-		service.update(codice);
+		codice = service.update(codice);
+		List<CarrelloDTO> carrelloList = carrelloService.findCarrellosByCodice(codiceConverter.toEntity(codice));
+		for(CarrelloDTO c : carrelloList){
+			c.setStato(CarrelloStato.Spedito);
+			carrelloService.update(c);
+		}
 		setAll(request);
 		return "spedizione";
 	}

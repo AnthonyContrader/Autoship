@@ -15,8 +15,8 @@ import java.util.List;
 @Repository
 @Transactional
 public interface CarrelloRepository extends CrudRepository<Carrello, Long>{
-List <Carrello> findByOggetto(Oggetto oggetto);
-List <Carrello> findByUser(User user);
-List <Carrello> findByCodice(Codice codice);
+List <Carrello> findCarrellosByOggetto(Oggetto oggetto);
+List <Carrello> findCarrellosByUser(User user);
+List <Carrello> findCarrellosByCodice(Codice codice);
 
 }

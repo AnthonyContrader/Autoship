@@ -20,14 +20,14 @@ public class CarrelloService extends AbstractService<Carrello, CarrelloDTO>{
 	@Autowired
 	private CarrelloRepository repository;
 	
-	public List<CarrelloDTO> findByOggetto(Oggetto oggetto) {
-		return converter.toDTOList(repository.findByOggetto(oggetto));
+	public List<CarrelloDTO> findCarrellosByOggetto(Oggetto oggetto) {
+		return converter.toDTOList(repository.findCarrellosByOggetto(oggetto));
 	}
 	
-	public List<CarrelloDTO> findByCodice(Codice codice) {
-		return converter.toDTOList(repository.findByCodice(codice));
+	public List<CarrelloDTO> findCarrellosByCodice(Codice codice) {
+		return converter.toDTOList(repository.findCarrellosByCodice(codice));
 	}
-	public List<CarrelloDTO> findByUser(User user) {
-		return converter.toDTOList(repository.findByUser(user));
+	public List<CarrelloDTO> findCarrellosByUser(User user) {
+		return converter.toDTOList(repository.findCarrellosByUser(user));
 	}
 }

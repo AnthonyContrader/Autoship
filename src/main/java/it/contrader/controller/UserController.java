@@ -13,10 +13,17 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import it.contrader.converter.CodiceConverter;
+import it.contrader.converter.UserConverter;
+import it.contrader.dto.CarrelloDTO;
 import it.contrader.dto.CodiceDTO;
+import it.contrader.dto.MagazzinoDTO;
+import it.contrader.dto.OggettoDTO;
 import it.contrader.dto.UserDTO;
 import it.contrader.model.User.Usertype;
+import it.contrader.service.CarrelloService;
 import it.contrader.service.CodiceService;
+import it.contrader.service.MagazzinoService;
 import it.contrader.service.UserService;
 
 @Controller
@@ -27,7 +34,19 @@ public class UserController {
 	private UserService service;
 	
 	@Autowired
+	private UserConverter converter;
+	
+	@Autowired
 	private CodiceService codiceService;
+	
+	@Autowired
+	private CarrelloService carrelloService;
+	
+	@Autowired
+	private MagazzinoService magazzinoService;
+	
+	@Autowired
+	private CodiceConverter codiceConverter;
 
 	@PostMapping("/login")
 	public String login(HttpServletRequest request, @RequestParam(value = "username", required = true) String username,
@@ -88,6 +107,20 @@ public class UserController {
 
 	@GetMapping("/delete")
 	public String delete(HttpServletRequest request, @RequestParam("id") Long id) {
+		UserDTO user = service.read(id);
+		List<CarrelloDTO> carrello = carrelloService.findCarrellosByUser(converter.toEntity(user));
+		CodiceDTO codice;
+		List<MagazzinoDTO> magazzinoList;
+		for(CarrelloDTO c : carrello) {
+			codice = codiceService.read(c.getCodice().getId());
+			magazzinoList = magazzinoService.findMagazzinosByCodice(codiceConverter.toEntity(codice));
+			for(MagazzinoDTO m : magazzinoList){
+				m.setCodice(null);
+				magazzinoService.update(m);
+			}
+			carrelloService.delete(c.getId());
+			codiceService.delete(codice.getId());
+		}
 		service.delete(id);
 		setAll(request);
 		return "users";

@@ -12,10 +12,15 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import it.contrader.converter.CodiceConverter;
 import it.contrader.converter.OggettoConverter;
+import it.contrader.converter.UserConverter;
+import it.contrader.dto.CarrelloDTO;
 import it.contrader.dto.CodiceDTO;
 import it.contrader.dto.MagazzinoDTO;
 import it.contrader.dto.OggettoDTO;
+import it.contrader.dto.UserDTO;
+import it.contrader.model.Carrello.CarrelloStato;
 import it.contrader.model.Oggetto;
+import it.contrader.service.CarrelloService;
 import it.contrader.service.CodiceService;
 import it.contrader.service.MagazzinoService;
 import it.contrader.service.OggettoService;
@@ -37,6 +42,12 @@ public class AcquistoController {
 	private CodiceService codiceService;
 	
 	@Autowired
+	private CarrelloService carrelloService;
+	
+	@Autowired
+	private UserConverter userConverter;
+	
+	@Autowired
 	private CodiceConverter codiceConverter;
 	
 	@GetMapping("/getall")
@@ -47,6 +58,7 @@ public class AcquistoController {
 	
 	@GetMapping("/update")
 	public String udpate(HttpServletRequest request, @RequestParam("id") Long id) {
+		UserDTO user = (UserDTO) request.getSession().getAttribute("user");
 		String otp = (String) request.getSession().getAttribute("otp");
 		OggettoDTO oggetto = service.read(id);
 		MagazzinoDTO magazzino = magazzinoService.findByOggetto(converter.toEntity(oggetto));
@@ -59,6 +71,12 @@ public class AcquistoController {
 		}
 		magazzino.setCodice(codiceConverter.toEntity(codice));
 		magazzinoService.update(magazzino);
+		CarrelloDTO carrello = new CarrelloDTO();
+		carrello.setUser(userConverter.toEntity(user));
+		carrello.setOggetto(converter.toEntity(oggetto));
+		carrello.setCodice(codiceConverter.toEntity(codice));
+		carrello.setStato(CarrelloStato.Ordinato);
+		carrelloService.insert(carrello);
 		setAll(request);
 		return "acquisto";
 	}	

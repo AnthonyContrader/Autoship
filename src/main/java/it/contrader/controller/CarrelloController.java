@@ -31,6 +31,6 @@ public class CarrelloController {
 	
 	private void setAll(HttpServletRequest request) {
 		UserDTO userDTO = (UserDTO) request.getSession().getAttribute("user");
-		request.setAttribute("list", service.findByUser(userConverter.toEntity(userDTO)));
+		request.setAttribute("list", service.findCarrellosByUser(userConverter.toEntity(userDTO)));
 	}	
 }
