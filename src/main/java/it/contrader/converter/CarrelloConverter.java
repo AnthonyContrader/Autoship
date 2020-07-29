@@ -22,7 +22,6 @@ public class CarrelloConverter extends AbstractConverter<Carrello, CarrelloDTO> 
 		CarrelloDTO carrelloDTO = null;
 		if (carrello != null) {
 			carrelloDTO = new CarrelloDTO(carrello.getId(), carrello.getUser(), carrello.getOggetto(), carrello.getCodice(), carrello.getStato());
-
 		}
 		return carrelloDTO;
 	}
