@@ -11,12 +11,23 @@
 </head>
 <body>
 	<%@ include file="./css/header.jsp"%>
-
+	<%
+		UserDTO user = (UserDTO) request.getSession().getAttribute("user");
+	%>
 	<div class="navbar">
 		<a href="/homeadmin.jsp">Home</a>
 		<a class="active"  href=/user/getall>Users</a>
 		<a href=/magazzino/getall>Magazzino</a>
 		<a href=/oggetto/getall>Oggetto</a>
+	<%
+		if(user.getUsertype() == Usertype.SUPERUSER){
+	%>
+		<a href="/spedizione/getall">Ordine</a>
+		<a href="/acquisto/getall">Acquisto</a>
+  		<a href="/carrello/getall">Carrello</a>
+	<%
+		}
+	%>
 		<a href="/user/logout" id="logout">Logout</a>
 	</div>
 	<div class="main">
@@ -36,6 +47,10 @@
 			</tr>
 			<%
 				for (UserDTO u : list) {
+					if(u.getUsertype() == Usertype.SUPERUSER && user.getUsertype() != Usertype.SUPERUSER){
+						
+					}
+					else{
 			%>
 			<tr>
 				<td><a href="/user/read?id=<%=u.getId()%>"> <%=u.getUsername()%>
@@ -46,7 +61,7 @@
 
 
 				<%
-					if (u.getUsertype() != Usertype.ADMIN) {
+					if ((u.getUsertype() != Usertype.SUPERUSER && u.getUsertype() != Usertype.ADMIN) || (u.getUsertype() == Usertype.ADMIN && user.getUsertype() == Usertype.SUPERUSER)) {
 				%>
 					<td><a href="/user/delete?id=<%=u.getId()%>">Delete</a></td>
 				<%
@@ -61,6 +76,7 @@
 			</tr>
 			<%
 				}
+			}
 			%>
 		</table>
 

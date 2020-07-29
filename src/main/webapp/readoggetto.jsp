@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-	pageEncoding="ISO-8859-1" import="it.contrader.dto.OggettoDTO"%>
+	pageEncoding="ISO-8859-1" import="it.contrader.dto.OggettoDTO"
+	import="it.contrader.dto.UserDTO" import="it.contrader.model.User.Usertype"%>
 <html>
 <head>
 <meta charset="utf-8">
@@ -11,11 +12,23 @@
 </head>
 <body>
 	<%@ include file="./css/header.jsp"%>
+	<%
+		UserDTO user = (UserDTO) request.getSession().getAttribute("user");
+	%>
 	<div class="navbar">
 		<a href="/homeadmin.jsp">Home</a>
 		<a href=/user/getall>Users</a>
 		<a href=/magazzino/getall>Magazzino</a>
 		<a class="active" href=/oggetto/getall>Oggetto</a>
+	<%
+		if(user.getUsertype() == Usertype.SUPERUSER){
+	%>
+		<a href="/spedizione/getall">Ordine</a>
+		<a href="/acquisto/getall">Acquisto</a>
+  		<a href="/carrello/getall">Carrello</a>
+	<%
+		}
+	%>
 		<a href="/user/logout" id="logout">Logout</a>
 	</div>
 </body>

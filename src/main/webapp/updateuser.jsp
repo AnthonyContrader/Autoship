@@ -13,11 +13,23 @@
 </head>
 <body>
 <%@ include file="./css/header.jsp" %>
+	<%
+		UserDTO user = (UserDTO) request.getSession().getAttribute("user");
+	%>
 	<div class="navbar">
 		<a href="/homeadmin.jsp">Home</a>
 		<a class="active"  href=/user/getall>Users</a>
 		<a href=/magazzino/getall>Magazzino</a>
 		<a href=/oggetto/getall>Oggetto</a>
+	<%
+		if(user.getUsertype() == Usertype.SUPERUSER){
+	%>
+		<a href="/spedizione/getall">Ordine</a>
+		<a href="/acquisto/getall">Acquisto</a>
+  		<a href="/carrello/getall">Carrello</a>
+	<%
+		}
+	%>
 		<a href="/user/logout" id="logout">Logout</a>
 	</div>
 <br>
@@ -44,8 +56,8 @@
 			type="text" id="pass" name="password" value=<%=u.getPassword()%>> 
     </div>
   </div>
-  <%
-		if (u.getUsertype() != Usertype.ADMIN) {
+	<%
+		if ((u.getUsertype() != Usertype.SUPERUSER && u.getUsertype() != Usertype.ADMIN) || (u.getUsertype() == Usertype.ADMIN && user.getUsertype() == Usertype.SUPERUSER)) {
 	%>
   <div class="row">
     <div class="col-25">
@@ -55,6 +67,7 @@
  			<select id="type" name="usertype">
   				<option value="ADMIN" <%if(u.getUsertype().toString().equals("ADMIN")) {%>selected<%}%>>ADMIN</option>
   				<option value="USER" <%if(u.getUsertype().toString().equals("USER")) {%>selected<%}%>>USER</option>
+				<option value="CORRIERE" <%if(u.getUsertype().toString().equals("CORRIERE")) {%>selected<%}%>>CORRIERE</option>
 			</select>
     	</div>
     	<input type="hidden" name="id" value =<%=u.getId() %>>

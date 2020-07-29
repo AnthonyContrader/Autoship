@@ -36,17 +36,31 @@ public class UserController {
 		UserDTO userDTO = service.findByUsernameAndPassword(username, password);
 		if(userDTO != null) {
 			request.getSession().setAttribute("user", userDTO);
-		
+			String codice;
+			byte[] array;
+			List<String> otp;
 			switch (userDTO.getUsertype()) {
+			
+			case SUPERUSER:
+				array = new byte[5]; // length is bounded by 7
+				otp = getAllCodes();
+				new Random().nextBytes(array);
+				codice = Integer.toString((int)(Math.random() * (5000 - 1000)));
+				while(otp.contains(codice)) {
+					new Random().nextBytes(array);
+					codice = Integer.toString((int)(Math.random() * (5000 - 1000)));
+				}
+				request.getSession().setAttribute("otp", codice);
+				return "homesuperuser";
 			
 			case ADMIN:
 				return "homeadmin";
 		
 			case USER:
-				byte[] array = new byte[5]; // length is bounded by 7
-				List<String> otp = getAllCodes();
+				array = new byte[5]; // length is bounded by 7
+				otp = getAllCodes();
 				new Random().nextBytes(array);
-				String codice = Integer.toString((int)(Math.random() * (5000 - 1000)));
+				codice = Integer.toString((int)(Math.random() * (5000 - 1000)));
 				while(otp.contains(codice)) {
 					new Random().nextBytes(array);
 					codice = Integer.toString((int)(Math.random() * (5000 - 1000)));
