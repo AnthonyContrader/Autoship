@@ -11,8 +11,8 @@ import it.contrader.model.Carrello;
 public class CarrelloConverter extends AbstractConverter<Carrello, CarrelloDTO> {
 	public Carrello toEntity(CarrelloDTO carrelloDTO) {
 		Carrello carrello = null;
-		if (carrello != null) {
-			carrello = new Carrello(carrelloDTO.getId(), carrelloDTO.getUser(), carrelloDTO.getOggetto(), carrelloDTO.getCodice(), carrello.getStato());
+		if (carrelloDTO != null) {
+			carrello = new Carrello(carrelloDTO.getId(), carrelloDTO.getUser(), carrelloDTO.getOggetto(), carrelloDTO.getCodice(), carrelloDTO.getStato());
 		}
 		return carrello ;
 	}
