@@ -33,7 +33,16 @@
 			<th></th>
 		</tr>
 		<%
-			for (CodiceDTO c : list) {
+			if(list.isEmpty()) {
+		%>
+			<tr>
+				<td>No data for Ordine</td>
+				<td></td>
+			</tr>
+		<%
+			}
+			else{
+				for (CodiceDTO c : list) {
 		%>
 		<tr>
 			<td><%=c.getOtp()%></td>
@@ -41,6 +50,7 @@
 			</td>
 			<%
 				}
+			}
 			%>
 		</tr>
 	</table>

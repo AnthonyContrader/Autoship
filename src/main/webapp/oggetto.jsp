@@ -36,7 +36,18 @@
 			<th></th>
 		</tr>
 		<%
-			for (OggettoDTO o : list) {
+			if(list.isEmpty()) {
+		%>
+			<tr>
+				<td>No data for Oggetto</td>
+				<td></td>
+				<td></td>
+				<td></td>
+			</tr>
+		<%
+			}
+			else{
+				for (OggettoDTO o : list) {
 		%>
 		<tr>
 			<td><a href="/oggetto/read?id=<%=o.getId()%>"><%=o.getNome()%></a></td>
@@ -60,6 +71,7 @@
 			<td></td>
 			<%					
 				}
+			}
 			%>
 		</tr>
 		<%

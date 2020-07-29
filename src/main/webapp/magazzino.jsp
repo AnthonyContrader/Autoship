@@ -38,6 +38,17 @@
 			<th></th>
 		</tr>
 			<%
+			if(list.isEmpty()) {
+		%>
+			<tr>
+				<td>No data for Magazzino</td>
+				<td></td>
+				<td></td>
+				<td></td>
+			</tr>
+		<%
+			}
+			else{
 				for (MagazzinoDTO m : list) {
 			%>
 			<tr>
@@ -88,6 +99,7 @@
 		</tr>
 		<%
 			}
+		}
 		%>
 	</table>
 

@@ -24,7 +24,7 @@
 
 <div class="navbar">
   <a class="active" href="/homeuser.jsp">Home</a>
-  <a href="/acquisto/getall">Oggetto</a>
+  <a href="/acquisto/getall">Acquisto</a>
   <a href="/carrello/getall">Ordine</a>
   <a href="/user/logout" id="logout">Logout</a>
 </div>

@@ -16,7 +16,7 @@
 	
 	<div class="navbar">
 	  <a href="/homecorriere.jsp">Home</a>
-	  <a class="active" href="/acquisto/getall">Oggetto</a>
+	  <a class="active" href="/acquisto/getall">Acquisto</a>
 	  <a href="/carrello/getall">Ordine</a>
 	  <a href="/user/logout" id="logout">Logout</a>
 	</div>
@@ -36,7 +36,17 @@
 			<th></th>
 		</tr>
 		<%
-			for (OggettoDTO o : list) {
+			if(list.isEmpty()) {
+		%>
+			<tr>
+				<td>No data for Acquisto</td>
+				<td></td>
+				<td></td>
+			</tr>
+		<%
+			}
+			else{
+				for (OggettoDTO o : list) {
 		%>
 		<tr>
 			<td><%=o.getNome()%></td>
@@ -45,6 +55,7 @@
 			</td>
 			<%
 				}
+			}
 			%>
 		</tr>
 	</table>
