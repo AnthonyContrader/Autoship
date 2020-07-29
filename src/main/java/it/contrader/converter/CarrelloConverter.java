@@ -6,7 +6,6 @@ import it.contrader.dto.CarrelloDTO;
 
 import it.contrader.model.Carrello;
 
-
 @Component
 public class CarrelloConverter extends AbstractConverter<Carrello, CarrelloDTO> {
 	public Carrello toEntity(CarrelloDTO carrelloDTO) {

@@ -3,6 +3,7 @@ package it.contrader.service;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import it.contrader.converter.CarrelloConverter;
 import it.contrader.dao.CarrelloRepository;
@@ -12,6 +13,7 @@ import it.contrader.model.Codice;
 import it.contrader.model.Oggetto;
 import it.contrader.model.User;
 
+@Service
 public class CarrelloService extends AbstractService<Carrello, CarrelloDTO>{
 	@Autowired
 	private CarrelloConverter converter;
