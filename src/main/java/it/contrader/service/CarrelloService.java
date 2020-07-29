@@ -12,7 +12,7 @@ import it.contrader.model.Codice;
 import it.contrader.model.Oggetto;
 import it.contrader.model.User;
 
-public class CarelloService extends AbstractService<Carrello, CarrelloDTO>{
+public class CarrelloService extends AbstractService<Carrello, CarrelloDTO>{
 	@Autowired
 	private CarrelloConverter converter;
 	@Autowired
