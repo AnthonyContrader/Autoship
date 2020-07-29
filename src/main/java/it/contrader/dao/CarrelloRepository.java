@@ -18,5 +18,6 @@ public interface CarrelloRepository extends CrudRepository<Carrello, Long>{
 List <Carrello> findCarrellosByOggetto(Oggetto oggetto);
 List <Carrello> findCarrellosByUser(User user);
 List <Carrello> findCarrellosByCodice(Codice codice);
+Carrello findByOggettoAndCodice(Oggetto oggetto, Codice codice);
 
 }

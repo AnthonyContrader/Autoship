@@ -29,6 +29,10 @@ public class MagazzinoService extends AbstractService<Magazzino, MagazzinoDTO>{
 		return converter.toDTO(repository.findByCodice(codice));
 	}
 	
+	public MagazzinoDTO findByOggettoAndCodice(Oggetto oggetto, Codice codice) {
+		return converter.toDTO(repository.findByOggettoAndCodice(oggetto, codice));
+	}
+	
 	public List<MagazzinoDTO> findMagazzinosByCodice(Codice codice){
 		return converter.toDTOList(repository.findMagazzinosByCodice(codice));
 	}

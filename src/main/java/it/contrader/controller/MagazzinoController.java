@@ -135,8 +135,8 @@ public class MagazzinoController {
 	}
 	
 	private void getObjectNotInCell(HttpServletRequest request) {
-		List<OggettoDTO> listo = oggettoService.getAll();
-		List<OggettoDTO> dummyList = oggettoService.getAll();
+		List<OggettoDTO> listo = oggettoService.findByCancellatoFalse();
+		List<OggettoDTO> dummyList = oggettoService.findByCancellatoFalse();
 		MagazzinoDTO magazzino;
 		
 		for(OggettoDTO oggetto : dummyList) {

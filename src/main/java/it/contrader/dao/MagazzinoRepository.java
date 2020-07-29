@@ -19,6 +19,8 @@ public interface MagazzinoRepository extends CrudRepository<Magazzino, Long> {
 	
 	Magazzino findByCodice(Codice codice);
 	
+	Magazzino findByOggettoAndCodice(Oggetto oggetto, Codice codice);
+	
 	List<Magazzino> findMagazzinosByCodice(Codice codice);
 
 }

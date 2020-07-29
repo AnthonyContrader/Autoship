@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1" import="java.util.List"
-	import="it.contrader.dto.CarrelloDTO" import="it.contrader.dto.UserDTO"
-	import="it.contrader.model.User.Usertype"%>
+	import="it.contrader.dto.CarrelloDTO" import="it.contrader.model.Carrello.CarrelloStato"
+	import="it.contrader.dto.UserDTO" import="it.contrader.model.User.Usertype"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -46,12 +46,14 @@
 			<th>Username</th>
 			<th>Oggetto</th>
 			<th>Stato</th>
+			<th></th>
 		</tr>
 		<%
 			if(list.isEmpty()) {
 		%>
 			<tr>
 				<td>No data for Carrello</td>
+				<td></td>
 				<td></td>
 				<td></td>
 			</tr>
@@ -65,6 +67,16 @@
 			<td><%=c.getOggetto().getNome()%></td>
 			<td><%=c.getStato()%></td>
 			<%
+				if(c.getStato() == CarrelloStato.Ordinato) {
+			%>
+			<td><a href="/carrello/delete?id=<%=c.getId()%>">Delete</a></td>
+			<%
+				}
+				else {
+			%>
+				<td></td>
+			<%
+					}
 				}
 			}
 			%>
