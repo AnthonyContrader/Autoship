@@ -10,7 +10,7 @@
 <meta name="description" content="Carrello Management">
 <meta name="author" content="Vittorio Valent">
 <link href="/css/vittoriostyle.css" rel="stylesheet">
-<title>Read Carrello</title>
+<title>Carrello Management</title>
 </head>
 <body>
 	<%@ include file="../css/header.jsp" %>
@@ -51,7 +51,7 @@
 			if(list.isEmpty()) {
 		%>
 			<tr>
-				<td>No data for Ordine</td>
+				<td>No data for Carrello</td>
 				<td></td>
 				<td></td>
 			</tr>
@@ -61,8 +61,8 @@
 				for (CarrelloDTO c : list) {
 		%>
 		<tr>
-			<td><%=c.getUser().getUsername%></td>
-			<td><%=c.getOggetto().getNome%></td>
+			<td><%=c.getUser().getUsername()%></td>
+			<td><%=c.getOggetto().getNome()%></td>
 			<td><%=c.getStato()%></td>
 			<%
 				}
