@@ -66,26 +66,31 @@ h2 {
 	
 }
 .login{
-	width:30%;
+	width: 20%;
 	margin: auto auto;
 	margin-top: 5%;
 	z-index:1;
 }
 
-.login input {
+.sr-only {
+	clear: both;
+	width:100%;
 	text-align: center;
-	float: center;
+	height: 2%;
+	padding: 0;
+	margin-bottom: 0%;
+}
+
+.form-control {
+	text-align: center;
 	clear: both;
 	width:90%;
 	margin-left:5%;
 	margin-right:5%;
 }
 
-.login label {
-	float: center;
-	clear: both;
-	width:100%;
-	text-align: center;
+#inputUser{
+	margin-bottom: 10%;
 }
 
 /* Anchors */
