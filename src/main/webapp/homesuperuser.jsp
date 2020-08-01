@@ -20,7 +20,7 @@
 
 
 	<div class="navbar">
-		<a class="active" href="/homeadmin.jsp">Home</a>
+		<a class="active" href="/homesuperuser.jsp">Home</a>
 		<a href=/user/getall>Users</a>
 		<a href=/magazzino/getall>Magazzino</a>
 		<a href=/oggetto/getall>Oggetto</a>

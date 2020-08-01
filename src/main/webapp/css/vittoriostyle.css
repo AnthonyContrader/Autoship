@@ -13,7 +13,7 @@ div.text{
 
 .header {
 	text-align: center;
-	font-size: 800%;
+	font-size: 10.3vw;
 	font-family: sans-serif;
 	color: #00a990;
 }
@@ -23,13 +23,13 @@ div.text{
 	margin-left: 5%;
 	margin-bottom: 5%;
 	width: 90%;
-	font-size: 15px;
+	font-size: 1.2vw;
 	text-align: justify;
 }
 
 .footer {
 	text-align: center;
-	font-size: 70%;
+	font-size: 0.9vw;
 	background-color: #00a990;
 	color: #ffffff;
 	width: 100%;
@@ -45,7 +45,7 @@ div.text{
 h1 {
 	position: center;
 	text-align: center;
-	size: 300%;
+	font-size: 2.5vw;
 	font-family: sans-serif;
 	color: #000000;
 }
@@ -79,6 +79,7 @@ h2 {
 	height: 2%;
 	padding: 0;
 	margin-bottom: 0%;
+	font-size: 1.3vw;
 }
 
 .form-control {
@@ -87,10 +88,15 @@ h2 {
 	width:90%;
 	margin-left:5%;
 	margin-right:5%;
+	font-size: 1.3vw;
 }
 
 #inputUser{
 	margin-bottom: 10%;
+}
+
+.login button{
+	font-size: 1.75vw;
 }
 
 /* Anchors */
@@ -125,6 +131,7 @@ table {
 	width: 50%;
 	border-radius:4px;
     -moz-border-radius:4px;
+    font-size: 1.29vw;
 }
 
 .tableRead {
@@ -165,6 +172,7 @@ select {
   border-radius: 4px;
   background-color: #f2f2f2;
   margin: 4% 0;
+  font-size: 1.1vw;
 }
 select:hover {
   background-color:  #00ccad;
@@ -179,6 +187,7 @@ width: 100%;
   border: 1px solid #ccc;
   border-radius: 4px;
   cursor: pointer;
+  font-size: 1.1vw;
 	
 }
 
@@ -195,6 +204,7 @@ input {
   border-radius: 4px;
   cursor: pointer;
   float:right;
+  font-size: 1.1vw;
 }
 
 input:hover {
@@ -254,7 +264,7 @@ button {
   text-align: center;
   text-decoration: none;
   display: inline-block;
-  font-size: 130%;
+  font-size: 1.56vw;
   margin-left: 10%;
   margin-right: 10%;
   margin-top: 5%;
@@ -312,7 +322,7 @@ div.navbar a {
 	text-align: center;
 	padding: 1% 2%;
 	text-decoration: none;
-	font-size: 17px;
+	font-size: 1.37vw;
 	border-radius: 7px;
 	background: #00a990;
 }

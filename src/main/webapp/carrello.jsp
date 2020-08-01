@@ -18,8 +18,17 @@
 		UserDTO user = (UserDTO) request.getSession().getAttribute("user");
 	%>
 	<div class="navbar">
-	  <a href="/homecorriere.jsp">Home</a>
-	  <%
+	<%
+		if(user.getUsertype() == Usertype.SUPERUSER){
+	%>
+	  <a href="/homesuperuser.jsp">Home</a>
+	 <%
+		}
+	 	else{
+	%>
+	  <a href="/homeuser.jsp">Home</a>
+	 <%
+	 	}
 		if(user.getUsertype() == Usertype.SUPERUSER){
 	%>
 		<a href=/user/getall>Users</a>
