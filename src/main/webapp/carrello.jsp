@@ -18,7 +18,39 @@
 		UserDTO user = (UserDTO) request.getSession().getAttribute("user");
 	%>
 	<div class="navbar">
-	<%
+		<%
+			if(user.getUsertype() == Usertype.SUPERUSER){
+		%>
+		  <a href="/homesuperuser.jsp">Home</a>
+		 <%
+			}
+		 	else{
+		%>
+		  <a href="/homeuser.jsp">Home</a>
+		 <%
+		 	}
+			if(user.getUsertype() == Usertype.SUPERUSER){
+		%>
+			<a href=/user/getall>Users</a>
+			<a href=/magazzino/getall>Magazzino</a>
+			<a href=/oggetto/getall>Oggetto</a>
+			<a href="/spedizione/getall">Ordine</a>
+		<%
+			}
+		%>
+		  <a href="/acquisto/getall">Acquisto</a>
+		  <a class="active" href="/carrello/getall">Carrello</a>
+		  <a href="/user/logout" id="logout">Logout</a>
+	</div>
+	
+	<div class="navbar-small">
+		<div>
+			<button type="button" onclick="showSubMenu()">Menu</button>
+			<a href="/user/logout" id="logout">Logout</a>
+		</div>
+		<div id="sub-menu-container">
+			<div id="sub-menu">
+					<%
 		if(user.getUsertype() == Usertype.SUPERUSER){
 	%>
 	  <a href="/homesuperuser.jsp">Home</a>
@@ -40,15 +72,15 @@
 	%>
 	  <a href="/acquisto/getall">Acquisto</a>
 	  <a class="active" href="/carrello/getall">Carrello</a>
-	  <a href="/user/logout" id="logout">Logout</a>
+			</div>
+		</div>
 	</div>
 	
 <div class="main">
-
+<br>
 	<%
 		List<CarrelloDTO> list = (List<CarrelloDTO>) request.getAttribute("list");
 	%>
-<br>
 
 	<table class="tableRead">
 		<tr>
@@ -95,5 +127,6 @@
 </div>
 <br>
 <%@ include file="../css/footer.jsp" %>
+<script type="text/javascript" src="/js/subMenu.js"></script>
 </body>
 </html>

@@ -24,7 +24,21 @@
   <a href="/user/logout" id="logout">Logout</a>
 </div>
 
+<div class="navbar-small">
+	<div>
+		<button type="button" onclick="showSubMenu()">Menu</button>
+		<a href="/user/logout" id="logout">Logout</a>
+	</div>
+	<div id="sub-menu-container">
+		<div id="sub-menu">
+			<a class="active" href="/homecorriere.jsp">Home</a>
+  			<a href="/spedizione/getall">Ordine</a>
+		</div>
+	</div>
+</div>
+
 <div class="main">
+<br>
 <h1>Welcome ${user.getUsername()}</h1>
 
 	"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
@@ -36,6 +50,6 @@
 </div>
 
 <%@ include file="css/footer.jsp" %>
-
+<script type="text/javascript" src="/js/subMenu.js"></script>
 </body>
 </html>

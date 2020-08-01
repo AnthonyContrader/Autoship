@@ -342,6 +342,10 @@
 		color: #ffffff;
 	}
 	
+	div.navbar-small{
+		display: none;
+	}
+	
 	/*Images*/
 	.imgheader {
 		position: center; z-index : -1;

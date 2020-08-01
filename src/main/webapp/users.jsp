@@ -16,37 +16,71 @@
 	%>
 	<div class="navbar">
 		<%
-		if(user.getUsertype() == Usertype.SUPERUSER){
-	%>
-	  <a href="/homesuperuser.jsp">Home</a>
-	<%
-		}
-	 	else{
-	%>
-		<a href="/homeadmin.jsp">Home</a>
-	<%
-	 	}
-	%>
-		<a class="active"  href=/user/getall>Users</a>
-		<a href=/magazzino/getall>Magazzino</a>
-		<a href=/oggetto/getall>Oggetto</a>
-	<%
-		if(user.getUsertype() == Usertype.SUPERUSER){
-	%>
-		<a href="/spedizione/getall">Ordine</a>
-		<a href="/acquisto/getall">Acquisto</a>
-  		<a href="/carrello/getall">Carrello</a>
-	<%
-		}
-	%>
-		<a href="/user/logout" id="logout">Logout</a>
+			if(user.getUsertype() == Usertype.SUPERUSER){
+		%>
+		  <a href="/homesuperuser.jsp">Home</a>
+		<%
+			}
+		 	else{
+		%>
+			<a href="/homeadmin.jsp">Home</a>
+		<%
+		 	}
+		%>
+			<a class="active"  href=/user/getall>Users</a>
+			<a href=/magazzino/getall>Magazzino</a>
+			<a href=/oggetto/getall>Oggetto</a>
+		<%
+			if(user.getUsertype() == Usertype.SUPERUSER){
+		%>
+			<a href="/spedizione/getall">Ordine</a>
+			<a href="/acquisto/getall">Acquisto</a>
+	  		<a href="/carrello/getall">Carrello</a>
+		<%
+			}
+		%>
+			<a href="/user/logout" id="logout">Logout</a>
+	</div>
+	
+	<div class="navbar-small">
+		<div>
+			<button type="button" onclick="showSubMenu()">Menu</button>
+			<a href="/user/logout" id="logout">Logout</a>
+		</div>
+		<div id="sub-menu-container">
+			<div id="sub-menu">
+				<%
+					if(user.getUsertype() == Usertype.SUPERUSER){
+				%>
+				  <a href="/homesuperuser.jsp">Home</a>
+				<%
+					}
+				 	else{
+				%>
+					<a href="/homeadmin.jsp">Home</a>
+				<%
+				 	}
+				%>
+					<a class="active"  href=/user/getall>Users</a>
+					<a href=/magazzino/getall>Magazzino</a>
+					<a href=/oggetto/getall>Oggetto</a>
+				<%
+					if(user.getUsertype() == Usertype.SUPERUSER){
+				%>
+					<a href="/spedizione/getall">Ordine</a>
+					<a href="/acquisto/getall">Acquisto</a>
+			  		<a href="/carrello/getall">Carrello</a>
+				<%
+					}
+				%>
+			</div>
+		</div>
 	</div>
 	<div class="main">
+	<br>
 		<%
 			List<UserDTO> list = (List<UserDTO>) request.getSession().getAttribute("list");
 		%>
-
-		<br>
 
 		<table class=tableInsert>
 			<tr>
@@ -128,5 +162,6 @@
 	</div>
 	<br>
 	<%@ include file="./css/footer.jsp"%>
+	<script type="text/javascript" src="/js/subMenu.js"></script>
 </body>
 </html>

@@ -29,8 +29,27 @@
   		<a href="/carrello/getall">Carrello</a>
 		<a href="/user/logout" id="logout">Logout</a>
 	</div>
+	
+	<div class="navbar-small">
+		<div>
+			<button type="button" onclick="showSubMenu()">Menu</button>
+			<a href="/user/logout" id="logout">Logout</a>
+		</div>
+		<div id="sub-menu-container">
+			<div id="sub-menu">
+				<a class="active" href="/homesuperuser.jsp">Home</a>
+				<a href=/user/getall>Users</a>
+				<a href=/magazzino/getall>Magazzino</a>
+				<a href=/oggetto/getall>Oggetto</a>
+				<a href="/spedizione/getall">Ordine</a>
+				<a href="/acquisto/getall">Acquisto</a>
+		  		<a href="/carrello/getall">Carrello</a>
+			</div>
+		</div>
+	</div>
 
 	<div class="main">
+	<br>
 		<h1>Welcome ${user.getUsername()}</h1>
 
 		"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
@@ -73,6 +92,6 @@
 
 
 	<%@ include file="css/footer.jsp"%>
-
+	<script type="text/javascript" src="/js/subMenu.js"></script>
 </body>
 </html>
