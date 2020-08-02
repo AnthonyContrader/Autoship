@@ -109,7 +109,7 @@ public class UserController {
 	public String delete(HttpServletRequest request, @RequestParam("id") Long id) {
 		UserDTO user = service.read(id);
 		List<CarrelloDTO> carrello = carrelloService.findCarrellosByUser(converter.toEntity(user));
-		CodiceDTO codice;
+		CodiceDTO codice = new CodiceDTO();
 		List<MagazzinoDTO> magazzinoList;
 		for(CarrelloDTO c : carrello) {
 			codice = codiceService.read(c.getCodice().getId());
@@ -118,8 +118,13 @@ public class UserController {
 				m.setCodice(null);
 				magazzinoService.update(m);
 			}
+			c.setCodice(null);
+			c.setUser(null);
 			carrelloService.delete(c.getId());
-			codiceService.delete(codice.getId());
+			List<CarrelloDTO> codiceList = carrelloService.findCarrellosByCodice(codiceConverter.toEntity(codice));
+			if(codiceList.isEmpty()) {
+				codiceService.delete(codice.getId());
+			}
 		}
 		service.delete(id);
 		setAll(request);

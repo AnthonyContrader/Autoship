@@ -91,21 +91,21 @@
 				<th></th>
 			</tr>
 			<%
-				for (UserDTO u : list) {
-					if(!(u.getUsertype() == Usertype.SUPERUSER && user.getUsertype() != Usertype.SUPERUSER)){
+				for (UserDTO ul : list) {
+					if(!(ul.getUsertype() == Usertype.SUPERUSER && user.getUsertype() != Usertype.SUPERUSER)){
 			%>
 			<tr>
-				<td><a href="/user/read?id=<%=u.getId()%>"> <%=u.getUsername()%>
+				<td><a href="/user/read?id=<%=ul.getId()%>"> <%=ul.getUsername()%>
 				</a></td>
-				<td><%=u.getPassword()%></td>
-				<td><%=u.getUsertype()%></td>
-				<td><a href="/user/preupdate?id=<%=u.getId()%>">Edit</a></td>
+				<td><%=ul.getPassword()%></td>
+				<td><%=ul.getUsertype()%></td>
+				<td><a href="/user/preupdate?id=<%=ul.getId()%>">Edit</a></td>
 
 
 				<%
-					if ((u.getUsertype() != Usertype.SUPERUSER && u.getUsertype() != Usertype.ADMIN) || (u.getUsertype() == Usertype.ADMIN && user.getUsertype() == Usertype.SUPERUSER)) {
+					if ((ul.getUsertype() != Usertype.SUPERUSER && ul.getUsertype() != Usertype.ADMIN) || (ul.getUsertype() == Usertype.ADMIN && user.getUsertype() == Usertype.SUPERUSER)) {
 				%>
-					<td><a href="/user/delete?id=<%=u.getId()%>">Delete</a></td>
+					<td><a href="/user/delete?id=<%=ul.getId()%>">Delete</a></td>
 				<%
 					}
 					else {

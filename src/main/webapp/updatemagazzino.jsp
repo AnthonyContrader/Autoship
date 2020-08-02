@@ -84,7 +84,7 @@
 <br>
 
 <%MagazzinoDTO m = (MagazzinoDTO) request.getAttribute("dto");%>
-<%List<OggettoDTO> oggetti = (List<OggettoDTO>) request.getAttribute("listo");%>
+<%List<OggettoDTO> oggetti = (List<OggettoDTO>) request.getAttribute("oggetti");%>
 
 <form id="center" action="/magazzino/update?id=<%=m.getId()%>" method="post">
   <div class="row">

@@ -84,7 +84,7 @@
 <br>
 	<%
 		List<MagazzinoDTO> list = (List<MagazzinoDTO>) request.getAttribute("list");
-		List<OggettoDTO> listo = (List<OggettoDTO>) request.getAttribute("listo");
+		List<OggettoDTO> ol = (List<OggettoDTO>) request.getAttribute("oggetti");
 	%>
 
 	<table class="tableInsert">
@@ -170,7 +170,7 @@
     <div class="col-75">
 	   <select id="id_oggetto" name="id_oggetto">
 	    	<% 
-	    		for(OggettoDTO o : listo) {
+	    		for(OggettoDTO o : ol) {
 	    	%>
 	  			<option value=<%=o.getId()%>><%=o.getNome()%></option>
 		 	<%

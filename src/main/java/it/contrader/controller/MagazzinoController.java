@@ -135,17 +135,17 @@ public class MagazzinoController {
 	}
 	
 	private void getObjectNotInCell(HttpServletRequest request) {
-		List<OggettoDTO> listo = oggettoService.findByCancellatoFalse();
+		List<OggettoDTO> oggettoList = oggettoService.findByCancellatoFalse();
 		List<OggettoDTO> dummyList = oggettoService.findByCancellatoFalse();
 		MagazzinoDTO magazzino;
 		
 		for(OggettoDTO oggetto : dummyList) {
 			magazzino = service.findByOggetto(oggettoConverter.toEntity(oggetto));
 			if(magazzino != null) {
-				listo.remove(oggetto);
+				oggettoList.remove(oggetto);
 			}
 		}
 		
-		request.setAttribute("listo", listo);
+		request.setAttribute("oggetti", oggettoList);
 	}
 }
