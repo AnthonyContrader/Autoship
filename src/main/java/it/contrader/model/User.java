@@ -19,7 +19,7 @@ import lombok.NoArgsConstructor;
 public class User {
 
 	public enum Usertype {
-		SUPERUSER, ADMIN, USER, CORRIERE
+		SUPERUTENTE, AMMINISTRATORE, CORRIERE, UTENTE
 	}
 
 	@Id

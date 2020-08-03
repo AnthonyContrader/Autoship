@@ -60,7 +60,7 @@ public class UserController {
 			List<String> otp;
 			switch (userDTO.getUsertype()) {
 			
-			case SUPERUSER:
+			case SUPERUTENTE:
 				array = new byte[5]; // length is bounded by 7
 				otp = getAllCodes();
 				new Random().nextBytes(array);
@@ -72,10 +72,13 @@ public class UserController {
 				request.getSession().setAttribute("otp", codice);
 				return "homesuperuser";
 			
-			case ADMIN:
+			case AMMINISTRATORE:
 				return "homeadmin";
+				
+			case CORRIERE:
+				return "homecorriere";
 		
-			case USER:
+			case UTENTE:
 				array = new byte[5]; // length is bounded by 7
 				otp = getAllCodes();
 				new Random().nextBytes(array);
@@ -86,9 +89,6 @@ public class UserController {
 				}
 				request.getSession().setAttribute("otp", codice);
 				return "homeuser";
-					
-			case CORRIERE:
-				return "homecorriere";
 		
 			default:
 			return "index";
@@ -101,7 +101,13 @@ public class UserController {
 
 	@GetMapping("/getall")
 	public String getAll(HttpServletRequest request) {
-		setAll(request);
+		UserDTO user = (UserDTO) request.getSession().getAttribute("user");
+		if(user.getUsertype().equals(Usertype.SUPERUTENTE) || user.getUsertype().equals(Usertype.AMMINISTRATORE)){
+			setAll(request);
+		}
+		else {
+			request.getSession().setAttribute("dto", service.read(user.getId()));
+		}
 		return "users";
 	}
 
@@ -140,14 +146,19 @@ public class UserController {
 	@PostMapping("/update")
 	public String update(HttpServletRequest request, @RequestParam("id") Long id, @RequestParam("username") String username,
 			@RequestParam("password") String password, @RequestParam("usertype") Usertype usertype) {
-
+		UserDTO user = (UserDTO) request.getSession().getAttribute("user");
 		UserDTO dto = new UserDTO();
 		dto.setId(id);
 		dto.setUsername(username);
 		dto.setPassword(password);
 		dto.setUsertype(usertype);
 		service.update(dto);
-		setAll(request);
+		if(user.getUsertype().equals(Usertype.SUPERUTENTE) || user.getUsertype().equals(Usertype.AMMINISTRATORE)){
+			setAll(request);
+		}
+		else {
+			request.getSession().setAttribute("dto", service.read(id));
+		}
 		return "users";
 
 	}
