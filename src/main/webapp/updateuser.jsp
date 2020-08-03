@@ -29,7 +29,7 @@
 		<%
 		 	}
 		%>
-			<a class="active"  href=/user/getall>Users</a>
+			<a class="active"  href=/user/getall>Utente</a>
 			<a href=/magazzino/getall>Magazzino</a>
 			<a href=/oggetto/getall>Oggetto</a>
 		<%
@@ -63,7 +63,7 @@
 				<%
 				 	}
 				%>
-					<a class="active"  href=/user/getall>Users</a>
+					<a class="active"  href=/user/getall>Utente</a>
 					<a href=/magazzino/getall>Magazzino</a>
 					<a href=/oggetto/getall>Oggetto</a>
 				<%
@@ -108,7 +108,7 @@
 	%>
   <div class="row">
     <div class="col-25">
-      <label for="type">Usertype</label>
+      <label for="type">Tipo</label>
     </div>
    		 <div class="col-75">
  			<select id="type" name="usertype">
@@ -122,7 +122,7 @@
  	<%
 		}
 	%>
-      <button type="submit" >Edit</button>
+      <button type="submit" >Modifica</button>
 </form>
 
 	

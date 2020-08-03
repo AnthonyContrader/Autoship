@@ -6,7 +6,7 @@
 <meta charset="ISO-8859-1">
 </head>
 <body>
-	<div class="footer">Stuff about copyright, legal notes and other
-		useless informations...</div>
+	<div class="footer">Cose su copyright, note legali e altre
+		informazioni inutili...</div>
 </body>
 </html>

@@ -10,7 +10,7 @@
 <meta name="description" content="Magazzino Edit page">
 <meta name="author" content="Vittorio Valent">
 <link href="/css/vittoriostyle.css" rel="stylesheet">
-<title>Edit Magazzino</title>
+<title>Modifica Magazzino</title>
 </head>
 <body>
 <%@ include file="../css/header.jsp" %>
@@ -30,7 +30,7 @@
 		<%
 		 	}
 		%>
-			<a href=/user/getall>Users</a>
+			<a href=/user/getall>Utente</a>
 			<a class="active" href=/magazzino/getall>Magazzino</a>
 			<a href=/oggetto/getall>Oggetto</a>
 		<%
@@ -64,7 +64,7 @@
 				<%
 				 	}
 				%>
-					<a href=/user/getall>Users</a>
+					<a href=/user/getall>Utente</a>
 					<a class="active" href=/magazzino/getall>Magazzino</a>
 					<a href=/oggetto/getall>Oggetto</a>
 				<%
@@ -119,7 +119,7 @@
       <input type="number" id="capienza" name="capienza" value="<%=m.getCapienza()%>" required>
     </div>
   </div>
-      <button type="submit" >Edit</button>
+      <button type="submit" >Modifica</button>
 </form>
 
 	

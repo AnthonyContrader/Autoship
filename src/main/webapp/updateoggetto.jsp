@@ -30,7 +30,7 @@
 		<%
 		 	}
 		%>
-			<a href=/user/getall>Users</a>
+			<a href=/user/getall>Utente</a>
 			<a href=/magazzino/getall>Magazzino</a>
 			<a class="active" href=/oggetto/getall>Oggetto</a>
 		<%
@@ -64,7 +64,7 @@
 				<%
 				 	}
 				%>
-					<a href=/user/getall>Users</a>
+					<a href=/user/getall>Utente</a>
 					<a href=/magazzino/getall>Magazzino</a>
 					<a class="active" href=/oggetto/getall>Oggetto</a>
 				<%
@@ -97,14 +97,14 @@
   </div>
        <div class="row">
     <div class="col-25">
-      <label for="nome">Dimensione</label>
+      <label for="dimensione">Dimensione</label>
     </div>
     <div class="col-75">
       <input type="number" id="dimensione" name="dimensione" value="<%=o.getDimensione()%>" required>
     </div>
     <input type="hidden" name="id" value =<%=o.getId() %>>
   </div>
-      <button type="submit" >Edit</button>
+      <button type="submit" >Modifica</button>
 </form>
 
 	

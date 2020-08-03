@@ -10,7 +10,7 @@
 <meta name="description" content="Spedizione Management">
 <meta name="author" content="Vittorio Valent">
 <link href="/css/vittoriostyle.css" rel="stylesheet">
-<title>Spedizione Manager</title>
+<title>Gestione Spedizione</title>
 </head>
 <body>
 	<%@ include file="../css/header.jsp" %>
@@ -31,7 +31,7 @@
 		 	}
 			if(user.getUsertype() == Usertype.SUPERUSER){
 		%>
-			<a href=/user/getall>Users</a>
+			<a href=/user/getall>Utente</a>
 			<a href=/magazzino/getall>Magazzino</a>
 			<a href=/oggetto/getall>Oggetto</a>
 		<%
@@ -69,7 +69,7 @@
 				 	}
 					if(user.getUsertype() == Usertype.SUPERUSER){
 				%>
-					<a href=/user/getall>Users</a>
+					<a href=/user/getall>Utente</a>
 					<a href=/magazzino/getall>Magazzino</a>
 					<a href=/oggetto/getall>Oggetto</a>
 				<%
@@ -103,7 +103,7 @@
 			if(list.isEmpty()) {
 		%>
 			<tr>
-				<td>No data for Ordine</td>
+				<td>Nessun dato</td>
 				<td></td>
 			</tr>
 		<%

@@ -10,7 +10,7 @@
 <meta name="description" content="Carrello Management">
 <meta name="author" content="Vittorio Valent">
 <link href="/css/vittoriostyle.css" rel="stylesheet">
-<title>Carrello Management</title>
+<title>Gestione Carrello</title>
 </head>
 <body>
 	<%@ include file="../css/header.jsp" %>
@@ -31,7 +31,7 @@
 		 	}
 			if(user.getUsertype() == Usertype.SUPERUSER){
 		%>
-			<a href=/user/getall>Users</a>
+			<a href=/user/getall>Utente</a>
 			<a href=/magazzino/getall>Magazzino</a>
 			<a href=/oggetto/getall>Oggetto</a>
 			<a href="/spedizione/getall">Ordine</a>
@@ -63,7 +63,7 @@
 	 	}
 		if(user.getUsertype() == Usertype.SUPERUSER){
 	%>
-		<a href=/user/getall>Users</a>
+		<a href=/user/getall>Utente</a>
 		<a href=/magazzino/getall>Magazzino</a>
 		<a href=/oggetto/getall>Oggetto</a>
 		<a href="/spedizione/getall">Ordine</a>
@@ -93,7 +93,7 @@
 			if(list.isEmpty()) {
 		%>
 			<tr>
-				<td>No data for Carrello</td>
+				<td>Nessun dato</td>
 				<td></td>
 				<td></td>
 				<td></td>
@@ -110,7 +110,7 @@
 			<%
 				if(c.getStato() == CarrelloStato.Ordinato) {
 			%>
-			<td><a href="/carrello/delete?id=<%=c.getId()%>">Delete</a></td>
+			<td><a href="/carrello/delete?id=<%=c.getId()%>">Elimina</a></td>
 			<%
 				}
 				else {

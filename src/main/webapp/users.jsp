@@ -27,7 +27,7 @@
 		<%
 		 	}
 		%>
-			<a class="active"  href=/user/getall>Users</a>
+			<a class="active"  href=/user/getall>Utente</a>
 			<a href=/magazzino/getall>Magazzino</a>
 			<a href=/oggetto/getall>Oggetto</a>
 		<%
@@ -61,7 +61,7 @@
 				<%
 				 	}
 				%>
-					<a class="active"  href=/user/getall>Users</a>
+					<a class="active"  href=/user/getall>Utente</a>
 					<a href=/magazzino/getall>Magazzino</a>
 					<a href=/oggetto/getall>Oggetto</a>
 				<%
@@ -86,7 +86,7 @@
 			<tr>
 				<th>Username</th>
 				<th>Password</th>
-				<th>Usertype</th>
+				<th>Tipo</th>
 				<th></th>
 				<th></th>
 			</tr>
@@ -99,13 +99,13 @@
 				</a></td>
 				<td><%=ul.getPassword()%></td>
 				<td><%=ul.getUsertype()%></td>
-				<td><a href="/user/preupdate?id=<%=ul.getId()%>">Edit</a></td>
+				<td><a href="/user/preupdate?id=<%=ul.getId()%>">Modifica</a></td>
 
 
 				<%
 					if ((ul.getUsertype() != Usertype.SUPERUSER && ul.getUsertype() != Usertype.ADMIN) || (ul.getUsertype() == Usertype.ADMIN && user.getUsertype() == Usertype.SUPERUSER)) {
 				%>
-					<td><a href="/user/delete?id=<%=ul.getId()%>">Delete</a></td>
+					<td><a href="/user/delete?id=<%=ul.getId()%>">Elimina</a></td>
 				<%
 					}
 					else {
@@ -145,7 +145,7 @@
 			</div>
 			<div class="row">
 				<div class="col-25">
-					<label for="type">Usertype</label>
+					<label for="type">Tipo</label>
 				</div>
 				<div class="col-75">
 					<select id="type" name="usertype">
@@ -156,7 +156,7 @@
 					</select>
 				</div>
 			</div>
-			<button type="submit">Insert</button>
+			<button type="submit">Inserisci</button>
 		</form>
 
 	</div>

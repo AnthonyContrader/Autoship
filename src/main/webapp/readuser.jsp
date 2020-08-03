@@ -8,7 +8,7 @@
 <meta name="description" content="User Read">
 <meta name="author" content="Vittorio Valent">
 <link href="/css/vittoriostyle.css" rel="stylesheet">
-<title>Read User</title>
+<title>Lettore Utente</title>
 </head>
 <body>
 	<%@ include file="./css/header.jsp"%>
@@ -28,7 +28,7 @@
 		<%
 		 	}
 		%>
-			<a class="active"  href=/user/getall>Users</a>
+			<a class="active"  href=/user/getall>Utente</a>
 			<a href=/magazzino/getall>Magazzino</a>
 			<a href=/oggetto/getall>Oggetto</a>
 		<%
@@ -62,7 +62,7 @@
 				<%
 				 	}
 				%>
-					<a class="active"  href=/user/getall>Users</a>
+					<a class="active"  href=/user/getall>Utente</a>
 					<a href=/magazzino/getall>Magazzino</a>
 					<a href=/oggetto/getall>Oggetto</a>
 				<%
@@ -90,7 +90,7 @@
 				<th>ID</th>
 				<th>Username</th>
 				<th>Password</th>
-				<th>Usertype</th>
+				<th>Tipo</th>
 			</tr>
 			<tr>
 				<td><%=u.getId()%></td>

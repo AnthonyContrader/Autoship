@@ -10,7 +10,7 @@
 <meta name="description" content="Oggetto Management">
 <meta name="author" content="Vittorio Valent">
 <link href="/css/vittoriostyle.css" rel="stylesheet">
-<title>Oggetto Manager</title>
+<title>Gestione Oggetto</title>
 </head>
 <body>
 <%@ include file="../css/header.jsp" %>
@@ -30,7 +30,7 @@
 	<%
 	 	}
 	%>
-		<a href=/user/getall>Users</a>
+		<a href=/user/getall>Utente</a>
 		<a href=/magazzino/getall>Magazzino</a>
 		<a class="active" href=/oggetto/getall>Oggetto</a>
 	<%
@@ -64,7 +64,7 @@
 				<%
 				 	}
 				%>
-					<a href=/user/getall>Users</a>
+					<a href=/user/getall>Utente</a>
 					<a href=/magazzino/getall>Magazzino</a>
 					<a class="active" href=/oggetto/getall>Oggetto</a>
 				<%
@@ -96,7 +96,7 @@
 			if(list.isEmpty()) {
 		%>
 			<tr>
-				<td>No data for Oggetto</td>
+				<td>Nessun dato</td>
 				<td></td>
 				<td></td>
 				<td></td>
@@ -110,15 +110,15 @@
 			<td><a href="/oggetto/read?id=<%=o.getId()%>"><%=o.getNome()%></a></td>
 			<td><%=o.getDimensione()%></td>
 			<% if(o.isCella() == false && o.isCancellato() == false) { %>
-				<td><a href="/oggetto/preupdate?id=<%=o.getId()%>">Edit</a>
+				<td><a href="/oggetto/preupdate?id=<%=o.getId()%>">Modifica</a>
 				</td>
-				<td><a href="/oggetto/delete?id=<%=o.getId()%>">Delete</a>
+				<td><a href="/oggetto/delete?id=<%=o.getId()%>">Elimina</a>
 				</td>
 			<% 
 				}
 				else if(o.isCancellato() == true){
 			%>
-				<td><a href="/oggetto/reinsert?id=<%=o.getId()%>">Out of Stock</a></td>
+				<td><a href="/oggetto/reinsert?id=<%=o.getId()%>">Esaurito</a></td>
 				<td></td>
 			<% 
 				}
@@ -155,7 +155,7 @@
       <input type="number" id="dimensione" name="dimensione" placeholder="inserisci dimensione" required>
     </div>
   </div>
-      <button type="submit" >Insert</button>
+      <button type="submit" >Inserisci</button>
 </form>
 
 </div>

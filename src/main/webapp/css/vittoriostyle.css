@@ -520,7 +520,7 @@
 	}
 	
 	.tableInsert {
-		float:left;
+		margin: auto auto;
 	}	
 	
 	th, td {
@@ -701,7 +701,8 @@
 		float:left;
 	}
 	#floatright {
-		float: right;
+		margin: auto auto;
+		margin-top: 5%;
 	}
 	#floattop {
 		float:top;
@@ -715,19 +716,49 @@
 	
 	/*Navigation bar*/
 	div.navbar {
-		background: #00a990;
-		overflow: hidden;
+		display: none;
+	}
+	
+	div.navbar-small{
+		overflow: visile;
 		position: sticky;
 		width: 100%;
 		top: 0;
 		z-index: 2;
-		border-radius: 7px;
 		position: -webkit-sticky; /* Safari */
 		display: inline-block;
 	}
 	
-	div.navbar a {
+	div.navbar-small div{
+		overflow: hidden;
+		background: #00a990;
+		border-radius: 7px;
+		position: relative;
+		height: fit-content;
+	}
+	
+	div.navbar-small div button{
 		float: left;
+		display: block;
+		color: #ffffff;
+		text-align: center;
+		padding: 1% 2%;
+		text-decoration: none;
+		font-size: 1.955vw;
+		border-radius: 7px;
+		background: #00a990;
+		border: none;
+		width: fit-content;
+		margin: 0 0;
+		outline: none;
+	}
+	
+	div.navbar-small div button:hover{
+		background: #00ccad;
+		color: #ffffff;
+	}
+	
+	div.navbar-small div a{
 		display: block;
 		color: #ffffff;
 		text-align: center;
@@ -738,18 +769,46 @@
 		background: #00a990;
 	}
 	
-	div.navbar a:hover {
+	div.navbar-small div a:hover{
 		background: #00ccad;
 		color: #ffffff;
 	}
 	
-	div.navbar a.active {
-		background: #00ccad;
-		color: #ffffff;
-	}
-	
-	div.navbar-small{
+	#sub-menu-container{
+		position: relative;
+		overflow: visible;
 		display: none;
+		height: auto;
+	}
+	
+	#sub-menu{
+		display: block;
+		background: #00a990;
+		position: absolute;
+		z-index: 2;
+		width: 12%;
+		border-radius: 0 0 7px 7px;
+	}
+	
+	#sub-menu a{
+		display: block;
+		color: #ffffff;
+		text-align: center;
+		padding: 8% 2%;
+		text-decoration: none;
+		font-size: 1.955vw;
+		border-radius: 7px;
+		background: #00a990;		
+	}
+	
+	#sub-menu a:hover{
+		background: #00ccad;
+		color: #ffffff;
+	}
+	
+	#sub-menu a.active{
+		background: #00ccad;
+		color: #ffffff;
 	}
 	
 	/*Images*/
@@ -1131,6 +1190,11 @@
 		width: fit-content;
 		margin: 0 0;
 		outline:none;
+	}
+	
+	div.navbar-small div button:hover{
+		background: #00ccad;
+		color: #ffffff;
 	}
 	
 	div.navbar-small div a {

@@ -10,7 +10,7 @@
 <meta name="description" content="Acquisto Management">
 <meta name="author" content="Vittorio Valent">
 <link href="/css/vittoriostyle.css" rel="stylesheet">
-<title>Acquisto Manager</title>
+<title>Gestione Acquisto</title>
 </head>
 <body>
 	<%@ include file="../css/header.jsp" %>
@@ -31,7 +31,7 @@
 		 	}
 			if(user.getUsertype() == Usertype.SUPERUSER){
 		%>
-			<a href=/user/getall>Users</a>
+			<a href=/user/getall>Utente</a>
 			<a href=/magazzino/getall>Magazzino</a>
 			<a href=/oggetto/getall>Oggetto</a>
 			<a href="/spedizione/getall">Ordine</a>
@@ -63,7 +63,7 @@
 				 	}
 					if(user.getUsertype() == Usertype.SUPERUSER){
 				%>
-					<a href=/user/getall>Users</a>
+					<a href=/user/getall>Utente</a>
 					<a href=/magazzino/getall>Magazzino</a>
 					<a href=/oggetto/getall>Oggetto</a>
 					<a href="/spedizione/getall">Ordine</a>
@@ -91,7 +91,7 @@
 			if(list.isEmpty()) {
 		%>
 			<tr>
-				<td>No data for Acquisto</td>
+				<td>Nessun dato</td>
 				<td></td>
 				<td></td>
 			</tr>

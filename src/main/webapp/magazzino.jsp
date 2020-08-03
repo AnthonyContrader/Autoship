@@ -11,7 +11,7 @@
 <meta name="description" content="Magazzino Management">
 <meta name="author" content="Vittorio Valent">
 <link href="/css/vittoriostyle.css" rel="stylesheet">
-<title>Magazzino Manager</title>
+<title>Gestione Magazzino</title>
 </head>
 <body>
 <%@ include file="../css/header.jsp" %>
@@ -31,7 +31,7 @@
 		<%
 		 	}
 		%>
-			<a href=/user/getall>Users</a>
+			<a href=/user/getall>Utente</a>
 			<a class="active" href=/magazzino/getall>Magazzino</a>
 			<a href=/oggetto/getall>Oggetto</a>
 		<%
@@ -65,7 +65,7 @@
 				<%
 				 	}
 				%>
-					<a href=/user/getall>Users</a>
+					<a href=/user/getall>Utente</a>
 					<a class="active" href=/magazzino/getall>Magazzino</a>
 					<a href=/oggetto/getall>Oggetto</a>
 				<%
@@ -98,7 +98,7 @@
 			if(list.isEmpty()) {
 		%>
 			<tr>
-				<td>No data for Magazzino</td>
+				<td>Nessun dato</td>
 				<td></td>
 				<td></td>
 				<td></td>
@@ -126,7 +126,7 @@
 				if(m.isCancellato() == false){
 					if(m.getCodice()==null){
 			%>
-			<td><a href=/magazzino/preupdate?id=<%=m.getId()%>>Edit</a>
+			<td><a href=/magazzino/preupdate?id=<%=m.getId()%>>Modifica</a>
 			</td>
 			<%
 					}
@@ -142,13 +142,13 @@
 					}
 					else{
 			%>
-				<td><a href=/magazzino/delete?id=<%=m.getId()%>>Delete</a></td>
+				<td><a href=/magazzino/delete?id=<%=m.getId()%>>Elimina</a></td>
 			<%
 					}
 				}
 				else{
 			%>
-				<td><a href=/magazzino/reinsert?id=<%=m.getId()%>>Disabled</a></td>
+				<td><a href=/magazzino/reinsert?id=<%=m.getId()%>>Disattivato</a></td>
 				<td></td>
 			<%
 				}
@@ -188,7 +188,7 @@
       <input type="number" id="capienza" name="capienza" placeholder="inserisci capienza" required>
     </div>
   </div>
-      <button type="submit" >Insert</button>
+      <button type="submit" >Inserisci</button>
 </form>
 
 </div>

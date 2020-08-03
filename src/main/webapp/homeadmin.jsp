@@ -21,7 +21,7 @@
 
 	<div class="navbar">
 		<a class="active" href="/homeadmin.jsp">Home</a>
-		<a href=/user/getall>Users</a>
+		<a href=/user/getall>Utente</a>
 		<a href=/magazzino/getall>Magazzino</a>
 		<a href=/oggetto/getall>Oggetto</a>
 		<a href="/user/logout" id="logout">Logout</a>
@@ -35,7 +35,7 @@
 		<div id="sub-menu-container">
 			<div id="sub-menu">
 				<a class="active" href="/homeadmin.jsp">Home</a>	
-				<a href=/user/getall>Users</a>
+				<a href=/user/getall>Utente</a>
 				<a href=/magazzino/getall>Magazzino</a>
 				<a href=/oggetto/getall>Oggetto</a>
 			</div>
@@ -44,7 +44,7 @@
 
 	<div class="main">
 	<br>
-		<h1>Welcome ${user.getUsername()}</h1>
+		<h1>Benvenuto ${user.getUsername()}</h1>
 
 		"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
 		eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad
