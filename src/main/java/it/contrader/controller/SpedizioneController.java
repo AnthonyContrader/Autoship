@@ -18,8 +18,8 @@ import it.contrader.dto.CodiceDTO;
 import it.contrader.dto.MagazzinoDTO;
 import it.contrader.dto.OggettoDTO;
 import it.contrader.dto.UserDTO;
-import it.contrader.model.Carrello.CarrelloStato;
 import it.contrader.model.Codice;
+import it.contrader.model.Codice.CodiceStato;
 import it.contrader.service.CarrelloService;
 import it.contrader.service.CodiceService;
 import it.contrader.service.MagazzinoService;
@@ -69,18 +69,14 @@ public class SpedizioneController {
 			oggetto = oggettoService.update(oggetto);
 		}
 		codice.setCancellato(true);
+		codice.setStato(CodiceStato.Spedito);
 		codice = service.update(codice);
-		List<CarrelloDTO> carrelloList = carrelloService.findCarrellosByCodice(codiceConverter.toEntity(codice));
-		for(CarrelloDTO c : carrelloList){
-			c.setStato(CarrelloStato.Spedito);
-			carrelloService.update(c);
-		}
 		setAll(request);
 		return "spedizione";
 	}
 	
 	private void setAll(HttpServletRequest request) {
-		request.setAttribute("list", service.findByCancellatoFalse());
+		request.setAttribute("list", service.findByStato(CodiceStato.Confermato));
 	}
 
 }

@@ -11,7 +11,7 @@ public class CarrelloConverter extends AbstractConverter<Carrello, CarrelloDTO> 
 	public Carrello toEntity(CarrelloDTO carrelloDTO) {
 		Carrello carrello = null;
 		if (carrelloDTO != null) {
-			carrello = new Carrello(carrelloDTO.getId(), carrelloDTO.getUser(), carrelloDTO.getOggetto(), carrelloDTO.getCodice(), carrelloDTO.getStato());
+			carrello = new Carrello(carrelloDTO.getId(), carrelloDTO.getOggetto(), carrelloDTO.getCodice());
 		}
 		return carrello ;
 	}
@@ -20,7 +20,7 @@ public class CarrelloConverter extends AbstractConverter<Carrello, CarrelloDTO> 
 	public CarrelloDTO toDTO(Carrello carrello) {
 		CarrelloDTO carrelloDTO = null;
 		if (carrello != null) {
-			carrelloDTO = new CarrelloDTO(carrello.getId(), carrello.getUser(), carrello.getOggetto(), carrello.getCodice(), carrello.getStato());
+			carrelloDTO = new CarrelloDTO(carrello.getId(), carrello.getOggetto(), carrello.getCodice());
 		}
 		return carrelloDTO;
 	}

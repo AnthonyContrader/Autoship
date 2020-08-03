@@ -114,23 +114,21 @@ public class UserController {
 	@GetMapping("/delete")
 	public String delete(HttpServletRequest request, @RequestParam("id") Long id) {
 		UserDTO user = service.read(id);
-		List<CarrelloDTO> carrello = carrelloService.findCarrellosByUser(converter.toEntity(user));
-		CodiceDTO codice = new CodiceDTO();
+		List<CarrelloDTO> carrelloList;
 		List<MagazzinoDTO> magazzinoList;
-		for(CarrelloDTO c : carrello) {
-			codice = codiceService.read(c.getCodice().getId());
+		List<CodiceDTO> codiceList = codiceService.findCodicesByUser(converter.toEntity(user));
+		for(CodiceDTO codice : codiceList) {
+			carrelloList = carrelloService.findCarrellosByCodice(codiceConverter.toEntity(codice));
 			magazzinoList = magazzinoService.findMagazzinosByCodice(codiceConverter.toEntity(codice));
+			for(CarrelloDTO c : carrelloList) {
+				c.setCodice(null);
+				carrelloService.delete(c.getId());
+			}
 			for(MagazzinoDTO m : magazzinoList){
 				m.setCodice(null);
 				magazzinoService.update(m);
 			}
-			c.setCodice(null);
-			c.setUser(null);
-			carrelloService.delete(c.getId());
-			List<CarrelloDTO> codiceList = carrelloService.findCarrellosByCodice(codiceConverter.toEntity(codice));
-			if(codiceList.isEmpty()) {
-				codiceService.delete(codice.getId());
-			}
+			codiceService.delete(codice.getId());
 		}
 		service.delete(id);
 		setAll(request);

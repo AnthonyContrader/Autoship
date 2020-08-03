@@ -1,7 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1" import="java.util.List"
-	import="it.contrader.dto.CarrelloDTO" import="it.contrader.model.Carrello.CarrelloStato"
-	import="it.contrader.dto.UserDTO" import="it.contrader.model.User.Usertype"%>
+	import="it.contrader.dto.CarrelloDTO" import="it.contrader.dto.UserDTO" 
+	import="it.contrader.model.User.Usertype" import="it.contrader.dto.CodiceDTO"
+	import="it.contrader.model.Codice.CodiceStato" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -147,54 +148,110 @@
 <div class="main">
 <br>
 	<%
-		List<CarrelloDTO> list = (List<CarrelloDTO>) request.getAttribute("list");
+	String action = (String) request.getAttribute("action");
+	List<CodiceDTO> codiceList = (List<CodiceDTO>) request.getAttribute("codiceList");	
 	%>
-
+	
 	<table class="tableRead">
-		<tr>
-			<th>Username</th>
-			<th>Prodotto</th>
-			<th>Stato</th>
-			<th></th>
-		</tr>
-		<%
-			if(list.isEmpty()) {
-		%>
 			<tr>
-				<td>Nessun dato</td>
-				<td></td>
-				<td></td>
-				<td></td>
+				<th>OTP</th>
+				<th>Stato</th>
+				<th></th>
+				<th></th>
+				<th></th>
 			</tr>
-		<%
-			}
-			else{
-				for (CarrelloDTO c : list) {
-		%>
-		<tr>
-			<td><%=c.getUser().getUsername()%></td>
-			<td><%=c.getOggetto().getNome()%></td>
-			<td><%=c.getStato()%></td>
 			<%
-				if(c.getStato() == CarrelloStato.Ordinato) {
+				if(codiceList.isEmpty()) {
 			%>
-			<td><a href="/carrello/delete?id=<%=c.getId()%>">Elimina</a></td>
+				<tr>
+					<td>Nessun dato</td>
+					<td></td>
+					<td></td>
+					<td></td>
+				</tr>
 			<%
 				}
-				else {
+				else{
+					for (CodiceDTO c : codiceList) {
 			%>
-				<td></td>
+			<tr>
+				<td><%=c.getOtp()%></td>
+				<%
+				if(c.getStato() == CodiceStato.Attesa) {
+				%>
+				<td>In Attesa di Conferma</td>
+				<td><a href="/carrello/update?id=<%=c.getId()%>">Conferma</a></td>
+				<td><a href="/carrello/getcarrello?id=<%=c.getId()%>">Gestisci</a></td>
+				<td><a href="/carrello/delete?id=<%=c.getId()%>">Elimina</a></td>
+				
 			<%
+			}
+				else{
+			%>
+				<td><%=c.getStato()%></td>
+				<td><a href="/carrello/getcarrello?id=<%=c.getId()%>">Visualizza</a></td>
+			<%
+						}
 					}
 				}
-			}
+				%>
+			</tr>
+		</table>
+	<%
+	if(action != null && action.equals("read")){
+		List<CarrelloDTO> list = (List<CarrelloDTO>) request.getAttribute("list");
+	%>
+	<div class="popup">
+		<span class="close">&times;</span>
+		<table id="center">
+			<tr>
+				<th>Prodotto</th>
+				<th>Dimensione</th>
+				<th></th>
+			</tr>
+			<%
+				if(list.isEmpty()) {
 			%>
-		</tr>
-	</table>
-
+				<tr>
+					<td>Nessun dato</td>
+					<td></td>
+					<td></td>
+					<td></td>
+				</tr>
+			<%
+				}
+				else{
+					for (CarrelloDTO c : list) {
+			%>
+			<tr>
+				<td><%=c.getOggetto().getNome()%></td>
+				<td><%=c.getOggetto().getDimensione()%></td>
+			<%
+				if(c.getCodice().getStato() == CodiceStato.Attesa){
+			%>
+				<td><a href="/carrello/deletecarrello?id=<%=c.getId()%>">Elimina</a></td>
+			<%
+				}
+				else{
+			%>
+				<td></td>
+			<%
+				}
+			%>
+			</tr>
+				<%
+					}
+				}
+				%>
+		</table>
+		</div>
+	<%
+		}
+	%>
 </div>
 <br>
 <%@ include file="../css/footer.jsp" %>
 <script type="text/javascript" src="/js/subMenu.js"></script>
+<script type="text/javascript" src="/js/popup.js"></script>
 </body>
 </html>

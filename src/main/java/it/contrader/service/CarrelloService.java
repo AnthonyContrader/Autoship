@@ -27,7 +27,4 @@ public class CarrelloService extends AbstractService<Carrello, CarrelloDTO>{
 	public List<CarrelloDTO> findCarrellosByCodice(Codice codice) {
 		return converter.toDTOList(repository.findCarrellosByCodice(codice));
 	}
-	public List<CarrelloDTO> findCarrellosByUser(User user) {
-		return converter.toDTOList(repository.findCarrellosByUser(user));
-	}
 }

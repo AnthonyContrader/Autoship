@@ -18,7 +18,7 @@ import it.contrader.dto.CodiceDTO;
 import it.contrader.dto.MagazzinoDTO;
 import it.contrader.dto.OggettoDTO;
 import it.contrader.dto.UserDTO;
-import it.contrader.model.Carrello.CarrelloStato;
+import it.contrader.model.Codice.CodiceStato;
 import it.contrader.model.Oggetto;
 import it.contrader.service.CarrelloService;
 import it.contrader.service.CodiceService;
@@ -66,16 +66,16 @@ public class AcquistoController {
 		if(codice == null) {
 			codice = new CodiceDTO();
 			codice.setOtp(otp);
+			codice.setUser(userConverter.toEntity(user));
+			codice.setStato(CodiceStato.Attesa);
 			codice.setCancellato(false);
 			codice = codiceService.insert(codice);
 		}
 		magazzino.setCodice(codiceConverter.toEntity(codice));
 		magazzinoService.update(magazzino);
 		CarrelloDTO carrello = new CarrelloDTO();
-		carrello.setUser(userConverter.toEntity(user));
 		carrello.setOggetto(converter.toEntity(oggetto));
 		carrello.setCodice(codiceConverter.toEntity(codice));
-		carrello.setStato(CarrelloStato.Ordinato);
 		carrelloService.insert(carrello);
 		setAll(request);
 		return "acquisto";
