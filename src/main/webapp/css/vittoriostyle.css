@@ -334,15 +334,21 @@
 	
 	/*Navigation bar*/
 	div.navbar {
-		background: #00a990;
 		overflow: hidden;
 		position: sticky;
 		width: 100%;
 		top: 0;
 		z-index: 2;
-		border-radius: 7px;
 		position: -webkit-sticky; /* Safari */
 		display: inline-block;
+	}
+	
+	div.navbar div{
+		overflow: hidden;
+		background: #00a990;
+		position: relative;
+		height: fit-content;
+		border-radius: 7px;
 	}
 	
 	div.navbar a {
@@ -1225,7 +1231,7 @@
 		background: #00a990;
 		position: absolute;
 		z-index: 2;
-		width: 18%;
+		width: 20%;
 		border-radius: 0 0 7px 7px;
 	}
 
