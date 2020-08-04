@@ -298,18 +298,20 @@
 		right: 0;
 	}
 	
+	.closeLine{
+		vertical-align: top;
+	}
+	
 	.close{
-		position: absolute;
-  		top: 10%;
-  		right: 10%;
-  		color: #ffffff;
-  		font-size: 3vw;
+		position: relative;
+  		color: #000000;
+  		font-size: 2.5vw;
   		font-weight: bold;
 	}
 	
 	.close:hover,
 	.close:focus {
-	  color: #00a990;
+	  color: #ffffff;
 	  text-decoration: none;
 	  cursor: pointer;
 	}
@@ -689,18 +691,20 @@
 		right: 0;
 	}
 	
+	.closeLine{
+		vertical-align: top;
+	}
+	
 	.close{
-		position: absolute;
-  		top: 10%;
-  		right: 10%;
-  		color: #ffffff;
-  		font-size: 4.4vw;
+		position: reative;
+  		color: #000000;
+  		font-size: 2.5vw;
   		font-weight: bold;
 	}
 	
 	.close:hover,
 	.close:focus {
-	  color: #00a990;
+	  color: #ffffff;
 	  text-decoration: none;
 	  cursor: pointer;
 	}
@@ -1133,18 +1137,20 @@
 		right: 0;
 	}
 	
+	.closeLine{
+		vertical-align: top;
+	}
+		
 	.close{
-		position: absolute;
-  		top: 10%;
-  		right: 10%;
-  		color: #ffffff;
-  		font-size: 5.6vw;
+		position: reative;
+  		color: #000000;
+  		font-size: 2.5vw;
   		font-weight: bold;
 	}
 	
 	.close:hover,
 	.close:focus {
-	  color: #00a990;
+	  color: #ffffff;
 	  text-decoration: none;
 	  cursor: pointer;
 	}
