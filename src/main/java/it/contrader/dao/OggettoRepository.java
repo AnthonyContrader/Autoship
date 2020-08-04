@@ -1,16 +1,18 @@
 package it.contrader.dao;
 
+import java.util.List;
+
 import javax.transaction.Transactional;
 
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
-import it.contrader.model.User;
+import it.contrader.model.Oggetto;
+
 
 @Repository
 @Transactional
-public interface UserRepository extends CrudRepository<User, Long> {
+public interface OggettoRepository extends CrudRepository<Oggetto, Long> {
 
-	User findByUsernameAndPassword(String username, String password);
-
+	List<Oggetto> findByCancellatoFalse();
 }
