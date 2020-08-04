@@ -19,7 +19,7 @@ export class UsersComponent implements OnInit {
   }
 
   getUsers() {
-    this.service.getAll().subscribe(users => this.users = users);
+    this.service.getAllAdmin().subscribe(users => this.users = users);
   }
 
   delete(user: UserDTO) {
