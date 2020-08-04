@@ -10,15 +10,21 @@ import { UserDTO } from 'src/dto/userdto';
 export class EditProfileComponent implements OnInit {
 
   user: UserDTO;
+  userUpdated: UserDTO;
 
   constructor(private service: UserService) { }
 
   ngOnInit() {
     this.user = JSON.parse(localStorage.getItem('currentUser'));
+    this.read(this.user);
   }
 
   update(user: UserDTO) {
-    this.service.update(user);
+    this.service.update(user).subscribe(() => this.user);
+  }
+
+  read(user: UserDTO) {
+    this.service.read(user.id).subscribe(() => this.user);
   }
 
 }
