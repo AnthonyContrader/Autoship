@@ -5,6 +5,7 @@ import { AdminDashboardComponent } from './admin-dashboard/admin-dashboard.compo
 import { UsersComponent } from './users/users.component';
 import { WorkInProgressComponent } from './work-in-progress/work-in-progress.component';
 import { EditProfileComponent } from './edit-profile/edit-profile.component';
+import { GeneralInfoComponent } from './general-info/general-info.component';
 
 /**
  * Modulo di routing dell'admin. Qui ci sono i percorsi che un admin può seguire:
@@ -23,7 +24,8 @@ const routes: Routes = [
     { path: '', component: AdminDashboardComponent},
     { path: 'users', component: UsersComponent},
     { path: 'work-in-progress', component: WorkInProgressComponent},
-    { path: 'edit-profile', component: EditProfileComponent}
+    { path: 'edit-profile', component: EditProfileComponent},
+    { path: 'general-info', component:  GeneralInfoComponent},
   ]}
 ];
 
