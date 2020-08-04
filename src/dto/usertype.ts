@@ -1,4 +1,3 @@
 export enum Usertype {
-    ADMIN,
-    USER
+    SUPERUTENTE, AMMINISTRATORE, CORRIERE, UTENTE
 }

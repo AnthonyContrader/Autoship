@@ -31,8 +31,9 @@
           </td>
           <td>
             <select placeholder="usertype" [(ngModel)]="usertoinsert.usertype">
-              <option value="ADMIN">ADMIN</option>
-              <option value="USER">USER</option>
+              <option value="AMMINISTRATORE">AMMINISTRATORE</option>
+              <option value="CORRIERE">CORRIERE</option>
+              <option value="UTENTE">UTENTE</option>
             </select>
           </td>
           <td>
@@ -51,8 +52,9 @@
           </td>
           <td>
             <select [(ngModel)]="user.usertype">
-              <option [selected]="user.usertype===ADMIN" value="ADMIN">ADMIN</option>
-              <option [selected]="user.usertype===USER" value="USER">USER</option>
+              <option [selected]="user.usertype===AMMINISTRATORE" value="AMMINISTRATORE">AMMINISTRATORE</option>
+              <option [selected]="user.usertype===CORRIERE" value="CORRIERE">CORRIERE</option>
+              <option [selected]="user.usertype===UTENTE" value="UTENTE">UTENTE</option>
             </select>
           </td>
           <td>

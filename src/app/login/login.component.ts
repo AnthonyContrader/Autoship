@@ -27,11 +27,19 @@ export class LoginComponent implements OnInit {
         localStorage.setItem('currentUser', JSON.stringify(user));
 
         switch (user.usertype.toString()) {
-          case 'ADMIN': {
+          case 'SUPERUTENTE': {
+            this.router.navigate(['/superuser-dashboard']);
+            break;
+          }
+          case 'AMMINISTRATORE': {
             this.router.navigate(['/admin-dashboard']);
             break;
           }
-          case 'USER': {
+          case 'CORRIERE': {
+            this.router.navigate(['/corriere-dashboard']);
+            break;
+          }
+          case 'UTENTE': {
             this.router.navigate(['/user-dashboard']);
             break;
           }
