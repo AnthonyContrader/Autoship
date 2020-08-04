@@ -19,7 +19,10 @@ import { OggettoComponent } from './oggetto/oggetto.component';
 @NgModule({
   declarations: [
     AppComponent,
+<<<<<<< HEAD
     OggettoComponent
+=======
+>>>>>>> aad4d896dcb4f5d10cf0aeb7161ae23feeae47e0
   ],
   imports: [
     BrowserModule,
