@@ -21,10 +21,11 @@ export class LoginComponent implements OnInit {
   login(f: NgForm): void {
     this.loginDTO = new LoginDTO(f.value.username, f.value.password);
 
+    const currentUser = 'currentUser';
     this.service.login(this.loginDTO).subscribe((user) => {
 
       if (user != null) {
-        localStorage.setItem('currentUser', JSON.stringify(user));
+        localStorage.setItem(currentUser, JSON.stringify(user));
 
         switch (user.usertype.toString()) {
           case 'SUPERUTENTE': {
