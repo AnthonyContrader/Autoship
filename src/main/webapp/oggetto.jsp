@@ -145,6 +145,7 @@
 <div class="main">
 <br>
 	<%
+		String action = (String) request.getAttribute("action");
 		List<OggettoDTO> list = (List<OggettoDTO>) request.getAttribute("list");
 	%>
 
@@ -167,21 +168,21 @@
 		<%
 			}
 			else{
-				for (OggettoDTO o : list) {
+				for (OggettoDTO ol : list) {
 		%>
 		<tr>
-			<td><a href="/oggetto/read?id=<%=o.getId()%>"><%=o.getNome()%></a></td>
-			<td><%=o.getDimensione()%></td>
-			<% if(o.isCella() == false && o.isCancellato() == false) { %>
-				<td><a href="/oggetto/preupdate?id=<%=o.getId()%>">Modifica</a>
+			<td><a href="/oggetto/read?id=<%=ol.getId()%>"><%=ol.getNome()%></a></td>
+			<td><%=ol.getDimensione()%></td>
+			<% if(ol.isCella() == false && ol.isCancellato() == false) { %>
+				<td><a href="/oggetto/preupdate?id=<%=ol.getId()%>">Modifica</a>
 				</td>
-				<td><a href="/oggetto/delete?id=<%=o.getId()%>">Elimina</a>
+				<td><a href="/oggetto/delete?id=<%=ol.getId()%>">Elimina</a>
 				</td>
 			<% 
 				}
-				else if(o.isCancellato() == true){
+				else if(ol.isCancellato() == true){
 			%>
-				<td><a href="/oggetto/reinsert?id=<%=o.getId()%>">Esaurito</a></td>
+				<td><a href="/oggetto/reinsert?id=<%=ol.getId()%>">Esaurito</a></td>
 				<td></td>
 			<% 
 				}
@@ -221,9 +222,65 @@
       <button type="submit" >Inserisci</button>
 </form>
 
+<%
+	if(action != null){
+		OggettoDTO o = (OggettoDTO) request.getAttribute("dto");
+%>
+	<div class="popup">
+		<%
+			if(action.equals("read")){
+		%>
+			<table id="center">
+				<tr>
+					<th>ID</th>
+					<th>Nome</th>
+					<th>Dimensione</th>
+					<th align="right" class="closeLine"><span class="close">&times;</span></th>
+				</tr>
+				<tr>
+					<td><%=o.getId()%></td>
+					<td><%=o.getNome()%></td>
+					<td><%=o.getDimensione()%></td>
+					<td></td>
+				</tr>
+			</table>
+		<%
+			}
+			else if(action.equals("update")){
+		%>
+			<form id="center" action="/oggetto/update" method="post">
+			   <div align="right" class="closeLine"><span class="close">&times;</span></div>
+			   <div class="row">
+			    <div class="col-25">
+			      <label for="nome">Nome</label>
+			    </div>
+			    <div class="col-75">
+			      <input type="text" id="nome" name="nome" value="<%=o.getNome()%>" required>
+			    </div>
+			  </div>
+			       <div class="row">
+			    <div class="col-25">
+			      <label for="dimensione">Dimensione</label>
+			    </div>
+			    <div class="col-75">
+			      <input type="number" id="dimensione" name="dimensione" value="<%=o.getDimensione()%>" required>
+			    </div>
+			    <input type="hidden" name="id" value =<%=o.getId() %>>
+			  </div>
+			      <button type="submit" >Modifica</button>
+			</form>
+		<%
+			}
+		%>
+	</div>
+	<%
+		}
+	%>
+
 </div>
 <br>
 <%@ include file="../css/footer.jsp" %>
 <script type="text/javascript" src="/js/subMenu.js"></script>
+<script type="text/javascript" src="/js/popup.js"></script>
 </body>
 </html>

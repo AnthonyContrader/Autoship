@@ -226,6 +226,11 @@
 		padding: 2%;
 	}
 	
+	form .closeLine{
+		width: 100%;
+		margin-bottom: 10%;
+	}
+	
 	.col-25 {
 	  float: left;
 	  width: 25%;
@@ -233,12 +238,18 @@
 	}
 	
 	.col-75 {
-	  float: left;
+	  float: right;
 	  width: 75%;
 	  margin-top: 1%;
 	}
 		
 	/* Clear floats after the columns */
+	.row{
+		margin: 0 auto;
+		width: 100%;
+		box-sizing: border-box;
+	}
+	
 	.row:after {
 	  content: "";
 	  display: table;
@@ -311,7 +322,6 @@
 	
 	.close:hover,
 	.close:focus {
-	  color: #ffffff;
 	  text-decoration: none;
 	  cursor: pointer;
 	}
@@ -619,6 +629,11 @@
 		padding: 2%;
 	}
 	
+	form .closeLine{
+		width: 100%;
+		margin-bottom: 10%;
+	}
+	
 	.col-25 {
 	  float: left;
 	  width: 25%;
@@ -626,12 +641,18 @@
 	}
 	
 	.col-75 {
-	  float: left;
+	  float: right;
 	  width: 75%;
 	  margin-top: 1%;
 	}
 	
 	/* Clear floats after the columns */
+	.row{
+		margin: 0 auto;
+		width: 100%;
+		box-sizing: border-box;
+	}
+	
 	.row:after {
 	  content: "";
 	  display: table;
@@ -704,7 +725,6 @@
 	
 	.close:hover,
 	.close:focus {
-	  color: #ffffff;
 	  text-decoration: none;
 	  cursor: pointer;
 	}
@@ -1065,6 +1085,11 @@
 		padding: 2%;
 	}
 	
+	form .closeLine{
+		width: 100%;
+		margin-bottom: 10%;
+	}
+	
 	.col-25 {
 	  float: left;
 	  width: 25%;
@@ -1072,12 +1097,18 @@
 	}
 	
 	.col-75 {
-	  float: left;
+	  float: right;
 	  width: 75%;
 	  margin-top: 1%;
 	}
 	
 	/* Clear floats after the columns */
+	.row{
+		margin: 0 auto;
+		width: 100%;
+		box-sizing: border-box;
+	}
+	
 	.row:after {
 	  content: "";
 	  display: table;
@@ -1150,7 +1181,6 @@
 	
 	.close:hover,
 	.close:focus {
-	  color: #ffffff;
 	  text-decoration: none;
 	  cursor: pointer;
 	}

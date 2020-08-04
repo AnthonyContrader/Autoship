@@ -32,6 +32,7 @@ public class OggettoController {
 	
 	@GetMapping("/getall")
 	public String getAll(HttpServletRequest request) {
+		request.setAttribute("action", null);
 		setAll(request);
 		return "oggetto";
 	}
@@ -41,6 +42,7 @@ public class OggettoController {
 		OggettoDTO dto = service.read(id);
 		dto.setCancellato(true);
 		service.update(dto);
+		request.setAttribute("action", null);
 		setAll(request);
 		return "oggetto";
 	}
@@ -50,14 +52,17 @@ public class OggettoController {
 		OggettoDTO dto = service.read(id);
 		dto.setCancellato(false);
 		service.update(dto);
+		request.setAttribute("action", null);
 		setAll(request);
 		return "oggetto";
 	}
 	
 	@GetMapping("/preupdate")
 	public String preUpdate(HttpServletRequest request, @RequestParam("id") Long id) {
+		request.setAttribute("action", "update");
 		request.setAttribute("dto", service.read(id));
-		return "updateoggetto";
+		setAll(request);
+		return "oggetto";
 	}
 	
 	@PostMapping("/update")
@@ -70,6 +75,7 @@ public class OggettoController {
 		dto.setDimensione(dimensione);
 		dto.setCancellato(false);
 		service.update(dto);
+		request.setAttribute("action", null);
 		setAll(request);
 		return "oggetto";
 	}
@@ -83,6 +89,7 @@ public class OggettoController {
 		dto.setDimensione(dimensione);
 		dto.setCancellato(false);
 		service.insert(dto);
+		request.setAttribute("action", null);
 		setAll(request);
 		return "oggetto";
 	}
@@ -90,7 +97,9 @@ public class OggettoController {
 	@GetMapping("/read")
 	public String read(HttpServletRequest request, @RequestParam("id") Long id) {
 		request.setAttribute("dto", service.read(id));
-		return "readoggetto";
+		request.setAttribute("action", "read");
+		setAll(request);
+		return "oggetto";
 	}
 	
 	private void setAll(HttpServletRequest request) {

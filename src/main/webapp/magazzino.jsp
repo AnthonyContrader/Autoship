@@ -145,6 +145,7 @@
 <div class="main">
 <br>
 	<%
+		String action = (String) request.getAttribute("action");
 		List<MagazzinoDTO> list = (List<MagazzinoDTO>) request.getAttribute("list");
 		List<OggettoDTO> ol = (List<OggettoDTO>) request.getAttribute("oggetti");
 	%>
@@ -168,13 +169,13 @@
 		<%
 			}
 			else{
-				for (MagazzinoDTO m : list) {
+				for (MagazzinoDTO ml : list) {
 			%>
 			<tr>
 			<%
-				if(m.getOggetto() != null){
+				if(ml.getOggetto() != null){
 			%>
-				<td><%=m.getOggetto().getNome()%></td>
+				<td><%=ml.getOggetto().getNome()%></td>
 			<%
 				}
 				else{
@@ -183,12 +184,12 @@
 			<%
 				}
 			%>
-			<td><%=m.getCapienza()%></td>
+			<td><%=ml.getCapienza()%></td>
 			<%
-				if(m.isCancellato() == false){
-					if(m.getCodice()==null){
+				if(ml.isCancellato() == false){
+					if(ml.getCodice()==null){
 			%>
-			<td><a href=/magazzino/preupdate?id=<%=m.getId()%>>Modifica</a>
+			<td><a href=/magazzino/preupdate?id=<%=ml.getId()%>>Modifica</a>
 			</td>
 			<%
 					}
@@ -197,20 +198,20 @@
 			<td></td>
 			<%
 					}
-					if(m.getOggetto() != null) {
+					if(ml.getOggetto() != null) {
 			%>
 				<td></td>
 			<%
 					}
 					else{
 			%>
-				<td><a href=/magazzino/delete?id=<%=m.getId()%>>Elimina</a></td>
+				<td><a href=/magazzino/delete?id=<%=ml.getId()%>>Elimina</a></td>
 			<%
 					}
 				}
 				else{
 			%>
-				<td><a href=/magazzino/reinsert?id=<%=m.getId()%>>Disattivato</a></td>
+				<td><a href=/magazzino/reinsert?id=<%=ml.getId()%>>Disattivato</a></td>
 				<td></td>
 			<%
 				}
@@ -253,9 +254,56 @@
       <button type="submit" >Inserisci</button>
 </form>
 
+<%
+	if(action != null && action.equals("update")){
+		MagazzinoDTO m = (MagazzinoDTO) request.getAttribute("dto");	
+%>
+<div class="popup">
+<form id="center" action="/magazzino/update?id=<%=m.getId()%>" method="post">
+    <div align="right" class="closeLine"><span class="close">&times;</span></div>
+    <div class="row">
+    <div class="col-25">
+      <label for="id_oggetto">Prodotto</label>
+    </div>
+    <div class="col-75">
+	    <select id="id_oggetto" name="id_oggetto">
+	    	<%
+				if (m.getOggetto() != null) {
+			%>
+				<option value="<%=m.getOggetto().getId()%>"><%=m.getOggetto().getNome()%></option>
+			<%
+				}
+			%>
+		    <% 
+		   		for(OggettoDTO o : ol) {
+		   	%>
+		 		<option value="<%=o.getId()%>"><%=o.getNome()%></option>
+		 	<%
+		 		} 
+		    %> 
+			<option value="0">Vuoto</option>
+			</select>
+		</div>
+  </div>
+  <div class="row">
+    <div class="col-25">
+      <label for="capienza">Capienza</label>
+    </div>
+    <div class="col-75">
+      <input type="number" id="capienza" name="capienza" value="<%=m.getCapienza()%>" required>
+    </div>
+  </div>
+      <button type="submit" >Modifica</button>
+</form>
+</div>
+<%
+	}
+%>
+
 </div>
 <br>
 <%@ include file="../css/footer.jsp" %>
 <script type="text/javascript" src="/js/subMenu.js"></script>
+<script type="text/javascript" src="/js/popup.js"></script>
 </body>
 </html>

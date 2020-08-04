@@ -39,6 +39,7 @@ public class MagazzinoController {
 	@GetMapping("/getall")
 	public String getAll(HttpServletRequest request) {
 		setAll(request);
+		request.setAttribute("action", null);
 		getObjectNotInCell(request);
 		return "magazzino";
 	}
@@ -48,6 +49,7 @@ public class MagazzinoController {
 		MagazzinoDTO dto = service.read(id);
 		dto.setCancellato(true);
 		service.update(dto);
+		request.setAttribute("action", null);
 		setAll(request);
 		getObjectNotInCell(request);
 		return "magazzino";
@@ -58,6 +60,7 @@ public class MagazzinoController {
 		MagazzinoDTO dto = service.read(id);
 		dto.setCancellato(false);
 		service.update(dto);
+		request.setAttribute("action", null);
 		setAll(request);
 		getObjectNotInCell(request);
 		return "magazzino";
@@ -66,8 +69,10 @@ public class MagazzinoController {
 	@GetMapping("/preupdate")
 	public String preUpdate(HttpServletRequest request, @RequestParam("id") Long id) {
 		request.setAttribute("dto", service.read(id));
+		request.setAttribute("action", "update");
+		setAll(request);
 		getObjectNotInCell(request);
-		return "updatemagazzino";
+		return "magazzino";
 	}
 	
 	@PostMapping("/update")
@@ -93,6 +98,7 @@ public class MagazzinoController {
 		}
 		dto.setCancellato(false);
 		service.update(dto);
+		request.setAttribute("action", null);
 		getObjectNotInCell(request);
 		setAll(request);
 		return "magazzino";
@@ -119,6 +125,7 @@ public class MagazzinoController {
 		}
 		dto.setCancellato(false);
 		service.insert(dto);
+		request.setAttribute("action", null);
 		getObjectNotInCell(request);
 		setAll(request);
 		return "magazzino";

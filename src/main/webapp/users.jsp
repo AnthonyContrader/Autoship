@@ -188,7 +188,9 @@
 		</div>
 	<div class="main">
 	<br>
-		<%if(user.getUsertype() == Usertype.SUPERUTENTE || user.getUsertype() == Usertype.AMMINISTRATORE){
+		<%	
+			String action = (String) request.getAttribute("action");
+			if(user.getUsertype() == Usertype.SUPERUTENTE || user.getUsertype() == Usertype.AMMINISTRATORE){
 				List<UserDTO> list = (List<UserDTO>) request.getSession().getAttribute("list");
 		%>
 
@@ -291,9 +293,99 @@
 			}
 		%>
 
+		<%
+			if(action != null){
+				UserDTO u = (UserDTO) request.getSession().getAttribute("dto");
+
+	%>
+	<div class="popup">
+		<%
+			if(action.equals("read")){
+		%>
+			<table id="center">
+				<tr>
+					<th>ID</th>
+					<th>Username</th>
+					<th>Password</th>
+					<th>Usertype</th>
+					<th align="right" class="closeLine"><span class="close">&times;</span></th>
+				</tr>
+				<tr>
+					<td><%=u.getId()%></td>
+					<td><%=u.getUsername()%></td>
+					<td><%=u.getPassword()%></td>
+					<td><%=u.getUsertype()%></td>
+					<td></td>
+				</tr>
+			</table>
+		<%
+			}
+			else if(action.equals("update")){
+		%>
+			<form id="center" action="/user/update" method="post">
+			  <div align="right" class="closeLine"><span class="close">&times;</span></div>
+			  <div class="row">
+			    <div class="col-25">
+			      <label for="user-update">Username</label>
+			    </div>
+			    <div class="col-75">
+			      <input type="text" id="user-update" name="username" value=<%=u.getUsername()%>>
+			    </div>
+			  </div>
+			  <div class="row">
+			    <div class="col-25">
+			     <label for="pass-update">Password</label>
+			    </div>
+			    <div class="col-75">
+			      <input
+						type="text" id="pass-update" name="password" value=<%=u.getPassword()%>> 
+			    </div>
+			  </div>
+				<%
+					if(user.getUsertype() == Usertype.SUPERUTENTE || user.getUsertype() == Usertype.AMMINISTRATORE){
+						if ((u.getUsertype() != Usertype.SUPERUTENTE && u.getUsertype() != Usertype.AMMINISTRATORE) || (u.getUsertype() == Usertype.AMMINISTRATORE && user.getUsertype() == Usertype.SUPERUTENTE)) {
+				%>
+			  <div class="row">
+			    <div class="col-25">
+			      <label for="type">Tipo</label>
+			    </div>
+			   		 <div class="col-75">
+			 			<select id="type" name="usertype">
+			  				<option value="AMMINISTRATORE">AMMINISTRATORE</option>
+						<option value="CORRIERE">CORRIERE</option>
+						<option value="UTENTE">UTENTE</option>
+						</select>
+			    	</div>
+			  </div>
+			 	<%
+						}
+					else{
+					%>
+						<input type="hidden" name="usertype" value=<%=u.getUsertype() %>>
+				<%
+					}
+				}
+					else{
+				%>	
+					<input type="hidden" name="usertype" value=<%=u.getUsertype() %>>
+				<%
+					}
+				%>	
+					<input type="hidden" name="id" value=<%=u.getId()%>>
+			      <button type="submit" >Modifica</button>
+			</form>
+		<%
+			}
+		%>
+	</div>
+	<%
+		}
+	%>
+
 	</div>
 	<br>
 	<%@ include file="./css/footer.jsp"%>
 	<script type="text/javascript" src="/js/subMenu.js"></script>
+	<script type="text/javascript" src="/js/popup.js"></script>
 </body>
 </html>

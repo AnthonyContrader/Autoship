@@ -108,6 +108,7 @@ public class UserController {
 		else {
 			request.getSession().setAttribute("dto", service.read(user.getId()));
 		}
+		request.setAttribute("action", null);
 		return "users";
 	}
 
@@ -131,14 +132,17 @@ public class UserController {
 			codiceService.delete(codice.getId());
 		}
 		service.delete(id);
+		request.setAttribute("action", null);
 		setAll(request);
 		return "users";
 	}
 
 	@GetMapping("/preupdate")
 	public String preUpdate(HttpServletRequest request, @RequestParam("id") Long id) {
+		request.setAttribute("action", "update");
 		request.getSession().setAttribute("dto", service.read(id));
-		return "updateuser";
+		setAll(request);
+		return "users";
 	}
 
 	@PostMapping("/update")
@@ -157,6 +161,7 @@ public class UserController {
 		else {
 			request.getSession().setAttribute("dto", service.read(id));
 		}
+		request.setAttribute("action", null);
 		return "users";
 
 	}
@@ -169,6 +174,7 @@ public class UserController {
 		dto.setPassword(password);
 		dto.setUsertype(usertype);
 		service.insert(dto);
+		request.setAttribute("action", null);
 		setAll(request);
 		return "users";
 	}
@@ -176,7 +182,9 @@ public class UserController {
 	@GetMapping("/read")
 	public String read(HttpServletRequest request, @RequestParam("id") Long id) {
 		request.getSession().setAttribute("dto", service.read(id));
-		return "readuser";
+		request.setAttribute("action", "read");
+		setAll(request);
+		return "users";
 	}
 
 	@GetMapping("/logout")
