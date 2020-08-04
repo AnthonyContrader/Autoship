@@ -1,12 +1,11 @@
 package it.contrader.model;
 
-import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -16,21 +15,17 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Data
 @Entity
-public class User {
-
-	public enum Usertype {
-		SUPERUTENTE, AMMINISTRATORE, CORRIERE, UTENTE
-	}
-
+public class Carrello {
+	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-
-	@Column(unique = true)
-	private String username;
-
-	private String password;
-
-	@Enumerated(EnumType.STRING)
-	private Usertype usertype;
+	
+	@ManyToOne
+	@JoinColumn(name = "id_oggetto", referencedColumnName = "id")
+	private Oggetto oggetto;
+	
+	@ManyToOne
+	@JoinColumn(name = "id_codice", referencedColumnName = "id")
+	private Codice codice;
 }
