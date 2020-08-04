@@ -24,6 +24,5 @@ export class Service extends AbstractService<OggettoDTO>{
     this.type = 'oggetto';
   }
 
-
-
+  
 }

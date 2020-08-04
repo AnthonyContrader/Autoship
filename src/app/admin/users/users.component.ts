@@ -11,7 +11,7 @@ export class UsersComponent implements OnInit {
 
   users: UserDTO[];
   usertoinsert: UserDTO = new UserDTO();
-
+  
   constructor(private service: UserService) { }
 
   ngOnInit() {

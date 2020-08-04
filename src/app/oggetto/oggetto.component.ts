@@ -10,10 +10,19 @@ import { Router } from '@angular/router';
   styleUrls: ['./oggetto.component.css']
 })
 export class OggettoComponent implements OnInit {
-
-  constructor() { }
-
+  
+  oggettiDto: Array<OggettoDTO>
+  
+  constructor(private service : OggettoService) { }
   ngOnInit() {
   }
+
+
+ let oggetti = service.getall();
+  
+ 
+ this.oggetto.Service.getall().subscribe((response) => {
+    this.oggettoInsert = response;
+    
 
 }
