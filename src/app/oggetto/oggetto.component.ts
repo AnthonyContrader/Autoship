@@ -18,11 +18,11 @@ export class OggettoComponent implements OnInit {
   }
 
 
- let oggetti = service.getall();
+ /*let oggetti = service.getall();
   
  
  this.oggetto.Service.getall().subscribe((response) => {
     this.oggettoInsert = response;
-    
+*/    
 
 }

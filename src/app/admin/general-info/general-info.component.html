@@ -12,13 +12,19 @@
           <th>
             Password
           </th>
+          <th>
+            Tipo
+          </th>
         </tr>
         <tr>
           <td>
-            <input [(ngModel)]="user.username" disabled>
+            <input [(ngModel)]="userRead.username" disabled>
           </td>
           <td>
-            <input [(ngModel)]="user.password" disabled>
+            <input [(ngModel)]="userRead.password" disabled>
+          </td>
+          <td>
+            <input [(ngModel)]="userRead.usertype" disabled>
           </td>
         </tr>
       </table>

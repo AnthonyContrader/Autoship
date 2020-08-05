@@ -50,13 +50,18 @@
           <td>
             <input [(ngModel)]="user.password">
           </td>
-          <td>
+          <td *ngIf="user.usertype != 'AMMINISTRATORE' else admin">
             <select [(ngModel)]="user.usertype">
               <option [selected]="user.usertype===AMMINISTRATORE" value="AMMINISTRATORE">AMMINISTRATORE</option>
               <option [selected]="user.usertype===CORRIERE" value="CORRIERE">CORRIERE</option>
               <option [selected]="user.usertype===UTENTE" value="UTENTE">UTENTE</option>
             </select>
           </td>
+          <ng-template #admin>
+            <td>
+              <input [(ngModel)]="user.usertype" disabled>
+            </td>
+          </ng-template>
           <td>
             <button (click)=update(user)>Save</button>
           </td>
