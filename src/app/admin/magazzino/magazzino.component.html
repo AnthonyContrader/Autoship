@@ -1,3 +1,69 @@
-<p>
-  magazzino works!
-</p>
+<div class="container">
+  <div class="row mt-5">
+    <div class="col-md-1">
+
+    </div>
+    <div class="col-md-10">
+      <table>
+        <tr>
+          <th>
+            Prodotto
+          </th>
+          <th>
+            Capienza
+          </th>
+          <th>
+            Edit
+          </th>
+          <th>
+            Delete
+          </th>
+        </tr>
+        <tr>
+          <td>
+            <select placeholder="Prodotto" name="id_oggetto" [(ngModel)]="magazzinotoinsert.oggetto.id">
+              <option value="0">Vuoto</option>
+            </select>
+          <td>
+            <input placeholder="Capienza" name="capienza" [(ngModel)]="magazzinotoinsert.capienza">
+          </td>
+          <td>
+            <button (click)="insertMagazzino(magazzinotoinsert)">Inserisci</button>
+          </td>
+          <td>
+            <button (click)="clear()">Clear</button>
+          </td>
+        </tr>
+        <tr *ngFor="let magazzino of magazzinolist">
+          <input type="hidden" name="id" [(ngModel)]="magazzino.id">
+          <select placeholder="Prodotto" name="id_oggetto" [(ngModel)]="magazzino.oggetto.id">
+            <option value="0">Vuoto</option>
+          </select>
+          <td>
+            <input name="capienza" [(ngModel)]="magazzino.capienza">
+          </td>
+          <td *ngIf="magazzino.cancellato == false else reinsert">
+            <button (click)=updateMagazzino(magazzino)>Salva</button>
+          </td>
+          <ng-template #reinsert>
+            <td>
+              <button (click)=reinsertMagazzino(magazzino)>Disattivato</button>
+            </td>
+          </ng-template>
+          <td  *ngIf="magazzino.cancellato == false else notDelete">
+            <button (click)="deleteMagazzino(magazzino)">Elimina</button>
+          </td>  
+          <ng-template #notDelete>
+            <td>
+              <button (click)="deleteMagazzino(magazzino)" disabled>Elimina</button>
+            </td>
+          </ng-template> 
+        </tr>
+
+      </table>
+    </div>
+    <div class="col-md-1">
+
+    </div>
+  </div>
+</div>
