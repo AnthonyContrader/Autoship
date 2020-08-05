@@ -26,14 +26,21 @@ public class MagazzinoController extends AbstractController<MagazzinoDTO>{
 	private OggettoService oggettoService;
 	
 	@PostMapping("/insertmagazzino")
-	public MagazzinoDTO insertMagazzino(@RequestBody MagazzinoDTO magazzino) {
+	public MagazzinoDTO insertMagazzino(@RequestBody MagazzinoDTO magazzino, @RequestParam (name = "id_oggetto") Long id_oggetto) {
 		OggettoDTO oggetto;
-		if(magazzino.getOggetto() != null) {
-			oggetto = oggettoService.read(magazzino.getOggetto().getId());
+		if(id_oggetto != 0) {
+			oggetto = oggettoService.read(id_oggetto);
 			int dimensione = oggetto.getDimensione();
 			if(magazzino.getCapienza() < dimensione) {
-				magazzino.setCapienza(0);
+				id_oggetto = (long) 0;
 			}
+		}
+		if(id_oggetto == 0) {
+			magazzino.setOggetto(null);
+		}
+		else{
+			oggetto = oggettoService.read(id_oggetto);
+			magazzino.setOggetto(oggetto);
 		}
 		magazzino.setCancellato(false);
 		return service.insert(magazzino);
