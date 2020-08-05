@@ -8,6 +8,7 @@ import { WorkInProgressComponent } from './work-in-progress/work-in-progress.com
 import { EditProfileComponent } from './edit-profile/edit-profile.component';
 import { GeneralInfoComponent } from './general-info/general-info.component';
 import { MagazzinoComponent } from './magazzino/magazzino.component';
+import { OggettoComponent } from './oggetto/oggetto.component';
 
 /**
  * Modulo dell'admin, qui vengono dichiarate le component che utilizza 
@@ -18,7 +19,7 @@ import { MagazzinoComponent } from './magazzino/magazzino.component';
  * @see AdminRoutingModule
  */
 @NgModule({
-  declarations: [AdminDashboardComponent, UsersComponent, WorkInProgressComponent, EditProfileComponent, GeneralInfoComponent, MagazzinoComponent],
+  declarations: [AdminDashboardComponent, UsersComponent, WorkInProgressComponent, EditProfileComponent, GeneralInfoComponent, MagazzinoComponent, OggettoComponent],
   imports: [
     CommonModule,
     AdminRoutingModule,

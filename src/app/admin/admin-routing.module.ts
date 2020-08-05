@@ -7,6 +7,7 @@ import { WorkInProgressComponent } from './work-in-progress/work-in-progress.com
 import { EditProfileComponent } from './edit-profile/edit-profile.component';
 import { GeneralInfoComponent } from './general-info/general-info.component';
 import { MagazzinoComponent } from './magazzino/magazzino.component';
+import { OggettoComponent } from './oggetto/oggetto.component';
 
 /**
  * Modulo di routing dell'admin. Qui ci sono i percorsi che un admin può seguire:
@@ -27,7 +28,8 @@ const routes: Routes = [
     { path: 'work-in-progress', component: WorkInProgressComponent},
     { path: 'edit-profile', component: EditProfileComponent},
     { path: 'general-info', component:  GeneralInfoComponent},
-    { path: 'magazzino', component:  MagazzinoComponent}
+    { path: 'magazzino', component:  MagazzinoComponent},
+    { path: 'oggetto', component:  OggettoComponent}
   ]}
 ];
 
