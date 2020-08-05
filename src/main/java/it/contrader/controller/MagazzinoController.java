@@ -2,7 +2,9 @@ package it.contrader.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -24,66 +26,43 @@ public class MagazzinoController extends AbstractController<MagazzinoDTO>{
 	private OggettoService oggettoService;
 	
 	@PostMapping("/insertmagazzino")
-	public MagazzinoDTO insertMagazzino(@RequestParam("id_oggetto") Long id_oggetto,
-			@RequestParam("capienza") int capienza) {
+	public MagazzinoDTO insertMagazzino(@RequestBody MagazzinoDTO magazzino) {
 		OggettoDTO oggetto;
-		if(id_oggetto != 0) {
-			oggetto = oggettoService.read(id_oggetto);
+		if(magazzino.getOggetto() != null) {
+			oggetto = oggettoService.read(magazzino.getOggetto().getId());
 			int dimensione = oggetto.getDimensione();
-			if(capienza < dimensione) {
-				id_oggetto = (long) 0;
+			if(magazzino.getCapienza() < dimensione) {
+				magazzino.setCapienza(0);
 			}
 		}
-		MagazzinoDTO dto = new MagazzinoDTO();
-		dto.setCapienza(capienza);
-		if(id_oggetto == 0) {
-			dto.setOggetto(null);
-		}
-		else {
-			oggetto = oggettoService.read(id_oggetto);
-			dto.setOggetto(oggetto);
-		}
-		dto.setCancellato(false);
-		return service.insert(dto);
+		magazzino.setCancellato(false);
+		return service.insert(magazzino);
 	}
 	
 	@PostMapping("/updatemagazzino")
-	public MagazzinoDTO updateMagazzino(@RequestParam("id") Long id, @RequestParam("id_oggetto") Long id_oggetto,
-			@RequestParam("capienza") int capienza) {
+	public MagazzinoDTO updateMagazzino(@RequestBody MagazzinoDTO magazzino) {
 		OggettoDTO oggetto;
-		if(id_oggetto != 0) {
-			oggetto = oggettoService.read(id_oggetto);
+		if(magazzino.getOggetto() != null) {
+			oggetto = oggettoService.read(magazzino.getOggetto().getId());
 			int dimensione = oggetto.getDimensione();
-			if(capienza < dimensione) {
-				id_oggetto = (long) 0;
+			if(magazzino.getCapienza() < dimensione) {
+				magazzino.setCapienza(0);
 			}
 		}
-		MagazzinoDTO dto = new MagazzinoDTO();
-		dto.setId(id);
-		dto.setCapienza(capienza);
-		if(id_oggetto == 0) {
-			dto.setOggetto(null);
-		}
-		else {
-			oggetto = oggettoService.read(id_oggetto);
-			dto.setOggetto(oggetto);
-		}
-		dto.setCancellato(false);
-		return service.update(dto);
+		magazzino.setCancellato(false);
+		return service.update(magazzino);
 	}
 	
 	@PostMapping("/deletemagazzino")
-	public MagazzinoDTO deleteMagazzino(@RequestParam("id") Long id, @RequestParam("capienza") int capienza, @RequestParam("id_oggetto") Long id_oggetto){
-		MagazzinoDTO dto = service.read(id);
-		dto.setCancellato(true);
-		return service.update(dto);
+	public MagazzinoDTO deleteMagazzino(@RequestBody MagazzinoDTO magazzino){
+		magazzino.setCancellato(true);
+		return service.update(magazzino);
 	}
 	
 	@PostMapping("/reinsertmagazzino")
-	public MagazzinoDTO reinsertMagazzino(@RequestParam("id") Long id, @RequestParam("capienza") int capienza, @RequestParam("id_oggetto") Long id_oggetto){
-		MagazzinoDTO dto = service.read(id);
-		dto.setCancellato(false);
-		return service.update(dto);
+	public MagazzinoDTO reinsertMagazzino(@RequestBody MagazzinoDTO magazzino){
+		magazzino.setCancellato(false);
+		return service.update(magazzino);
 	}
 	
 }
