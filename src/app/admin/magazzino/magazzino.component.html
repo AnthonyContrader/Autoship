@@ -35,7 +35,9 @@
           </td>
         </tr>
         <tr *ngFor="let magazzino of magazzinolist">
-          <select placeholder="Prodotto" name="id_oggetto" [(ngModel)]="magazzino.oggetto">
+          <select name="id_oggetto" [(ngModel)]="magazzino.oggetto">
+            <option *ngIf="magazzino.oggetto!=null" [selected]="magazzino.oggetto===magazzino.oggetto" 
+            value="magazzino.oggetto">{{magazzino.oggetto.nome}}</option>
             <option [selected]="magazzino.oggetto===null" value="">Vuoto</option>
           </select>
           <td>
