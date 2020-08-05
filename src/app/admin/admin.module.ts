@@ -19,7 +19,7 @@ import { OggettoComponent } from './oggetto/oggetto.component';
  * @see AdminRoutingModule
  */
 @NgModule({
-  declarations: [AdminDashboardComponent, UsersComponent, WorkInProgressComponent, EditProfileComponent, GeneralInfoComponent, MagazzinoComponent, OggettoComponent],
+  declarations: [AdminDashboardComponent, UsersComponent, WorkInProgressComponent, EditProfileComponent, GeneralInfoComponent, OggettoComponent, MagazzinoComponent],
   imports: [
     CommonModule,
     AdminRoutingModule,

@@ -40,8 +40,7 @@ export class AdminMenuComponent implements OnInit {
     if (this.isOggettoCollapsed === false) {
       this.isOggettoCollapsed = true;
     } else { this.isOggettoCollapsed = false; }
-  }
-  
+  } 
 
   magazzinocollapse() {
     if (this.isMagazzinoCollapsed === false) {
