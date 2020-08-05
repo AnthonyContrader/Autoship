@@ -62,12 +62,17 @@
               <input [(ngModel)]="user.usertype" disabled>
             </td>
           </ng-template>
-          <td>
+          <td *ngIf="user.usertype != 'AMMINISTRATORE' else adminSave">
             <button (click)=update(user)>Save</button>
           </td>
-          <td>
+          <ng-template #adminSave>
+            <td  colspan="2">
+              <button (click)=update(user)>Save</button>
+            </td>
+          </ng-template>
+          <td *ngIf="user.usertype != 'AMMINISTRATORE'">
             <button (click)="delete(user)">Delete</button>
-          </td>
+          </td>          
         </tr>
       </table>
     </div>
