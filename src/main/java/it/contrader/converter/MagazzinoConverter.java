@@ -10,10 +10,10 @@ import it.contrader.model.Magazzino;
 public class MagazzinoConverter extends AbstractConverter<Magazzino, MagazzinoDTO> {
 	
 	@Autowired
-	private CodiceConverter codiceConverter;
+	private OggettoConverter oggettoConverter;
 	
 	@Autowired
-	private OggettoConverter oggettoConverter;
+	private CodiceConverter codiceConverter;
 	
 	public Magazzino toEntity(MagazzinoDTO magazzinoDTO) {
 		Magazzino magazzino = null;
