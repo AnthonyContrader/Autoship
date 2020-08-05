@@ -11,8 +11,8 @@ import { Router } from '@angular/router';
 })
 export class OggettoComponent implements OnInit {
   
-  oggettiDto: Array<OggettoDTO>
-  
+ public oggettiDTO: Array<OggettoDTO>
+ oggetto :OggettoComponent ;
   constructor(private service : OggettoService) { }
   ngOnInit() {
   }
@@ -20,6 +20,12 @@ export class OggettoComponent implements OnInit {
 
  /*let oggetti = service.getall();
   
+      }
+
+      oggettolist() {
+        this.oggetto.service.getAll().subscribe((response) => {
+          this.oggettiDTO= response;
+      
  
  this.oggetto.Service.getall().subscribe((response) => {
     this.oggettoInsert = response;
