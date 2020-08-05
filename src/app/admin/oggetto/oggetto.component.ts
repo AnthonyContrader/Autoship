@@ -12,6 +12,7 @@ import { Router } from '@angular/router';
 export class OggettoComponent implements OnInit {
 
   oggetti: OggettoDTO[];
+  oggettotoinsert: OggettoDTO = new OggettoDTO();
     constructor(private service : OggettoService) { }
     ngOnInit() {
       this.oggettoList();
@@ -19,6 +20,16 @@ export class OggettoComponent implements OnInit {
   
     public oggettoList(){
       this.service.getAll().subscribe(oggetti => this.oggetti = oggetti);
+    }
+    insertOggetto(oggetto : OggettoDTO){
+      this.service.insert(oggetto).subscribe(() => this.oggettoList());
+    }
+    updateOggetto(oggetto : OggettoDTO){
+      this.service.updateOggetto(oggetto).subscribe(() => this.oggettoList());
+    }
+  
+    deleteOggetto(oggetto : OggettoDTO){
+      this.service.deleteOggetto(oggetto).subscribe(() => this.oggettoList());
     }
 }
    

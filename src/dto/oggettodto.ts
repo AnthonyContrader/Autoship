@@ -5,10 +5,5 @@ export class OggettoDTO {
     dimensione: number;
     cancellato: boolean;
     cella: boolean;
-    constructor(nome: string, dimensione: number) {
-        this.nome = nome;
-        this.dimensione = dimensione;
-        this.cancellato = false;
-        this.cella=false;
-    }
+  
 }

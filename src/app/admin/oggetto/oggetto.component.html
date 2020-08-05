@@ -1,11 +1,31 @@
-<table>
+<table class="table">
     <tr>
-      <th>Prodotto</th>
-      <th>Dimensione</th>
+        <th>Nome</th>
+        <th>Dimensione</th>
+        <th> </th>
+        <th> </th>
     </tr>
     <tr *ngFor="let oggetto of oggetti">
-      <td> <p [(ngModel)]="oggetto.Nome"> </p></td>
-      <td> <p [(ngModel)]="oggetto.Dimensione"> </p></td>
+        <td><input type="text" placeholder="{{oggetto.nome}}" name="Nome" [(ngModel)]="oggetto.nome"></td>
+        <td><input type="text" placeholder="{{oggetto.dimensione}}" name="Dimensione" [(ngModel)]="oggetto.dimensione"></td>
+        <td><button (click)="updateOggetto(oggetto)">Modifica</button></td>
+        <td><button (click)="deleteOggetto(oggetto)">Elimina</button></td>
     </tr>
-  
-  </table>
+    <tr>
+        <td>
+          <input type="text" placeholder="Nome prodotto" name="Nome" [(ngModel)]="oggettotoinsert.nome">
+          <td>
+            <input placeholder="Dimensione" name="Dimensione" [(ngModel)]="oggettotoinsert.dimensione">
+          </td>
+          <td>
+            <button (click)="insertOggetto(oggettotoinsert)">Inserisci</button>
+          </td>
+          <td>
+            <button (click)="clear()">Clear</button>
+          </td>
+        </tr>
+
+
+
+    
+</table>
