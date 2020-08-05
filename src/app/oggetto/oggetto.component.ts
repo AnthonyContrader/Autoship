@@ -11,12 +11,17 @@ import { Router } from '@angular/router';
 })
 export class OggettoComponent implements OnInit {
   
- public oggettiDTO: Array<OggettoDTO>
- oggetto :OggettoComponent ;
+  oggetti: OggettoDTO[];
+// oggetto :OggettoComponent ;
+//oggettotoinsert: OggettoDTO = new OggettoDTO();
   constructor(private service : OggettoService) { }
   ngOnInit() {
+    this.oggettoList();
   }
 
+  public oggettoList(){
+    this.service.getAll().subscribe(oggetti => this.oggetti = oggetti);
+  }
 
  /*let oggetti = service.getall();
   
