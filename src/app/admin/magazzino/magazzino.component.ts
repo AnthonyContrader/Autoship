@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { MagazzinoService } from 'src/service/magazzino.service';
+import { OggettoService } from 'src/service/oggetto.service';
 import { MagazzinoDTO } from 'src/dto/magazzinodto';
 import { OggettoDTO } from 'src/dto/oggettodto';
 
@@ -13,10 +14,13 @@ export class MagazzinoComponent implements OnInit {
   magazzinolist: MagazzinoDTO[];
   magazzinotoinsert: MagazzinoDTO = new MagazzinoDTO();
 
-  constructor(private service: MagazzinoService) { }
+  oggettolist: OggettoDTO[];
+
+  constructor(private service: MagazzinoService, private oggettoService: OggettoService) { }
 
   ngOnInit() {
     this.getMagazzinoList();
+    this.getOggettoList();
   }
 
   
@@ -24,8 +28,8 @@ export class MagazzinoComponent implements OnInit {
     this.service.getAll().subscribe(magazzinolist => this.magazzinolist = magazzinolist);
   }
 
-  insertMagazzino(magazzino : MagazzinoDTO){
-    this.service.insertMagazzino(magazzino).subscribe(() => this.getMagazzinoList());
+  insertMagazzino(magazzino : MagazzinoDTO, id_oggetto : number){
+    this.service.insertMagazzino(magazzino, id_oggetto).subscribe(() => this.getMagazzinoList());
   }
 
   updateMagazzino(magazzino : MagazzinoDTO){
@@ -38,6 +42,10 @@ export class MagazzinoComponent implements OnInit {
 
   reinsertMagazzino(magazzino : MagazzinoDTO){
     this.service.reinsertMagazzino(magazzino).subscribe(() => this.getMagazzinoList());
+  }
+
+  getOggettoList(){
+    this.oggettoService.getOggettoNotInCell().subscribe(oggettolist => this.oggettolist = oggettolist);
   }
 
   clear(){

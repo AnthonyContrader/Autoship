@@ -32,8 +32,8 @@ export class OggettoService extends AbstractService<OggettoDTO>{
     return this.http.post<OggettoDTO>('http://localhost:8080/' + this.type + '/deleteoggeto',  oggettoDTO);
   }
 
-  getOggettoNotInCell(): Observable<OggettoDTO>{
-    return this.http.get<OggettoDTO>('http://localhost:8080/' + this.type + '/getobjectnotincell');
+  getOggettoNotInCell(): Observable<OggettoDTO[]>{
+    return this.http.get<OggettoDTO[]>('http://localhost:8080/' + this.type + '/getobjectnotincell');
   }
 
   

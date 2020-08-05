@@ -21,14 +21,15 @@
         </tr>
         <tr>
         <td>
-          <select placeholder="Prodotto" name="id_oggetto" [(ngModel)]="magazzinotoinsert.oggetto">
-             <option value="0">Vuoto</option>
+          <select name="id_oggetto" [(ngModel)]="magazzinotoinsert.oggetto">
+            <option *ngFor="let oggetto of oggettolist" value="oggetto.id">{{oggetto.nome}}</option>
+            <option value="0">Vuoto</option>
           </select>
           <td>
             <input placeholder="Capienza" name="capienza" [(ngModel)]="magazzinotoinsert.capienza">
           </td>
           <td>
-            <button (click)="insertMagazzino(magazzinotoinsert)">Inserisci</button>
+            <button (click)="insertMagazzino(magazzinotoinsert, id_oggetto)">Inserisci</button>
           </td>
           <td>
             <button (click)="clear()">Clear</button>
@@ -36,9 +37,10 @@
         </tr>
         <tr *ngFor="let magazzino of magazzinolist">
           <select name="id_oggetto" [(ngModel)]="magazzino.oggetto">
-            <option *ngIf="magazzino.oggetto!=null" [selected]="magazzino.oggetto===magazzino.oggetto" 
+            <option *ngIf="magazzino.oggetto!=null"  
             value="magazzino.oggetto">{{magazzino.oggetto.nome}}</option>
-            <option [selected]="magazzino.oggetto===null" value="">Vuoto</option>
+            <option *ngFor="let oggetto of oggettolist" value="oggetto">{{oggetto.nome}}</option>
+            <option value="">Vuoto</option>
           </select>
           <td>
             <input name="capienza" [(ngModel)]="magazzino.capienza">

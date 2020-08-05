@@ -3,6 +3,7 @@ import { AbstractService } from './abstractservice';
 import { MagazzinoDTO } from 'src/dto/magazzinodto';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { $ } from 'protractor';
 
 @Injectable({
   providedIn: 'root'
@@ -14,8 +15,8 @@ export class MagazzinoService extends AbstractService<MagazzinoDTO>{
     this.type = 'magazzino';
   }
 
-  insertMagazzino(magazzinoDTO : MagazzinoDTO): Observable<MagazzinoDTO>{
-    return this.http.post<MagazzinoDTO>('http://localhost:8080/' + this.type + '/insertmagazzino',  magazzinoDTO);
+  insertMagazzino(magazzinoDTO : MagazzinoDTO, id_oggetto : number): Observable<MagazzinoDTO>{
+    return this.http.post<MagazzinoDTO>('http://localhost:8080/' + this.type + '/insertmagazzino?id_oggetto=' + id_oggetto,  magazzinoDTO);
   }
 
   updateMagazzino(magazzinoDTO : MagazzinoDTO): Observable<MagazzinoDTO>{
