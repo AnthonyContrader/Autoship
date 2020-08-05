@@ -20,10 +20,10 @@
           </th>
         </tr>
         <tr>
-          <td>
-            <select placeholder="Prodotto" name="id_oggetto" [(ngModel)]="magazzinotoinsert.oggetto.id">
-              <option value="0">Vuoto</option>
-            </select>
+        <td>
+          <select placeholder="Prodotto" name="id_oggetto" [(ngModel)]="magazzinotoinsert.oggetto">
+             <option value="0">Vuoto</option>
+          </select>
           <td>
             <input placeholder="Capienza" name="capienza" [(ngModel)]="magazzinotoinsert.capienza">
           </td>
@@ -35,9 +35,8 @@
           </td>
         </tr>
         <tr *ngFor="let magazzino of magazzinolist">
-          <input type="hidden" name="id" [(ngModel)]="magazzino.id">
-          <select placeholder="Prodotto" name="id_oggetto" [(ngModel)]="magazzino.oggetto.id">
-            <option value="0">Vuoto</option>
+          <select placeholder="Prodotto" name="id_oggetto" [(ngModel)]="magazzino.oggetto">
+            <option [selected]="magazzino.oggetto===null" value="">Vuoto</option>
           </select>
           <td>
             <input name="capienza" [(ngModel)]="magazzino.capienza">
@@ -47,7 +46,7 @@
           </td>
           <ng-template #reinsert>
             <td>
-              <button (click)=reinsertMagazzino(magazzino)>Disattivato</button>
+              <button (click)=reinsertMagazzino(magazzino)>Attiva</button>
             </td>
           </ng-template>
           <td  *ngIf="magazzino.cancellato == false else notDelete">
@@ -59,11 +58,7 @@
             </td>
           </ng-template> 
         </tr>
-
       </table>
-    </div>
-    <div class="col-md-1">
-
     </div>
   </div>
 </div>

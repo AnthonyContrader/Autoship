@@ -46,3 +46,8 @@ input:hover,  input:active, input:focus{
 button:hover{
     background-color: crimson;
 }
+
+button:disabled{
+	background-color: darkorange;
+	color: grey;
+}

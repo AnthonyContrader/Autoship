@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { MagazzinoService } from 'src/service/magazzino.service';
 import { MagazzinoDTO } from 'src/dto/magazzinodto';
+import { OggettoDTO } from 'src/dto/oggettodto';
 
 @Component({
   selector: 'app-magazzino',
