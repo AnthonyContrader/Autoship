@@ -1,6 +1,5 @@
 package it.contrader.dto;
 
-import it.contrader.model.User;
 import it.contrader.model.Codice.CodiceStato;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -16,7 +15,7 @@ public class CodiceDTO {
 
 	private String otp;
 	
-	private User user;
+	private UserDTO user;
 	
 	private CodiceStato stato;
 	

@@ -15,8 +15,8 @@ public class CarrelloDTO {
 	
 	private Long id;
 	
-	private Oggetto oggetto;
+	private OggettoDTO oggetto;
 		
-	private Codice codice;
+	private CodiceDTO codice;
 }
 
