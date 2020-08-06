@@ -15,12 +15,14 @@ export class MagazzinoComponent implements OnInit {
   magazzinotoinsert: MagazzinoDTO = new MagazzinoDTO();
 
   oggettolist: OggettoDTO[];
+  oggettotoinsert: OggettoDTO;
 
   constructor(private service: MagazzinoService, private oggettoService: OggettoService) { }
 
   ngOnInit() {
     this.getMagazzinoList();
     this.getOggettoList();
+    this.oggettotoinsert = new OggettoDTO();
   }
 
   
