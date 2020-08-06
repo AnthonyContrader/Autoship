@@ -49,9 +49,22 @@ public class CodiceController extends AbstractController<CodiceDTO>{
 		return otp;
 	}
 	
+	@GetMapping("/getallconfirmed")
+	public List<CodiceDTO> getAllConfirmed(HttpServletRequest request){		
+		List<CodiceDTO> codici = service.findByStato(CodiceStato.Confermato);					
+		return codici;
+	}
+	
 	@PostMapping("/confirm")
-	public CodiceDTO update(@RequestBody CodiceDTO codice) {
+	public CodiceDTO confirm(@RequestBody CodiceDTO codice) {
 		codice.setStato(CodiceStato.Confermato);
+		service.update(codice);
+		return codice;
+	}
+	
+	@PostMapping("/send")
+	public CodiceDTO send(@RequestBody CodiceDTO codice) {
+		codice.setStato(CodiceStato.Spedito);
 		service.update(codice);
 		return codice;
 	}
@@ -68,5 +81,5 @@ public class CodiceController extends AbstractController<CodiceDTO>{
 			magazzinoService.update(m);
 		}		
 		service.delete(codice.getId());
-	}	
+	}
 }
