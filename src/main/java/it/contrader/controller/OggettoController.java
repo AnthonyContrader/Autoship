@@ -74,4 +74,19 @@ public class OggettoController extends AbstractController<OggettoDTO>{
 		return oggettoList;
 	}
 
+	
+	@GetMapping("/getobjectincell")
+	public List<OggettoDTO> getObjectInCell(HttpServletRequest request) {
+		List<OggettoDTO> oggettoList = service.findByCancellatoFalse();
+		List<OggettoDTO> dummyList = service.findByCancellatoFalse();
+		MagazzinoDTO magazzino;
+		
+		for(OggettoDTO oggetto : dummyList) {
+			magazzino = magazzinoService.findByOggetto(converter.toEntity(oggetto));
+			if(magazzino == null) {
+				oggettoList.remove(oggetto);
+			}
+		}
+		return oggettoList;
+	}
 }

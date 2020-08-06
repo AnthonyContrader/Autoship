@@ -89,5 +89,6 @@ public class MagazzinoController extends AbstractController<MagazzinoDTO>{
 		magazzino.setCancellato(false);
 		return service.update(magazzino);
 	}
+
 	
 }
