@@ -1,0 +1,14 @@
+<table class="table">
+    <tr>
+        <th>Nome</th>
+        <th>Dimensione</th>
+    </tr>
+    <tr *ngFor="let oggetto of oggettolist">
+        <td>
+          <input type="text" placeholder="{{oggetto.nome}}" name="Nome" [(ngModel)]="oggetto.nome">
+        </td>
+        <td>
+            <input type="text" placeholder="{{oggetto.dimensione}}" name="Dimensione" [(ngModel)]="oggetto.dimensione">
+          </td>
+    </tr>    
+</table>

@@ -2,13 +2,14 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { UserRoutingModule } from './user-routing.module';
-import { UserDashboardComponent } from './user-dashboard/user-dashboard.component';
-//import { UserLayoutComponent } from '../layout/user-layout/user-layout.component';
+import { GeneralInfoComponent } from './general-info/general-info.component';
+import { EditProfileComponent } from './edit-profile/edit-profile.component';
+import { AcquistaComponent } from './acquista/acquista.component';
 
 
 
 @NgModule({
-  declarations: [UserDashboardComponent],
+  declarations: [GeneralInfoComponent,EditProfileComponent, AcquistaComponent],
   imports: [
     CommonModule,
     UserRoutingModule,

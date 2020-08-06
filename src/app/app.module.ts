@@ -6,8 +6,7 @@ import { LoginModule } from './login/login.module';
 import { HttpClientModule } from '@angular/common/http';
 import { LayoutModule } from './layout/layout.module';
 import { AdminModule } from './admin/admin.module';
-import { UserComponent } from './user/user.module';
-import { UserDashboardComponent } from './user/user-dashboard/user-dashboard.component';
+import { UserModule } from './user/user.module';
 
 
 /** 
@@ -19,9 +18,7 @@ import { UserDashboardComponent } from './user/user-dashboard/user-dashboard.com
 */
 @NgModule({
   declarations: [
-    AppComponent,
-    UserComponent,
-    UserDashboardComponent
+    AppComponent
   ],
   imports: [
     BrowserModule,
@@ -29,7 +26,8 @@ import { UserDashboardComponent } from './user/user-dashboard/user-dashboard.com
     LoginModule,
     HttpClientModule,
     LayoutModule,
-    AdminModule
+    AdminModule,
+    UserModule
   ],
   providers: [],
   bootstrap: [AppComponent]

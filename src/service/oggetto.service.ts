@@ -39,6 +39,9 @@ export class OggettoService extends AbstractService<OggettoDTO>{
   getOggettoNotInCell(): Observable<OggettoDTO[]>{
     return this.http.get<OggettoDTO[]>('http://localhost:8080/' + this.type + '/getobjectnotincell');
   }
+  getOggettoInCell(): Observable<OggettoDTO[]>{
+    return this.http.get<OggettoDTO[]>('http://localhost:8080/' + this.type + '/getobjectincell');
+  }
 
   
 }
