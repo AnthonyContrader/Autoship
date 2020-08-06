@@ -1,5 +1,7 @@
 package it.contrader.controller;
 
+import java.io.IOException;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -8,6 +10,13 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+
+import com.fasterxml.jackson.core.JsonParseException;
+import com.fasterxml.jackson.databind.DeserializationFeature;
+import com.fasterxml.jackson.databind.JsonMappingException;
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.node.ObjectNode;
 
 import it.contrader.dto.MagazzinoDTO;
 import it.contrader.dto.OggettoDTO;
@@ -26,17 +35,20 @@ public class MagazzinoController extends AbstractController<MagazzinoDTO>{
 	private OggettoService oggettoService;
 	
 	@PostMapping("/insertmagazzino")
-	public MagazzinoDTO insertMagazzino(@RequestBody MagazzinoDTO magazzino, @RequestParam (name = "id_oggetto") String id) {
-		Long id_oggetto = Long.parseLong(id);
+	public MagazzinoDTO insertMagazzino(@RequestBody JsonNode json) {
+		ObjectMapper mapper = new ObjectMapper();
+		mapper.configure(DeserializationFeature.ACCEPT_EMPTY_STRING_AS_NULL_OBJECT, true);
+		MagazzinoDTO magazzino = mapper.convertValue(json.get("magazzino"), MagazzinoDTO.class);
+		Long id_oggetto = mapper.convertValue(json.get("oggetto"), Long.class);
 		OggettoDTO oggetto;
-		if(id_oggetto != 0) {
+		if(id_oggetto != null) {
 			oggetto = oggettoService.read(id_oggetto);
 			int dimensione = oggetto.getDimensione();
 			if(magazzino.getCapienza() < dimensione) {
 				id_oggetto = (long) 0;
 			}
 		}
-		if(id_oggetto == 0) {
+		if(id_oggetto == 0 || id_oggetto == 0) {
 			magazzino.setOggetto(null);
 		}
 		else{
@@ -48,14 +60,25 @@ public class MagazzinoController extends AbstractController<MagazzinoDTO>{
 	}
 	
 	@PostMapping("/updatemagazzino")
-	public MagazzinoDTO updateMagazzino(@RequestBody MagazzinoDTO magazzino) {
+	public MagazzinoDTO updateMagazzino(@RequestBody JsonNode json) {
+		ObjectMapper mapper = new ObjectMapper();
+		mapper.configure(DeserializationFeature.ACCEPT_EMPTY_STRING_AS_NULL_OBJECT, true);
+		MagazzinoDTO magazzino = mapper.convertValue(json.get("magazzino"), MagazzinoDTO.class);
+		Long id_oggetto = mapper.convertValue(json.get("oggetto"), Long.class);
 		OggettoDTO oggetto;
-		if(magazzino.getOggetto() != null) {
-			oggetto = oggettoService.read(magazzino.getOggetto().getId());
+		if(id_oggetto != null) {
+			oggetto = oggettoService.read(id_oggetto);
 			int dimensione = oggetto.getDimensione();
 			if(magazzino.getCapienza() < dimensione) {
-				magazzino.setCapienza(0);
+				id_oggetto = (long) 0;
 			}
+		}
+		if(id_oggetto == null || id_oggetto == 0) {
+			magazzino.setOggetto(null);
+		}
+		else{
+			oggetto = oggettoService.read(id_oggetto);
+			magazzino.setOggetto(oggetto);
 		}
 		magazzino.setCancellato(false);
 		return service.update(magazzino);
