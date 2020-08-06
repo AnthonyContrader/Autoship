@@ -26,7 +26,8 @@ public class MagazzinoController extends AbstractController<MagazzinoDTO>{
 	private OggettoService oggettoService;
 	
 	@PostMapping("/insertmagazzino")
-	public MagazzinoDTO insertMagazzino(@RequestBody MagazzinoDTO magazzino, @RequestParam (name = "id_oggetto") Long id_oggetto) {
+	public MagazzinoDTO insertMagazzino(@RequestBody MagazzinoDTO magazzino, @RequestParam (name = "id_oggetto") String id) {
+		Long id_oggetto = Long.parseLong(id);
 		OggettoDTO oggetto;
 		if(id_oggetto != 0) {
 			oggetto = oggettoService.read(id_oggetto);
