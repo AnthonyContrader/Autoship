@@ -2,7 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { LoginDTO } from 'src/dto/logindto';
 import { NgForm } from '@angular/forms';
 import { UserService } from 'src/service/user.service';
+import { CodiceService } from 'src/service/codice.service';
 import { Router } from '@angular/router';
+import { CodiceDTO } from 'src/dto/codicedto';
 
 @Component({
   selector: 'app-login',
@@ -12,8 +14,9 @@ import { Router } from '@angular/router';
 export class LoginComponent implements OnInit {
 
   loginDTO: LoginDTO;
+  codiceList : string[];
 
-  constructor(private service: UserService, private router: Router) { }
+  constructor(private service: UserService,private codiceService: CodiceService, private router: Router) { }
 
   ngOnInit() {
   }
@@ -23,6 +26,8 @@ export class LoginComponent implements OnInit {
     let codice: number;
     const currentUser = 'currentUser';
     const otp='otp';
+    this.checkCodice();
+
     this.service.login(this.loginDTO).subscribe((user) => {
 
       if (user != null) {
@@ -31,6 +36,9 @@ export class LoginComponent implements OnInit {
         switch (user.usertype.toString()) {
           case 'SUPERUTENTE': {
             codice=Math.floor((Math.random() * 1000) + 1);
+            while(this.codiceList.includes(codice.toString())){
+              codice=Math.floor((Math.random() * 1000) + 1);
+            }
             localStorage.setItem(otp,JSON.stringify(codice));
             this.router.navigate(['/superuser-dashboard']);
             break;
@@ -45,6 +53,9 @@ export class LoginComponent implements OnInit {
           }
           case 'UTENTE': {
             codice=Math.floor((Math.random() * 1000) + 1);
+            while(this.codiceList.includes(codice.toString())){
+              codice=Math.floor((Math.random() * 1000) + 1);
+            }
             localStorage.setItem(otp,JSON.stringify(codice));
             this.router.navigate(['/user-dashboard']);
             break;
@@ -54,5 +65,9 @@ export class LoginComponent implements OnInit {
         }
       }
     });
+  }
+
+  checkCodice(){
+    return this.codiceService.getAllCodes().subscribe(codes => {this.codiceList = codes as string[]});
   }
 }

@@ -1,17 +1,19 @@
 <table class="table">
-    <tr>
-        <th>Nome</th>
-        <th>Dimensione</th>
-        <th> </th>
-    </tr>
-    <tr *ngFor="let oggetto of oggettolist">
-        <td>
-          <input type="text" placeholder="{{oggetto.nome}}" name="Nome" [(ngModel)]="oggetto.nome">
+  <tr>
+      <th>Nome</th>
+      <th>Dimensione</th>
+      <th> </th>  
+      <th> </th>
+  </tr>
+  <tr *ngFor="let magazzino of magazzinolist">
+      <td>
+        <input type="text" placeholder="{{magazzino.oggetto.nome}}" name="Nome">
+      </td>
+      <td>
+          <input type="text" placeholder="{{magazzino.oggetto.dimensione}}" name="Dimensione">
         </td>
-        <td>
-            <input type="text" placeholder="{{oggetto.dimensione}}" name="Dimensione" [(ngModel)]="oggetto.dimensione">
-          </td>
-          <td> <button (click)="setCodice(codice,user.id,oggetto.id)">Aggiungi al carrello</button></td>
-          <td><button (click)="clear(oggetto)">Clear</button> </td>
-    </tr>    
+      <td> 
+        <button (click)="setCodice(codice,user,magazzino)">Aggiungi al carrello</button>
+      </td>
+  </tr>    
 </table>

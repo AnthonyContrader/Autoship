@@ -31,5 +31,4 @@ export class UserService extends AbstractService<UserDTO>{
   getAllAdmin(): Observable<UserDTO[]> {
     return this.http.get<UserDTO[]>('http://localhost:8080/' + this.type + '/getalladmin')
   }
-
 }

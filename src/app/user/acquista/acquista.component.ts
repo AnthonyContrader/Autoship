@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { OggettoDTO } from 'src/dto/oggettodto';
-import { OggettoService } from 'src/service/oggetto.service';
+import { MagazzinoDTO } from 'src/dto/magazzinodto';
+import { MagazzinoService } from 'src/service/magazzino.service';
 import { UserDTO } from 'src/dto/userdto';
 @Component({
   selector: 'app-acquista',
@@ -8,10 +8,10 @@ import { UserDTO } from 'src/dto/userdto';
   styleUrls: ['./acquista.component.css']
 })
 export class AcquistaComponent implements OnInit {
-  oggettolist: OggettoDTO[];
+  magazzinolist: MagazzinoDTO[];
   codice: string;
   user: UserDTO;
-  constructor(private oggettoservice: OggettoService) { }
+  constructor(private service: MagazzinoService) { }
 
   ngOnInit(): void {
     this.getOggettoList();
@@ -19,13 +19,18 @@ export class AcquistaComponent implements OnInit {
     this.user = JSON.parse(localStorage.getItem('currentUser'));
   }
   getOggettoList(){
-    this.oggettoservice.getOggettoInCell().subscribe(oggettolist => this.oggettolist = oggettolist);
+    this.service.getOggettoInCell().subscribe(magazzinolist => this.magazzinolist = magazzinolist);
   }
-  setCodice(otp: string, id_user: number, id_oggetto: number){
-    this.oggettoservice.setCodice(otp,id_user,id_oggetto);
+  setCodice(otp: string, user: UserDTO, magazzino: MagazzinoDTO){
+    this.service.setCodice(otp, user.id, magazzino).subscribe(() => this.magazzinolist);
+  }
+
+ /* setCodice(oggetto: OggettoDTO){
+    this.service.setCodice(oggetto);
     this.getOggettoList();
-  }
-  clear(oggetto: OggettoDTO){
+  }*/
+
+ /* clear(oggetto: OggettoDTO){
     oggetto = new OggettoDTO();
-  }
+  }*/
 }
