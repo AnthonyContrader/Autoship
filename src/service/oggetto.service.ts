@@ -24,12 +24,16 @@ export class OggettoService extends AbstractService<OggettoDTO>{
     this.type = 'oggetto';
   }
 
-  updateOggetto(OggettoDTO : OggettoDTO): Observable<OggettoDTO>{
-    return this.http.post<OggettoDTO>('http://localhost:8080/' + this.type + '/updateoggetto',  OggettoDTO);
+  getAllObject(): Observable<OggettoDTO[]> {
+    return this.http.get<OggettoDTO[]>('http://localhost:8080/' + this.type + '/getallobject')
   }
 
-  deleteOggetto(oggettoDTO : OggettoDTO): Observable<OggettoDTO>{
+    deleteOggetto(oggettoDTO : OggettoDTO): Observable<OggettoDTO>{
     return this.http.post<OggettoDTO>('http://localhost:8080/' + this.type + '/deleteoggeto',  oggettoDTO);
+  }
+
+  reinsertOggetto(OggettoDTO : OggettoDTO): Observable<OggettoDTO>{
+    return this.http.post<OggettoDTO>('http://localhost:8080/' + this.type + '/reinsertoggetto',  OggettoDTO);
   }
 
   getOggettoNotInCell(): Observable<OggettoDTO[]>{

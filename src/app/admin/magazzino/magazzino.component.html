@@ -13,10 +13,10 @@
             Capienza
           </th>
           <th>
-            Edit
+            Modifica
           </th>
           <th>
-            Delete
+            Elimina
           </th>
         </tr>
         <tr>
@@ -45,19 +45,22 @@
           <td>
             <input name="capienza" [(ngModel)]="magazzino.capienza">
           </td>
-          <td *ngIf="magazzino.cancellato == false else reinsert">
+          <td *ngIf="magazzino.cancellato == false && magazzino.codice == null else notsave">
             <button (click)="updateMagazzino(magazzino, id_oggetto)">Salva</button>
           </td>
-          <ng-template #reinsert>
+          <ng-template #notsave>
             <td>
-              <button (click)=reinsertMagazzino(magazzino)>Attiva</button>
+              <button (click)="updateMagazzino(magazzino, id_oggetto)" disabled>Salva</button>
             </td>
           </ng-template>
-          <td  *ngIf="magazzino.cancellato == false && magazzino.oggetto == null else notDelete">
+          <td  *ngIf="magazzino.cancellato == false && magazzino.oggetto == null else notdelete">
             <button (click)="deleteMagazzino(magazzino)">Elimina</button>
           </td>  
-          <ng-template #notDelete>
-            <td>
+          <ng-template #notdelete>
+            <td *ngIf="magazzino.cancellato == true">
+              <button (click)="reinsertMagazzino(magazzino)">Ripristina</button>
+            </td>
+            <td *ngIf="magazzino.oggetto != null">
               <button (click)="deleteMagazzino(magazzino)" disabled>Elimina</button>
             </td>
           </ng-template> 

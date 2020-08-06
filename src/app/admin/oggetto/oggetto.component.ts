@@ -19,17 +19,21 @@ export class OggettoComponent implements OnInit {
     }
   
     public oggettoList(){
-      this.service.getAll().subscribe(oggetti => this.oggetti = oggetti);
+      this.service.getAllObject().subscribe(oggetti => this.oggetti = oggetti);
     }
     insertOggetto(oggetto : OggettoDTO){
       this.service.insert(oggetto).subscribe(() => this.oggettoList());
     }
     updateOggetto(oggetto : OggettoDTO){
-      this.service.updateOggetto(oggetto).subscribe(() => this.oggettoList());
+      this.service.update(oggetto).subscribe(() => this.oggettoList());
     }
   
     deleteOggetto(oggetto : OggettoDTO){
       this.service.deleteOggetto(oggetto).subscribe(() => this.oggettoList());
+    }
+
+    reinsertOggetto(oggetto : OggettoDTO){
+      this.service.reinsertOggetto(oggetto).subscribe(() => this.oggettoList());
     }
 }
    
