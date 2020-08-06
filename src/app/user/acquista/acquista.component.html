@@ -11,6 +11,7 @@
         <td>
             <input type="text" placeholder="{{oggetto.dimensione}}" name="Dimensione" [(ngModel)]="oggetto.dimensione">
           </td>
+          <td> <button (click)="setCodice(codice,user.id,oggetto.id)">Aggiungi al carrello</button></td>
           <td><button (click)="clear(oggetto)">Clear</button> </td>
     </tr>    
 </table>
