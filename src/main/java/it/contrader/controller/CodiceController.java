@@ -17,10 +17,12 @@ import it.contrader.converter.CodiceConverter;
 import it.contrader.dto.CarrelloDTO;
 import it.contrader.dto.CodiceDTO;
 import it.contrader.dto.MagazzinoDTO;
+import it.contrader.dto.OggettoDTO;
 import it.contrader.model.Codice.CodiceStato;
 import it.contrader.service.CarrelloService;
 import it.contrader.service.CodiceService;
 import it.contrader.service.MagazzinoService;
+import it.contrader.service.OggettoService;
 
 @RestController
 @RequestMapping("/codice")
@@ -32,6 +34,9 @@ public class CodiceController extends AbstractController<CodiceDTO>{
 	
 	@Autowired
 	private MagazzinoService magazzinoService;
+	
+	@Autowired
+	private OggettoService oggettoService;
 	
 	@Autowired
 	private CarrelloService carrelloService;
@@ -64,6 +69,16 @@ public class CodiceController extends AbstractController<CodiceDTO>{
 	
 	@PostMapping("/send")
 	public CodiceDTO send(@RequestBody CodiceDTO codice) {
+		List<MagazzinoDTO> magazzinoList = magazzinoService.findMagazzinosByCodice(codiceConverter.toEntity(codice));
+		for(MagazzinoDTO m : magazzinoList){
+			OggettoDTO oggetto = m.getOggetto();
+			m.setOggetto(null);
+			m.setCodice(null);
+			magazzinoService.update(m);
+			oggetto.setCancellato(true);
+			oggetto = oggettoService.update(oggetto);
+		}
+		codice.setCancellato(true);
 		codice.setStato(CodiceStato.Spedito);
 		service.update(codice);
 		return codice;
