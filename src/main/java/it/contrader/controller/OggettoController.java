@@ -113,8 +113,8 @@ public class OggettoController extends AbstractController<OggettoDTO>{
 	}
 	
 	@PostMapping("/setcodice")
-	public void setCodice(@RequestBody JsonNode json){
-			ObjectMapper mapper = new ObjectMapper();
+	public OggettoDTO setCodice(@RequestBody JsonNode json){
+			/*ObjectMapper mapper = new ObjectMapper();
 			mapper.configure(DeserializationFeature.ACCEPT_EMPTY_STRING_AS_NULL_OBJECT, true);
 			Long id_oggetto = mapper.convertValue(json.get("oggetto"), Long.class);
 			String otp = mapper.convertValue(json.get("otp"), String.class);
@@ -137,6 +137,9 @@ public class OggettoController extends AbstractController<OggettoDTO>{
 			carrello.setOggetto(oggetto);
 			carrello.setCodice(codice);
 			carrelloService.insert(carrello);
+			return oggetto;*/
 			
+			System.out.println("Ciao");
+			return null;
 	}
 }
