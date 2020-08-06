@@ -2,6 +2,7 @@
     <tr>
         <th>Nome</th>
         <th>Dimensione</th>
+        <th> </th>
     </tr>
     <tr *ngFor="let oggetto of oggettolist">
         <td>
@@ -10,5 +11,6 @@
         <td>
             <input type="text" placeholder="{{oggetto.dimensione}}" name="Dimensione" [(ngModel)]="oggetto.dimensione">
           </td>
+          <td><button (click)="clear(oggetto)">Clear</button> </td>
     </tr>    
 </table>
