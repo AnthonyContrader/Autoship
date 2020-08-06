@@ -7,10 +7,10 @@
   </tr>
   <tr *ngFor="let magazzino of magazzinolist">
       <td>
-        <input type="text" placeholder="{{magazzino.oggetto.nome}}" name="Nome">
+        {{magazzino.oggetto.nome}}
       </td>
       <td>
-          <input type="text" placeholder="{{magazzino.oggetto.dimensione}}" name="Dimensione">
+          {{magazzino.oggetto.dimensione}}
         </td>
       <td> 
         <button (click)="setCodice(codice,user,magazzino)">Aggiungi al carrello</button>

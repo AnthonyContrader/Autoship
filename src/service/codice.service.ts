@@ -18,4 +18,12 @@ export class CodiceService extends AbstractService<CodiceDTO>{
     return this.http.get<string[]>('http://localhost:8080/' + this.type + '/getallcodes')
   }
 
+  confirm(codiceDTO: CodiceDTO): Observable<CodiceDTO> {
+    return this.http.post<CodiceDTO>('http://localhost:8080/' + this.type + '/confirm', codiceDTO)
+  }
+
+  deleteCode(codiceDTO: CodiceDTO): Observable<CodiceDTO> {
+    return this.http.post<CodiceDTO>('http://localhost:8080/' + this.type + '/deletecode', codiceDTO)
+  }
+
 }

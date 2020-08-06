@@ -14,23 +14,15 @@ export class AcquistaComponent implements OnInit {
   constructor(private service: MagazzinoService) { }
 
   ngOnInit(): void {
-    this.getOggettoList();
+    this.getMagazzinoList();
     this.codice = JSON.parse(localStorage.getItem('otp'));
     this.user = JSON.parse(localStorage.getItem('currentUser'));
   }
-  getOggettoList(){
+  getMagazzinoList(){
     this.service.getOggettoInCell().subscribe(magazzinolist => this.magazzinolist = magazzinolist);
   }
+
   setCodice(otp: string, user: UserDTO, magazzino: MagazzinoDTO){
-    this.service.setCodice(otp, user.id, magazzino).subscribe(() => this.magazzinolist);
+    this.service.setCodice(otp, user.id, magazzino).subscribe(() => this.getMagazzinoList());
   }
-
- /* setCodice(oggetto: OggettoDTO){
-    this.service.setCodice(oggetto);
-    this.getOggettoList();
-  }*/
-
- /* clear(oggetto: OggettoDTO){
-    oggetto = new OggettoDTO();
-  }*/
 }

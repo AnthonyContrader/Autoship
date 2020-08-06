@@ -19,12 +19,20 @@
         </td>
       </tr>
     <tr *ngFor="let oggetto of oggetti">
-        <td>
+      <td *ngIf="oggetto.cancellato == false && oggetto.cella == false">
           <input type="text" placeholder="{{oggetto.nome}}" name="Nome" [(ngModel)]="oggetto.nome">
         </td>
-        <td>
+        <td *ngIf="oggetto.cancellato == false && oggetto.cella == false else notedit">
           <input type="text" placeholder="{{oggetto.dimensione}}" name="Dimensione" [(ngModel)]="oggetto.dimensione">
         </td>
+        <ng-template #notedit>
+          <td>
+            <input type="text" placeholder="{{oggetto.nome}}" name="Nome" [(ngModel)]="oggetto.nome" disabled>
+          </td>
+          <td>
+            <input type="text" placeholder="{{oggetto.dimensione}}" name="Dimensione" [(ngModel)]="oggetto.dimensione" disabled>
+          </td>
+        </ng-template>
         <td *ngIf="oggetto.cancellato == false && oggetto.cella == false">
           <button (click)="updateOggetto(oggetto)">Salva</button>
         </td>

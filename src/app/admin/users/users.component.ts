@@ -9,12 +9,14 @@ import { UserDTO } from 'src/dto/userdto';
 })
 export class UsersComponent implements OnInit {
 
+  admin : UserDTO;
   users: UserDTO[];
   usertoinsert: UserDTO = new UserDTO();
   
   constructor(private service: UserService) { }
 
   ngOnInit() {
+    this.admin = JSON.parse(localStorage.getItem('currentUser'));
     this.getUsers();
   }
 
