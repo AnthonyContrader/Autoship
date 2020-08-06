@@ -6,6 +6,8 @@ import { LoginModule } from './login/login.module';
 import { HttpClientModule } from '@angular/common/http';
 import { LayoutModule } from './layout/layout.module';
 import { AdminModule } from './admin/admin.module';
+import { UserComponent } from './user/user.module';
+import { UserDashboardComponent } from './user/user-dashboard/user-dashboard.component';
 
 
 /** 
@@ -17,7 +19,9 @@ import { AdminModule } from './admin/admin.module';
 */
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    UserComponent,
+    UserDashboardComponent
   ],
   imports: [
     BrowserModule,
