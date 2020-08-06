@@ -15,14 +15,13 @@ export class MagazzinoComponent implements OnInit {
   magazzinotoinsert: MagazzinoDTO = new MagazzinoDTO();
 
   oggettolist: OggettoDTO[];
-  oggettotoinsert: OggettoDTO;
+  id_oggetto : number;
 
   constructor(private service: MagazzinoService, private oggettoService: OggettoService) { }
 
   ngOnInit() {
     this.getMagazzinoList();
     this.getOggettoList();
-    this.oggettotoinsert = new OggettoDTO();
   }
 
   
@@ -32,10 +31,12 @@ export class MagazzinoComponent implements OnInit {
 
   insertMagazzino(magazzino : MagazzinoDTO, id_oggetto : number){
     this.service.insertMagazzino(magazzino, id_oggetto).subscribe(() => this.getMagazzinoList());
+    this.getOggettoList();
   }
 
-  updateMagazzino(magazzino : MagazzinoDTO){
-    this.service.updateMagazzino(magazzino).subscribe(() => this.getMagazzinoList());
+  updateMagazzino(magazzino : MagazzinoDTO, id_oggetto : number){
+    this.service.updateMagazzino(magazzino, id_oggetto).subscribe(() => this.getMagazzinoList());
+    this.getOggettoList();
   }
 
   deleteMagazzino(magazzino : MagazzinoDTO){

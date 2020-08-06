@@ -4,6 +4,7 @@ import { MagazzinoDTO } from 'src/dto/magazzinodto';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { $ } from 'protractor';
+import { OggettoDTO } from 'src/dto/oggettodto';
 
 @Injectable({
   providedIn: 'root'
@@ -16,11 +17,11 @@ export class MagazzinoService extends AbstractService<MagazzinoDTO>{
   }
 
   insertMagazzino(magazzinoDTO : MagazzinoDTO, id_oggetto : number): Observable<MagazzinoDTO>{
-    return this.http.post<MagazzinoDTO>('http://localhost:8080/' + this.type + '/insertmagazzino?id_oggetto=' + id_oggetto,  magazzinoDTO);
+    return this.http.post<MagazzinoDTO>('http://localhost:8080/' + this.type + '/insertmagazzino',   {magazzino: magazzinoDTO, oggetto: id_oggetto});
   }
 
-  updateMagazzino(magazzinoDTO : MagazzinoDTO): Observable<MagazzinoDTO>{
-    return this.http.post<MagazzinoDTO>('http://localhost:8080/' + this.type + '/updatemagazzino',  magazzinoDTO);
+  updateMagazzino(magazzinoDTO : MagazzinoDTO, id_oggetto : number): Observable<MagazzinoDTO>{
+    return this.http.post<MagazzinoDTO>('http://localhost:8080/' + this.type + '/updatemagazzino',  {magazzino: magazzinoDTO, oggetto: id_oggetto});
   }
 
   deleteMagazzino(magazzinoDTO : MagazzinoDTO): Observable<MagazzinoDTO>{

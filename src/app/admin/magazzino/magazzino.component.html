@@ -21,8 +21,8 @@
         </tr>
         <tr>
           <td>
-            <select name="id_oggetto" [(ngModel)]="oggettotoinsert.id">
-              <option *ngFor="let oggetto of oggettolist" value="oggetto.id">{{oggetto.nome}}</option>
+            <select [(ngModel)]="id_oggetto">
+              <option *ngFor="let oggetto of oggettolist" ngValue="{{oggetto.id}}">{{oggetto.nome}}</option>
               <option value="">Vuoto</option>
             </select>
             <td>
@@ -36,24 +36,24 @@
           </td>
         </tr>
         <tr *ngFor="let magazzino of magazzinolist">
-          <select name="id_oggetto" [(ngModel)]="oggettotoinsert.id">
+          <select [(ngModel)]="id_oggetto">
             <option *ngIf="magazzino.oggetto!=null"  
-            value="magazzino.oggetto">{{magazzino.oggetto.nome}}</option>
-            <option *ngFor="let oggetto of oggettolist" value="oggetto">{{oggetto.nome}}</option>
+            [selected]="true == true" ngValue="{{magazzino.oggetto.id}}">{{magazzino.oggetto.nome}}</option>
+            <option *ngFor="let oggetto of oggettolist" ngValue="{{oggetto.id}}">{{oggetto.nome}}</option>
             <option value="">Vuoto</option>
           </select>
           <td>
             <input name="capienza" [(ngModel)]="magazzino.capienza">
           </td>
           <td *ngIf="magazzino.cancellato == false else reinsert">
-            <button (click)=updateMagazzino(magazzino)>Salva</button>
+            <button (click)="updateMagazzino(magazzino, id_oggetto)">Salva</button>
           </td>
           <ng-template #reinsert>
             <td>
               <button (click)=reinsertMagazzino(magazzino)>Attiva</button>
             </td>
           </ng-template>
-          <td  *ngIf="magazzino.cancellato == false else notDelete">
+          <td  *ngIf="magazzino.cancellato == false && magazzino.oggetto == null else notDelete">
             <button (click)="deleteMagazzino(magazzino)">Elimina</button>
           </td>  
           <ng-template #notDelete>
