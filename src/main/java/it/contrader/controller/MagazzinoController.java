@@ -1,22 +1,16 @@
 package it.contrader.controller;
 
-import java.io.IOException;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.fasterxml.jackson.core.JsonParseException;
 import com.fasterxml.jackson.databind.DeserializationFeature;
-import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.node.ObjectNode;
 
 import it.contrader.dto.MagazzinoDTO;
 import it.contrader.dto.OggettoDTO;
@@ -48,7 +42,7 @@ public class MagazzinoController extends AbstractController<MagazzinoDTO>{
 				id_oggetto = (long) 0;
 			}
 		}
-		if(id_oggetto == 0 || id_oggetto == 0) {
+		if(id_oggetto == null || id_oggetto == 0) {
 			magazzino.setOggetto(null);
 		}
 		else{

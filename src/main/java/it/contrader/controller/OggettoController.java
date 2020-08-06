@@ -26,17 +26,25 @@ public class OggettoController extends AbstractController<OggettoDTO>{
 	@Autowired
 	private OggettoService service;
 	@Autowired
-	private MagazzinoService magazzinoservice;
+	private MagazzinoService magazzinoService;
 	
 	@Autowired
-	private OggettoConverter oggettoConverter;
+	private OggettoConverter converter;
 	
-	
-	
-	@PostMapping("/updateoggetto")
-	public OggettoDTO updateoggetto(@RequestBody OggettoDTO oggetto) {
-		oggetto.setCancellato(false);
-		return service.update(oggetto);
+	@GetMapping("/getallobject")
+	public List<OggettoDTO> getAllObject(HttpServletRequest request) {
+		MagazzinoDTO magazzino;
+		List<OggettoDTO> list = service.getAll();
+		for(OggettoDTO oggetto : list) {
+			magazzino = magazzinoService.findByOggetto(converter.toEntity(oggetto));
+			if(magazzino != null) {
+				oggetto.setCella(true);
+			}
+			else {
+				oggetto.setCella(false);
+			}
+		}
+		return list;
 	}
 	
 	@PostMapping("/deleteoggeto")
@@ -44,6 +52,13 @@ public class OggettoController extends AbstractController<OggettoDTO>{
 		oggetto.setCancellato(true);
 		return service.update(oggetto);
 	}
+	
+	@PostMapping("/reinsertoggetto")
+	public OggettoDTO updateoggetto(@RequestBody OggettoDTO oggetto) {
+		oggetto.setCancellato(false);
+		return service.update(oggetto);
+	}
+	
 	@GetMapping("/getobjectnotincell")
 	public List<OggettoDTO> getObjectNotInCell(HttpServletRequest request) {
 		List<OggettoDTO> oggettoList = service.findByCancellatoFalse();
@@ -51,7 +66,7 @@ public class OggettoController extends AbstractController<OggettoDTO>{
 		MagazzinoDTO magazzino;
 		
 		for(OggettoDTO oggetto : dummyList) {
-			magazzino = magazzinoservice.findByOggetto(oggettoConverter.toEntity(oggetto));
+			magazzino = magazzinoService.findByOggetto(converter.toEntity(oggetto));
 			if(magazzino != null) {
 				oggettoList.remove(oggetto);
 			}
