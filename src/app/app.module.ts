@@ -8,6 +8,8 @@ import { LayoutModule } from './layout/layout.module';
 import { AdminModule } from './admin/admin.module';
 import { UserModule } from './user/user.module';
 import { CorriereModule } from './corriere/corriere.module';
+import { SuperuserModule } from './superuser/superuser.module';
+
 
 
 
@@ -30,7 +32,8 @@ import { CorriereModule } from './corriere/corriere.module';
     LayoutModule,
     AdminModule,
     UserModule,
-    CorriereModule
+    CorriereModule,
+    SuperuserModule
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -8,6 +8,8 @@ import { UserLayoutComponent } from './user-layout/user-layout.component';
 import { UserMenuComponent } from './user-layout/user-menu/user-menu.component';
 import { CorriereLayoutComponent } from './corriere-layout/corriere-layout.component';
 import { CorriereMenuComponent } from './corriere-layout/corriere-menu/corriere-menu.component';
+import { SuperuserLayoutComponent } from './superuser-layout/superuser-layout.component';
+import { SuperuserMenuComponent } from './superuser-layout/superuser-menu/superuser-menu.component';
 
 /**
  * Modulo di layout. Viene caricato nel rputer outlet padre e poi 
@@ -19,7 +21,7 @@ import { CorriereMenuComponent } from './corriere-layout/corriere-menu/corriere-
  * @see AdminLayoutComponent
  */
 @NgModule({
-  declarations: [AdminLayoutComponent, AdminMenuComponent, HeaderComponent, UserLayoutComponent, UserMenuComponent, CorriereLayoutComponent, CorriereMenuComponent],
+  declarations: [AdminLayoutComponent, AdminMenuComponent, HeaderComponent, UserLayoutComponent, UserMenuComponent, CorriereLayoutComponent, CorriereMenuComponent, SuperuserLayoutComponent, SuperuserMenuComponent],
   imports: [
     CommonModule,
     RouterModule
