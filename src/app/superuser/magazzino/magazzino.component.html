@@ -37,7 +37,7 @@
         </tr>
         <tr *ngFor="let magazzino of magazzinolist">
           <td *ngIf="magazzino.cancellato == false && magazzino.codice == null"> 
-            <select [(ngModel)]="id_oggetto">
+            <select>
               <option *ngIf="magazzino.oggetto!=null"  
               [selected]="magazzino.oggetto != null" ngValue="{{magazzino.oggetto.id}}">{{magazzino.oggetto.nome}}</option>
               <option *ngFor="let oggetto of oggettolist" ngValue="{{oggetto.id}}">{{oggetto.nome}}</option>
