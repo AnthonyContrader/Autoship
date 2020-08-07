@@ -7,6 +7,7 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -42,6 +43,10 @@ public class CodiceController extends AbstractController<CodiceDTO>{
 	
 	@Autowired
 	private OggettoService oggettoService;
+	
+
+	@Autowired
+	private CodiceService codiceService;
 	
 	@Autowired
 	private UserService userService;
@@ -101,8 +106,9 @@ public class CodiceController extends AbstractController<CodiceDTO>{
 		return codice;
 	}
 	
-	@PostMapping("/deletecode")
-	public void deleteCode(@RequestBody CodiceDTO codice) {
+	@DeleteMapping("/deletecode")
+	public void deleteCode(@RequestParam("id") Long id_codice) {
+		CodiceDTO codice = codiceService.read(id_codice);
 		List<CarrelloDTO> carrelloList = carrelloService.findCarrellosByCodice(codiceConverter.toEntity(codice));
 		for(CarrelloDTO c : carrelloList) {
 			carrelloService.delete(c.getId());
