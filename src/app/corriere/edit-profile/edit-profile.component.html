@@ -1,0 +1,36 @@
+<div class="container">
+  <div class="row mt-5">
+    <div class="col-md-1">
+
+    </div>
+    <div class="col-md-10">
+      <table>
+        <tr>
+          <th>
+            Username
+          </th>
+          <th>
+            Password
+          </th>
+          <th>
+            Edit
+          </th>
+        </tr>
+        <tr>
+          <td>
+            <input [(ngModel)]="userRead.username">
+          </td>
+          <td>
+            <input [(ngModel)]="userRead.password">
+          </td>
+          <td>
+            <button (click)=update(userRead)>Save</button>
+          </td>
+        </tr>
+      </table>
+    </div>
+    <div class="col-md-1">
+
+    </div>
+  </div>
+</div>

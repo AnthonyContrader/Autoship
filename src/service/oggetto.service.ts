@@ -42,9 +42,5 @@ export class OggettoService extends AbstractService<OggettoDTO>{
   getOggettoInCell(): Observable<OggettoDTO[]>{
     return this.http.get<OggettoDTO[]>('http://localhost:8080/' + this.type + '/getobjectincell');
   }
-
-   /*setCodice(otp: string, id_user: number, id_oggetto: number): Observable<OggettoDTO> {
-    return this.http.post<OggettoDTO>('http://localhost:8080/' + this.type + '/setcodice', {otp: otp, user: id_user, oggetto: id_oggetto});
-   }*/
   
 }

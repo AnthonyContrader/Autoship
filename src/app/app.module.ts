@@ -7,6 +7,8 @@ import { HttpClientModule } from '@angular/common/http';
 import { LayoutModule } from './layout/layout.module';
 import { AdminModule } from './admin/admin.module';
 import { UserModule } from './user/user.module';
+import { CorriereModule } from './corriere/corriere.module';
+
 
 
 /** 
@@ -27,7 +29,8 @@ import { UserModule } from './user/user.module';
     HttpClientModule,
     LayoutModule,
     AdminModule,
-    UserModule
+    UserModule,
+    CorriereModule
   ],
   providers: [],
   bootstrap: [AppComponent]
