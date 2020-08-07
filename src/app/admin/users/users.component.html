@@ -66,11 +66,11 @@
             <button (click)=update(user)>Save</button>
           </td>
           <td *ngIf="user.id != admin.id else adminSave">
-            <button (click)="delete(user)">Delete</button>
+            <button (click)="deleteUser(user)">Delete</button>
           </td> 
           <ng-template #adminSave>
             <td>
-            <button (click)="delete(user)" disabled>Delete</button>
+            <button (click)="deleteUser(user)" disabled>Delete</button>
           </td>
           </ng-template>         
         </tr>
