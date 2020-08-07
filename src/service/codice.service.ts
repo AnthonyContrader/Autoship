@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { AbstractService } from './abstractservice';
 import { CodiceDTO } from 'src/dto/codicedto';
+import { UserDTO } from 'src/dto/userdto';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
@@ -16,6 +17,10 @@ export class CodiceService extends AbstractService<CodiceDTO>{
 
   getAllCodes(): Observable<string[]> {
     return this.http.get<string[]>('http://localhost:8080/' + this.type + '/getallcodes')
+  }
+
+  getAllByUser(user: UserDTO): Observable<CodiceDTO[]> {
+    return this.http.get<CodiceDTO[]>('http://localhost:8080/' + this.type + '/getallcodesbyuser?user=' + user.id);
   }
 
   getAllConfirmed(): Observable<CodiceDTO> {

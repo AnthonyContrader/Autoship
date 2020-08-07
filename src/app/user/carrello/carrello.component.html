@@ -19,7 +19,7 @@
             </td>
         </ng-template>
         <td *ngIf="codice.stato == 'Attesa'"> 
-            <button >Gestisci</button>
+            <button (click)="gestisciCarrello(codice)">Gestisci</button>
           </td>
           <td *ngIf="codice.stato == 'Attesa'"> 
               <button (click)="conferma(codice)">Conferma</button>
@@ -29,7 +29,7 @@
           </td>
           <ng-template #notManage>
               <td> 
-                  <button >Visualizza</button>
+                  <button (click)="visualizzaCarrello(codice)">Visualizza</button>
               </td>
               <td> 
                   <button (click)="conferma(codice)" disabled>Conferma</button>
