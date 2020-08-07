@@ -4,6 +4,9 @@ form{
     padding: 2%;
     border-radius:0;
     border-color: crimson;
+    background-color:#263238;
+    box-shadow: 10px 10px 5px #000000;
+    border-radius: 10px 10px 10px 10px;
 }
 
 img{
@@ -20,6 +23,7 @@ input, input:hover, input::selection, input:checked, input:focus{
     color: white;
     border-bottom: 1px solid crimson;
     margin: 0px; 
+    
 }
 
 .container-fluid{
@@ -48,6 +52,7 @@ padding-right: auto;
 padding-bottom: 2%;
 padding-left: auto;
 }
+
 
 #image{
     width:30%;
