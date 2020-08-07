@@ -15,7 +15,11 @@ export class CarrelloService extends AbstractService<CarrelloDTO>{
   }
 
   getCarrello(otp : string): Observable<CarrelloDTO[]> {
-    return this.http.get<CarrelloDTO[]>('http://localhost:8080/' + this.type + '/getcarrello?otp=' + otp, )
+    return this.http.get<CarrelloDTO[]>('http://localhost:8080/' + this.type + '/getcarrello?otp=' + otp);
+  }
+
+  deleteCarrello(carrello: CarrelloDTO): Observable<any> {
+    return this.http.delete('http://localhost:8080/' + this.type + '/deletecarrello?id=' + carrello.id);
   }
   
 }

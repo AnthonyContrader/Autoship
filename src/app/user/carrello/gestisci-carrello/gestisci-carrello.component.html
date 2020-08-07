@@ -1,1 +1,21 @@
-<p>gestisci-carrello works! {{otp}}</p>
+<table class="table">
+    <tr>
+        <th>Nome Prodotto</th>
+        <th>Dimensione Prodotto</th>
+        <th>Elimina</th>
+    </tr>
+    <tr *ngFor="let carrello of carrellolist">
+        <td>
+            {{carrello.oggetto.nome}}
+        </td>
+        <td>
+            {{carrello.oggetto.dimensione}}
+        </td>
+        <td>
+            {{carrello.oggetto.dimensione}}
+        </td>
+        <td>
+            <button (click)="deleteCarrello(carrello)">Visualizza</button>
+        </td>
+    </tr>    
+ </table>
