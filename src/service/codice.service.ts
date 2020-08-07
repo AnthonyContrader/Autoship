@@ -23,8 +23,8 @@ export class CodiceService extends AbstractService<CodiceDTO>{
     return this.http.get<CodiceDTO[]>('http://localhost:8080/' + this.type + '/getallcodesbyuser?user=' + user.id);
   }
 
-  getAllConfirmed(): Observable<CodiceDTO> {
-    return this.http.get<CodiceDTO>('http://localhost:8080/' + this.type + '/getallconfirmed')
+  getAllConfirmed(): Observable<CodiceDTO[]> {
+    return this.http.get<CodiceDTO[]>('http://localhost:8080/' + this.type + '/getallconfirmed')
   }
 
   confirm(codiceDTO: CodiceDTO): Observable<CodiceDTO> {
@@ -35,8 +35,8 @@ export class CodiceService extends AbstractService<CodiceDTO>{
     return this.http.post<CodiceDTO>('http://localhost:8080/' + this.type + '/send', codiceDTO)
   }
 
-  deleteCode(codiceDTO: CodiceDTO): Observable<CodiceDTO> {
-    return this.http.post<CodiceDTO>('http://localhost:8080/' + this.type + '/deletecode', codiceDTO)
+  deleteCode(codiceDTO: CodiceDTO): Observable<any> {
+    return this.http.delete('http://localhost:8080/' + this.type + '/deletecode?id=' + codiceDTO.id)
   }
 
 }

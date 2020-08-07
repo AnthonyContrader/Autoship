@@ -25,7 +25,7 @@
               <button (click)="conferma(codice)">Conferma</button>
           </td>
           <td *ngIf="codice.stato == 'Attesa' else notManage"> 
-              <button >Elimina</button>
+              <button (click)="deleteCarrello(codice)">Elimina</button>
           </td>
           <ng-template #notManage>
               <td> 
@@ -35,7 +35,7 @@
                   <button (click)="conferma(codice)" disabled>Conferma</button>
               </td>
               <td> 
-                  <button  disabled>Elimina</button>
+                  <button (click)="deleteCarrello(codice)" disabled>Elimina</button>
               </td>
           </ng-template>
     </tr>    

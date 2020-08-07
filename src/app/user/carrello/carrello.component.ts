@@ -37,4 +37,8 @@ export class CarrelloComponent implements OnInit {
     this.router.navigate(['/user-dashboard/carrello/visualizza-carrello/' + codice.otp]);;
   }
 
+  deleteCarrello(codice: CodiceDTO){
+    this.service.deleteCode(codice).subscribe(() => this.getCodeList(this.user));
+  }
+
 }
