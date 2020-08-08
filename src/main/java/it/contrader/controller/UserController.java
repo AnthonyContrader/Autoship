@@ -1,5 +1,6 @@
 package it.contrader.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -71,14 +72,27 @@ public class UserController extends AbstractController<UserDTO>{
 		return userService.findByUsernameAndPassword(loginDTO.getUsername(), loginDTO.getPassword());
 	}
 	
-	@GetMapping(value = "/getalladmin")
-	public List<UserDTO> getAllAdmin() {
+	@GetMapping(value = "/getallusers")
+	public List<UserDTO> getAllUsers() {
 		List<UserDTO> userList = userService.getAll();
 		List<UserDTO> dummyList = userService.getAll();
 		
 		for(UserDTO user: dummyList) {
 			if(user.getUsertype().equals(Usertype.SUPERUTENTE)){
 				userList.remove(user);
+			}
+		}
+		return userList;
+	}
+	
+	@GetMapping(value = "/getalladmin")
+	public List<Long> getAllAdmin() {
+		List<UserDTO> dummyList = userService.getAll();
+		List<Long> userList = new ArrayList<Long>();
+		
+		for(UserDTO user: dummyList) {
+			if(user.getUsertype().equals(Usertype.AMMINISTRATORE)){
+				userList.add(user.getId());
 			}
 		}
 		return userList;

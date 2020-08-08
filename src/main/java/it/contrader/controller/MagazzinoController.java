@@ -1,5 +1,6 @@
 package it.contrader.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -149,6 +150,19 @@ public class MagazzinoController extends AbstractController<MagazzinoDTO>{
 		for(MagazzinoDTO magazzino : dummyList) {
 			if(magazzino.getOggetto() == null || magazzino.getCodice() != null) {
 				magazzinoList.remove(magazzino);
+			}
+		}
+		return magazzinoList;
+	}
+	
+	@GetMapping("/getmagazzinowithoggetto")
+	public List<Long> getMagazzinoWithOggetto(HttpServletRequest request) {
+		List<Long> magazzinoList = new ArrayList<Long>();
+		List<MagazzinoDTO> dummyList = service.getAll();
+		
+		for(MagazzinoDTO magazzino : dummyList) {
+			if(magazzino.getOggetto() != null || magazzino.getCodice() == null) {
+				magazzinoList.add(magazzino.getId());
 			}
 		}
 		return magazzinoList;
