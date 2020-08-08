@@ -1,3 +1,9 @@
+<div class="container">
+  <div class="row mt-5">
+    <div class="col-md-1">
+
+    </div>
+    <div class="col-md-10">
       <table>
         <tr>
           <th>
@@ -29,13 +35,13 @@
               <button (click)="clear()">Clear</button>
           </td>
         </tr>
-        <tr *ngFor="let magazzino of magazzinolist">
+        <tr *ngFor="let magazzino of magazzinolist, let i = index">
           <td *ngIf="magazzino.cancellato == false && magazzino.codice == null"> 
-            <select [(ngModel)]="magazzino.oggetto">
+            <select [(ngModel)]="magazzino.oggetto" >
               <option *ngIf="magazzino.oggetto!=null"  
-              [selected]="magazzino.oggetto !== null" ngValue="{{magazzino.oggetto.id}}">{{magazzino.oggetto.nome}}</option>
+              [selected]="magazzino.oggetto !== null" ngValue="{{magazzinolist[i].oggetto.id}}">{{magazzinolist[i].oggetto.nome}}</option>
               <option *ngFor="let oggetto of oggettolist" ngValue="{{oggetto.id}}">{{oggetto.nome}}</option>
-              <option value="" [selected]="magazzino.oggetto == null">Vuoto</option>
+              <option value="" [selected]="magazzino.oggetto === null">Vuoto</option>
             </select>
           </td>
           <td *ngIf="magazzino.cancellato == false && magazzino.codice == null else notedit">
@@ -73,3 +79,6 @@
           </ng-template> 
         </tr>
       </table>
+    </div>
+  </div>
+</div>

@@ -36,6 +36,10 @@ export class MagazzinoService extends AbstractService<MagazzinoDTO>{
     return this.http.get<MagazzinoDTO[]>('http://localhost:8080/' + this.type + '/getobjectincell');
   }
 
+  getMagazzinoWithOggetto(): Observable<number[]>{
+    return this.http.get<number[]>('http://localhost:8080/' + this.type + '/getmagazzinowithoggetto');
+  }
+
   setCodice(otp: string, id_user: number, magazzino: MagazzinoDTO): Observable<MagazzinoDTO> {
     return this.http.post<MagazzinoDTO>('http://localhost:8080/' + this.type + '/setcodice', {otp: otp, user: id_user, magazzino: magazzino});
   }

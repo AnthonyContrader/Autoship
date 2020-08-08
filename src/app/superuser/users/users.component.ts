@@ -11,6 +11,7 @@ export class UsersComponent implements OnInit {
 
   admin : UserDTO;
   users: UserDTO[];
+  admins: number[];
   usertoinsert: UserDTO = new UserDTO();
   
   constructor(private service: UserService) { }
@@ -18,10 +19,15 @@ export class UsersComponent implements OnInit {
   ngOnInit() {
     this.admin = JSON.parse(localStorage.getItem('currentUser'));
     this.getUsers();
+    this.getAdmin();
   }
 
   getUsers() {
     this.service.getAll().subscribe(users => this.users = users);
+  }
+
+  getAdmin() {
+    this.service.getAllAdmin().subscribe(admins => this.admins = admins);
   }
 
   delete(user: UserDTO) {
@@ -34,10 +40,12 @@ export class UsersComponent implements OnInit {
 
   update(user: UserDTO) {
     this.service.update(user).subscribe(() => this.getUsers());
+    this.service.getAllAdmin().subscribe(() => this.getAdmin());
   }
 
   insert(user: UserDTO) {
     this.service.insert(user).subscribe(() => this.getUsers());
+    this.service.getAllAdmin().subscribe(() => this.getAdmin());
   }
 
   clear(){

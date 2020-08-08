@@ -13,6 +13,7 @@ export class MagazzinoComponent implements OnInit {
 
   magazzinolist: MagazzinoDTO[];
   magazzinotoinsert: MagazzinoDTO = new MagazzinoDTO();
+  magazzinofulllist: number[];
 
   oggettolist: OggettoDTO[];
   oggettotoinsert : OggettoDTO;
@@ -24,6 +25,7 @@ export class MagazzinoComponent implements OnInit {
     this.oggettotoinsert = new OggettoDTO;
     this.getMagazzinoList();
     this.getOggettoList();
+    this.getMagazzinoWithOggetto();
   }
 
   
@@ -35,14 +37,16 @@ export class MagazzinoComponent implements OnInit {
     this.oggettotoinsert = magazzino.oggetto;
     magazzino.oggetto = null;
     this.service.insertMagazzino(magazzino, this.oggettotoinsert).subscribe(() => this.getMagazzinoList());
-    this.getOggettoList();
+    this.oggettoService.getOggettoNotInCell().subscribe(() => this.getOggettoList());
+    this.service.getMagazzinoWithOggetto().subscribe(() => this.getMagazzinoWithOggetto());
   }
 
   updateMagazzino(magazzino : MagazzinoDTO, oggetto: OggettoDTO){
     this.oggettotoinsert = magazzino.oggetto;
     magazzino.oggetto = null;
     this.service.updateMagazzino(magazzino, this.oggettotoinsert).subscribe(() => this.getMagazzinoList());
-    this.getOggettoList();
+    this.oggettoService.getOggettoNotInCell().subscribe(() => this.getOggettoList());
+    this.service.getMagazzinoWithOggetto().subscribe(() => this.getMagazzinoWithOggetto());
   }
 
   deleteMagazzino(magazzino : MagazzinoDTO){
@@ -55,6 +59,10 @@ export class MagazzinoComponent implements OnInit {
 
   getOggettoList(){
     this.oggettoService.getOggettoNotInCell().subscribe(oggettolist => this.oggettolist = oggettolist);
+  }
+
+  getMagazzinoWithOggetto(){
+    this.service.getMagazzinoWithOggetto().subscribe(magazzinofulllist => this.magazzinofulllist = magazzinofulllist);
   }
 
   clear(){

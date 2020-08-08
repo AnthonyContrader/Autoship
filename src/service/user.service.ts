@@ -28,8 +28,12 @@ export class UserService extends AbstractService<UserDTO>{
     return this.http.post<any>('http://localhost:8080/' + this.type + '/login', loginDTO)
   }
 
-  getAllAdmin(): Observable<UserDTO[]> {
-    return this.http.get<UserDTO[]>('http://localhost:8080/' + this.type + '/getalladmin')
+  getAllUsers(): Observable<UserDTO[]> {
+    return this.http.get<UserDTO[]>('http://localhost:8080/' + this.type + '/getallusers')
+  }
+
+  getAllAdmin(): Observable<number[]> {
+    return this.http.get<number[]>('http://localhost:8080/' + this.type + '/getalladmin')
   }
 
   deleteUser(userDTO: UserDTO): Observable<any>{

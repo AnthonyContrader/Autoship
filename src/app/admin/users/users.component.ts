@@ -21,7 +21,7 @@ export class UsersComponent implements OnInit {
   }
 
   getUsers() {
-    this.service.getAllAdmin().subscribe(users => this.users = users);
+    this.service.getAllUsers().subscribe(users => this.users = users);
   }
 
   delete(user: UserDTO) {
