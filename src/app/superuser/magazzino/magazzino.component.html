@@ -21,7 +21,7 @@
         </tr>
         <tr>
           <td>
-            <select [(ngModel)]="id_oggetto">
+            <select [(ngModel)]="magazzinotoinsert.oggetto">
               <option *ngFor="let oggetto of oggettolist" ngValue="{{oggetto.id}}">{{oggetto.nome}}</option>
               <option value="">Vuoto</option>
             </select>
@@ -29,7 +29,7 @@
               <input placeholder="Capienza" name="capienza" [(ngModel)]="magazzinotoinsert.capienza">
             </td>
             <td>
-              <button (click)="insertMagazzino(magazzinotoinsert, id_oggetto)">Inserisci</button>
+              <button (click)="insertMagazzino(magazzinotoinsert, magazzinotoinsert.oggetto)">Inserisci</button>
             </td>
             <td>
               <button (click)="clear()">Clear</button>
@@ -37,7 +37,7 @@
         </tr>
         <tr *ngFor="let magazzino of magazzinolist">
           <td *ngIf="magazzino.cancellato == false && magazzino.codice == null"> 
-            <select [(ngModel)]="id_oggetto">
+            <select [(ngModel)]="magazzino.oggetto">
               <option *ngIf="magazzino.oggetto!=null"  
               [selected]="magazzino.oggetto != null" ngValue="{{magazzino.oggetto.id}}">{{magazzino.oggetto.nome}}</option>
               <option *ngFor="let oggetto of oggettolist" ngValue="{{oggetto.id}}">{{oggetto.nome}}</option>
@@ -59,11 +59,11 @@
             </td>
           </ng-template>
           <td *ngIf="magazzino.cancellato == false && magazzino.codice == null else notsave">
-            <button (click)="updateMagazzino(magazzino, id_oggetto)">Salva</button>
+            <button (click)="updateMagazzino(magazzino, magazzino.oggetto)">Salva</button>
           </td>
           <ng-template #notsave>
             <td>
-              <button (click)="updateMagazzino(magazzino, id_oggetto)" disabled>Salva</button>
+              <button (click)="updateMagazzino(magazzino, magazzino.oggetto)" disabled>Salva</button>
             </td>
           </ng-template>
           <td  *ngIf="magazzino.cancellato == false && magazzino.oggetto == null else notdelete">

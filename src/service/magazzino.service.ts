@@ -16,12 +16,12 @@ export class MagazzinoService extends AbstractService<MagazzinoDTO>{
     this.type = 'magazzino';
   }
 
-  insertMagazzino(magazzinoDTO : MagazzinoDTO, id_oggetto : number): Observable<MagazzinoDTO>{
-    return this.http.post<MagazzinoDTO>('http://localhost:8080/' + this.type + '/insertmagazzino',   {magazzino: magazzinoDTO, oggetto: id_oggetto});
+  insertMagazzino(magazzinoDTO : MagazzinoDTO, oggettoDTO: OggettoDTO): Observable<MagazzinoDTO>{
+    return this.http.post<MagazzinoDTO>('http://localhost:8080/' + this.type + '/insertmagazzino',   {magazzino: magazzinoDTO, oggetto: oggettoDTO});
   }
 
-  updateMagazzino(magazzinoDTO : MagazzinoDTO, id_oggetto : number): Observable<MagazzinoDTO>{
-    return this.http.post<MagazzinoDTO>('http://localhost:8080/' + this.type + '/updatemagazzino',  {magazzino: magazzinoDTO, oggetto: id_oggetto});
+  updateMagazzino(magazzinoDTO : MagazzinoDTO, oggettoDTO: OggettoDTO): Observable<MagazzinoDTO>{
+    return this.http.post<MagazzinoDTO>('http://localhost:8080/' + this.type + '/updatemagazzino',  {magazzino: magazzinoDTO, oggetto: oggettoDTO});
   }
 
   deleteMagazzino(magazzinoDTO : MagazzinoDTO): Observable<MagazzinoDTO>{

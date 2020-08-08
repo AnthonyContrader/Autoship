@@ -15,11 +15,13 @@ export class MagazzinoComponent implements OnInit {
   magazzinotoinsert: MagazzinoDTO = new MagazzinoDTO();
 
   oggettolist: OggettoDTO[];
+  oggettotoinsert : OggettoDTO;
   id_oggetto : number;
 
   constructor(private service: MagazzinoService, private oggettoService: OggettoService) { }
 
   ngOnInit() {
+    this.oggettotoinsert = new OggettoDTO;
     this.getMagazzinoList();
     this.getOggettoList();
   }
@@ -29,13 +31,17 @@ export class MagazzinoComponent implements OnInit {
     this.service.getAll().subscribe(magazzinolist => this.magazzinolist = magazzinolist);
   }
 
-  insertMagazzino(magazzino : MagazzinoDTO, id_oggetto : number){
-    this.service.insertMagazzino(magazzino, id_oggetto).subscribe(() => this.getMagazzinoList());
+  insertMagazzino(magazzino : MagazzinoDTO, oggetto: OggettoDTO){
+    this.oggettotoinsert = magazzino.oggetto;
+    magazzino.oggetto = null;
+    this.service.insertMagazzino(magazzino, this.oggettotoinsert).subscribe(() => this.getMagazzinoList());
     this.getOggettoList();
   }
 
-  updateMagazzino(magazzino : MagazzinoDTO, id_oggetto : number){
-    this.service.updateMagazzino(magazzino, id_oggetto).subscribe(() => this.getMagazzinoList());
+  updateMagazzino(magazzino : MagazzinoDTO, oggetto: OggettoDTO){
+    this.oggettotoinsert = magazzino.oggetto;
+    magazzino.oggetto = null;
+    this.service.updateMagazzino(magazzino, this.oggettotoinsert).subscribe(() => this.getMagazzinoList());
     this.getOggettoList();
   }
 
