@@ -35,11 +35,11 @@
               <button (click)="clear()">Clear</button>
           </td>
         </tr>
-        <tr *ngFor="let magazzino of magazzinolist, let i = index">
+        <tr *ngFor="let magazzino of magazzinolist">
           <td *ngIf="magazzino.cancellato == false && magazzino.codice == null"> 
             <select [(ngModel)]="magazzino.oggetto" >
               <option *ngIf="magazzino.oggetto!=null"  
-              [selected]="magazzino.oggetto !== null" ngValue="{{magazzinolist[i].oggetto.id}}">{{magazzinolist[i].oggetto.nome}}</option>
+              [selected]="magazzino.oggetto !== null" ngValue="{{magazzino.oggetto.id}}">{{magazzino.oggetto.nome}}</option>
               <option *ngFor="let oggetto of oggettolist" ngValue="{{oggetto.id}}">{{oggetto.nome}}</option>
               <option value="" [selected]="magazzino.oggetto === null">Vuoto</option>
             </select>
