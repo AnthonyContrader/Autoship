@@ -15,6 +15,7 @@ export class MagazzinoComponent implements OnInit {
   magazzinotoinsert: MagazzinoDTO = new MagazzinoDTO();
   magazzinofulllist: number[];
   @ViewChild('magazzinoTable') wrapper: ElementRef;
+//  isLast = false;
 
   oggettolist: OggettoDTO[];
   oggettotoinsert : OggettoDTO;
@@ -32,9 +33,9 @@ export class MagazzinoComponent implements OnInit {
  //   });
   }
 
-  ngAfterViewChecked() {
-    this.selectOggetto()
-   }
+  //ngAfterViewChecked() {
+  //  this.selectOggetto();
+  // }
 
   
   getMagazzinoList() {
@@ -48,9 +49,29 @@ export class MagazzinoComponent implements OnInit {
     this.oggettoService.getOggettoNotInCell().subscribe(() => this.getOggettoList());
   }
 
-  updateMagazzino(magazzino : MagazzinoDTO, oggetto: OggettoDTO){
-    this.oggettotoinsert = magazzino.oggetto;
+  updateMagazzino(magazzino : MagazzinoDTO, oggetto: OggettoDTO, index: number){
+    this.id_oggetto = Number.parseInt((document.getElementById("select"+ index) as HTMLSelectElement).value);
+  //  console.log(this.id_oggetto);
+    console.log(magazzino);
+    if(this.id_oggetto && magazzino.oggetto && this.id_oggetto == magazzino.oggetto.id){
+        this.oggettotoinsert = magazzino.oggetto;
+    }
+    else if(this.id_oggetto){
+      this.oggettolist.forEach(o => {
+          if(o.id == this.id_oggetto){
+            this.oggettotoinsert = o
+          }
+      });
+    }
+    else{
+      this.oggettotoinsert = null;
+    }
+    console.log(this.oggettotoinsert);
+
+    //console.log(document.getElementById("select"+ index));
+    //console.log(index);
     magazzino.oggetto = null;
+
     this.service.updateMagazzino(magazzino, this.oggettotoinsert).subscribe(() => this.getMagazzinoList());
     this.oggettoService.getOggettoNotInCell().subscribe(() => this.getOggettoList());
   }
@@ -67,14 +88,31 @@ export class MagazzinoComponent implements OnInit {
     this.oggettoService.getOggettoNotInCell().subscribe(oggettolist => this.oggettolist = oggettolist);
   }
 
-  selectOggetto(){
-   (this.wrapper.nativeElement as HTMLElement).querySelectorAll("tr").forEach(tr => {
+  selectOggetto(magazzino: MagazzinoDTO){
+  /* (this.wrapper.nativeElement as HTMLElement).querySelectorAll("tr").forEach(tr => {
     let select = tr.querySelector('select') as HTMLSelectElement;
-  //  select.selectedIndex = 1
-
+    if(select){
+      if(magazzino.oggetto){
+        select.selectedIndex = 0;
+      }
+      else{
+        select.selectedIndex = select.options.length;
+        console.log(select);
+      }
+    }
    });
-  //  console.log(m);
+  //  console.log(m);*/
 
+
+  }
+
+  check(isFirst: boolean, magazzino: MagazzinoDTO){
+    if(isFirst){
+      console.log("inCheck");
+      console.log(magazzino.oggetto);
+      this.selectOggetto(magazzino);
+    }
+    return true;
   }
 
   getMagazzinoWithOggetto(){

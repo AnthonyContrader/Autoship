@@ -38,9 +38,29 @@ export class MagazzinoComponent implements OnInit {
     this.oggettoService.getOggettoNotInCell().subscribe(() => this.getOggettoList());
   }
 
-  updateMagazzino(magazzino : MagazzinoDTO, oggetto: OggettoDTO){
-    this.oggettotoinsert = magazzino.oggetto;
+  updateMagazzino(magazzino : MagazzinoDTO, oggetto: OggettoDTO, index: number){
+    this.id_oggetto = Number.parseInt((document.getElementById("select"+ index) as HTMLSelectElement).value);
+  //  console.log(this.id_oggetto);
+    console.log(magazzino);
+    if(this.id_oggetto && magazzino.oggetto && this.id_oggetto == magazzino.oggetto.id){
+        this.oggettotoinsert = magazzino.oggetto;
+    }
+    else if(this.id_oggetto){
+      this.oggettolist.forEach(o => {
+          if(o.id == this.id_oggetto){
+            this.oggettotoinsert = o
+          }
+      });
+    }
+    else{
+      this.oggettotoinsert = null;
+    }
+    console.log(this.oggettotoinsert);
+
+    //console.log(document.getElementById("select"+ index));
+    //console.log(index);
     magazzino.oggetto = null;
+
     this.service.updateMagazzino(magazzino, this.oggettotoinsert).subscribe(() => this.getMagazzinoList());
     this.oggettoService.getOggettoNotInCell().subscribe(() => this.getOggettoList());
   }
