@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { MagazzinoService } from 'src/service/magazzino.service';
 import { OggettoService } from 'src/service/oggetto.service';
 import { MagazzinoDTO } from 'src/dto/magazzinodto';
@@ -14,6 +14,7 @@ export class MagazzinoComponent implements OnInit {
   magazzinolist: MagazzinoDTO[];
   magazzinotoinsert: MagazzinoDTO = new MagazzinoDTO();
   magazzinofulllist: number[];
+  @ViewChild('magazzinoTable') wrapper: ElementRef;
 
   oggettolist: OggettoDTO[];
   oggettotoinsert : OggettoDTO;
@@ -26,7 +27,14 @@ export class MagazzinoComponent implements OnInit {
     this.getMagazzinoList();
     this.getOggettoList();
     this.getMagazzinoWithOggetto();
+  //  document.addEventListener('DOMContentLoaded', (event) => {
+  //    this.selectOggetto();
+ //   });
   }
+
+  ngAfterViewChecked() {
+    this.selectOggetto()
+   }
 
   
   getMagazzinoList() {
@@ -57,6 +65,16 @@ export class MagazzinoComponent implements OnInit {
 
   getOggettoList(){
     this.oggettoService.getOggettoNotInCell().subscribe(oggettolist => this.oggettolist = oggettolist);
+  }
+
+  selectOggetto(){
+   (this.wrapper.nativeElement as HTMLElement).querySelectorAll("tr").forEach(tr => {
+    let select = tr.querySelector('select') as HTMLSelectElement;
+  //  select.selectedIndex = 1
+
+   });
+  //  console.log(m);
+
   }
 
   getMagazzinoWithOggetto(){
