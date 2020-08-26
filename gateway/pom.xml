@@ -921,15 +921,6 @@
                                 </configuration>
                             </execution>
                             <execution>
-                                <id>npm rebuild node-sass</id>
-                                <goals>
-                                    <goal>npm</goal>
-                                </goals>
-                                <configuration>
-                                    <arguments>rebuild node-sass</arguments>
-                                </configuration>
-                            </execution>
-                            <execution>
                                 <id>webpack build test</id>
                                 <goals>
                                     <goal>npm</goal>

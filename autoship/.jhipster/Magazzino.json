@@ -1,0 +1,41 @@
+{
+    "fluentMethods": true,
+    "clientRootFolder": "",
+    "relationships": [
+        {
+            "relationshipName": "oggetto",
+            "otherEntityName": "oggetto",
+            "relationshipType": "one-to-one",
+            "otherEntityField": "nome",
+            "ownerSide": true,
+            "otherEntityRelationshipName": "magazzino"
+        },
+        {
+            "relationshipName": "codice",
+            "otherEntityName": "codice",
+            "relationshipType": "many-to-one",
+            "otherEntityField": "otp"
+        }
+    ],
+    "fields": [
+        {
+            "fieldName": "capienza",
+            "fieldType": "Integer",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "cancellato",
+            "fieldType": "Boolean"
+        }
+    ],
+    "changelogDate": "20200826092057",
+    "dto": "mapstruct",
+    "searchEngine": false,
+    "service": "serviceImpl",
+    "entityTableName": "magazzino",
+    "jpaMetamodelFiltering": false,
+    "pagination": "pagination",
+    "microserviceName": "autoship"
+}

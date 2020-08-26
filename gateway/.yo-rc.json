@@ -21,9 +21,9 @@
     "serviceDiscoveryType": "consul",
     "buildTool": "maven",
     "enableSwaggerCodegen": false,
-    "jwtSecretKey": "173301c710a06bfca00ead6fcb0cc30797bd89ea",
+    "jwtSecretKey": "412e895cd24f07d219476cab8222af4ca350fbf3",
     "clientFramework": "angularX",
-    "useSass": true,
+    "useSass": false,
     "clientPackageManager": "npm",
     "testFrameworks": [
       "protractor"

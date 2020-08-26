@@ -1,0 +1,32 @@
+{
+    "fluentMethods": true,
+    "clientRootFolder": "",
+    "relationships": [
+        {
+            "relationshipName": "oggetto",
+            "otherEntityName": "oggetto",
+            "relationshipType": "many-to-one",
+            "otherEntityField": "nome"
+        },
+        {
+            "relationshipName": "codice",
+            "otherEntityName": "codice",
+            "relationshipType": "many-to-one",
+            "otherEntityField": "otp"
+        }
+    ],
+    "fields": [
+        {
+            "fieldName": "cancellato",
+            "fieldType": "Boolean"
+        }
+    ],
+    "changelogDate": "20200826092702",
+    "dto": "mapstruct",
+    "searchEngine": false,
+    "service": "serviceImpl",
+    "entityTableName": "carrello",
+    "jpaMetamodelFiltering": false,
+    "pagination": "pagination",
+    "microserviceName": "autoship"
+}
