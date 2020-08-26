@@ -1,0 +1,15 @@
+<table class="table">
+    <tr>
+        <th>Codice</th>
+        <th>Spedisci</th>
+    </tr>
+    <tr *ngFor="let codice of codicelist">
+        <td>
+          {{codice.otp}}
+        </td>
+        <td> 
+            <button (click)="spedizione(codice)">Spedisci</button> 
+          </td>
+        
+    </tr>    
+  </table>

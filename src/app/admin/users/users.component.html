@@ -1,0 +1,83 @@
+<div class="container">
+  <div class="row mt-5">
+    <div class="col-md-1">
+
+    </div>
+    <div class="col-md-10">
+      <table>
+        <tr>
+          <th>
+            Username
+          </th>
+          <th>
+            Password
+          </th>
+          <th>
+            Usertype
+          </th>
+          <th>
+            Edit
+          </th>
+          <th>
+            User
+          </th>
+        </tr>
+        <tr>
+          <td>
+            <input placeholder="username" [(ngModel)]="usertoinsert.username">
+          </td>
+          <td>
+            <input placeholder="password" [(ngModel)]="usertoinsert.password">
+          </td>
+          <td>
+            <select placeholder="usertype" [(ngModel)]="usertoinsert.usertype">
+              <option value="AMMINISTRATORE">AMMINISTRATORE</option>
+              <option value="CORRIERE">CORRIERE</option>
+              <option value="UTENTE">UTENTE</option>
+            </select>
+          </td>
+          <td>
+            <button (click)="insert(usertoinsert)">Insert</button>
+          </td>
+          <td>
+            <button (click)="clear()">Clear</button>
+          </td>
+        </tr>
+        <tr *ngFor="let user of users">
+          <td>
+            <input [(ngModel)]="user.username">
+          </td>
+          <td>
+            <input [(ngModel)]="user.password">
+          </td>
+          <td *ngIf="user.id != admin.id else adminUser">
+            <select [(ngModel)]="user.usertype">
+              <option [selected]="user.usertype===AMMINISTRATORE" value="AMMINISTRATORE">AMMINISTRATORE</option>
+              <option [selected]="user.usertype===CORRIERE" value="CORRIERE">CORRIERE</option>
+              <option [selected]="user.usertype===UTENTE" value="UTENTE">UTENTE</option>
+            </select>
+          </td>
+          <ng-template #adminUser>
+            <td>
+              {{user.usertype}}
+            </td>
+          </ng-template>
+          <td>
+            <button (click)=update(user)>Save</button>
+          </td>
+          <td *ngIf="user.id != admin.id else adminSave">
+            <button (click)="deleteUser(user)">Delete</button>
+          </td> 
+          <ng-template #adminSave>
+            <td>
+            <button (click)="deleteUser(user)" disabled>Delete</button>
+          </td>
+          </ng-template>         
+        </tr>
+      </table>
+    </div>
+    <div class="col-md-1">
+
+    </div>
+  </div>
+</div>

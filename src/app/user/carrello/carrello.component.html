@@ -1,0 +1,42 @@
+<table class="table">
+    <tr>
+        <th>Codice</th>
+        <th>Stato</th>
+        <th>Prodotti</th>  
+        <th>Conferma</th>
+        <th>Elimina</th>
+    </tr>
+    <tr *ngFor="let codice of codicelist">
+        <td>
+          {{codice.otp}}
+        </td>
+        <td *ngIf="codice.stato == 'Attesa' else notAttesa">
+            In Attesa di Conferma
+        </td>
+        <ng-template #notAttesa>
+            <td>
+                {{codice.stato}}
+            </td>
+        </ng-template>
+        <td *ngIf="codice.stato == 'Attesa'"> 
+            <button (click)="gestisciCarrello(codice)">Gestisci</button>
+          </td>
+          <td *ngIf="codice.stato == 'Attesa'"> 
+              <button (click)="conferma(codice)">Conferma</button>
+          </td>
+          <td *ngIf="codice.stato == 'Attesa' else notManage"> 
+              <button (click)="deleteCarrello(codice)">Elimina</button>
+          </td>
+          <ng-template #notManage>
+              <td> 
+                  <button (click)="visualizzaCarrello(codice)">Visualizza</button>
+              </td>
+              <td> 
+                  <button (click)="conferma(codice)" disabled>Conferma</button>
+              </td>
+              <td> 
+                  <button (click)="deleteCarrello(codice)" disabled>Elimina</button>
+              </td>
+          </ng-template>
+    </tr>    
+  </table>

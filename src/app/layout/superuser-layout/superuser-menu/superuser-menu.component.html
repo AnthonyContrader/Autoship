@@ -1,0 +1,82 @@
+<div class="row">
+    <div class="col-md-12">
+        <div class="sidenav">
+            <button class="menubtn">
+                <a [routerLink]="['/superuser-dashboard']"> <i class="fas fa-home" style="margin-right: 10px"> </i>
+                    Dashboard </a>
+            </button>
+            <button type="button" class="menubtn" data-toggle="collapsebtn" data-target="#account"
+                (click)="accountcollapse()">
+                <i class="fas fa-user" style="margin-right: 15px"></i> Profilo
+            </button>
+            <div class="collapsebtn" id="account" *ngIf="isAccountCollapsed">
+                <button class="menubtn" style="background-color: #334247; padding-left: 40px">
+                    <a [routerLink]="['/superuser-dashboard/edit-profile']"> <i class="fas fa-user-edit"
+                            style="margin-right: 15px"></i>
+                        Modifica</a>
+                </button>
+                <button class="menubtn" style="background-color: #334247; padding-left: 40px">
+                    <a [routerLink]="['/superuser-dashboard/general-info']"><i class="fas fa-file-alt"
+                            style="margin-right: 15px"></i>Informazioni</a>
+                </button>
+            </div>
+            <button type="button" class="menubtn" data-toggle="collapsebtn" data-target="#users"
+                (click)="userscollapse()">
+                <i class="fas fa-users" style="margin-right: 15px"></i>Utenti
+            </button>
+            <div class="collapsebtn" id="users" *ngIf="isUserCollapsed">
+                <button class="menubtn" style="padding-left: 40px; background-color: #334247;">
+                    <a [routerLink]="['/superuser-dashboard/users']"> <i class="fas fa-edit" style="margin-right: 10px">
+                        </i> Gestisci </a>
+                </button>
+            </div>
+            <button type="button" class="menubtn" data-toggle="collapsebtn" data-target="#oggetto"
+                (click)="oggettocollapse()">
+                <i class="fas fa-tags" style="margin-right: 15px"></i>Prodotti
+            </button>
+            <div class="collapsebtn" id="oggetto" *ngIf="isOggettoCollapsed">
+                <button class="menubtn" style="padding-left: 40px; background-color: #334247;">
+                    <a [routerLink]="['/superuser-dashboard/oggetto']"> <i class="fas fa-edit" style="margin-right: 10px">
+                        </i> Gestisci </a>
+                </button>
+                    <button class="menubtn" style="padding-left: 40px; background-color: #334247;">
+                        <a [routerLink]="['/superuser-dashboard/acquista']"> <i class="fa fa-shopping-bag" style="margin-right: 10px">
+                            </i> Acquista </a>
+                    </button>
+            </div>
+                <button type="button" class="menubtn" data-toggle="collapsebtn" data-target="#magazzino"
+                (click)="magazzinocollapse()">
+                <i class="fas fa-box" style="margin-right: 15px"></i>Magazzino
+            </button>
+            <div class="collapsebtn" id="magazzino" *ngIf="isMagazzinoCollapsed">
+                <button class="menubtn" style="padding-left: 40px; background-color: #334247;">
+                    <a [routerLink]="['/superuser-dashboard/magazzino']"> <i class="fas fa-clipboard" style="margin-right: 10px">
+                        </i> Gestisci </a>
+                </button>
+            </div>
+            <button type="button" class="menubtn" data-toggle="collapsebtn" data-target="#ordine"
+                (click)="ordinecollapse()">
+                <i class="fas fa-truck-moving" style="margin-right: 15px"></i>Spedizioni
+            </button>
+            <div class="collapsebtn" id="ordine" *ngIf="isOrdineCollapsed">
+                <button class="menubtn" style="padding-left: 40px; background-color: #334247;">
+                    <a [routerLink]="['/superuser-dashboard/spedizione']"> <i class="fas fa-people-carry" style="margin-right: 10px">
+                        </i> Ordini </a>
+                </button>
+            </div>
+            <button type="button" class="menubtn" data-toggle="collapsebtn" data-target="#carrello"
+          (click)="carrellocollapse()">
+                <i class="fa fa-shopping-cart" style="margin-right: 15px"></i>Carrello
+        </button>
+            <div class="collapsebtn" id="carrello" *ngIf="isCarrelloCollapsed">
+                <button class="menubtn" style="padding-left: 40px; background-color: #334247;">
+                    <a [routerLink]="['/superuser-dashboard/carrello']"> <i class="fa fa-credit-card" style="margin-right: 10px">
+                        </i> Gestisci </a>
+                </button>
+            </div>
+            <button class="menubtn" (click)="logout()">
+                <i class="fas fa-sign-out-alt" style="margin-right: 15px"></i>Esci
+            </button>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,19 @@
+<table class="table">
+  <tr>
+      <th>Nome</th>
+      <th>Dimensione</th>
+      <th> </th>  
+      <th> </th>
+  </tr>
+  <tr *ngFor="let magazzino of magazzinolist">
+      <td>
+        {{magazzino.oggetto.nome}}
+      </td>
+      <td>
+          {{magazzino.oggetto.dimensione}}
+        </td>
+      <td> 
+        <button (click)="setCodice(codice,user,magazzino)">Aggiungi al carrello</button>
+      </td>
+  </tr>    
+</table>

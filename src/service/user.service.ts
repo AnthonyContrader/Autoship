@@ -1,0 +1,42 @@
+import { Injectable } from '@angular/core';
+import { AbstractService } from './abstractservice';
+import { UserDTO } from 'src/dto/userdto';
+import { HttpClient } from '@angular/common/http';
+import { LoginDTO } from 'src/dto/logindto';
+import { Observable } from 'rxjs';
+
+/**
+ * I service sono decorati da @Injectable. 
+ * Qui trovate, oltre ai metodi ereditati dall'Abstract,
+ *  il metodo per il login (in mirror con il backend).
+ * 
+ * @author Vittorio Valent
+ * 
+ * @see AbstractService
+ */
+@Injectable({
+  providedIn: 'root'
+})
+export class UserService extends AbstractService<UserDTO>{
+
+  constructor(http: HttpClient) {
+    super(http);
+    this.type = 'user';
+  }
+
+  login(loginDTO: LoginDTO): Observable<UserDTO> {
+    return this.http.post<any>('http://localhost:8080/' + this.type + '/login', loginDTO)
+  }
+
+  getAllUsers(): Observable<UserDTO[]> {
+    return this.http.get<UserDTO[]>('http://localhost:8080/' + this.type + '/getallusers')
+  }
+
+  getAllAdmin(): Observable<number[]> {
+    return this.http.get<number[]>('http://localhost:8080/' + this.type + '/getalladmin')
+  }
+
+  deleteUser(userDTO: UserDTO): Observable<any>{
+    return this.http.delete('http://localhost:8080/' + this.type + '/deleteuser?id=' + userDTO.id);
+  } 
+}
