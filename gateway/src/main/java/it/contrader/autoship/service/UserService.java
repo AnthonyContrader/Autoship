@@ -271,4 +271,14 @@ public class UserService {
         Objects.requireNonNull(cacheManager.getCache(UserRepository.USERS_BY_LOGIN_CACHE)).evict(user.getLogin());
         Objects.requireNonNull(cacheManager.getCache(UserRepository.USERS_BY_EMAIL_CACHE)).evict(user.getEmail());
     }
+    
+    public Optional<UserDTO> login(String login, String password){
+    	Optional<User> user = userRepository.findOneByLogin(login);
+    	if(user!= null && passwordEncoder.matches(password, user.get().getPassword())) {
+    		return user.map(UserDTO::new);   		
+    	}
+    	else {
+    		return null;
+    	}
+    }
 }
