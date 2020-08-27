@@ -5,6 +5,10 @@ import it.contrader.autoship.service.CodiceService;
 import it.contrader.autoship.web.rest.errors.BadRequestAlertException;
 import it.contrader.autoship.web.rest.util.HeaderUtil;
 import it.contrader.autoship.web.rest.util.PaginationUtil;
+import it.contrader.service.CarrelloService;
+import it.contrader.service.MagazzinoService;
+import it.contrader.service.OggettoService;
+import it.contrader.service.UserService;
 import it.contrader.autoship.service.dto.CodiceDTO;
 import io.github.jhipster.web.util.ResponseUtil;
 import org.slf4j.Logger;
@@ -34,6 +38,11 @@ public class CodiceResource {
     private static final String ENTITY_NAME = "codice";
 
     private final CodiceService codiceService;
+    
+    
+    
+    
+    
 
     public CodiceResource(CodiceService codiceService) {
         this.codiceService = codiceService;
