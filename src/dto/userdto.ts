@@ -10,13 +10,21 @@ import {Usertype} from './usertype';
  */
 export class UserDTO {
 
-   id: number;
+/*   id: number;
 
    username: string;
 
    password: string;
 
    usertype: Usertype;
+*/
+
+   id: number;
+   username: string;
+   password: string;
+   type: number;
+   authorities: Array<string>;
+   role?: Array<string>;
 
 }
 

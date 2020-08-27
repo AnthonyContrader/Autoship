@@ -24,9 +24,36 @@ export class UserService extends AbstractService<UserDTO>{
     this.type = 'user';
   }
 
-  login(loginDTO: LoginDTO): Observable<UserDTO> {
+ /* login(loginDTO: LoginDTO): Observable<UserDTO> {
     return this.http.post<any>('http://localhost:8080/' + this.type + '/login', loginDTO)
+  }*/
+
+/*  login(loginDTO: LoginDTO): Observable<UserDTO> {
+    return this.http.post<any>('http://localhost:8080/' + this.type + '/login', {login: loginDTO.username, password: loginDTO.password})
+  }*/
+
+  login(logindto:LoginDTO) {
+     return this.http.post('http://localhost:8080/api/authenticate', logindto);
+ 
+   }
+
+   auth() {
+    const user = JSON.parse(localStorage.getItem('currentAuth')) as UserDTO;
+
+    if (user) {
+        return 'Bearer ' + user.authorities;
+    } else {
+        return '';
+    }
   }
+
+   getUserLogged(username: string) {
+      return this.http.get('http://localhost:8080/api/users/' + username, {
+        headers: {
+            Authorization: this.auth()
+        }
+      });
+    }
 
   getAllUsers(): Observable<UserDTO[]> {
     return this.http.get<UserDTO[]>('http://localhost:8080/' + this.type + '/getallusers')
