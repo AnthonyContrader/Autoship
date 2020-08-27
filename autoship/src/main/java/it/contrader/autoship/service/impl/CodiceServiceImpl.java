@@ -84,7 +84,7 @@ public class CodiceServiceImpl implements CodiceService {
     
     @Override
     public Page<CodiceDTO> findByUserId(Pageable pageable, Long user_id) {
-        return codiceRepository.findByUserId(pageable, user_id)
+        return codiceRepository.findByUserid(pageable, user_id)
             .map(codiceMapper::toDto);
     }
 

@@ -19,6 +19,6 @@ public interface CodiceRepository extends JpaRepository<Codice, Long> {
 
 	Optional<Codice> findByOtp(String otp);
 	
-	Page<Codice> findByUserId(Pageable pageable, Long user_id);
+	Page<Codice> findByUserid(Pageable pageable, Long user_id);
 	
 }

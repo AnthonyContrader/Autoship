@@ -24,15 +24,15 @@ public class Codice implements Serializable {
     @Column(name = "otp")
     private String otp;
 
-    @Column(name = "userId")
-    private Long userId;
-
     @Enumerated(EnumType.STRING)
     @Column(name = "stato")
     private CodiceStato stato;
 
     @Column(name = "cancellato")
     private Boolean cancellato;
+
+    @Column(name = "userid")
+    private Long userid;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
     public Long getId() {
@@ -54,19 +54,6 @@ public class Codice implements Serializable {
 
     public void setOtp(String otp) {
         this.otp = otp;
-    }
-
-    public Long getUserId() {
-        return userId;
-    }
-
-    public Codice user_id(Long userId) {
-        this.userId = userId;
-        return this;
-    }
-
-    public void setUser_id(Long userId) {
-        this.userId = userId;
     }
 
     public CodiceStato getStato() {
@@ -93,6 +80,19 @@ public class Codice implements Serializable {
 
     public void setCancellato(Boolean cancellato) {
         this.cancellato = cancellato;
+    }
+
+    public Long getUserid() {
+        return userid;
+    }
+
+    public Codice userid(Long userid) {
+        this.userid = userid;
+        return this;
+    }
+
+    public void setUserid(Long userid) {
+        this.userid = userid;
     }
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here, do not remove
 
@@ -121,9 +121,9 @@ public class Codice implements Serializable {
         return "Codice{" +
             "id=" + getId() +
             ", otp='" + getOtp() + "'" +
-            ", user_id=" + getUserId() +
             ", stato='" + getStato() + "'" +
             ", cancellato='" + isCancellato() + "'" +
+            ", userid=" + getUserid() +
             "}";
     }
 }

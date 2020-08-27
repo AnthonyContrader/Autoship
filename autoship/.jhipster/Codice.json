@@ -8,10 +8,6 @@
             "fieldType": "String"
         },
         {
-            "fieldName": "userId",
-            "fieldType": "Long"
-        },
-        {
             "fieldName": "stato",
             "fieldType": "CodiceStato",
             "fieldValues": "ATTESA,CONFERMATO,SPEDITO"
@@ -19,6 +15,10 @@
         {
             "fieldName": "cancellato",
             "fieldType": "Boolean"
+        },
+        {
+            "fieldName": "userid",
+            "fieldType": "Long"
         }
     ],
     "changelogDate": "20200826091430",

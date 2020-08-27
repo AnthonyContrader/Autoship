@@ -2,9 +2,13 @@ package it.contrader.autoship.web.rest;
 
 import com.codahale.metrics.annotation.Timed;
 import it.contrader.autoship.service.CarrelloService;
+import it.contrader.autoship.service.CodiceService;
+import it.contrader.autoship.service.MagazzinoService;
 import it.contrader.autoship.web.rest.errors.BadRequestAlertException;
 import it.contrader.autoship.web.rest.util.HeaderUtil;
 import it.contrader.autoship.web.rest.util.PaginationUtil;
+import it.contrader.autoship.service.dto.CodiceDTO;
+import it.contrader.autoship.service.dto.MagazzinoDTO;
 import it.contrader.autoship.service.dto.CarrelloDTO;
 import io.github.jhipster.web.util.ResponseUtil;
 import org.slf4j.Logger;
@@ -33,10 +37,16 @@ public class CarrelloResource {
 
     private static final String ENTITY_NAME = "carrello";
 
-    private final CarrelloService carrelloService;
+	private final CarrelloService carrelloService;
+    
+    private final MagazzinoService magazzinoService;
+    
+    private final CodiceService codiceService;
 
-    public CarrelloResource(CarrelloService carrelloService) {
+    public CarrelloResource(CarrelloService carrelloService, MagazzinoService magazzinoService, CodiceService codiceService) {
         this.carrelloService = carrelloService;
+        this.magazzinoService = magazzinoService;
+        this.codiceService = codiceService;
     }
 
     /**
@@ -95,6 +105,21 @@ public class CarrelloResource {
         HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/carrellos");
         return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
     }
+    
+    @GetMapping("/getcarrello/{otp}")
+    @Timed
+    public ResponseEntity<List<CarrelloDTO>> getCarrello(Pageable pageable, @PathVariable String otp) {
+        Optional<CodiceDTO> codice = codiceService.findByOtp(otp);
+        Page<CarrelloDTO> page;
+        if(codice.isPresent()) {
+            page = carrelloService.findByCodiceId(pageable, codice.get().getId());
+        }
+        else {
+        	page = Page.empty(pageable);
+        }
+        HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/getcarrello/" + otp);
+        return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
+    }
 
     /**
      * GET  /carrellos/:id : get the "id" carrello.
@@ -122,5 +147,21 @@ public class CarrelloResource {
         log.debug("REST request to delete Carrello : {}", id);
         carrelloService.delete(id);
         return ResponseEntity.ok().headers(HeaderUtil.createEntityDeletionAlert(ENTITY_NAME, id.toString())).build();
+    }
+    
+    @DeleteMapping("/deletecarrello/{id}")
+    @Timed
+    public ResponseEntity<Void> deleteCarrelloCustom(Pageable pageable, @PathVariable Long id) {
+    	Optional<CarrelloDTO> carrello = carrelloService.findOne(id);
+    	Optional<CodiceDTO> codice = codiceService.findOne(carrello.get().getCodiceId());
+    	Optional<MagazzinoDTO> magazzino = magazzinoService.findByOggettoId(carrello.get().getOggettoId());
+    	magazzino.get().setCodiceId(null);
+    	magazzinoService.save(magazzino.get());
+    	carrelloService.delete(id);
+    	Page<CarrelloDTO> page = carrelloService.findByCodiceId(pageable, codice.get().getId());
+        if(!(page.hasContent())) {
+        	codiceService.delete(codice.get().getId());
+        }
+    	return ResponseEntity.ok().headers(HeaderUtil.createEntityDeletionAlert(ENTITY_NAME, id.toString())).build();
     }
 }

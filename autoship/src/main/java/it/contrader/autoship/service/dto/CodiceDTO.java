@@ -13,11 +13,11 @@ public class CodiceDTO implements Serializable {
 
     private String otp;
 
-    private Long userId;
-
     private CodiceStato stato;
 
     private Boolean cancellato;
+
+    private Long userid;
 
     public Long getId() {
         return id;
@@ -35,14 +35,6 @@ public class CodiceDTO implements Serializable {
         this.otp = otp;
     }
 
-    public Long getUserId() {
-        return userId;
-    }
-
-    public void setUserId(Long userId) {
-        this.userId = userId;
-    }
-
     public CodiceStato getStato() {
         return stato;
     }
@@ -57,6 +49,14 @@ public class CodiceDTO implements Serializable {
 
     public void setCancellato(Boolean cancellato) {
         this.cancellato = cancellato;
+    }
+
+    public Long getUserid() {
+        return userid;
+    }
+
+    public void setUserid(Long userid) {
+        this.userid = userid;
     }
 
     @Override
@@ -85,9 +85,9 @@ public class CodiceDTO implements Serializable {
         return "CodiceDTO{" +
             "id=" + getId() +
             ", otp='" + getOtp() + "'" +
-            ", userId=" + getUserId() +
             ", stato='" + getStato() + "'" +
             ", cancellato='" + isCancellato() + "'" +
+            ", userid=" + getUserid() +
             "}";
     }
 }

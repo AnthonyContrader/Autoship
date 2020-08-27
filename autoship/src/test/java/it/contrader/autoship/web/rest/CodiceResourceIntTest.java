@@ -48,14 +48,14 @@ public class CodiceResourceIntTest {
     private static final String DEFAULT_OTP = "AAAAAAAAAA";
     private static final String UPDATED_OTP = "BBBBBBBBBB";
 
-    private static final Long DEFAULT_USER_ID = 1L;
-    private static final Long UPDATED_USER_ID = 2L;
-
     private static final CodiceStato DEFAULT_STATO = CodiceStato.ATTESA;
     private static final CodiceStato UPDATED_STATO = CodiceStato.CONFERMATO;
 
     private static final Boolean DEFAULT_CANCELLATO = false;
     private static final Boolean UPDATED_CANCELLATO = true;
+
+    private static final Long DEFAULT_USERID = 1L;
+    private static final Long UPDATED_USERID = 2L;
 
     @Autowired
     private CodiceRepository codiceRepository;
@@ -110,9 +110,9 @@ public class CodiceResourceIntTest {
     public static Codice createEntity(EntityManager em) {
         Codice codice = new Codice()
             .otp(DEFAULT_OTP)
-            .user_id(DEFAULT_USER_ID)
             .stato(DEFAULT_STATO)
-            .cancellato(DEFAULT_CANCELLATO);
+            .cancellato(DEFAULT_CANCELLATO)
+            .userid(DEFAULT_USERID);
         return codice;
     }
 
@@ -138,9 +138,9 @@ public class CodiceResourceIntTest {
         assertThat(codiceList).hasSize(databaseSizeBeforeCreate + 1);
         Codice testCodice = codiceList.get(codiceList.size() - 1);
         assertThat(testCodice.getOtp()).isEqualTo(DEFAULT_OTP);
-        assertThat(testCodice.getUserId()).isEqualTo(DEFAULT_USER_ID);
         assertThat(testCodice.getStato()).isEqualTo(DEFAULT_STATO);
         assertThat(testCodice.isCancellato()).isEqualTo(DEFAULT_CANCELLATO);
+        assertThat(testCodice.getUserid()).isEqualTo(DEFAULT_USERID);
     }
 
     @Test
@@ -175,9 +175,9 @@ public class CodiceResourceIntTest {
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(codice.getId().intValue())))
             .andExpect(jsonPath("$.[*].otp").value(hasItem(DEFAULT_OTP.toString())))
-            .andExpect(jsonPath("$.[*].user_id").value(hasItem(DEFAULT_USER_ID.intValue())))
             .andExpect(jsonPath("$.[*].stato").value(hasItem(DEFAULT_STATO.toString())))
-            .andExpect(jsonPath("$.[*].cancellato").value(hasItem(DEFAULT_CANCELLATO.booleanValue())));
+            .andExpect(jsonPath("$.[*].cancellato").value(hasItem(DEFAULT_CANCELLATO.booleanValue())))
+            .andExpect(jsonPath("$.[*].userid").value(hasItem(DEFAULT_USERID.intValue())));
     }
     
 
@@ -193,9 +193,9 @@ public class CodiceResourceIntTest {
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.id").value(codice.getId().intValue()))
             .andExpect(jsonPath("$.otp").value(DEFAULT_OTP.toString()))
-            .andExpect(jsonPath("$.user_id").value(DEFAULT_USER_ID.intValue()))
             .andExpect(jsonPath("$.stato").value(DEFAULT_STATO.toString()))
-            .andExpect(jsonPath("$.cancellato").value(DEFAULT_CANCELLATO.booleanValue()));
+            .andExpect(jsonPath("$.cancellato").value(DEFAULT_CANCELLATO.booleanValue()))
+            .andExpect(jsonPath("$.userid").value(DEFAULT_USERID.intValue()));
     }
     @Test
     @Transactional
@@ -219,9 +219,9 @@ public class CodiceResourceIntTest {
         em.detach(updatedCodice);
         updatedCodice
             .otp(UPDATED_OTP)
-            .user_id(UPDATED_USER_ID)
             .stato(UPDATED_STATO)
-            .cancellato(UPDATED_CANCELLATO);
+            .cancellato(UPDATED_CANCELLATO)
+            .userid(UPDATED_USERID);
         CodiceDTO codiceDTO = codiceMapper.toDto(updatedCodice);
 
         restCodiceMockMvc.perform(put("/api/codices")
@@ -234,9 +234,9 @@ public class CodiceResourceIntTest {
         assertThat(codiceList).hasSize(databaseSizeBeforeUpdate);
         Codice testCodice = codiceList.get(codiceList.size() - 1);
         assertThat(testCodice.getOtp()).isEqualTo(UPDATED_OTP);
-        assertThat(testCodice.getUserId()).isEqualTo(UPDATED_USER_ID);
         assertThat(testCodice.getStato()).isEqualTo(UPDATED_STATO);
         assertThat(testCodice.isCancellato()).isEqualTo(UPDATED_CANCELLATO);
+        assertThat(testCodice.getUserid()).isEqualTo(UPDATED_USERID);
     }
 
     @Test

@@ -98,6 +98,12 @@ public class MagazzinoServiceImpl implements MagazzinoService {
 		return magazzinoRepository.findByOggetto(oggettoMapper.toEntity(oggetto))
 	            .map(magazzinoMapper::toDto);
 	}
+	
+	@Override
+	public Optional<MagazzinoDTO> findByOggettoId(Long oggettoId) {
+		return magazzinoRepository.findByOggettoId(oggettoId)
+	            .map(magazzinoMapper::toDto);
+	}
 
 	@Override
 	public Page<MagazzinoDTO> findByOggettoIdNotNullAndCodiceNull(Pageable pageable) {

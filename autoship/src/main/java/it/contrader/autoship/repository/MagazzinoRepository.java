@@ -22,6 +22,8 @@ public interface MagazzinoRepository extends JpaRepository<Magazzino, Long> {
 
 	Optional<Magazzino> findByOggetto(Oggetto oggetto);
 	
+	Optional<Magazzino> findByOggettoId(Long oggettoId);
+	
 	Page<Magazzino> findByOggettoIdNotNullAndCodiceNull(Pageable pageable);
 	
 	Page<Magazzino> findByCodiceId(Pageable pageable, Long codiceId);

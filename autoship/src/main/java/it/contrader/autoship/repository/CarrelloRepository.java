@@ -16,5 +16,5 @@ import org.springframework.stereotype.Repository;
 public interface CarrelloRepository extends JpaRepository<Carrello, Long> {
 
 	Page<Carrello> findByCodiceId(Pageable pageable, Long codiceId);
-	
+
 }

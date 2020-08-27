@@ -26,15 +26,15 @@
                 <constraints nullable="true" />
             </column>
 
-            <column name="user_id" type="bigint">
-                <constraints nullable="true" />
-            </column>
-
             <column name="stato" type="varchar(255)">
                 <constraints nullable="true" />
             </column>
 
             <column name="cancellato" type="bit">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="userid" type="bigint">
                 <constraints nullable="true" />
             </column>
 

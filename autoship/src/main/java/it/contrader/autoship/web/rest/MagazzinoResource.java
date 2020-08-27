@@ -254,7 +254,7 @@ public class MagazzinoResource {
 			if(!(codice.isPresent())) {
 				CodiceDTO newCodice = new CodiceDTO();
 				newCodice.setOtp(otp);
-				newCodice.setUserId(id_user);
+				newCodice.setUserid(id_user);
 				newCodice.setStato(CodiceStato.ATTESA);
 				newCodice.setCancellato(false);
 				newCodice = codiceService.save(newCodice);

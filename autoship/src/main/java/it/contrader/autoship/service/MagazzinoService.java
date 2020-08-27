@@ -47,6 +47,8 @@ public interface MagazzinoService {
     
     Optional<MagazzinoDTO> findByOggetto(OggettoDTO oggetto);
     
+    Optional<MagazzinoDTO> findByOggettoId(Long oggettoId);
+    
     Page<MagazzinoDTO> findByOggettoIdNotNullAndCodiceNull(Pageable pageable);
     
     Page<MagazzinoDTO> findByCodiceId(Pageable pageable, Long codiceId);
