@@ -25,6 +25,10 @@ export class CarrelloComponent implements OnInit {
     this.service.getAllByUser(user).subscribe(codicelist => this.codicelist = codicelist);
   }
 
+  /*getCodeList(user: UserDTO){
+    this.service.getAll().subscribe(codicelist => this.codicelist = codicelist);
+  }*/
+
   conferma(codice: CodiceDTO){
     this.service.confirm(codice).subscribe(() => this.getCodeList(this.user));
   }

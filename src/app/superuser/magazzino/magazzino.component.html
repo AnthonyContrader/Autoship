@@ -58,7 +58,7 @@
               {{magazzino.capienza}}
             </td>
           </ng-template>
-          <td *ngIf="magazzino.cancellato == false && magazzino.codice == null else notsave">
+          <td *ngIf="magazzino.cancellato == false && magazzino.codiceId == null else notsave">
             <button (click)="updateMagazzino(magazzino, i)">Salva</button>
           </td>
           <ng-template #notsave>

@@ -1,3 +1,3 @@
 export enum CodiceStato {
-    Attesa, Confermato, Spedito
+    ATTESA, CONFERMATO, SPEDITO
 }

@@ -12,7 +12,9 @@ export class MagazzinoDTO {
 
     capienza: number;
 
-    codice: CodiceDTO;
+    codiceId: number;
+
+    codiceOtp: string;
 
     cancellato: boolean;
 

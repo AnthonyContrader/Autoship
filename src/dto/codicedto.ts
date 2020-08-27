@@ -7,7 +7,7 @@ export class CodiceDTO {
 
     otp: string;
 
-    user: UserDTO;
+    userId: number;
 
     stato: CodiceStato;
 

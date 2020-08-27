@@ -23,7 +23,8 @@ export class AcquistaComponent implements OnInit {
     this.service.getOggettoInCell().subscribe(magazzinolist => this.magazzinolist = magazzinolist);
   }
 
-  setCodice(otp: string, user: UserDTO, magazzino: MagazzinoDTO){
-    this.service.setCodice(otp, user.id, magazzino).subscribe(() => this.getMagazzinoList());
+  setCodice(magazzino: MagazzinoDTO){
+    console.log(this.user.id);
+    this.service.setCodice(this.codice, this.user.id, magazzino).subscribe(() => this.getMagazzinoList());
   }
 }

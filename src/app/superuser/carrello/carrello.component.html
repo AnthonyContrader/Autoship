@@ -10,21 +10,21 @@
         <td>
           {{codice.otp}}
         </td>
-        <td *ngIf="codice.stato == 'Attesa' else notAttesa">
-            In Attesa di Conferma
+        <td *ngIf="codice.stato == 'ATTESA' else notAttesa">
+            IN ATTESA DI CONFERMA
         </td>
         <ng-template #notAttesa>
             <td>
                 {{codice.stato}}
             </td>
         </ng-template>
-        <td *ngIf="codice.stato == 'Attesa'"> 
+        <td *ngIf="codice.stato == 'ATTESA'"> 
             <button (click)="gestisciCarrello(codice)">Gestisci</button>
           </td>
-          <td *ngIf="codice.stato == 'Attesa'"> 
+          <td *ngIf="codice.stato == 'ATTESA'"> 
               <button (click)="conferma(codice)">Conferma</button>
           </td>
-          <td *ngIf="codice.stato == 'Attesa' else notManage"> 
+          <td *ngIf="codice.stato == 'ATTESA' else notManage"> 
               <button (click)="deleteCarrello(codice)">Elimina</button>
           </td>
           <ng-template #notManage>
