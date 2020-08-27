@@ -18,9 +18,11 @@ import org.springframework.web.bind.annotation.*;
 
 import java.net.URI;
 import java.net.URISyntaxException;
-
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+
+import javax.servlet.http.HttpServletRequest;
 
 /**
  * REST controller for managing Codice.
@@ -95,6 +97,17 @@ public class CodiceResource {
         HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/codices");
         return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
     }
+    
+    @GetMapping("/getallcodes")
+    @Timed
+	public List<String> getAllCodes(Pageable pageable){
+		List<String> otp = new ArrayList<>();			
+		Page<CodiceDTO> page = codiceService.findAll(pageable);	
+		for(CodiceDTO c : page) {
+			otp.add(c.getOtp());
+		}			
+		return otp;
+	}
 
     /**
      * GET  /codices/:id : get the "id" codice.
