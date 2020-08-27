@@ -19,6 +19,8 @@ public class OggettoDTO implements Serializable {
 
     private Boolean cancellato;
 
+    private Boolean cella;
+
     public Long getId() {
         return id;
     }
@@ -51,6 +53,14 @@ public class OggettoDTO implements Serializable {
         this.cancellato = cancellato;
     }
 
+    public Boolean isCella() {
+        return cella;
+    }
+
+    public void setCella(Boolean cella) {
+        this.cella = cella;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) {
@@ -79,6 +89,7 @@ public class OggettoDTO implements Serializable {
             ", nome='" + getNome() + "'" +
             ", dimensione=" + getDimensione() +
             ", cancellato='" + isCancellato() + "'" +
+            ", cella='" + isCella() + "'" +
             "}";
     }
 }

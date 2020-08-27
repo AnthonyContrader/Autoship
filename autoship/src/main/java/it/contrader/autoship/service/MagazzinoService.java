@@ -1,6 +1,8 @@
 package it.contrader.autoship.service;
 
+import it.contrader.autoship.domain.Oggetto;
 import it.contrader.autoship.service.dto.MagazzinoDTO;
+import it.contrader.autoship.service.dto.OggettoDTO;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -43,4 +45,6 @@ public interface MagazzinoService {
      * @param id the id of the entity
      */
     void delete(Long id);
+    
+    Optional<MagazzinoDTO> findByOggetto(OggettoDTO oggetto);
 }

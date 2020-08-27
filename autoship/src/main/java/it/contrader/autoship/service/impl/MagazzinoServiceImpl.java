@@ -2,9 +2,13 @@ package it.contrader.autoship.service.impl;
 
 import it.contrader.autoship.service.MagazzinoService;
 import it.contrader.autoship.domain.Magazzino;
+import it.contrader.autoship.domain.Oggetto;
 import it.contrader.autoship.repository.MagazzinoRepository;
 import it.contrader.autoship.service.dto.MagazzinoDTO;
+import it.contrader.autoship.service.dto.OggettoDTO;
 import it.contrader.autoship.service.mapper.MagazzinoMapper;
+import it.contrader.autoship.service.mapper.OggettoMapper;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -27,10 +31,13 @@ public class MagazzinoServiceImpl implements MagazzinoService {
     private final MagazzinoRepository magazzinoRepository;
 
     private final MagazzinoMapper magazzinoMapper;
+    
+    private final OggettoMapper oggettoMapper;
 
-    public MagazzinoServiceImpl(MagazzinoRepository magazzinoRepository, MagazzinoMapper magazzinoMapper) {
+    public MagazzinoServiceImpl(MagazzinoRepository magazzinoRepository, MagazzinoMapper magazzinoMapper, OggettoMapper oggettoMapper) {
         this.magazzinoRepository = magazzinoRepository;
         this.magazzinoMapper = magazzinoMapper;
+        this.oggettoMapper = oggettoMapper;
     }
 
     /**
@@ -86,4 +93,10 @@ public class MagazzinoServiceImpl implements MagazzinoService {
         log.debug("Request to delete Magazzino : {}", id);
         magazzinoRepository.deleteById(id);
     }
+
+	@Override
+	public Optional<MagazzinoDTO> findByOggetto(OggettoDTO oggetto) {
+		return magazzinoRepository.findByOggetto(oggettoMapper.toEntity(oggetto))
+	            .map(magazzinoMapper::toDto);
+	}
 }

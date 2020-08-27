@@ -51,6 +51,9 @@ public class OggettoResourceIntTest {
     private static final Boolean DEFAULT_CANCELLATO = false;
     private static final Boolean UPDATED_CANCELLATO = true;
 
+    private static final Boolean DEFAULT_CELLA = false;
+    private static final Boolean UPDATED_CELLA = true;
+
     @Autowired
     private OggettoRepository oggettoRepository;
 
@@ -99,7 +102,8 @@ public class OggettoResourceIntTest {
         Oggetto oggetto = new Oggetto()
             .nome(DEFAULT_NOME)
             .dimensione(DEFAULT_DIMENSIONE)
-            .cancellato(DEFAULT_CANCELLATO);
+            .cancellato(DEFAULT_CANCELLATO)
+            .cella(DEFAULT_CELLA);
         return oggetto;
     }
 
@@ -127,6 +131,7 @@ public class OggettoResourceIntTest {
         assertThat(testOggetto.getNome()).isEqualTo(DEFAULT_NOME);
         assertThat(testOggetto.getDimensione()).isEqualTo(DEFAULT_DIMENSIONE);
         assertThat(testOggetto.isCancellato()).isEqualTo(DEFAULT_CANCELLATO);
+        assertThat(testOggetto.isCella()).isEqualTo(DEFAULT_CELLA);
     }
 
     @Test
@@ -200,7 +205,8 @@ public class OggettoResourceIntTest {
             .andExpect(jsonPath("$.[*].id").value(hasItem(oggetto.getId().intValue())))
             .andExpect(jsonPath("$.[*].nome").value(hasItem(DEFAULT_NOME.toString())))
             .andExpect(jsonPath("$.[*].dimensione").value(hasItem(DEFAULT_DIMENSIONE)))
-            .andExpect(jsonPath("$.[*].cancellato").value(hasItem(DEFAULT_CANCELLATO.booleanValue())));
+            .andExpect(jsonPath("$.[*].cancellato").value(hasItem(DEFAULT_CANCELLATO.booleanValue())))
+            .andExpect(jsonPath("$.[*].cella").value(hasItem(DEFAULT_CELLA.booleanValue())));
     }
     
 
@@ -217,7 +223,8 @@ public class OggettoResourceIntTest {
             .andExpect(jsonPath("$.id").value(oggetto.getId().intValue()))
             .andExpect(jsonPath("$.nome").value(DEFAULT_NOME.toString()))
             .andExpect(jsonPath("$.dimensione").value(DEFAULT_DIMENSIONE))
-            .andExpect(jsonPath("$.cancellato").value(DEFAULT_CANCELLATO.booleanValue()));
+            .andExpect(jsonPath("$.cancellato").value(DEFAULT_CANCELLATO.booleanValue()))
+            .andExpect(jsonPath("$.cella").value(DEFAULT_CELLA.booleanValue()));
     }
     @Test
     @Transactional
@@ -242,7 +249,8 @@ public class OggettoResourceIntTest {
         updatedOggetto
             .nome(UPDATED_NOME)
             .dimensione(UPDATED_DIMENSIONE)
-            .cancellato(UPDATED_CANCELLATO);
+            .cancellato(UPDATED_CANCELLATO)
+            .cella(UPDATED_CELLA);
         OggettoDTO oggettoDTO = oggettoMapper.toDto(updatedOggetto);
 
         restOggettoMockMvc.perform(put("/api/oggettos")
@@ -257,6 +265,7 @@ public class OggettoResourceIntTest {
         assertThat(testOggetto.getNome()).isEqualTo(UPDATED_NOME);
         assertThat(testOggetto.getDimensione()).isEqualTo(UPDATED_DIMENSIONE);
         assertThat(testOggetto.isCancellato()).isEqualTo(UPDATED_CANCELLATO);
+        assertThat(testOggetto.isCella()).isEqualTo(UPDATED_CELLA);
     }
 
     @Test

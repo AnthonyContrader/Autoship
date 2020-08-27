@@ -31,6 +31,9 @@ public class Oggetto implements Serializable {
     @Column(name = "cancellato")
     private Boolean cancellato;
 
+    @Column(name = "cella")
+    private Boolean cella;
+
     // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
     public Long getId() {
         return id;
@@ -78,6 +81,19 @@ public class Oggetto implements Serializable {
     public void setCancellato(Boolean cancellato) {
         this.cancellato = cancellato;
     }
+
+    public Boolean isCella() {
+        return cella;
+    }
+
+    public Oggetto cella(Boolean cella) {
+        this.cella = cella;
+        return this;
+    }
+
+    public void setCella(Boolean cella) {
+        this.cella = cella;
+    }
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here, do not remove
 
     @Override
@@ -107,6 +123,7 @@ public class Oggetto implements Serializable {
             ", nome='" + getNome() + "'" +
             ", dimensione=" + getDimensione() +
             ", cancellato='" + isCancellato() + "'" +
+            ", cella='" + isCella() + "'" +
             "}";
     }
 }

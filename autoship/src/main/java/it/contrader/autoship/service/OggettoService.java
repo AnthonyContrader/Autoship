@@ -43,4 +43,8 @@ public interface OggettoService {
      * @param id the id of the entity
      */
     void delete(Long id);
+    
+    Page<OggettoDTO> findByCellaFalseAndCancellatoFalse(Pageable pageable);
+    
+    Page<OggettoDTO> findByCellaTrueAndCancellatoFalse(Pageable pageable);
 }

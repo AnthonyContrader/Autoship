@@ -20,6 +20,10 @@
         {
             "fieldName": "cancellato",
             "fieldType": "Boolean"
+        },
+        {
+            "fieldName": "cella",
+            "fieldType": "Boolean"
         }
     ],
     "changelogDate": "20200826083302",

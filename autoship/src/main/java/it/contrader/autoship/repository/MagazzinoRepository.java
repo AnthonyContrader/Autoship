@@ -1,6 +1,12 @@
 package it.contrader.autoship.repository;
 
 import it.contrader.autoship.domain.Magazzino;
+import it.contrader.autoship.domain.Oggetto;
+import it.contrader.autoship.service.dto.MagazzinoDTO;
+
+import java.util.Optional;
+
+import org.springframework.data.domain.Page;
 import org.springframework.data.jpa.repository.*;
 import org.springframework.stereotype.Repository;
 
@@ -12,4 +18,6 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface MagazzinoRepository extends JpaRepository<Magazzino, Long> {
 
+	Optional<Magazzino> findByOggetto(Oggetto oggetto);
+	
 }

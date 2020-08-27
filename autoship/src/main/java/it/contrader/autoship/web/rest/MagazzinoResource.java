@@ -1,10 +1,16 @@
 package it.contrader.autoship.web.rest;
 
 import com.codahale.metrics.annotation.Timed;
+import com.fasterxml.jackson.databind.DeserializationFeature;
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
+
 import it.contrader.autoship.service.MagazzinoService;
+import it.contrader.autoship.service.OggettoService;
 import it.contrader.autoship.web.rest.errors.BadRequestAlertException;
 import it.contrader.autoship.web.rest.util.HeaderUtil;
 import it.contrader.autoship.web.rest.util.PaginationUtil;
+import it.contrader.autoship.service.dto.OggettoDTO;
 import it.contrader.autoship.service.dto.MagazzinoDTO;
 import io.github.jhipster.web.util.ResponseUtil;
 import org.slf4j.Logger;
@@ -35,9 +41,12 @@ public class MagazzinoResource {
     private static final String ENTITY_NAME = "magazzino";
 
     private final MagazzinoService magazzinoService;
+    
+    private final OggettoService oggettoService;
 
-    public MagazzinoResource(MagazzinoService magazzinoService) {
+    public MagazzinoResource(MagazzinoService magazzinoService, OggettoService oggettoService) {
         this.magazzinoService = magazzinoService;
+        this.oggettoService = oggettoService;
     }
 
     /**
@@ -56,6 +65,40 @@ public class MagazzinoResource {
         }
         MagazzinoDTO result = magazzinoService.save(magazzinoDTO);
         return ResponseEntity.created(new URI("/api/magazzinos/" + result.getId()))
+            .headers(HeaderUtil.createEntityCreationAlert(ENTITY_NAME, result.getId().toString()))
+            .body(result);
+    }
+    
+    @PostMapping("/magazzinosinsert")
+    @Timed
+    public ResponseEntity<MagazzinoDTO> insertMagazzino(@Valid @RequestBody JsonNode json) throws URISyntaxException {
+        ObjectMapper mapper = new ObjectMapper();
+		mapper.configure(DeserializationFeature.ACCEPT_EMPTY_STRING_AS_NULL_OBJECT, true);
+		MagazzinoDTO magazzinoDTO = mapper.convertValue(json.get("magazzino"), MagazzinoDTO.class);
+		Long id_oggetto = mapper.convertValue(json.get("oggetto"), Long.class);
+	    if (magazzinoDTO.getId() != null) {
+            throw new BadRequestAlertException("A new magazzino cannot already have an ID", ENTITY_NAME, "idexists");
+        }
+	    Optional<OggettoDTO> oggetto;
+		if(id_oggetto != null) {
+			oggetto = oggettoService.findOne(id_oggetto);
+			int dimensione = oggetto.get().getDimensione();
+			if(magazzinoDTO.getCapienza() < dimensione) {
+				id_oggetto = (long) 0;
+			}
+		}
+		if(id_oggetto == null || id_oggetto == 0) {
+			magazzinoDTO.setOggettoId(null);
+		}
+		else{
+			oggetto = oggettoService.findOne(id_oggetto);
+			magazzinoDTO.setOggettoId(oggetto.get().getId());
+			oggetto.get().setCella(true);
+			oggettoService.save(oggetto.get());
+		}
+		magazzinoDTO.setCancellato(false);
+        MagazzinoDTO result = magazzinoService.save(magazzinoDTO);
+        return ResponseEntity.created(new URI("/api/magazzinosinsert/" + result.getId()))
             .headers(HeaderUtil.createEntityCreationAlert(ENTITY_NAME, result.getId().toString()))
             .body(result);
     }
@@ -79,6 +122,42 @@ public class MagazzinoResource {
         MagazzinoDTO result = magazzinoService.save(magazzinoDTO);
         return ResponseEntity.ok()
             .headers(HeaderUtil.createEntityUpdateAlert(ENTITY_NAME, magazzinoDTO.getId().toString()))
+            .body(result);
+    }
+    
+    @PutMapping("/magazzinosupdate")
+    @Timed
+    public ResponseEntity<MagazzinoDTO> updateMagazzinoCustom(@Valid @RequestBody JsonNode json) throws URISyntaxException {
+    	ObjectMapper mapper = new ObjectMapper();
+		mapper.configure(DeserializationFeature.ACCEPT_EMPTY_STRING_AS_NULL_OBJECT, true);
+		MagazzinoDTO magazzinoDTO = mapper.convertValue(json.get("magazzino"), MagazzinoDTO.class);
+		Long id_oggetto = mapper.convertValue(json.get("oggetto"), Long.class);
+	    Optional<OggettoDTO> oggetto;
+	    if(magazzinoDTO.getOggettoId() != null && magazzinoDTO.getOggettoId() != id_oggetto) {
+	    	Optional<OggettoDTO> oldOggetto = oggettoService.findOne(magazzinoDTO.getOggettoId());
+	    	oldOggetto.get().setCella(false);
+	    	oggettoService.save(oldOggetto.get());
+	    }
+		if(id_oggetto != null) {
+			oggetto = oggettoService.findOne(id_oggetto);
+			int dimensione = oggetto.get().getDimensione();
+			if(magazzinoDTO.getCapienza() < dimensione) {
+				id_oggetto = (long) 0;
+			}
+		}
+		if(id_oggetto == null || id_oggetto == 0) {
+			magazzinoDTO.setOggettoId(null);
+		}
+		else{
+			oggetto = oggettoService.findOne(id_oggetto);
+			magazzinoDTO.setOggettoId(oggetto.get().getId());
+			oggetto.get().setCella(true);
+			oggettoService.save(oggetto.get());
+		}
+		magazzinoDTO.setCancellato(false);
+        MagazzinoDTO result = magazzinoService.save(magazzinoDTO);
+        return ResponseEntity.created(new URI("/api/magazzinosupdate/" + result.getId()))
+            .headers(HeaderUtil.createEntityCreationAlert(ENTITY_NAME, result.getId().toString()))
             .body(result);
     }
 
@@ -123,5 +202,28 @@ public class MagazzinoResource {
         log.debug("REST request to delete Magazzino : {}", id);
         magazzinoService.delete(id);
         return ResponseEntity.ok().headers(HeaderUtil.createEntityDeletionAlert(ENTITY_NAME, id.toString())).build();
+    }
+    
+
+    @PutMapping("/magazzinodelete")
+    @Timed
+    public ResponseEntity<MagazzinoDTO> deleteOggettoCustom(@Valid @RequestBody MagazzinoDTO magazzinoDTO) throws URISyntaxException {
+        log.debug("REST request to update Magazzino : {}", magazzinoDTO);
+        magazzinoDTO.setCancellato(true);
+        MagazzinoDTO result = magazzinoService.save(magazzinoDTO);
+        return ResponseEntity.ok()
+            .headers(HeaderUtil.createEntityUpdateAlert(ENTITY_NAME, magazzinoDTO.getId().toString()))
+            .body(result);
+    }
+    
+    @PutMapping("/magazzinoreinsert")
+    @Timed
+    public ResponseEntity<MagazzinoDTO> reinsertOggettoCustom(@Valid @RequestBody MagazzinoDTO magazzinoDTO) throws URISyntaxException {
+        log.debug("REST request to update Magazzino : {}", magazzinoDTO);
+        magazzinoDTO.setCancellato(false);
+        MagazzinoDTO result = magazzinoService.save(magazzinoDTO);
+        return ResponseEntity.ok()
+            .headers(HeaderUtil.createEntityUpdateAlert(ENTITY_NAME, magazzinoDTO.getId().toString()))
+            .body(result);
     }
 }

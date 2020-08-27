@@ -86,4 +86,16 @@ public class OggettoServiceImpl implements OggettoService {
         log.debug("Request to delete Oggetto : {}", id);
         oggettoRepository.deleteById(id);
     }
+
+	@Override
+	public Page<OggettoDTO> findByCellaFalseAndCancellatoFalse(Pageable pageable) {
+		return oggettoRepository.findByCellaFalseAndCancellatoFalse(pageable)
+	            .map(oggettoMapper::toDto);
+	}
+	
+	@Override
+	public Page<OggettoDTO> findByCellaTrueAndCancellatoFalse(Pageable pageable) {
+		return oggettoRepository.findByCellaTrueAndCancellatoFalse(pageable)
+	            .map(oggettoMapper::toDto);
+	}
 }

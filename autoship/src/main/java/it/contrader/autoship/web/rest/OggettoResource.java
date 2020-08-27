@@ -1,6 +1,8 @@
 package it.contrader.autoship.web.rest;
 
 import com.codahale.metrics.annotation.Timed;
+
+import it.contrader.autoship.service.MagazzinoService;
 import it.contrader.autoship.service.OggettoService;
 import it.contrader.autoship.web.rest.errors.BadRequestAlertException;
 import it.contrader.autoship.web.rest.util.HeaderUtil;
@@ -35,7 +37,7 @@ public class OggettoResource {
     private static final String ENTITY_NAME = "oggetto";
 
     private final OggettoService oggettoService;
-
+    
     public OggettoResource(OggettoService oggettoService) {
         this.oggettoService = oggettoService;
     }
@@ -54,6 +56,8 @@ public class OggettoResource {
         if (oggettoDTO.getId() != null) {
             throw new BadRequestAlertException("A new oggetto cannot already have an ID", ENTITY_NAME, "idexists");
         }
+        oggettoDTO.setCancellato(false);
+        oggettoDTO.setCella(false);        
         OggettoDTO result = oggettoService.save(oggettoDTO);
         return ResponseEntity.created(new URI("/api/oggettos/" + result.getId()))
             .headers(HeaderUtil.createEntityCreationAlert(ENTITY_NAME, result.getId().toString()))
@@ -123,5 +127,45 @@ public class OggettoResource {
         log.debug("REST request to delete Oggetto : {}", id);
         oggettoService.delete(id);
         return ResponseEntity.ok().headers(HeaderUtil.createEntityDeletionAlert(ENTITY_NAME, id.toString())).build();
+    }
+    
+    @PutMapping("/oggettodelete")
+    @Timed
+    public ResponseEntity<OggettoDTO> deleteOggettoCustom(@Valid @RequestBody OggettoDTO oggettoDTO) throws URISyntaxException {
+        log.debug("REST request to update Oggetto : {}", oggettoDTO);
+        oggettoDTO.setCancellato(true);
+        OggettoDTO result = oggettoService.save(oggettoDTO);
+        return ResponseEntity.ok()
+            .headers(HeaderUtil.createEntityUpdateAlert(ENTITY_NAME, oggettoDTO.getId().toString()))
+            .body(result);
+    }
+    
+    @PutMapping("/oggettoreinsert")
+    @Timed
+    public ResponseEntity<OggettoDTO> reinsertOggettoCustom(@Valid @RequestBody OggettoDTO oggettoDTO) throws URISyntaxException {
+        log.debug("REST request to update Oggetto : {}", oggettoDTO);
+        oggettoDTO.setCancellato(false);
+        OggettoDTO result = oggettoService.save(oggettoDTO);
+        return ResponseEntity.ok()
+            .headers(HeaderUtil.createEntityUpdateAlert(ENTITY_NAME, oggettoDTO.getId().toString()))
+            .body(result);
+    }
+    
+    @GetMapping("/oggettosnotincell")
+    @Timed
+    public ResponseEntity<List<OggettoDTO>> getOggettosNotInCell(Pageable pageable) {
+        log.debug("REST request to get Oggetto : {}");
+        Page<OggettoDTO> page = oggettoService.findByCellaFalseAndCancellatoFalse(pageable);
+        HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/oggettosnotincell");
+        return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
+    }
+    
+    @GetMapping("/oggettosincell")
+    @Timed
+    public ResponseEntity<List<OggettoDTO>> getOggettosInCell(Pageable pageable) {
+        log.debug("REST request to get Oggetto : {}");
+        Page<OggettoDTO> page = oggettoService.findByCellaTrueAndCancellatoFalse(pageable);
+        HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/oggettosnotincell");
+        return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
     }
 }
