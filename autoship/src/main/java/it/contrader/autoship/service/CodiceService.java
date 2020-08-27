@@ -36,13 +36,15 @@ public interface CodiceService {
      * @return the entity
      */
     Optional<CodiceDTO> findOne(Long id);
+    
+    Optional<CodiceDTO> findByOtp(String otp);
 
     /**
      * Delete the "id" codice.
      *
      * @param id the id of the entity
      */
-    Page<CodiceDTO> findCarrellosByCodice(CodiceDTO codiceDTO);
+//    Page<CodiceDTO> findCarrellosByCodice(CodiceDTO codiceDTO);
 
 	/**
 	 * Delete the codice by id.

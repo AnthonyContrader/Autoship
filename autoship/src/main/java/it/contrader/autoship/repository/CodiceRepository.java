@@ -1,6 +1,9 @@
 package it.contrader.autoship.repository;
 
 import it.contrader.autoship.domain.Codice;
+
+import java.util.Optional;
+
 import org.springframework.data.jpa.repository.*;
 import org.springframework.stereotype.Repository;
 
@@ -12,4 +15,6 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface CodiceRepository extends JpaRepository<Codice, Long> {
 
+	Optional<Codice> findByOtp(String otp);
+	
 }

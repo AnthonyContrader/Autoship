@@ -19,6 +19,8 @@ public class MagazzinoDTO implements Serializable {
     private Long oggettoId;
 
     private String oggettoNome;
+    
+    private String oggettoDimensione;
 
     private Long codiceId;
 
@@ -63,7 +65,7 @@ public class MagazzinoDTO implements Serializable {
     public void setOggettoNome(String oggettoNome) {
         this.oggettoNome = oggettoNome;
     }
-
+    
     public Long getCodiceId() {
         return codiceId;
     }

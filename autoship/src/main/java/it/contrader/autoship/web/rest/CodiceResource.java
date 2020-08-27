@@ -30,11 +30,7 @@ import it.contrader.autoship.service.dto.CodiceDTO;
 import it.contrader.autoship.web.rest.errors.BadRequestAlertException;
 import it.contrader.autoship.web.rest.util.HeaderUtil;
 import it.contrader.autoship.web.rest.util.PaginationUtil;
-import it.contrader.dto.CarrelloDTO;
-import it.contrader.dto.MagazzinoDTO;
-import it.contrader.service.CarrelloService;
-import it.contrader.service.MagazzinoService;
-import it.contrader.service.OggettoService;
+
 
 /**
  * REST controller for managing Codice.
@@ -49,13 +45,13 @@ public class CodiceResource {
 
     private final CodiceService codiceService;
     
-    private  final MagazzinoService magazzinoService;
+/*    private  final MagazzinoService magazzinoService;
     
     private  final OggettoService oggettoService;
     
     private  final UserService userService;
     
-    private  final CarrelloService carrelloService;
+    private  final CarrelloService carrelloService;*/
     
     
     
@@ -157,7 +153,7 @@ public class CodiceResource {
     public ResponseEntity<Void> deleteCodice(@PathVariable Long id) {
     	
     	Optional<CodiceDTO> codice = codiceService.findOne(id);
-		List<CarrelloDTO> carrelloList = carrelloService.findCarrellosByCodice(codice);
+/*		List<CarrelloDTO> carrelloList = carrelloService.findCarrellosByCodice(codice);
 		for(CarrelloDTO c : carrelloList) {
 			carrelloService.delete(c.getId());
 		}
@@ -166,7 +162,7 @@ public class CodiceResource {
 			m.setCodice(null);
 			magazzinoService.update(m);
 		}		
-		service.delete(codice.getId());
+		service.delete(codice.getId());*/
     
         log.debug("REST request to delete Codice : {}", id);
         codiceService.delete(id);

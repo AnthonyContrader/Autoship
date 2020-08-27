@@ -4,6 +4,8 @@ import it.contrader.autoship.AutoshipApp;
 
 import it.contrader.autoship.domain.Magazzino;
 import it.contrader.autoship.repository.MagazzinoRepository;
+import it.contrader.autoship.service.CarrelloService;
+import it.contrader.autoship.service.CodiceService;
 import it.contrader.autoship.service.MagazzinoService;
 import it.contrader.autoship.service.OggettoService;
 import it.contrader.autoship.service.dto.MagazzinoDTO;
@@ -62,6 +64,12 @@ public class MagazzinoResourceIntTest {
     
     @Autowired
     private OggettoService oggettoService;
+    
+    @Autowired
+    private CodiceService codiceService;
+    
+    @Autowired
+    private CarrelloService carrelloService;
 
     @Autowired
     private MappingJackson2HttpMessageConverter jacksonMessageConverter;
@@ -82,7 +90,7 @@ public class MagazzinoResourceIntTest {
     @Before
     public void setup() {
         MockitoAnnotations.initMocks(this);
-        final MagazzinoResource magazzinoResource = new MagazzinoResource(magazzinoService, oggettoService);
+        final MagazzinoResource magazzinoResource = new MagazzinoResource(magazzinoService, oggettoService, codiceService, carrelloService);
         this.restMagazzinoMockMvc = MockMvcBuilders.standaloneSetup(magazzinoResource)
             .setCustomArgumentResolvers(pageableArgumentResolver)
             .setControllerAdvice(exceptionTranslator)

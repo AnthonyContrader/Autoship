@@ -5,12 +5,17 @@ import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
+import it.contrader.autoship.service.CarrelloService;
+import it.contrader.autoship.service.CodiceService;
 import it.contrader.autoship.service.MagazzinoService;
 import it.contrader.autoship.service.OggettoService;
 import it.contrader.autoship.web.rest.errors.BadRequestAlertException;
 import it.contrader.autoship.web.rest.util.HeaderUtil;
 import it.contrader.autoship.web.rest.util.PaginationUtil;
+import it.contrader.autoship.domain.enumeration.CodiceStato;
 import it.contrader.autoship.service.dto.OggettoDTO;
+import it.contrader.autoship.service.dto.CarrelloDTO;
+import it.contrader.autoship.service.dto.CodiceDTO;
 import it.contrader.autoship.service.dto.MagazzinoDTO;
 import io.github.jhipster.web.util.ResponseUtil;
 import org.slf4j.Logger;
@@ -22,6 +27,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 import java.net.URI;
 import java.net.URISyntaxException;
@@ -43,10 +49,16 @@ public class MagazzinoResource {
     private final MagazzinoService magazzinoService;
     
     private final OggettoService oggettoService;
+    
+    private final CodiceService codiceService;
+    
+    private final CarrelloService carrelloService;
 
-    public MagazzinoResource(MagazzinoService magazzinoService, OggettoService oggettoService) {
+    public MagazzinoResource(MagazzinoService magazzinoService, OggettoService oggettoService, CodiceService codiceService, CarrelloService carrelloService) {
         this.magazzinoService = magazzinoService;
         this.oggettoService = oggettoService;
+        this.codiceService = codiceService; 
+        this.carrelloService = carrelloService; 
     }
 
     /**
@@ -225,5 +237,47 @@ public class MagazzinoResource {
         return ResponseEntity.ok()
             .headers(HeaderUtil.createEntityUpdateAlert(ENTITY_NAME, magazzinoDTO.getId().toString()))
             .body(result);
+    }
+    
+    @PutMapping("/setcodice")
+    @Timed
+	public ResponseEntity<MagazzinoDTO> setCodice(@RequestBody JsonNode json) throws URISyntaxException{
+			ObjectMapper mapper = new ObjectMapper();
+			mapper.configure(DeserializationFeature.ACCEPT_EMPTY_STRING_AS_NULL_OBJECT, true);
+			MagazzinoDTO magazzino = mapper.convertValue(json.get("magazzino"), MagazzinoDTO.class);
+			String otp = mapper.convertValue(json.get("otp"), String.class);
+			Long id_user = mapper.convertValue(json.get("user"), Long.class);
+			Optional<OggettoDTO> oggetto = oggettoService.findOne(magazzino.getOggettoId());
+			Optional<CodiceDTO> codice = codiceService.findByOtp(otp);
+			CarrelloDTO carrello = new CarrelloDTO();
+			carrello.setOggettoId(oggetto.get().getId());
+			if(!(codice.isPresent())) {
+				CodiceDTO newCodice = new CodiceDTO();
+				newCodice.setOtp(otp);
+				newCodice.setUser_id(id_user);
+				newCodice.setStato(CodiceStato.ATTESA);
+				newCodice.setCancellato(false);
+				newCodice = codiceService.save(newCodice);
+				magazzino.setCodiceId(newCodice.getId());
+				carrello.setCodiceId(newCodice.getId());
+			}
+			else {
+				magazzino.setCodiceId(codice.get().getId());
+				carrello.setCodiceId(codice.get().getId());
+			}
+			magazzinoService.save(magazzino);			
+			carrelloService.save(carrello);
+			return ResponseEntity.ok()
+					.headers(HeaderUtil.createEntityUpdateAlert(ENTITY_NAME, magazzino.getId().toString()))
+		            .body(magazzino);
+	}
+    
+    @GetMapping("/getobjectincell")
+    @Timed
+    public ResponseEntity<List<MagazzinoDTO>> getObjectInCell(Pageable pageable) {
+        log.debug("REST request to get a page of Magazzinos");
+        Page<MagazzinoDTO> page = magazzinoService.findByOggettoIdNotNullAndCodiceNull(pageable);
+        HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/magazzinos");
+        return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
     }
 }

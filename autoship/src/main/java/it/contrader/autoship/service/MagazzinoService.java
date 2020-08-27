@@ -1,5 +1,6 @@
 package it.contrader.autoship.service;
 
+import it.contrader.autoship.domain.Magazzino;
 import it.contrader.autoship.domain.Oggetto;
 import it.contrader.autoship.service.dto.MagazzinoDTO;
 import it.contrader.autoship.service.dto.OggettoDTO;
@@ -47,4 +48,6 @@ public interface MagazzinoService {
     void delete(Long id);
     
     Optional<MagazzinoDTO> findByOggetto(OggettoDTO oggetto);
+    
+    Page<MagazzinoDTO> findByOggettoIdNotNullAndCodiceNull(Pageable pageable);
 }

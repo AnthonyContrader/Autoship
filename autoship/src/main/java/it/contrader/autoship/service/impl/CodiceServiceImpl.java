@@ -75,6 +75,12 @@ public class CodiceServiceImpl implements CodiceService {
         return codiceRepository.findById(id)
             .map(codiceMapper::toDto);
     }
+    
+    @Override
+    public Optional<CodiceDTO> findByOtp(String otp) {
+        return codiceRepository.findByOtp(otp)
+            .map(codiceMapper::toDto);
+    }
 
     /**
      * Delete the codice by id.
@@ -89,11 +95,11 @@ public class CodiceServiceImpl implements CodiceService {
         
     }
     
-    @Override
+   /*    @Override
     public  Page<CodiceDTO> findCarrellosByCodice( CodiceDTO codiceDTO) {
         log.debug("Request to delete Codice : {}", id);
         codiceRepository.deleteById(id);
         
         
-    }
+    }*/
 }

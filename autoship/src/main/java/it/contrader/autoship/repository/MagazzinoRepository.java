@@ -7,6 +7,7 @@ import it.contrader.autoship.service.dto.MagazzinoDTO;
 import java.util.Optional;
 
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.*;
 import org.springframework.stereotype.Repository;
 
@@ -19,5 +20,7 @@ import org.springframework.stereotype.Repository;
 public interface MagazzinoRepository extends JpaRepository<Magazzino, Long> {
 
 	Optional<Magazzino> findByOggetto(Oggetto oggetto);
+	
+	Page<Magazzino> findByOggettoIdNotNullAndCodiceNull(Pageable pageable);
 	
 }
