@@ -26,10 +26,15 @@ import com.codahale.metrics.annotation.Timed;
 
 import io.github.jhipster.web.util.ResponseUtil;
 import it.contrader.autoship.service.CodiceService;
+import it.contrader.autoship.service.MagazzinoService;
 import it.contrader.autoship.service.dto.CodiceDTO;
+import it.contrader.autoship.service.dto.MagazzinoDTO;
+import it.contrader.autoship.service.CarrelloService;
+import it.contrader.autoship.service.dto.CarrelloDTO;
 import it.contrader.autoship.web.rest.errors.BadRequestAlertException;
 import it.contrader.autoship.web.rest.util.HeaderUtil;
 import it.contrader.autoship.web.rest.util.PaginationUtil;
+import it.contrader.autoship.domain.enumeration.CodiceStato;
 
 
 /**
@@ -45,19 +50,21 @@ public class CodiceResource {
 
     private final CodiceService codiceService;
     
-/*    private  final MagazzinoService magazzinoService;
+    private  final MagazzinoService magazzinoService;
     
-    private  final OggettoService oggettoService;
+/*    private  final OggettoService oggettoService;
     
-    private  final UserService userService;
+    private  final UserService userService;*/
     
-    private  final CarrelloService carrelloService;*/
+    private  final CarrelloService carrelloService;
     
     
     
 
-    public CodiceResource(CodiceService codiceService) {
+    public CodiceResource(CodiceService codiceService, MagazzinoService magazzinoService, CarrelloService carrelloService) {
         this.codiceService = codiceService;
+        this.magazzinoService = magazzinoService;
+        this.carrelloService = carrelloService;
     }
 
     /**
@@ -117,6 +124,24 @@ public class CodiceResource {
         return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
     }
     
+    @GetMapping("/codicesbyuser/{user}")
+    @Timed
+    public ResponseEntity<List<CodiceDTO>> getAllCodesByUser(Pageable pageable, @PathVariable Long user) {
+        Page<CodiceDTO> page = codiceService.findByUserId(pageable, user);
+        HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/codicesbyuser/" + user);
+        return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
+    }
+    
+    @PutMapping("/confirm")
+    @Timed
+    public ResponseEntity<CodiceDTO> confirm(@RequestBody CodiceDTO codiceDTO) throws URISyntaxException {
+       codiceDTO.setStato(CodiceStato.CONFERMATO);
+    	CodiceDTO result = codiceService.save(codiceDTO);
+        return ResponseEntity.ok()
+            .headers(HeaderUtil.createEntityUpdateAlert(ENTITY_NAME, codiceDTO.getId().toString()))
+            .body(result);
+    }
+    
     @GetMapping("/getallcodes")
     @Timed
 	public List<String> getAllCodes(Pageable pageable){
@@ -153,19 +178,26 @@ public class CodiceResource {
     public ResponseEntity<Void> deleteCodice(@PathVariable Long id) {
     	
     	Optional<CodiceDTO> codice = codiceService.findOne(id);
-/*		List<CarrelloDTO> carrelloList = carrelloService.findCarrellosByCodice(codice);
+    	log.debug("REST request to delete Codice : {}", id);
+        codiceService.delete(id);
+        return ResponseEntity.ok().headers(HeaderUtil.createEntityDeletionAlert(ENTITY_NAME, id.toString())).build();
+    }
+    
+    @DeleteMapping("/deletecode/{id}")
+    @Timed
+    public ResponseEntity<Void> deleteCodiceCustom(Pageable pageable, @PathVariable Long id) {
+    	log.debug("REST request to delete Codice : {}", id);
+    	Optional<CodiceDTO> codice = codiceService.findOne(id);
+		Page<CarrelloDTO> carrelloList = carrelloService.findByCodiceId(pageable, id);
 		for(CarrelloDTO c : carrelloList) {
 			carrelloService.delete(c.getId());
 		}
-		List<MagazzinoDTO> magazzinoList = magazzinoService.findMagazzinosByCodice(codiceConverter.toEntity(codice));
+		Page<MagazzinoDTO> magazzinoList = magazzinoService.findByCodiceId(pageable, id);
 		for(MagazzinoDTO m : magazzinoList){
-			m.setCodice(null);
-			magazzinoService.update(m);
+			m.setCodiceId(null);
+			magazzinoService.save(m);
 		}		
-		service.delete(codice.getId());*/
-    
-        log.debug("REST request to delete Codice : {}", id);
-        codiceService.delete(id);
+		codiceService.delete(codice.get().getId());
         return ResponseEntity.ok().headers(HeaderUtil.createEntityDeletionAlert(ENTITY_NAME, id.toString())).build();
     }
 }

@@ -4,6 +4,8 @@ import it.contrader.autoship.domain.Codice;
 
 import java.util.Optional;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.*;
 import org.springframework.stereotype.Repository;
 
@@ -16,5 +18,7 @@ import org.springframework.stereotype.Repository;
 public interface CodiceRepository extends JpaRepository<Codice, Long> {
 
 	Optional<Codice> findByOtp(String otp);
+	
+	Page<Codice> findByUserId(Pageable pageable, Long user_id);
 	
 }

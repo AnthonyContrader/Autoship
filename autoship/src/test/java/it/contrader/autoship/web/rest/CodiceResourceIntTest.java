@@ -4,7 +4,9 @@ import it.contrader.autoship.AutoshipApp;
 
 import it.contrader.autoship.domain.Codice;
 import it.contrader.autoship.repository.CodiceRepository;
+import it.contrader.autoship.service.CarrelloService;
 import it.contrader.autoship.service.CodiceService;
+import it.contrader.autoship.service.MagazzinoService;
 import it.contrader.autoship.service.dto.CodiceDTO;
 import it.contrader.autoship.service.mapper.CodiceMapper;
 import it.contrader.autoship.web.rest.errors.ExceptionTranslator;
@@ -65,6 +67,12 @@ public class CodiceResourceIntTest {
 
     @Autowired
     private CodiceService codiceService;
+    
+    @Autowired
+    private MagazzinoService magazzinoService;
+    
+    @Autowired
+    private CarrelloService carrelloService;
 
     @Autowired
     private MappingJackson2HttpMessageConverter jacksonMessageConverter;
@@ -85,7 +93,7 @@ public class CodiceResourceIntTest {
     @Before
     public void setup() {
         MockitoAnnotations.initMocks(this);
-        final CodiceResource codiceResource = new CodiceResource(codiceService);
+        final CodiceResource codiceResource = new CodiceResource(codiceService, magazzinoService, carrelloService);
         this.restCodiceMockMvc = MockMvcBuilders.standaloneSetup(codiceResource)
             .setCustomArgumentResolvers(pageableArgumentResolver)
             .setControllerAdvice(exceptionTranslator)
@@ -130,7 +138,7 @@ public class CodiceResourceIntTest {
         assertThat(codiceList).hasSize(databaseSizeBeforeCreate + 1);
         Codice testCodice = codiceList.get(codiceList.size() - 1);
         assertThat(testCodice.getOtp()).isEqualTo(DEFAULT_OTP);
-        assertThat(testCodice.getUser_id()).isEqualTo(DEFAULT_USER_ID);
+        assertThat(testCodice.getUserId()).isEqualTo(DEFAULT_USER_ID);
         assertThat(testCodice.getStato()).isEqualTo(DEFAULT_STATO);
         assertThat(testCodice.isCancellato()).isEqualTo(DEFAULT_CANCELLATO);
     }
@@ -226,7 +234,7 @@ public class CodiceResourceIntTest {
         assertThat(codiceList).hasSize(databaseSizeBeforeUpdate);
         Codice testCodice = codiceList.get(codiceList.size() - 1);
         assertThat(testCodice.getOtp()).isEqualTo(UPDATED_OTP);
-        assertThat(testCodice.getUser_id()).isEqualTo(UPDATED_USER_ID);
+        assertThat(testCodice.getUserId()).isEqualTo(UPDATED_USER_ID);
         assertThat(testCodice.getStato()).isEqualTo(UPDATED_STATO);
         assertThat(testCodice.isCancellato()).isEqualTo(UPDATED_CANCELLATO);
     }

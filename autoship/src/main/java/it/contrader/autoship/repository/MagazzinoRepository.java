@@ -1,5 +1,6 @@
 package it.contrader.autoship.repository;
 
+import it.contrader.autoship.domain.Carrello;
 import it.contrader.autoship.domain.Magazzino;
 import it.contrader.autoship.domain.Oggetto;
 import it.contrader.autoship.service.dto.MagazzinoDTO;
@@ -23,4 +24,5 @@ public interface MagazzinoRepository extends JpaRepository<Magazzino, Long> {
 	
 	Page<Magazzino> findByOggettoIdNotNullAndCodiceNull(Pageable pageable);
 	
+	Page<Magazzino> findByCodiceId(Pageable pageable, Long codiceId);
 }

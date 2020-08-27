@@ -43,4 +43,6 @@ public interface CarrelloService {
      * @param id the id of the entity
      */
     void delete(Long id);
+    
+    Page<CarrelloDTO> findByCodiceId(Pageable pageable, Long codiceId);
 }

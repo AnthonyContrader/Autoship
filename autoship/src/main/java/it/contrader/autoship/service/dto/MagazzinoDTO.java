@@ -20,8 +20,6 @@ public class MagazzinoDTO implements Serializable {
 
     private String oggettoNome;
     
-    private String oggettoDimensione;
-
     private Long codiceId;
 
     private String codiceOtp;

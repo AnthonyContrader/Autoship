@@ -86,4 +86,11 @@ public class CarrelloServiceImpl implements CarrelloService {
         log.debug("Request to delete Carrello : {}", id);
         carrelloRepository.deleteById(id);
     }
+    
+    @Override
+    @Transactional(readOnly = true)
+    public Page<CarrelloDTO> findByCodiceId(Pageable pageable, Long codiceId) {
+        return carrelloRepository.findByCodiceId(pageable, codiceId)
+            .map(carrelloMapper::toDto);
+    }
 }

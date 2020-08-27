@@ -38,6 +38,8 @@ public interface CodiceService {
     Optional<CodiceDTO> findOne(Long id);
     
     Optional<CodiceDTO> findByOtp(String otp);
+    
+    Page<CodiceDTO> findByUserId(Pageable pageable, Long user_id);
 
     /**
      * Delete the "id" codice.

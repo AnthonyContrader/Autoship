@@ -81,6 +81,12 @@ public class CodiceServiceImpl implements CodiceService {
         return codiceRepository.findByOtp(otp)
             .map(codiceMapper::toDto);
     }
+    
+    @Override
+    public Page<CodiceDTO> findByUserId(Pageable pageable, Long user_id) {
+        return codiceRepository.findByUserId(pageable, user_id)
+            .map(codiceMapper::toDto);
+    }
 
     /**
      * Delete the codice by id.

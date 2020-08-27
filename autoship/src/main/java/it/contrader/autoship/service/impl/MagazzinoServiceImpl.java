@@ -2,7 +2,6 @@ package it.contrader.autoship.service.impl;
 
 import it.contrader.autoship.service.MagazzinoService;
 import it.contrader.autoship.domain.Magazzino;
-import it.contrader.autoship.domain.Oggetto;
 import it.contrader.autoship.repository.MagazzinoRepository;
 import it.contrader.autoship.service.dto.MagazzinoDTO;
 import it.contrader.autoship.service.dto.OggettoDTO;
@@ -106,5 +105,9 @@ public class MagazzinoServiceImpl implements MagazzinoService {
 	            .map(magazzinoMapper::toDto);
 	}
 	
-	
+	@Override
+	public Page<MagazzinoDTO> findByCodiceId(Pageable pageable, Long codiceId) {
+		return magazzinoRepository.findByCodiceId(pageable, codiceId)
+	            .map(magazzinoMapper::toDto);
+	}
 }

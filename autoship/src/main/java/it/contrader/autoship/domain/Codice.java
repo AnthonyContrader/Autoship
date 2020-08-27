@@ -24,8 +24,8 @@ public class Codice implements Serializable {
     @Column(name = "otp")
     private String otp;
 
-    @Column(name = "user_id")
-    private Long user_id;
+    @Column(name = "userId")
+    private Long userId;
 
     @Enumerated(EnumType.STRING)
     @Column(name = "stato")
@@ -56,17 +56,17 @@ public class Codice implements Serializable {
         this.otp = otp;
     }
 
-    public Long getUser_id() {
-        return user_id;
+    public Long getUserId() {
+        return userId;
     }
 
-    public Codice user_id(Long user_id) {
-        this.user_id = user_id;
+    public Codice user_id(Long userId) {
+        this.userId = userId;
         return this;
     }
 
-    public void setUser_id(Long user_id) {
-        this.user_id = user_id;
+    public void setUser_id(Long userId) {
+        this.userId = userId;
     }
 
     public CodiceStato getStato() {
@@ -121,7 +121,7 @@ public class Codice implements Serializable {
         return "Codice{" +
             "id=" + getId() +
             ", otp='" + getOtp() + "'" +
-            ", user_id=" + getUser_id() +
+            ", user_id=" + getUserId() +
             ", stato='" + getStato() + "'" +
             ", cancellato='" + isCancellato() + "'" +
             "}";

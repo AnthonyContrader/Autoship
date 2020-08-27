@@ -13,7 +13,7 @@ public class CodiceDTO implements Serializable {
 
     private String otp;
 
-    private Long user_id;
+    private Long userId;
 
     private CodiceStato stato;
 
@@ -35,12 +35,12 @@ public class CodiceDTO implements Serializable {
         this.otp = otp;
     }
 
-    public Long getUser_id() {
-        return user_id;
+    public Long getUserId() {
+        return userId;
     }
 
-    public void setUser_id(Long user_id) {
-        this.user_id = user_id;
+    public void setUserId(Long userId) {
+        this.userId = userId;
     }
 
     public CodiceStato getStato() {
@@ -85,7 +85,7 @@ public class CodiceDTO implements Serializable {
         return "CodiceDTO{" +
             "id=" + getId() +
             ", otp='" + getOtp() + "'" +
-            ", user_id=" + getUser_id() +
+            ", userId=" + getUserId() +
             ", stato='" + getStato() + "'" +
             ", cancellato='" + isCancellato() + "'" +
             "}";
