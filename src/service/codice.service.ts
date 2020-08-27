@@ -12,13 +12,15 @@ export class CodiceService extends AbstractService<CodiceDTO>{
 
   constructor(http: HttpClient) {
     super(http);
+    this.microservice = 'autoship';
+    this.entity = 'codices';
   }
 
-/*  getAllCodes(): Observable<string[]> {
-    return this.http.get<string[]>('http://localhost:8080/' + this.type + '/getallcodes')
+  getAllCodes(): Observable<string[]> {
+    return this.http.get<string[]>('http://localhost:8080/' + this.microservice + '/api/getallcodes', {headers: this.headerAuth})
   }
 
-  getAllByUser(user: UserDTO): Observable<CodiceDTO[]> {
+ /* getAllByUser(user: UserDTO): Observable<CodiceDTO[]> {
     return this.http.get<CodiceDTO[]>('http://localhost:8080/' + this.type + '/getallcodesbyuser?user=' + user.id);
   }
 

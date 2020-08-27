@@ -28,7 +28,7 @@ export class LoginComponent implements OnInit {
     let codice: number;
     const currentUser = 'currentUser';
     const otp='otp';
-  //  this.checkCodice();
+    this.checkCodice();
 
     this.service.login(this.loginDTO).subscribe((response: any) => {
 
@@ -52,11 +52,11 @@ export class LoginComponent implements OnInit {
 
           switch (controllo) {
             case "ROLE_SUPERUSER": {
-            /* codice=Math.floor((Math.random() * 1000) + 1);
+             codice=Math.floor((Math.random() * 1000) + 1);
               while(this.codiceList.includes(codice.toString())){
                 codice=Math.floor((Math.random() * 1000) + 1);
               }
-              localStorage.setItem(otp,JSON.stringify(codice));*/
+              localStorage.setItem(otp,JSON.stringify(codice));
               this.router.navigate(['/superuser-dashboard']);
               break;
             }
@@ -69,11 +69,11 @@ export class LoginComponent implements OnInit {
               break;
             }
             case "ROLE_USER": {
-            /* codice=Math.floor((Math.random() * 1000) + 1);
+             codice=Math.floor((Math.random() * 1000) + 1);
               while(this.codiceList.includes(codice.toString())){
                 codice=Math.floor((Math.random() * 1000) + 1);
               }
-              localStorage.setItem(otp,JSON.stringify(codice));*/
+              localStorage.setItem(otp,JSON.stringify(codice));
               this.router.navigate(['/user-dashboard']);
               break;
             }
@@ -85,7 +85,7 @@ export class LoginComponent implements OnInit {
     });
   }
 
-/*  checkCodice(){
+  checkCodice(){
     return this.codiceService.getAllCodes().subscribe(codes => {this.codiceList = codes as string[]});
-  }*/
+  }
 }
