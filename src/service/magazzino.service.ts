@@ -33,23 +33,15 @@ export class MagazzinoService extends AbstractService<MagazzinoDTO>{
     return this.http.put<MagazzinoDTO>('http://localhost:8080/' + this.microservice + '/api/magazzinoreinsert',  magazzinoDTO, {headers: this.headerAuth});
   }
 
-/*  deleteMagazzino(magazzinoDTO : MagazzinoDTO): Observable<MagazzinoDTO>{
-    return this.http.post<MagazzinoDTO>('http://localhost:8080/' + this.type + '/deletemagazzino',  magazzinoDTO);
-  }
-
-  reinsertMagazzino(magazzinoDTO : MagazzinoDTO): Observable<MagazzinoDTO>{
-    return this.http.post<MagazzinoDTO>('http://localhost:8080/' + this.type + '/reinsertmagazzino',  magazzinoDTO);
-  }
-
   getOggettoInCell(): Observable<MagazzinoDTO[]>{
-    return this.http.get<MagazzinoDTO[]>('http://localhost:8080/' + this.type + '/getobjectincell');
+    return this.http.get<MagazzinoDTO[]>('http://localhost:8080/' + this.microservice + '/api/getobjectincell', {headers: this.headerAuth});
   }
 
-  getMagazzinoWithOggetto(): Observable<number[]>{
+/*  getMagazzinoWithOggetto(): Observable<number[]>{
     return this.http.get<number[]>('http://localhost:8080/' + this.type + '/getmagazzinowithoggetto');
-  }
+  }*/
 
   setCodice(otp: string, id_user: number, magazzino: MagazzinoDTO): Observable<MagazzinoDTO> {
-    return this.http.post<MagazzinoDTO>('http://localhost:8080/' + this.type + '/setcodice', {otp: otp, user: id_user, magazzino: magazzino});
-  }*/
+    return this.http.put<MagazzinoDTO>('http://localhost:8080/' + this.microservice + '/api/setcodice', {otp: otp, user: id_user, magazzino: magazzino}, {headers: this.headerAuth});
+  }
 }

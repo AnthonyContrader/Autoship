@@ -8,7 +8,7 @@ export class MagazzinoDTO {
 
     oggettoId: number;
 
-    oggettoString: string;
+    oggettoNome: string;
 
     capienza: number;
 

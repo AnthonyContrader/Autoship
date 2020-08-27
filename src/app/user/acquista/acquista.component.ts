@@ -18,6 +18,7 @@ export class AcquistaComponent implements OnInit {
     this.codice = JSON.parse(localStorage.getItem('otp'));
     this.user = JSON.parse(localStorage.getItem('currentUser'));
   }
+
   getMagazzinoList(){
     this.service.getOggettoInCell().subscribe(magazzinolist => this.magazzinolist = magazzinolist);
   }
