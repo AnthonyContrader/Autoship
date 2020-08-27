@@ -1,16 +1,11 @@
 package it.contrader.autoship.web.rest;
 
-import com.codahale.metrics.annotation.Timed;
-import it.contrader.autoship.service.CodiceService;
-import it.contrader.autoship.web.rest.errors.BadRequestAlertException;
-import it.contrader.autoship.web.rest.util.HeaderUtil;
-import it.contrader.autoship.web.rest.util.PaginationUtil;
-import it.contrader.service.CarrelloService;
-import it.contrader.service.MagazzinoService;
-import it.contrader.service.OggettoService;
-import it.contrader.service.UserService;
-import it.contrader.autoship.service.dto.CodiceDTO;
-import io.github.jhipster.web.util.ResponseUtil;
+import java.net.URI;
+import java.net.URISyntaxException;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Optional;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.Page;
@@ -18,15 +13,28 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
-import java.net.URI;
-import java.net.URISyntaxException;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
+import com.codahale.metrics.annotation.Timed;
 
-import javax.servlet.http.HttpServletRequest;
+import io.github.jhipster.web.util.ResponseUtil;
+import it.contrader.autoship.service.CodiceService;
+import it.contrader.autoship.service.dto.CodiceDTO;
+import it.contrader.autoship.web.rest.errors.BadRequestAlertException;
+import it.contrader.autoship.web.rest.util.HeaderUtil;
+import it.contrader.autoship.web.rest.util.PaginationUtil;
+import it.contrader.dto.CarrelloDTO;
+import it.contrader.dto.MagazzinoDTO;
+import it.contrader.service.CarrelloService;
+import it.contrader.service.MagazzinoService;
+import it.contrader.service.OggettoService;
 
 /**
  * REST controller for managing Codice.
@@ -41,7 +49,13 @@ public class CodiceResource {
 
     private final CodiceService codiceService;
     
+    private  final MagazzinoService magazzinoService;
     
+    private  final OggettoService oggettoService;
+    
+    private  final UserService userService;
+    
+    private  final CarrelloService carrelloService;
     
     
     
@@ -141,6 +155,19 @@ public class CodiceResource {
     @DeleteMapping("/codices/{id}")
     @Timed
     public ResponseEntity<Void> deleteCodice(@PathVariable Long id) {
+    	
+    	Optional<CodiceDTO> codice = codiceService.findOne(id);
+		List<CarrelloDTO> carrelloList = carrelloService.findCarrellosByCodice(codice);
+		for(CarrelloDTO c : carrelloList) {
+			carrelloService.delete(c.getId());
+		}
+		List<MagazzinoDTO> magazzinoList = magazzinoService.findMagazzinosByCodice(codiceConverter.toEntity(codice));
+		for(MagazzinoDTO m : magazzinoList){
+			m.setCodice(null);
+			magazzinoService.update(m);
+		}		
+		service.delete(codice.getId());
+    
         log.debug("REST request to delete Codice : {}", id);
         codiceService.delete(id);
         return ResponseEntity.ok().headers(HeaderUtil.createEntityDeletionAlert(ENTITY_NAME, id.toString())).build();

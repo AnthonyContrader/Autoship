@@ -82,8 +82,18 @@ public class CodiceServiceImpl implements CodiceService {
      * @param id the id of the entity
      */
     @Override
-    public void delete(Long id) {
+    public void delete (Long id) {
         log.debug("Request to delete Codice : {}", id);
         codiceRepository.deleteById(id);
+        
+        
+    }
+    
+    @Override
+    public  Page<CodiceDTO> findCarrellosByCodice( CodiceDTO codiceDTO) {
+        log.debug("Request to delete Codice : {}", id);
+        codiceRepository.deleteById(id);
+        
+        
     }
 }

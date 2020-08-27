@@ -42,5 +42,14 @@ public interface CodiceService {
      *
      * @param id the id of the entity
      */
-    void delete(Long id);
+    Page<CodiceDTO> findCarrellosByCodice(CodiceDTO codiceDTO);
+
+	/**
+	 * Delete the codice by id.
+	 *
+	 * @param id the id of the entity
+	 */
+	void delete(Long id);
+    
+    
 }
