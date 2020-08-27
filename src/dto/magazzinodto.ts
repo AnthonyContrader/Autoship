@@ -6,7 +6,9 @@ export class MagazzinoDTO {
 
     id: number;
 
-    oggetto: OggettoDTO;
+    oggettoId: number;
+
+    oggettoString: string;
 
     capienza: number;
 

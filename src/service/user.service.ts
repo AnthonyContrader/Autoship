@@ -21,7 +21,6 @@ export class UserService extends AbstractService<UserDTO>{
 
   constructor(http: HttpClient) {
     super(http);
-    this.type = 'user';
   }
 
  /* login(loginDTO: LoginDTO): Observable<UserDTO> {
@@ -37,25 +36,15 @@ export class UserService extends AbstractService<UserDTO>{
  
    }
 
-   auth() {
-    const user = JSON.parse(localStorage.getItem('currentAuth')) as UserDTO;
-
-    if (user) {
-        return 'Bearer ' + user.authorities;
-    } else {
-        return '';
-    }
-  }
-
    getUserLogged(username: string) {
       return this.http.get('http://localhost:8080/api/users/' + username, {
         headers: {
-            Authorization: this.auth()
+            Authorization: localStorage.getItem('currentAuth')
         }
       });
     }
 
-  getAllUsers(): Observable<UserDTO[]> {
+/*  getAllUsers(): Observable<UserDTO[]> {
     return this.http.get<UserDTO[]>('http://localhost:8080/' + this.type + '/getallusers')
   }
 
@@ -65,5 +54,5 @@ export class UserService extends AbstractService<UserDTO>{
 
   deleteUser(userDTO: UserDTO): Observable<any>{
     return this.http.delete('http://localhost:8080/' + this.type + '/deleteuser?id=' + userDTO.id);
-  } 
+  } */
 }

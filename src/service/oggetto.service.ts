@@ -21,26 +21,40 @@ export class OggettoService extends AbstractService<OggettoDTO>{
 
   constructor(http: HttpClient) {
     super(http);
-    this.type = 'oggetto';
+    this.microservice= 'autoship';
+    this.entity = 'oggettos';
   }
 
-  getAllObject(): Observable<OggettoDTO[]> {
+  deleteOggetto(oggettoDTO : OggettoDTO): Observable<OggettoDTO>{
+    return this.http.put<OggettoDTO>('http://localhost:8080/' + this.microservice + '/api/oggettodelete',  oggettoDTO, {headers: this.headerAuth});
+  }
+
+  reinsertOggetto(OggettoDTO : OggettoDTO): Observable<OggettoDTO>{
+    return this.http.put<OggettoDTO>('http://localhost:8080/' + this.microservice + '/api/oggettoreinsert',  OggettoDTO, {headers: this.headerAuth});
+  }
+
+  getOggettoNotInCell(): Observable<OggettoDTO[]>{
+    return this.http.get<OggettoDTO[]>('http://localhost:8080/' + this.microservice + '/api/oggettosnotincell', {headers: this.headerAuth});
+  }
+
+  getOggettoInCell(): Observable<OggettoDTO[]>{
+    return this.http.get<OggettoDTO[]>('http://localhost:8080/' + this.microservice + '/api/oggettosincell', {headers: this.headerAuth});
+  }
+
+/*  getAllObject(): Observable<OggettoDTO[]> {
     return this.http.get<OggettoDTO[]>('http://localhost:8080/' + this.type + '/getallobject')
   }
 
-    deleteOggetto(oggettoDTO : OggettoDTO): Observable<OggettoDTO>{
+  insertOggetto(oggettoDTO : OggettoDTO): Observable<OggettoDTO>{
+    return this.http.post<OggettoDTO>('http://localhost:8080/autoship/api/oggetto',  oggettoDTO);
+  }
+
+  deleteOggetto(oggettoDTO : OggettoDTO): Observable<OggettoDTO>{
     return this.http.post<OggettoDTO>('http://localhost:8080/' + this.type + '/deleteoggeto',  oggettoDTO);
   }
 
   reinsertOggetto(OggettoDTO : OggettoDTO): Observable<OggettoDTO>{
     return this.http.post<OggettoDTO>('http://localhost:8080/' + this.type + '/reinsertoggetto',  OggettoDTO);
-  }
-
-  getOggettoNotInCell(): Observable<OggettoDTO[]>{
-    return this.http.get<OggettoDTO[]>('http://localhost:8080/' + this.type + '/getobjectnotincell');
-  }
-  getOggettoInCell(): Observable<OggettoDTO[]>{
-    return this.http.get<OggettoDTO[]>('http://localhost:8080/' + this.type + '/getobjectincell');
-  }
+  }*/
   
 }

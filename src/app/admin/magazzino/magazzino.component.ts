@@ -27,7 +27,7 @@ export class MagazzinoComponent implements OnInit {
     this.oggettotoinsert = new OggettoDTO;
     this.getMagazzinoList();
     this.getOggettoList();
-    this.getMagazzinoWithOggetto();
+  //  this.getMagazzinoWithOggetto();
   //  document.addEventListener('DOMContentLoaded', (event) => {
   //    this.selectOggetto();
  //   });
@@ -42,19 +42,17 @@ export class MagazzinoComponent implements OnInit {
     this.service.getAll().subscribe(magazzinolist => this.magazzinolist = magazzinolist);
   }
 
-  insertMagazzino(magazzino : MagazzinoDTO, oggetto: OggettoDTO){
-    this.oggettotoinsert = magazzino.oggetto;
-    magazzino.oggetto = null;
-    this.service.insertMagazzino(magazzino, this.oggettotoinsert).subscribe(() => this.getMagazzinoList());
+  insertMagazzino(magazzino : MagazzinoDTO){
+    this.service.insertMagazzino(magazzino, this.id_oggetto).subscribe(() => this.getMagazzinoList());
     this.oggettoService.getOggettoNotInCell().subscribe(() => this.getOggettoList());
   }
 
-  updateMagazzino(magazzino : MagazzinoDTO, oggetto: OggettoDTO, index: number){
+ updateMagazzino(magazzino : MagazzinoDTO, index: number){
     this.id_oggetto = Number.parseInt((document.getElementById("select"+ index) as HTMLSelectElement).value);
   //  console.log(this.id_oggetto);
     console.log(magazzino);
-    if(this.id_oggetto && magazzino.oggetto && this.id_oggetto == magazzino.oggetto.id){
-        this.oggettotoinsert = magazzino.oggetto;
+    if(this.id_oggetto && magazzino.oggettoId && this.id_oggetto == magazzino.oggettoId){
+        this.oggettotoinsert.id = magazzino.oggettoId;
     }
     else if(this.id_oggetto){
       this.oggettolist.forEach(o => {
@@ -64,15 +62,13 @@ export class MagazzinoComponent implements OnInit {
       });
     }
     else{
-      this.oggettotoinsert = null;
+      this.oggettotoinsert.id = 0;
     }
     console.log(this.oggettotoinsert);
 
     //console.log(document.getElementById("select"+ index));
     //console.log(index);
-    magazzino.oggetto = null;
-
-    this.service.updateMagazzino(magazzino, this.oggettotoinsert).subscribe(() => this.getMagazzinoList());
+    this.service.updateMagazzino(magazzino, this.oggettotoinsert.id).subscribe(() => this.getMagazzinoList());
     this.oggettoService.getOggettoNotInCell().subscribe(() => this.getOggettoList());
   }
 
@@ -88,8 +84,8 @@ export class MagazzinoComponent implements OnInit {
     this.oggettoService.getOggettoNotInCell().subscribe(oggettolist => this.oggettolist = oggettolist);
   }
 
-  selectOggetto(magazzino: MagazzinoDTO){
-  /* (this.wrapper.nativeElement as HTMLElement).querySelectorAll("tr").forEach(tr => {
+  /*selectOggetto(magazzino: MagazzinoDTO){
+   (this.wrapper.nativeElement as HTMLElement).querySelectorAll("tr").forEach(tr => {
     let select = tr.querySelector('select') as HTMLSelectElement;
     if(select){
       if(magazzino.oggetto){
@@ -101,25 +97,25 @@ export class MagazzinoComponent implements OnInit {
       }
     }
    });
-  //  console.log(m);*/
+  //  console.log(m);
 
 
-  }
+  }*/
 
-  check(isFirst: boolean, magazzino: MagazzinoDTO){
+/*  check(isFirst: boolean, magazzino: MagazzinoDTO){
     if(isFirst){
       console.log("inCheck");
       console.log(magazzino.oggetto);
       this.selectOggetto(magazzino);
     }
     return true;
-  }
+  }*/
 
-  getMagazzinoWithOggetto(){
+/*  getMagazzinoWithOggetto(){
     this.service.getMagazzinoWithOggetto().subscribe(magazzinofulllist => this.magazzinofulllist = magazzinofulllist);
-  }
+  }*/
 
-  clear(){
+ clear(){
     this.magazzinotoinsert = new MagazzinoDTO();
   }
 

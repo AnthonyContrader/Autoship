@@ -12,10 +12,9 @@ export class CodiceService extends AbstractService<CodiceDTO>{
 
   constructor(http: HttpClient) {
     super(http);
-    this.type = 'codice';
   }
 
-  getAllCodes(): Observable<string[]> {
+/*  getAllCodes(): Observable<string[]> {
     return this.http.get<string[]>('http://localhost:8080/' + this.type + '/getallcodes')
   }
 
@@ -37,6 +36,6 @@ export class CodiceService extends AbstractService<CodiceDTO>{
 
   deleteCode(codiceDTO: CodiceDTO): Observable<any> {
     return this.http.delete('http://localhost:8080/' + this.type + '/deletecode?id=' + codiceDTO.id)
-  }
+  }*/
 
 }

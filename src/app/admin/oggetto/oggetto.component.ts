@@ -19,8 +19,9 @@ export class OggettoComponent implements OnInit {
     }
   
     public oggettoList(){
-      this.service.getAllObject().subscribe(oggetti => this.oggetti = oggetti);
+      this.service.getAll().subscribe(oggetti => this.oggetti = oggetti);
     }
+
     insertOggetto(oggetto : OggettoDTO){
       this.service.insert(oggetto).subscribe(() => this.oggettoList());
     }
@@ -34,6 +35,10 @@ export class OggettoComponent implements OnInit {
 
     reinsertOggetto(oggetto : OggettoDTO){
       this.service.reinsertOggetto(oggetto).subscribe(() => this.oggettoList());
+    }
+
+    clear(){
+      this.oggettotoinsert = new OggettoDTO();
     }
 }
    

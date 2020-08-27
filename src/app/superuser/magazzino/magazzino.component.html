@@ -4,7 +4,7 @@
 
     </div>
     <div class="col-md-10">
-      <table>
+      <table #magazzinoTable>
         <tr>
           <th>
             Prodotto
@@ -21,7 +21,7 @@
         </tr>
         <tr>
           <td>
-            <select [(ngModel)]="magazzinotoinsert.oggetto">
+            <select [(ngModel)]="id_oggetto">
               <option *ngFor="let oggetto of oggettolist" ngValue="{{oggetto.id}}">{{oggetto.nome}}</option>
               <option value="">Vuoto</option>
             </select>
@@ -29,7 +29,7 @@
               <input placeholder="Capienza" name="capienza" [(ngModel)]="magazzinotoinsert.capienza">
             </td>
             <td>
-              <button (click)="insertMagazzino(magazzinotoinsert, magazzinotoinsert.oggetto)">Inserisci</button>
+              <button (click)="insertMagazzino(magazzinotoinsert)">Inserisci</button>
             </td>
             <td>
               <button (click)="clear()">Clear</button>
@@ -38,20 +38,20 @@
         <tr *ngFor="let magazzino of magazzinolist; let i = index">
           <td *ngIf="magazzino.cancellato == false && magazzino.codice == null"> 
             <select [attr.id]="'select' + i">
-              <option *ngIf="magazzino.oggetto!=null"  
-              [selected]="magazzino.oggetto !== null" value="{{magazzino.oggetto.id}}">{{magazzino.oggetto.nome}}</option>
+              <option *ngIf="magazzino.oggettoId!=null"  
+              [selected]="magazzino.oggettoId !== null" value="{{magazzino.oggettoId}}">{{magazzino.oggettoNome}}</option>
               <option *ngFor="let oggetto of oggettolist" value="{{oggetto.id}}">{{oggetto.nome}}</option>
-              <option value="" [selected]="magazzino.oggetto === null">Vuoto</option>
+              <option value="" [selected]="magazzino.oggettoId == null">Vuoto</option>
             </select>
           </td>
           <td *ngIf="magazzino.cancellato == false && magazzino.codice == null else notedit">
             <input name="capienza" [(ngModel)]="magazzino.capienza">
           </td>
           <ng-template #notedit>
-            <td *ngIf="magazzino.oggetto != null">
+            <td *ngIf="magazzino.oggettoId != null">
               {{magazzino.oggetto.nome}}
             </td>
-            <td *ngIf="magazzino.oggetto == null">
+            <td *ngIf="magazzino.oggettoId == null">
               Vuoto
             </td>
             <td>
@@ -59,21 +59,21 @@
             </td>
           </ng-template>
           <td *ngIf="magazzino.cancellato == false && magazzino.codice == null else notsave">
-            <button (click)="updateMagazzino(magazzino, magazzino.oggetto, i)">Salva</button>
+            <button (click)="updateMagazzino(magazzino, i)">Salva</button>
           </td>
           <ng-template #notsave>
             <td>
-              <button (click)="updateMagazzino(magazzino, magazzino.oggetto)" disabled>Salva</button>
+              <button (click)="updateMagazzino(magazzino)" disabled>Salva</button>
             </td>
           </ng-template>
-          <td  *ngIf="magazzino.cancellato == false && magazzino.oggetto == null else notdelete">
+          <td  *ngIf="magazzino.cancellato == false && magazzino.oggettoId == null else notdelete">
             <button (click)="deleteMagazzino(magazzino)">Elimina</button>
           </td>  
           <ng-template #notdelete>
             <td *ngIf="magazzino.cancellato == true">
               <button (click)="reinsertMagazzino(magazzino)">Ripristina</button>
             </td>
-            <td *ngIf="magazzino.oggetto != null">
+            <td *ngIf="magazzino.oggettoId != null">
               <button (click)="deleteMagazzino(magazzino)" disabled>Elimina</button>
             </td>
           </ng-template> 

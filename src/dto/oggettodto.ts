@@ -4,6 +4,5 @@ export class OggettoDTO {
     nome: string;
     dimensione: number;
     cancellato: boolean;
-    cella: boolean;
-  
+    cella: boolean;  
 }

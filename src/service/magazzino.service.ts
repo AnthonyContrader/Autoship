@@ -13,18 +13,27 @@ export class MagazzinoService extends AbstractService<MagazzinoDTO>{
 
   constructor(http: HttpClient) {
     super(http);
-    this.type = 'magazzino';
+    this.microservice = 'autoship';
+    this.entity = 'magazzinos';
   }
 
-  insertMagazzino(magazzinoDTO : MagazzinoDTO, oggettoDTO: OggettoDTO): Observable<MagazzinoDTO>{
-    return this.http.post<MagazzinoDTO>('http://localhost:8080/' + this.type + '/insertmagazzino',   {magazzino: magazzinoDTO, oggetto: oggettoDTO});
+  insertMagazzino(magazzinoDTO : MagazzinoDTO, oggetto_id: number): Observable<MagazzinoDTO>{
+    return this.http.post<MagazzinoDTO>('http://localhost:8080/' + this.microservice + '/api/magazzinosinsert',   {magazzino: magazzinoDTO, oggetto: oggetto_id ?  oggetto_id : null}, {headers: this.headerAuth});
   }
 
-  updateMagazzino(magazzinoDTO : MagazzinoDTO, oggettoDTO: OggettoDTO): Observable<MagazzinoDTO>{
-    return this.http.post<MagazzinoDTO>('http://localhost:8080/' + this.type + '/updatemagazzino',  {magazzino: magazzinoDTO, oggetto: oggettoDTO ? oggettoDTO.id : null});
+   updateMagazzino(magazzinoDTO : MagazzinoDTO, oggetto_id: number): Observable<MagazzinoDTO>{
+    return this.http.put<MagazzinoDTO>('http://localhost:8080/' + this.microservice + '/api/magazzinosupdate',  {magazzino: magazzinoDTO, oggetto: oggetto_id ?  oggetto_id : null}, {headers: this.headerAuth});
   }
 
   deleteMagazzino(magazzinoDTO : MagazzinoDTO): Observable<MagazzinoDTO>{
+    return this.http.put<MagazzinoDTO>('http://localhost:8080/' + this.microservice + '/api/magazzinodelete',  magazzinoDTO, {headers: this.headerAuth});
+  }
+
+  reinsertMagazzino(magazzinoDTO : MagazzinoDTO): Observable<MagazzinoDTO>{
+    return this.http.put<MagazzinoDTO>('http://localhost:8080/' + this.microservice + '/api/magazzinoreinsert',  magazzinoDTO, {headers: this.headerAuth});
+  }
+
+/*  deleteMagazzino(magazzinoDTO : MagazzinoDTO): Observable<MagazzinoDTO>{
     return this.http.post<MagazzinoDTO>('http://localhost:8080/' + this.type + '/deletemagazzino',  magazzinoDTO);
   }
 
@@ -42,5 +51,5 @@ export class MagazzinoService extends AbstractService<MagazzinoDTO>{
 
   setCodice(otp: string, id_user: number, magazzino: MagazzinoDTO): Observable<MagazzinoDTO> {
     return this.http.post<MagazzinoDTO>('http://localhost:8080/' + this.type + '/setcodice', {otp: otp, user: id_user, magazzino: magazzino});
-  }
+  }*/
 }

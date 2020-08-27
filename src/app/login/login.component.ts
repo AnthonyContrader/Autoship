@@ -32,7 +32,7 @@ export class LoginComponent implements OnInit {
 
     this.service.login(this.loginDTO).subscribe((response: any) => {
 
-      localStorage.setItem("currentAuth", JSON.stringify({ "authorities": response.id_token }));
+      localStorage.setItem('currentAuth',  'Bearer ' + response.id_token );
 
       if(response != null){
         this.service.getUserLogged(this.loginDTO.username).subscribe((response: any) => {
@@ -85,7 +85,7 @@ export class LoginComponent implements OnInit {
     });
   }
 
-  checkCodice(){
+/*  checkCodice(){
     return this.codiceService.getAllCodes().subscribe(codes => {this.codiceList = codes as string[]});
-  }
+  }*/
 }

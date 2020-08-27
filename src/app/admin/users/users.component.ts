@@ -17,10 +17,10 @@ export class UsersComponent implements OnInit {
 
   ngOnInit() {
     this.admin = JSON.parse(localStorage.getItem('currentUser'));
-    this.getUsers();
+  //  this.getUsers();
   }
 
-  getUsers() {
+ /* getUsers() {
     this.service.getAllUsers().subscribe(users => this.users = users);
   }
 
@@ -42,5 +42,5 @@ export class UsersComponent implements OnInit {
 
   clear(){
     this.usertoinsert = new UserDTO();
-  }
+  }*/
 }

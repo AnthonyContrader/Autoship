@@ -1,6 +1,6 @@
 import { Service } from './service';
 import { Observable } from 'rxjs';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 /**
  * Service astratto, implementa tutti i metodi CRUD inviando request al server di SpringBoot. 
@@ -13,30 +13,35 @@ import { HttpClient } from '@angular/common/http';
  */
 export abstract class AbstractService<DTO> implements Service<DTO> {
 
-    type: string;
-    port: string = '8080';
+    microservice: string;
+    entity: string;
+    authorization: string = localStorage.getItem('currentAuth');
+    headerAuth = new HttpHeaders({
+        'Authorization': this.authorization
+      });
 
     constructor(protected http: HttpClient) {
     }
 
     getAll(): Observable<DTO[]> {
-        return this.http.get<DTO[]>('http://localhost:' + this.port + '/' + this.type + '/getall');
+        console.log(this.authorization);
+        return this.http.get<DTO[]>('http://localhost:8080/' + this.microservice + '/api/' + this.entity, {headers: this.headerAuth});
     }
 
     read(id: number): Observable<DTO> {
-        return this.http.get<DTO>('http://localhost:' + this.port + '/' + this.type + '/read?id=' + id);
+        return this.http.get<DTO>('http://localhost:8080/${this.microservice}/api/${this.entity}/${id}', {headers: this.headerAuth});
     }
 
     delete(id: number): Observable<any> {
-        return this.http.delete('http://localhost:' + this.port + '/' + this.type + '/delete?id=' + id);
+        return this.http.delete('http://localhost:8080/${this.microservice}/api/${this.entity}/${id}',  {headers: this.headerAuth});
     }
 
     insert(dto: DTO): Observable<any> {
-        return this.http.post('http://localhost:' + this.port + '/' + this.type + '/insert', dto);
+        return this.http.post('http://localhost:8080/' + this.microservice + '/api/' + this.entity, dto, {headers: this.headerAuth});
     }
 
     update(dto: DTO): Observable<DTO> {
-        return this.http.put<DTO>('http://localhost:' + this.port + '/' + this.type + '/update', dto);
+        return this.http.put<DTO>('http://localhost:8080/' + this.microservice + '/api/' + this.entity, dto, {headers: this.headerAuth});
 
     }
 
