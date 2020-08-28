@@ -220,6 +220,7 @@ public class CodiceResource {
 			m.setCodiceId(null);
 			magazzinoService.save(m);
 			oggetto.get().setCancellato(true);
+			oggetto.get().setCella(false);
 		 oggettoService.save(oggetto.get());
 		}
 		codiceDTO.setCancellato(true);
