@@ -27,6 +27,7 @@ import com.codahale.metrics.annotation.Timed;
 import io.github.jhipster.web.util.ResponseUtil;
 import it.contrader.autoship.service.CodiceService;
 import it.contrader.autoship.service.MagazzinoService;
+import it.contrader.autoship.service.OggettoService;
 import it.contrader.autoship.service.dto.CodiceDTO;
 import it.contrader.autoship.service.dto.MagazzinoDTO;
 import it.contrader.autoship.service.CarrelloService;
@@ -52,18 +53,17 @@ public class CodiceResource {
     
     private  final MagazzinoService magazzinoService;
     
-/*    private  final OggettoService oggettoService;
-    
-    private  final UserService userService;*/
+    private  final OggettoService oggettoService;
     
     private  final CarrelloService carrelloService;
     
     
     
 
-    public CodiceResource(CodiceService codiceService, MagazzinoService magazzinoService, CarrelloService carrelloService) {
+    public CodiceResource(CodiceService codiceService, MagazzinoService magazzinoService, OggettoService oggettoService, CarrelloService carrelloService) {
         this.codiceService = codiceService;
         this.magazzinoService = magazzinoService;
+        this.oggettoService = oggettoService;
         this.carrelloService = carrelloService;
     }
 

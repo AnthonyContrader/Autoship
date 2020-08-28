@@ -7,6 +7,7 @@ import it.contrader.autoship.repository.CodiceRepository;
 import it.contrader.autoship.service.CarrelloService;
 import it.contrader.autoship.service.CodiceService;
 import it.contrader.autoship.service.MagazzinoService;
+import it.contrader.autoship.service.OggettoService;
 import it.contrader.autoship.service.dto.CodiceDTO;
 import it.contrader.autoship.service.mapper.CodiceMapper;
 import it.contrader.autoship.web.rest.errors.ExceptionTranslator;
@@ -72,6 +73,9 @@ public class CodiceResourceIntTest {
     private MagazzinoService magazzinoService;
     
     @Autowired
+    private OggettoService oggettoService;
+    
+    @Autowired
     private CarrelloService carrelloService;
 
     @Autowired
@@ -93,7 +97,7 @@ public class CodiceResourceIntTest {
     @Before
     public void setup() {
         MockitoAnnotations.initMocks(this);
-        final CodiceResource codiceResource = new CodiceResource(codiceService, magazzinoService, carrelloService);
+        final CodiceResource codiceResource = new CodiceResource(codiceService, magazzinoService, oggettoService, carrelloService);
         this.restCodiceMockMvc = MockMvcBuilders.standaloneSetup(codiceResource)
             .setCustomArgumentResolvers(pageableArgumentResolver)
             .setControllerAdvice(exceptionTranslator)
