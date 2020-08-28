@@ -2,6 +2,7 @@ package it.contrader.autoship.service.impl;
 
 import it.contrader.autoship.service.CodiceService;
 import it.contrader.autoship.domain.Codice;
+import it.contrader.autoship.domain.enumeration.CodiceStato;
 import it.contrader.autoship.repository.CodiceRepository;
 import it.contrader.autoship.service.dto.CodiceDTO;
 import it.contrader.autoship.service.mapper.CodiceMapper;
@@ -108,4 +109,12 @@ public class CodiceServiceImpl implements CodiceService {
         
         
     }*/
+    
+    @Override
+    public Page<CodiceDTO> findByStato(Pageable pageable, CodiceStato stato ) {
+        return codiceRepository.findByStato(pageable, stato)
+            .map(codiceMapper::toDto);
+    }
+    
+    
 }

@@ -1,6 +1,7 @@
 package it.contrader.autoship.repository;
 
 import it.contrader.autoship.domain.Codice;
+import it.contrader.autoship.domain.enumeration.CodiceStato;
 
 import java.util.Optional;
 
@@ -21,4 +22,5 @@ public interface CodiceRepository extends JpaRepository<Codice, Long> {
 	
 	Page<Codice> findByUserid(Pageable pageable, Long user_id);
 	
+	Page<Codice> findByStato( Pageable pageable, CodiceStato stato);
 }

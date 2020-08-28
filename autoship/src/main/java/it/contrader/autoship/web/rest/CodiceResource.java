@@ -36,7 +36,7 @@ import it.contrader.autoship.web.rest.errors.BadRequestAlertException;
 import it.contrader.autoship.web.rest.util.HeaderUtil;
 import it.contrader.autoship.web.rest.util.PaginationUtil;
 import it.contrader.autoship.domain.enumeration.CodiceStato;
-
+import it.contrader.autoship.service.dto.OggettoDTO;
 
 /**
  * REST controller for managing Codice.
@@ -199,5 +199,34 @@ public class CodiceResource {
 		}		
 		codiceService.delete(codice.get().getId());
         return ResponseEntity.ok().headers(HeaderUtil.createEntityDeletionAlert(ENTITY_NAME, id.toString())).build();
+    }
+    
+    
+    @GetMapping("/getallconfirmed")
+    @Timed
+    public ResponseEntity<List<CodiceDTO>> getAllConfirmed (Pageable pageable) {
+        Page<CodiceDTO> page = codiceService.findByStato(pageable,CodiceStato.CONFERMATO);        
+        HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/getallconfirmed" );
+        return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
+    }
+    
+    @PutMapping("/send")
+    @Timed
+    public ResponseEntity<CodiceDTO> send (Pageable pageable , @RequestBody CodiceDTO codiceDTO) throws URISyntaxException {
+    	Page<MagazzinoDTO> magazzinoList = magazzinoService.findByCodiceId(pageable, codiceDTO.getId());
+		for(MagazzinoDTO m : magazzinoList){
+			Optional<OggettoDTO> oggetto = oggettoService.findOne(m.getOggettoId());
+			m.setOggettoId(null);
+			m.setCodiceId(null);
+			magazzinoService.save(m);
+			oggetto.get().setCancellato(true);
+		 oggettoService.save(oggetto.get());
+		}
+		codiceDTO.setCancellato(true);
+       codiceDTO.setStato(CodiceStato.SPEDITO);
+    	CodiceDTO result = codiceService.save(codiceDTO);
+        return ResponseEntity.ok()
+            .headers(HeaderUtil.createEntityUpdateAlert(ENTITY_NAME, codiceDTO.getId().toString()))
+            .body(result);
     }
 }

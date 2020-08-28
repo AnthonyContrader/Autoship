@@ -1,5 +1,7 @@
 package it.contrader.autoship.service;
 
+import it.contrader.autoship.domain.Codice;
+import it.contrader.autoship.domain.enumeration.CodiceStato;
 import it.contrader.autoship.service.dto.CodiceDTO;
 
 import org.springframework.data.domain.Page;
@@ -54,6 +56,8 @@ public interface CodiceService {
 	 * @param id the id of the entity
 	 */
 	void delete(Long id);
+	
+	Page<CodiceDTO> findByStato( Pageable pageable, CodiceStato stato);
     
     
 }
