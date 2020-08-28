@@ -24,17 +24,17 @@ export class CodiceService extends AbstractService<CodiceDTO>{
     return this.http.get<CodiceDTO[]>('http://localhost:8080/' + this.microservice + '/api/codicesbyuser/' + user.id, {headers: this.headerAuth}) ;
   }
 
- /* getAllConfirmed(): Observable<CodiceDTO[]> {
-    return this.http.get<CodiceDTO[]>('http://localhost:8080/' + this.type + '/getallconfirmed')
-  }*/
+  getAllConfirmed(): Observable<CodiceDTO[]> {
+    return this.http.get<CodiceDTO[]>('http://localhost:8080/' +this.microservice + '/api/getallconfirmed', {headers: this.headerAuth})
+  }
 
   confirm(codiceDTO: CodiceDTO): Observable<CodiceDTO> {
     return this.http.put<CodiceDTO>('http://localhost:8080/' + this.microservice + '/api/confirm', codiceDTO, {headers: this.headerAuth})
   }
 
-/*  send(codiceDTO: CodiceDTO): Observable<CodiceDTO> {
-    return this.http.post<CodiceDTO>('http://localhost:8080/' + this.type + '/send', codiceDTO)
-  }*/
+  send(codiceDTO: CodiceDTO): Observable<CodiceDTO> {
+    return this.http.put<CodiceDTO>('http://localhost:8080/' + this.microservice + '/api/send', codiceDTO , {headers: this.headerAuth})
+  }
 
   deleteCode(codiceDTO: CodiceDTO): Observable<any> {
     return this.http.delete('http://localhost:8080/' + this.microservice + '/api/deletecode/' + codiceDTO.id, {headers: this.headerAuth})
