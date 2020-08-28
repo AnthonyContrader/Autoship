@@ -5,6 +5,8 @@ import it.contrader.autoship.AutoshipApp;
 import it.contrader.autoship.domain.Carrello;
 import it.contrader.autoship.repository.CarrelloRepository;
 import it.contrader.autoship.service.CarrelloService;
+import it.contrader.autoship.service.CodiceService;
+import it.contrader.autoship.service.MagazzinoService;
 import it.contrader.autoship.service.dto.CarrelloDTO;
 import it.contrader.autoship.service.mapper.CarrelloMapper;
 import it.contrader.autoship.web.rest.errors.ExceptionTranslator;
@@ -55,6 +57,12 @@ public class CarrelloResourceIntTest {
 
     @Autowired
     private CarrelloService carrelloService;
+    
+    @Autowired
+    private MagazzinoService magazzinoService;
+    
+    @Autowired
+    private CodiceService codiceService;
 
     @Autowired
     private MappingJackson2HttpMessageConverter jacksonMessageConverter;
@@ -75,7 +83,7 @@ public class CarrelloResourceIntTest {
     @Before
     public void setup() {
         MockitoAnnotations.initMocks(this);
-        final CarrelloResource carrelloResource = new CarrelloResource(carrelloService);
+        final CarrelloResource carrelloResource = new CarrelloResource(carrelloService, magazzinoService, codiceService);
         this.restCarrelloMockMvc = MockMvcBuilders.standaloneSetup(carrelloResource)
             .setCustomArgumentResolvers(pageableArgumentResolver)
             .setControllerAdvice(exceptionTranslator)
