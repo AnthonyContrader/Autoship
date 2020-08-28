@@ -19,14 +19,14 @@ export class UsersComponent implements OnInit {
   ngOnInit() {
     this.admin = JSON.parse(localStorage.getItem('currentUser'));
     this.getUsers();
-    this.getAdmin();
+//    this.getAdmin();
   }
 
   getUsers() {
     this.service.getAll().subscribe(users => this.users = users);
   }
 
-  getAdmin() {
+/*  getAdmin() {
     this.service.getAllAdmin().subscribe(admins => this.admins = admins);
   }
 
@@ -46,7 +46,7 @@ export class UsersComponent implements OnInit {
   insert(user: UserDTO) {
     this.service.insert(user).subscribe(() => this.getUsers());
     this.service.getAllAdmin().subscribe(() => this.getAdmin());
-  }
+  }*/
 
   clear(){
     this.usertoinsert = new UserDTO();
