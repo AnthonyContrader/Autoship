@@ -13,15 +13,15 @@ export class SpedizioneComponent implements OnInit {
   constructor(private service: CodiceService) { }
 
   ngOnInit(): void {
-//  this.getAllConfirmed();
+   this.getAllConfirmed();
   }
 
-/*  getAllConfirmed() {
+  getAllConfirmed() {
     this.service.getAllConfirmed().subscribe(codicelist => this.codicelist = codicelist);
   }
   spedizione(codice: CodiceDTO){
     this.service.send(codice).subscribe(() => this.getAllConfirmed());
-  }*/
+  }
 
   
 }
