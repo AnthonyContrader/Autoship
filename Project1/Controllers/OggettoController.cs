@@ -27,9 +27,9 @@ namespace Project1.Controllers
 
         [Route("/api/v1/[controller]/create")]
         [HttpPost]
-        public UserDto Create([FromBody] dynamic oggetto)
+        public OggettoDto Create([FromBody] dynamic oggetto)
         {
-            OggettoDTO oggettoDto = JsonConvert.DeserializeObject<OggettoDTO>(oggetto.ToString());
+            OggettoDto oggettoDto = JsonConvert.DeserializeObject<OggettoDto>(oggetto.ToString());
 
             Oggetto oggettoItem = oggettoDto.ConvertTo();
             OggettoRepository oggettoRepository = new OggettoRepository(_context);
@@ -50,7 +50,7 @@ namespace Project1.Controllers
                 oggettiDto.Add(OggettoDto.ConvertFrom(oggetto));
             }
 
-            return OggettoDto;
+            return oggettiDto;
         }
 
         [Route("/api/v1/[controller]/deleteOggetto")]
