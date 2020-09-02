@@ -7,10 +7,8 @@ namespace Project1.Model
 {
     public class Oggetto : BaseModel
     {
-        private String nome;
+        public String Nome { get; set; }
 
-        private int dimensione;
-
-        private Boolean cancellato;
+        public int Dimensione { get; set; }
     }
 }
