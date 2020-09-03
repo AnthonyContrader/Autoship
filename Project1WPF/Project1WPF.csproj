@@ -158,9 +158,13 @@
     <Compile Include="BaseForm.cs" />
     <Compile Include="Command\RelayCommand.cs" />
     <Compile Include="Delegate\Delegates.cs" />
+    <Compile Include="OggettoWindow.xaml.cs">
+      <DependentUpon>OggettoWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="ViewModel\BaseViewModel.cs" />
     <Compile Include="ViewModel\LoginViewModel.cs" />
     <Compile Include="ViewModel\MainWindowViewModel.cs" />
+    <Compile Include="ViewModel\OggettoWindowViewModel.cs" />
     <Page Include="LoginFrm.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -180,6 +184,10 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="OggettoWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs">

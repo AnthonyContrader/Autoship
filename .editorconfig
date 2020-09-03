@@ -1,0 +1,4 @@
+﻿[*.cs]
+
+# IDE0025: Usa il corpo dell'espressione per le proprietà
+csharp_style_expression_bodied_properties = false:silent

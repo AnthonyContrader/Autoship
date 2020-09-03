@@ -17,13 +17,12 @@ using System.Windows.Shapes;
 namespace Project1WPF
 {
     /// <summary>
-    /// Interaction logic for MainWindow.xaml
+    /// Logica di interazione per OggettoWindow.xaml
     /// </summary>
-    public partial class MainWindow : BaseForm
+    public partial class OggettoWindow : BaseForm
     {
-        private MainWindowViewModel MainWindowViewModel { get { return ViewModel as MainWindowViewModel; } }
-
-        public MainWindow() : base()
+        private OggettoWindowViewModel OggettoWindowViewModel { get { return ViewModel as OggettoWindowViewModel; } }
+        public OggettoWindow() : base()
         {
             InitializeComponent();
 
@@ -47,7 +46,7 @@ namespace Project1WPF
                     this.Close();
                 }
 
-                await MainWindowViewModel.LoadUsers();
+                await OggettoWindowViewModel.LoadOggetti();
             }
             catch (Exception ex)
             {
