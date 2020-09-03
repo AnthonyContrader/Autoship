@@ -31,6 +31,7 @@ namespace Project1
             services.AddTransient<EsercizioRepository, EsercizioRepository>();
             services.AddTransient<ReviewRepository, ReviewRepository>();
             services.AddTransient<UserRepository, UserRepository>();
+            services.AddTransient<OggettoRepository, OggettoRepository>();
 
             services.AddDbContext<Project1Context>(options =>
             {
