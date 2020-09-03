@@ -130,5 +130,31 @@ namespace Shared.Services
             var catalog = JsonConvert.DeserializeObject<List<UserItem>>(result);
             return catalog;
         }
+
+        public async Task<Oggetto> CreateOggettoAsync(Oggetto oggetto)
+        {
+            string url = "/api/v1/oggetto/create";
+
+            var dataAsString = JsonConvert.SerializeObject(oggetto);
+            var content = new StringContent(dataAsString);
+            content.Headers.ContentType = new MediaTypeHeaderValue("application/json");
+
+            var response = await _httpClient.PostAsync(url, content);
+            var result = await response.Content.ReadAsStringAsync();
+
+            var catalog = JsonConvert.DeserializeObject<Oggetto>(result);
+            return catalog;
+        }
+
+        public async Task<List<Oggetto>> GetOggettiAsync()
+        {
+            string url = "/api/v1/oggetto/getoggetti";
+
+            var response = await _httpClient.GetAsync(url);
+            var result = await response.Content.ReadAsStringAsync();
+
+            var catalog = JsonConvert.DeserializeObject<List<Oggetto>>(result);
+            return catalog;
+        }
     }
 }
